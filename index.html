@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Stuart Tett | Freelance Designer</title>
+
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+
+  <link rel="stylesheet" type="text/css" href="style.css" />
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,200,300,400" rel="stylesheet">
+
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-102078547-1', 'auto');
+  ga('send', 'pageview');
+
+  </script>
+
+  <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+  <script>
+  $(window).scroll(() => {
+    var topOfWindow = $(window).scrollTop();
+    console.log(topOfWindow)
+
+    $('p').each(() => {
+      var imagePos = $(this).offset().top;
+      if (imagePos < topOfWindow + 800) {
+        $(this).addClass("fadeIn")
+      }
+    })
+
+    if (topOfWindow == 200) {
+      $('svg').each(() => {
+        $(this).css("width",topOfWindow)
+      })
+    }
+  })
+  </script>
+
+</head>
+<body>
+
+  <div id="content">
+    <div id="header">
+      <div id="top">
+        <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+        viewBox="0 0 136 300" style="enable-background:new 0 0 136 300;" xml:space="preserve" preserveAspectRatio="xMidYMid">
+        <style type="text/css">
+        .st0{fill:#100100;}
+        </style>
+        <path class="st0" d="M136,167.7H94V300H69V167.7H27.9v-25H136V167.7z"/>
+        <g>
+          <path class="st0" d="M27.9,138.1V68.5l-28.3,0L-0.2,0h68v28.1l68.1,0.2v110.1L27.9,138.1z M122.6,125.2l0.2-84l-61.5-0.1l-33.4,0
+          V28l26.9,0v-15h-42l-0.1,42.4l28.2,0v0l67.1,0l-0.1,38.3l-52.4,0l0-13.1l39.4,0l0-12.1l-54,0V125L122.6,125.2z"/>
+        </g>
+      </svg>
+      <h1>Stuart Tett</h1>
+    </div>
+    <h2>Freelance Designer</h2>
+  </div><!-- #header -->
+
+  <ul class="sidebar">
+    <li><a href="">About</a></li>
+    <li><a href="">Contact</a></li>
+    <li><a href="">Resume</a></li>
+    <li><a href="">Work</a></li>
+    <li><a href="">Resume</a></li>
+    <li><a href="http://www.imdb.com/name/nm2888036/">IMDB</a></li>
+    <li><a href="https://www.linkedin.com/in/stuart-tett-792681">LinkedIn</a></li>
+  </ul><!-- #middle -->
+  <div id="about">
+      <div class="entry-content" id="about">
+        <!-- <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/> -->
+        <p>I’ve been an effects artist since graduating from school with degrees in Computer Science and Art. I spent the first 6 years of my career working at DreamWorks Animation (DWA) on full CG animated features and Prime Focus working on CG effects for live-action films. It was a wonderful experience, but I’m now looking for opportunities outside the film industry, while still using the strong visual and analytical problem-solving skills. With these I have written lines of code to produce a beautiful image from a blank canvas. I have the skill-set to analyze the design of both software and an image. I am looking for opportunities that will allow me to exercise these opposite but intertwined areas.</p>
+        <!-- <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/> -->
+        <p>At DWA, my responsibilities as an effects artist included: effects look development, particle, volume and rigid-body simulation, keyframe animation, pipeline programming, scripting, packaging effects systems, cg lighting of volumes and particles, and compositing. I am able to do tasks in many areas of the pipeline and often had to develop new pipeline tools to accomplish my work efficiently. In addition, I have been the representative to Research &amp; Development Pipeline team for the Effects department at DWA. As the representative, I worked with the team to make sure the pipeline software is meeting the needs of our department and helped design some of the tools. I have also been involved as a mentor and instructor in DWA Effects Challenge 6-month program (from which I started in out of school).</p>
+        <!-- <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/> -->
+        <p>Some of the effects I’ve done include: explosions, fire, smoke, dust, rigid-body destruction, turbulent river water, lasers, sparks, liquid metal. Most of these were done using Maya and Houdini, as well as proprietary software (some of which I have coded to help the workflow for myself and other artists).</p>
+      </div><!-- .entry-content -->
+  </div><!-- #middle -->
+  <div id="footer">
+  </div><!-- #footer -->
+</div>
+</body>
+</html>
