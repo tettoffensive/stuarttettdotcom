@@ -21,7 +21,7 @@ $header-font: "Chiotras";
 $body-font: "League Spartan";
 $system-font: -apple-system, BlinkMacSystemFont,"Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
 $black: #100100;
-$white: #fffbfa;
+$white: #f1f1f1;
 $dark: #4a4a4a;
 $salmon: #fca290;
 
@@ -42,7 +42,7 @@ tr, tt, u, ul, var, video {
   // margin: 0;
   padding: 0;
   border: 0;
-  font-family: $system-font;
+  font-family: $body-font;
   vertical-align: baseline;
 }
 
@@ -77,22 +77,26 @@ media: 375pt,
   //@include grid-visual-perp;
   position: relative;
   top: 100px;
+  @include transition(all 0.3s cubic-bezier(.25,.8,.25,1));
 
-  &::after {
-    // Fog Gradient
-  opacity: 0.5;
-  @include linear-gradient(-180deg, rgba(255,255,255,0.16) 0%, #FFFFFF 100%);
-  display: block;
-  position: absolute;
-  top: 0;
-  left: 0;
-  content: "";
-  width: 100%;
-  height: 1024px;
-  pointer-events: none;
-  z-index: 1;
-  }
+  // &::after {
+  //   // Fog Gradient
+  //   opacity: 0.5;
+  //   @include linear-gradient(-180deg, rgba(255,255,255,0.16) 0%, #FFFFFF 100%);
+  //   display: block;
+  //   position: absolute;
+  //   top: 0;
+  //   left: 0;
+  //   content: "";
+  //   width: 100%;
+  //   height: 1024px;
+  //   pointer-events: none;
+  //   z-index: 0;
+  // }
+}
 
+.blur {
+  // filter: blur(10px);
 }
 
 .grid-column {
@@ -126,13 +130,10 @@ media: 375pt,
 
   & > li {
     margin: 0;
-    color: #4a4a4a;
+    color: $dark;
     font-size: 48px;
-    color: #4A4A4A;
     letter-spacing: 15px;
     font-family: $header-font;
-    vertical-align: middle;
-    // @include grid-column-height(0.58);
     vertical-align: middle;
     min-height: 58px;
     line-height: 58px;
@@ -167,10 +168,8 @@ media: 375pt,
 
   & > li {
     cursor: pointer;
-    @include linear-gradient(to right, $dark 50%, $salmon 50%);
-    background-size: 200% 100%;
-    background-position:left bottom;
-    color: white;
+    background-color: $dark;
+    color: $white;
     font-family: $header-font;
     font-size: 64px;
     letter-spacing: 20px;
@@ -179,6 +178,7 @@ media: 375pt,
     min-height: 120px;
     vertical-align: middle;
     line-height: 120px;
+    transform-origin: top left;
     @include box_shadow(0);
     @include transition(all 0.3s cubic-bezier(.25,.8,.25,1));
     @include user-select(none);
@@ -186,7 +186,7 @@ media: 375pt,
     &:hover {
       @include box_shadow(3);
       z-index: 100;
-      background-position: right bottom;
+      background-color: $salmon;
       @include transform(scale(1.16));
       @include transition(all 0.3s cubic-bezier(.25,.8,.25,1));
     }
@@ -194,44 +194,85 @@ media: 375pt,
     &:active {
       @include box_shadow(2);
       z-index: 100;
-      @include linear-gradient(to right, lighten($dark, 2%) 50%, lighten($salmon, 2%) 50%);
-      background-size: 200% 100%;
-      background-position: right bottom;
-      @include transform(scale(1.12));
+      background-color: lighten($salmon, 2%);
       @include transition(all 0.3s cubic-bezier(.25,.8,.25,1));
     }
-  }
-}
 
-.open {
-  @include transform(translate(-100%,0px));
+    & > * {
+      font-family: inherit;
+      pointer-events: none;
+    }
+
+    &.open {
+      @include box_shadow(3);
+      z-index: 100;
+      background-color: $salmon;
+      transform-origin: left top length;
+    }
+
+    &.open > * {
+      transform-origin: left top length;
+    }
+  }
 }
 
 .last-letter-style {
   letter-spacing: 0px;
 }
 
+%scrollbar {
+
+  &::-webkit-scrollbar-track {
+    width: 10px;
+    height: 10px;
+    border-radius: 10px;
+    background-color: lighten($dark, 15%);
+  }
+
+  &::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+    background-color: $dark;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    width: 10px;
+    height: 10px;
+    border-radius: 10px;
+    background-color: $salmon;
+  }
+}
+
 #modal {
 
+  // display: none;
   visibility: hidden;
-  -webkit-backdrop-filter: blur(10px);
+  // -webkit-backdrop-filter: blur(10px);
   z-index: 2;
   content: "";
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
+  min-height: 1024px;
   height: 100%;
-  pointer-events: none;
+  pointer-events: all;
+  overflow: hidden;
 
   & > .modal {
 
-    width: 787px;
+    // display: none;
+    visibility: hidden;
+    width: 800px;
     height: 605px;
+    position: absolute;
+    top: 100px;
+    left: 100px;
+    @include box-shadow(3);
 
     & > .title {
       background-color: $salmon;
-      color: white;
+      color: $white;
       font-family: $header-font;
       font-size: 72px;
       letter-spacing: 20px;
@@ -242,17 +283,42 @@ media: 375pt,
       line-height: 120px;
     }
 
+    & > .vert {
+      @include align-items(flex-start);
+      @include display(flex);
+      @include flex-direction(column);
+      overflow-y: scroll;
+      overflow-x: hidden;
+
+      @extend %scrollbar;
+
+      & > .entry {
+        flex: none;
+      }
+    }
+
+    & > .horiz {
+      @include align-items(flex-start);
+      @include display(flex);
+      @include flex-direction(row);
+      overflow-x: scroll;
+      overflow-y: hidden;
+
+      @extend %scrollbar;
+
+      & > .entry {
+        padding-right: 30px;
+      }
+    }
+
     & > .content {
       background-color: $dark;
-      color: white;
+      color: $white;
       font-family: $body-font;
       font-size: 24px;
       letter-spacing: 0;
       padding: 30px 20px;
-
-      @include align-items(flex-start);
-      @include display(flex);
-      @include flex-direction(column);
+      height: 472px;
 
       & > .entry {
         font-family: inherit;
@@ -260,7 +326,8 @@ media: 375pt,
         @include align-items(stretch);
         @include display(flex);
         @include flex-direction(row);
-        width: 95%;
+        width: 100%;
+        // height: 100px;
 
         & > .more {
           font-family: $header-font;
@@ -268,6 +335,13 @@ media: 375pt,
           color: lighten($dark, 15%);
           margin-left: auto;
           line-height: 20px;
+          @include transition(all 0.3s cubic-bezier(.25,.8,.25,1));
+
+          &:hover {
+            color: $white;
+            cursor: pointer;
+            @include transition(all 0.3s cubic-bezier(.25,.8,.25,1));
+          }
         }
 
         & > .info {
@@ -287,4 +361,81 @@ media: 375pt,
       }
     }
   }
+}
+
+input, select {
+  background-color: $dark;
+  border: 0px;
+  color: $salmon;
+  font-size: 24px;
+  font-family: $body-font;
+  padding: 0px;
+  margin: 0px;
+  z-index: 5000;
+  @include appearance(none);
+  background: transparent;
+
+  @include placeholder {
+    color: $salmon;
+    padding: 0px;
+    margin: 0px;
+  }
+}
+
+optgroup {
+  @include appearance(none);
+  background: none;
+}
+
+button {
+  background-color: $salmon !important;
+  color: $white !important;
+  font-family: $header-font !important;
+  font-size: 33px !important;
+  letter-spacing: 22px !important;
+  border: 0px !important;
+  padding: 10px 20px !important;
+}
+
+#mContact > .content {
+  line-height: 36px;
+}
+
+#mAbout > .content {
+  /* Stuart has a unique: */
+  font-family: $body-font;
+  font-size: 20px;
+  color: $salmon;
+  letter-spacing: 0;
+  line-height: 1.25em;
+
+  & > * {
+    font-family: inherit;
+    color: $salmon;
+    font-size: 20px;
+
+    & > .bold {
+      font-family: inherit;
+      color: $white;
+    }
+  }
+
+  & > .bold {
+    color: $white;
+  }
+}
+
+.image {
+  position: relative;
+  width: 100%; /* for IE 6 */
+}
+
+.caption {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  width: 100%;
+  text-transform: uppercase;
+  font-size: 24px;
+  font-family: $body-font;
 }
