@@ -21,13 +21,14 @@
   <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.2/TweenMax.min.js"></script>
   <script>
+
   $(document).ready(() => {
 
     $('.last-letter-spacing > * > *, button').html((i, text) => {
       return text.slice(0,-1) + "<span class=\"last-letter-style\" style=\"font-family: inherit;\">" + text.slice(-1) + "</span>"
     });
 
-    var tl = new TimelineLite({});
+    var tl = new TimelineMax({});
     var strBtn = "";
     var animBtn = "";
     var strModal = "";
@@ -36,47 +37,56 @@
     // Click to SHOW the Correct Modal
     $('.r-stack > li').click((e) => {
 
-      strModal = "#m"+e.target.id.slice(3);
-      strBtn = "#btn"+e.target.id.slice(3);
-      animBtn = document.querySelector(strBtn);
-      animModal = document.querySelector(strModal);
+      if (tl.isActive()) {
+        return;
+      }
+
+      animBtn = document.querySelector("#btn"+e.target.id.slice(3));
+      animModal = document.querySelector("#m"+e.target.id.slice(3));
       tl.clear();
+      tl.invalidate();
+      tl.kill();
 
       tl.set(animBtn,{clearProps: 'all',zIndex: 5000})
         .to(animBtn, 0.3, { className: "+=open", ease:Cubic.easeOut })
-        .set("#modal", { display: 'block', autoAlpha: 1 })
-        .set(animModal, { display: 'block', autoAlpha: 1 });
+        .set("#modal", { autoAlpha: 1})
+        .set(animModal, { display: 'inline-block', autoAlpha: 1 })
+        .fromTo(animModal, 0.5, { height: '0px', ease:Cubic.easeOut }, { height: '550px' });
       tl.play();
     })
 
     $('#modal').click((e) => {
       if (e.target === e.currentTarget) {
         // $('.container').removeClass("blur");
+        if (!tl.isActive()) {
         tl.reverse();
-        $('#modal').hide(400, 'easeOutExpo', () => {
           var url = $('#vReel').attr('src');
           $('#vReel').attr('src', '');
           $('#vReel').attr('src', url);
-        });
+        }
       }
     });
 
     $(window).load(() => {
       $('.r-stack > li').each(( i, item ) => {
 
-        var id = item.id;
+        var id = "#" + item.id;
         var width = item.getBoundingClientRect().width;
         var scaleX = 800.0 / width;
         var invScaleX = width / 800.0;
+        var modal = "#m"+id.slice(3);
 
         $("<style>")
         .prop("type", "text/css")
         .html("\
-        #"+ id + ".open { \
+        " + id + ".open { \
           transform: translateX(-800px) scaleX(calc("+ scaleX + ")); \
         } \
-        #"+ id + ".open > * { \
-                transform: scaleX("+ invScaleX + "); \
+        " + modal + " {\
+          transform: translateX()\
+        } \
+        " + id + ".open > * { \
+                transform: scaleX(calc("+ invScaleX + ")); \
         }")
         .appendTo("head");
       });
@@ -131,8 +141,9 @@
     </ul>
   </div><!-- #container -->
   <div id="modal">
+    <div class="overlay"></div>
     <div id="mWork" class="modal">
-      <div class="title">Work</div>
+      <!-- <div class="title">Work</div> -->
       <div class="content horiz">
         <div class="entry">
           <div class="image">
@@ -155,7 +166,6 @@
       </div>
     </div>
     <div id="mAbout" class="modal">
-      <div class="title">About</div>
       <div class="content">
         <p><span class="bold">Stuart has a unique background with a double major in Art &amp; Design and  Computer Science,</span> which give way to a rare skill-set of strong visual and analytical problem-solving skills. He spent 6 years with DreamWorks Animation as an Effects Animator prior to joining Grid (YC S12), where he excelled quickly and transitioned into a CTO role within his first 6 months. He continued developing mobile apps at Swipe Labs for 2 years. But he missed the creative freedom of doing visual work and is now concentrating on design.</p>
         <p class="bold">He is now available for hire for freelance for designing logos, branding, UI/UX for mobile and web.</p>
@@ -163,7 +173,6 @@
       </div>
     </div>
     <div id="mContact" class="modal loading">
-      <div class="title">Contact</div>
       <div class="content">
         <form>Hi Stuart,<br/>
           My name is <input type="name" value placeholder="Marty McFly"></input>,<br/>
@@ -184,7 +193,6 @@
       </div>
     </div>
     <div id="mResume" class="modal">
-      <div class="title">Resume</div>
       <div class="content vert">
         <div class="entry">
           <div class="info">
@@ -238,9 +246,8 @@
       </div>
     </div>
     <div id="mReel" class="modal">
-      <div class="title">Reel</div>
       <div class="content">
-        <!-- <iframe id="vReel" src="https://player.vimeo.com/video/68357859?color=fca290&title=0&byline=0&portrait=0" width="747" height="420" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe> -->
+        <iframe id="vReel" src="https://player.vimeo.com/video/68357859?color=fca290&title=0&byline=0&portrait=0" width="747" height="420" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
       </div>
     </div>
   </div>

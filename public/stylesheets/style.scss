@@ -30,6 +30,8 @@ body {
   @include user-select(none);
   background-color: $white;
   text-rendering: optimizeLegibility;
+  padding: 0;
+  margin: 0;
 }
 
 a, abbr, acronym, address, applet, article, aside, audio, b, big, blockquote,
@@ -53,15 +55,15 @@ h1, h2, h3, h4, h5, h6, .header1, .header2 {
 
 $neat-grid: (
 columns: 12,
-gutter: 20pt,
+gutter: 20px,
 color: rgba(#00d4ff, 0.25),
 );
 
 $desktop-grid: (
 columns: 12,
-gutter: 20pt,
+gutter: 20px,
 color: rgba(#d400ff, 0.25),
-media: 1200pt,
+media: 1200px,
 );
 
 $mobile-grid: (
@@ -72,6 +74,8 @@ media: 375pt,
 );
 
 .container {
+  padding: 0;
+  margin: 0;
   @include grid-container;
   // @include grid-visual;
   //@include grid-visual-perp;
@@ -79,20 +83,20 @@ media: 375pt,
   top: 100px;
   @include transition(all 0.3s cubic-bezier(.25,.8,.25,1));
 
-  // &::after {
-  //   // Fog Gradient
-  //   opacity: 0.5;
-  //   @include linear-gradient(-180deg, rgba(255,255,255,0.16) 0%, #FFFFFF 100%);
-  //   display: block;
-  //   position: absolute;
-  //   top: 0;
-  //   left: 0;
-  //   content: "";
-  //   width: 100%;
-  //   height: 1024px;
-  //   pointer-events: none;
-  //   z-index: 0;
-  // }
+  &::after {
+    // Fog Gradient
+    opacity: 0.5;
+    @include linear-gradient(-180deg, rgba(255,255,255,0.16) 0%, #FFFFFF 100%);
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    content: "";
+    width: 100%;
+    height: 1024px;
+    pointer-events: none;
+    z-index: 0;
+  }
 }
 
 .blur {
@@ -105,9 +109,7 @@ media: 375pt,
 
 .grid-column-2 {
   @include grid-column(2);
-  @include grid-push(-0.33);
-  padding: 0;
-  margin-right: 0;
+  // @include grid-push(-0.33);
 }
 
 .grid-collapse {
@@ -207,11 +209,11 @@ media: 375pt,
       @include box_shadow(3);
       z-index: 100;
       background-color: $salmon;
-      transform-origin: left top length;
+      // transform-origin: left top length;
     }
 
     &.open > * {
-      transform-origin: left top length;
+      // transform-origin: left top length;
     }
   }
 }
@@ -244,7 +246,6 @@ media: 375pt,
 }
 
 #modal {
-
   // display: none;
   visibility: hidden;
   // -webkit-backdrop-filter: blur(10px);
@@ -258,105 +259,106 @@ media: 375pt,
   height: 100%;
   pointer-events: all;
   overflow: hidden;
+}
 
-  & > .modal {
+#overlay {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  background-color: $white;
+  opacity: 0.75;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
 
-    // display: none;
-    visibility: hidden;
-    width: 800px;
-    height: 605px;
-    position: absolute;
-    top: 100px;
-    left: 100px;
-    @include box-shadow(3);
+.modal {
+  // display: none;
+  visibility: hidden;
+  overflow: hidden;
+  height: 550px;
+  position: relative;
+  @include grid-column-align-right(6, 800);
+  @include box-shadow(3);
+  background-color: $dark;
 
-    & > .title {
-      background-color: $salmon;
-      color: $white;
-      font-family: $header-font;
-      font-size: 72px;
-      letter-spacing: 20px;
-      padding-left: 0.5em;
-      padding-right: 0.5em;
-      min-height: 120px;
-      vertical-align: middle;
-      line-height: 120px;
+  & > .vert {
+    @include align-items(flex-start);
+    @include display(flex);
+    @include flex-direction(column);
+    overflow-y: scroll;
+    overflow-x: hidden;
+
+    @extend %scrollbar;
+
+    & > .entry {
+      flex: none;
     }
+  }
 
-    & > .vert {
-      @include align-items(flex-start);
-      @include display(flex);
-      @include flex-direction(column);
-      overflow-y: scroll;
-      overflow-x: hidden;
+  & > .horiz {
+    @include align-items(flex-start);
+    @include display(flex);
+    @include flex-direction(row);
+    overflow-x: scroll;
+    overflow-y: hidden;
 
-      @extend %scrollbar;
+    @extend %scrollbar;
 
-      & > .entry {
-        flex: none;
-      }
+    & > .entry {
+      padding-right: 30px;
     }
+  }
 
-    & > .horiz {
-      @include align-items(flex-start);
+  & > .content {
+    background-color: $dark;
+    color: $white;
+    font-family: $body-font;
+    font-size: 24px;
+    letter-spacing: 0;
+    margin: 5px;
+    padding: 20px 20px;
+    width: 750px;
+    height: 472px;
+
+    & > .entry {
+      font-family: inherit;
+      margin-bottom: 40px;
+      @include align-items(stretch);
       @include display(flex);
       @include flex-direction(row);
-      overflow-x: scroll;
-      overflow-y: hidden;
+      width: 100%;
+      // height: 100px;
 
-      @extend %scrollbar;
+      & > .more {
+        font-family: $header-font;
+        font-size: 64px;
+        color: lighten($dark, 15%);
+        margin-left: auto;
+        line-height: 20px;
+        @include transition(all 0.3s cubic-bezier(.25,.8,.25,1));
 
-      & > .entry {
-        padding-right: 30px;
-      }
-    }
-
-    & > .content {
-      background-color: $dark;
-      color: $white;
-      font-family: $body-font;
-      font-size: 24px;
-      letter-spacing: 0;
-      padding: 30px 20px;
-      height: 472px;
-
-      & > .entry {
-        font-family: inherit;
-        margin-bottom: 40px;
-        @include align-items(stretch);
-        @include display(flex);
-        @include flex-direction(row);
-        width: 100%;
-        // height: 100px;
-
-        & > .more {
-          font-family: $header-font;
-          font-size: 64px;
-          color: lighten($dark, 15%);
-          margin-left: auto;
-          line-height: 20px;
+        &:hover {
+          color: $white;
+          cursor: pointer;
           @include transition(all 0.3s cubic-bezier(.25,.8,.25,1));
+        }
+      }
 
-          &:hover {
-            color: $white;
-            cursor: pointer;
-            @include transition(all 0.3s cubic-bezier(.25,.8,.25,1));
-          }
+      & > .info {
+        font-family: inherit;
+        & > * {
+          font-family: inherit;
         }
 
-        & > .info {
-          font-family: inherit;
-          & > * {
-            font-family: inherit;
-          }
-
-          & > .date {
-            color: $salmon;
-            text-transform: uppercase;
-          }
-          & > .role {
-            text-indent: 40px;
-          }
+        & > .date {
+          color: $salmon;
+          text-transform: uppercase;
+        }
+        & > .role {
+          text-indent: 40px;
         }
       }
     }
@@ -399,6 +401,26 @@ button {
 
 #mContact > .content {
   line-height: 36px;
+}
+
+#mWork {
+  top: 220px;
+}
+
+#mAbout {
+  top: 340px;
+}
+
+#mContact {
+  top: 460px;
+}
+
+#mResume {
+  top: -90px;
+}
+
+#mReel {
+  top: 30px;
 }
 
 #mAbout > .content {
