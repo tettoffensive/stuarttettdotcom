@@ -1,6 +1,15 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <!-- Global Site Tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-42078109-2"></script>
+  <script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments)};
+  gtag('js', new Date());
+
+  gtag('config', 'UA-42078109-2');
+  </script>
   <title>Stuart Tett | Freelance Designer</title>
 
   <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
@@ -12,13 +21,13 @@
     m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
   })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
-  ga('create', 'UA-102078547-1', 'auto');
+  ga('create', 'UA-42078109-2', 'auto');
   ga('send', 'pageview');
 
   </script>
 
-  <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
-  <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+  <script src="https://code.jquery.com/jquery-1.10.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.2/TweenMax.min.js"></script>
   <script>
 
@@ -48,10 +57,10 @@
       tl.kill();
 
       tl.set(animBtn,{clearProps: 'all',zIndex: 5000})
-        .to(animBtn, 0.3, { className: "+=open", ease:Cubic.easeOut })
-        .set("#modal", { autoAlpha: 1})
-        .set(animModal, { display: 'inline-block', autoAlpha: 1 })
-        .fromTo(animModal, 0.5, { height: '0px', ease:Cubic.easeOut }, { height: '550px' });
+      .to(animBtn, 0.3, { className: "+=open", ease:Cubic.easeOut })
+      .set("#modal", { autoAlpha: 1})
+      .set(animModal, { display: 'inline-block', autoAlpha: 1 })
+      .fromTo(animModal, 0.5, { height: '0px', ease:Cubic.easeOut }, { height: '550px' });
       tl.play();
     })
 
@@ -59,7 +68,7 @@
       if (e.target === e.currentTarget) {
         // $('.container').removeClass("blur");
         if (!tl.isActive()) {
-        tl.reverse();
+          tl.reverse();
           var url = $('#vReel').attr('src');
           $('#vReel').attr('src', '');
           $('#vReel').attr('src', url);
@@ -86,7 +95,7 @@
           transform: translateX()\
         } \
         " + id + ".open > * { \
-                transform: scaleX(calc("+ invScaleX + ")); \
+          transform: scaleX(calc("+ invScaleX + ")); \
         }")
         .appendTo("head");
       });
