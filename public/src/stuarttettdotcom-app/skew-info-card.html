@@ -1,0 +1,64 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+
+<dom-module id="skew-info-card">
+  <template>
+    <style>
+    :host {
+      background-color: #3F4A48;
+      color: #ffffff;
+      padding: 0px;
+      transform: skewY(-3deg);
+      overflow: hidden;
+      padding: 1px;
+      -webkit-backface-visibility:hidden;
+      backface-visibility:hidden;
+      -webkit-background-clip:content-box;
+      background-clip:content-box;
+      outline: 1px solid transparent;
+      transform-origin: left top;
+      height: 256px;
+    }
+
+    :host > * {
+      padding: 20px 0;
+      transform-origin: left top;
+      transform: skewY(3deg);
+      max-width: 415px;
+      height: 100%;
+      margin: auto;
+    }
+
+    :host p {
+      font-family: 'Space Mono';
+      font-weight: 700;
+      font-style: italic;
+      font-size: 18px;
+      color: #FFFFFF;
+      letter-spacing: 1px;
+      text-align: left;
+
+    }
+
+    .grow p { padding: 20px; }
+    :host(:hover) .grow { width: 35%; }
+
+    </style>
+    <div>
+      <p class="d2">[[description]]</p>
+    </div>
+  </template>
+
+  <script>
+  class SkewInfoCard extends Polymer.Element {
+    static get is() { return 'skew-info-card'; }
+    static get properties() {
+      return {
+        description: {
+          type: String,
+        }
+      }
+    }
+  }
+  window.customElements.define(SkewInfoCard.is, SkewInfoCard);
+  </script>
+</dom-module>

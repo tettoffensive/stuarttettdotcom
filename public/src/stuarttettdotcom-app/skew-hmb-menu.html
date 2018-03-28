@@ -1,0 +1,102 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+
+<dom-module id="skew-hmb-menu">
+  <template>
+    <style>
+    :host {
+      width: 100%;
+      padding: 0px;
+      padding: 1px;
+      height: 100%;
+    }
+
+    .menu {
+      padding-top:  20px;
+    }
+
+    .line {
+      width: 100%;
+      height: 9px;
+      background-color: #3F4A48;
+      margin: 0px;
+      margin-top: 5px;
+    }
+
+    .dropdown {
+      position: relative;
+    }
+
+    .drop-btn {
+      cursor: pointer;
+    }
+
+    .dropdown-content {
+      position: absolute;
+      background-color: #ffffff;
+      min-width: 262%;
+      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+      padding: 0px;
+      z-index: 1;
+      overflow: hidden;
+      height: auto;
+      max-height: 0px;
+      transition: all .5s ease-in-out;
+    }
+
+    .dropdown-content a {
+      font-style: italic;
+      color: black;
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+    }
+
+    .dropdown-content .links {
+      padding: 12px 16px;
+    }
+
+    .dropdown-content a:hover {
+      color: #54F0CE;
+    }
+
+    .dropdown:hover .line {
+      background-color: #54F0CE;
+    }
+
+    .dropdown:hover .dropdown-content {
+      max-height: 600px;
+    }
+
+    .straighten {
+      transform-origin: left top;
+      transform: skewY(3deg);
+    }
+
+    </style>
+    <div class="menu dropdown">
+      <div class="drop-btn">
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+      </div>
+      <div class="dropdown-content">
+        <div class="links">
+        <a href="#" class="straighten">Link 1</a>
+        <a href="#" class="straighten">Link 2</a>
+        <a href="#" class="straighten">Link 3</a>
+      </div>
+      </div>
+    </div>
+  </template>
+
+  <script>
+  class SkewHmbMenu extends Polymer.Element {
+    static get is() { return 'skew-hmb-menu'; }
+    static get properties() {
+      return {
+      }
+    }
+  }
+  window.customElements.define(SkewHmbMenu.is, SkewHmbMenu);
+  </script>
+</dom-module>

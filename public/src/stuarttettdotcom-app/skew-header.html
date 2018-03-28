@@ -1,0 +1,136 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="skew-hmb-menu.html">
+
+<dom-module id="skew-header">
+  <template>
+    <style>
+    .grid-8-1-auto {
+      grid-column: 1 / -2;
+      grid-row: 1;
+    }
+
+    .grid-8-end-1 {
+      grid-column: -2;
+      grid-row: 1;
+      margin: auto;
+    }
+
+    :host {
+      display: grid;
+      grid-gap: 40px;
+      grid-template-columns: repeat(8, 1fr ) ;
+      color: #000;
+      padding: 0px;
+      transform: skewY(-3deg);
+      padding: 1px;
+      -webkit-backface-visibility:hidden;
+      backface-visibility:hidden;
+      -webkit-background-clip:content-box;
+      background-clip:content-box;
+      outline: 1px solid transparent;
+      transform-origin: left top;
+      z-index: 1;
+    }
+
+    .white-accent {
+      background-color: #ffffff;
+      width: 50%;
+      height: 55px;
+      margin: 0px;
+      margin-top: auto;
+    }
+
+    .straighten {
+      transform-origin: left top;
+      transform: skewY(3deg);
+    }
+
+    .nudge-left {
+      position: relative;
+      left: -14px;
+      top: -10px;
+    }
+
+    .heading-font {
+      font-family: 'BioRhyme';
+      font-weight: 800;
+      font-size: 41px;
+      color: #3F4A48;
+      letter-spacing: 8px;
+      z-index: 0;
+    }
+
+    .shadow {
+      /* STUART TETT: */
+      opacity: 0.5;
+      color: #54F0CE;
+      position: absolute;
+      left: 4px;
+      top: 4px;
+      z-index: -1;
+    }
+
+    svg#torch {
+      position: absolute;
+      left: 255px;
+      top: -26px;
+      z-index: 0;
+    }
+
+    svg#splash {
+      position: absolute;
+      left: 245px;
+      top: -34px;
+      z-index: -1;
+    }
+
+    </style>
+    <div class="white-accent grid-8-1-auto">
+      <div class="heading-font straighten nudge-left">STUART&nbsp;TETT
+        <div class="heading-font shadow">STUART&nbsp;TETT</div>
+        <svg id="splash" width="61px" height="56px" viewBox="0 0 61 56" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+          <!-- Generator: Sketch 49.2 (51160) - http://www.bohemiancoding.com/sketch -->
+          <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" fill-opacity="0.5">
+            <g id="Desktop-Skew-Copy" transform="translate(-402.000000, -57.000000)" fill="#28F7CF">
+              <g id="Header">
+                <g id="Logo" transform="translate(157.000000, 57.000000)">
+                  <path d="M300.1406,51.9311 C306.2786,47.5281 307.2406,21.1461 303.1496,16.9121 C299.0586,12.6781 291.5606,15.5381 287.7296,13.3641 C283.8986,11.1901 287.1306,4.7811 281.4236,1.8061 C275.7156,-1.1699 254.1786,-0.4839 249.9676,3.9801 C245.7566,8.4431 243.2306,31.7891 246.4786,36.1381 C249.7276,40.4871 259.7136,35.7951 261.7586,37.6261 C263.8046,39.4571 259.8336,50.6721 261.6386,53.0761 C263.4436,55.4791 293.2836,56.8521 300.1406,51.9311" id="Splash"></path>
+                </g>
+              </g>
+            </g>
+          </g>
+        </svg>
+        <svg id="torch" width="41px" height="42px" viewBox="0 0 41 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+          <!-- Generator: Sketch 49.2 (51160) - http://www.bohemiancoding.com/sketch -->
+          <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+            <g id="Desktop-Skew-Copy" transform="translate(-412.000000, -64.000000)">
+              <g id="Header">
+                <g id="Logo" transform="translate(157.000000, 57.000000)">
+                  <g id="Torch" transform="translate(255.000000, 7.000000)">
+                    <polygon id="Page-1" fill="#EDF4F3" points="3 4 3 21.501 10.997 21.501 10.997 37.875 37.125 37.875 37.125 11.747 20.5 11.747 20.5 4"></polygon>
+                    <path d="M23.006,-0.0001 L0,0.0529 L0,23.0889 L8.336,23.0889 L8.358,41.0889 L40.512,41.0889 L40.488,9.0469 L23.006,9.0469 L23.006,-0.0001 Z M5.001,5.0409 L18.007,5.0109 L18.007,9.0469 L8.962,9.0469 L8.962,14.0469 L35.492,14.0469 L35.508,36.0879 L13.352,36.0879 L13.336,23.0889 L26.297,23.0889 L26.297,27.1099 L17.256,27.1099 L17.256,32.1089 L31.297,32.1089 L31.297,18.0879 L10.501,18.0879 L8.331,18.0879 L5.001,18.0879 L5.001,5.0409 Z" id="torch-flame" fill="#3F4A48"></path>
+                  </g>
+                </g>
+              </g>
+            </g>
+          </g>
+        </svg>
+
+
+      </div>
+    </div>
+    <skew-hmb-menu class="grid-8-end-1"></skew-hmb-menu>
+
+  </template>
+
+  <script>
+  class SkewHeader extends Polymer.Element {
+    static get is() { return 'skew-header'; }
+    static get properties() {
+      return {
+      }
+    }
+  }
+  window.customElements.define(SkewHeader.is, SkewHeader);
+  </script>
+</dom-module>
