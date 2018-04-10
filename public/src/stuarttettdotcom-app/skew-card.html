@@ -4,11 +4,10 @@
   <template>
     <style>
     :host {
-      position: relative;
+      cursor: pointer;
       background-color: #ffffff;
       color: #000;
       padding: 0px;
-      transform: skewY(-3deg);
       overflow: hidden;
       padding: 1px;
       -webkit-backface-visibility:hidden;
@@ -17,8 +16,35 @@
       background-clip:content-box;
       outline: 1px solid transparent;
       transform-origin: left top;
+      /* transition: height .5s ease-in-out; */
+      transition: all 0.5s cubic-bezier(0.15, 0.005, 0.155, 1);
       height: 256px;
-      transition: all .5s ease-in-out;
+      position: relative;
+    }
+
+    :host(.initial) {
+      transform: skewY(-3deg);
+      z-index: 0;
+    }
+
+    :host(.onclick) {
+      transform: translate3d(0, -50%, 0);
+      display: inline-block;
+      /* height: 100%; */
+      width: 100%;
+      /*position: absolute;
+      left: 0;
+      top: 0; */
+      z-index: 100;
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.35);
+    }
+
+    :host(.initial) .grow {
+      transform: skewY(3deg);
+    }
+
+    :host(.initial) .onclick {
+      transform: skewY(0deg);
     }
 
     .content {
@@ -40,7 +66,6 @@
       height: 300%;
       width: 35%;
       transform-origin: left top;
-      transform: skewY(3deg);
       z-index: 1;
     }
 
@@ -62,19 +87,19 @@
     }
 
     .grow p { padding: 20px; }
-    :host(:hover) .grow { width: 35%; }
-    :host(:hover) {
+    /* :host(.initial):hover .grow { width: 35%; } */
+    :host(.initial):hover {
       height: 512px;
     }
 
     </style>
-    <div class="grow">
-      <p class="t2">[[title]]</p>
-      <p class="d2">[[description]]</p>
-    </div>
-    <div class="content">
-      <img src="[[img]]" />
-    </div>
+      <div class="grow">
+        <p class="t2">[[title]]</p></a>
+        <p class="d2">[[description]]</p>
+      </div>
+      <div class="content">
+        <img src="[[img]]" />
+      </div>
   </template>
 
   <script>
@@ -84,13 +109,74 @@
       return {
         title: {
           type: String,
+          reflectToAttribute: true,
         },
         description: {
           type: String,
+          reflectToAttribute: true,
         },
         img: {
           type: String,
+          reflectToAttribute: true,
+        },
+        link: {
+          type: String,
+          reflectToAttribute: true,
+        },
+      }
+    }
+
+    ready() {
+      this.classList.add('initial');
+      this.addEventListener('click', this._onClick);
+      super.ready();
+    }
+
+    _onClick(event) {
+      event.preventDefault();
+
+      var xhr = new XMLHttpRequest();
+      xhr.open('GET', 'builduptv/index.html');
+      xhr.onload = function() {
+        if (xhr.status === 200) {
+          // alert('hello there: ' + xhr.responseText);
+          // var newContent = xhr.responseText.find('#content');
+          // var newPage = $(newContent).attr('data-page');
+          // var tempElement = document.createElement('div');
+          // tempElement.innerHTML = data;
+          // var styles = tempElement.querySelector('#ce-fontset').innerHTML;
+          // document.querySelector('#ce-fontset').innerHTML = styles;
+          //
+          // $(newContent).addClass('ed-page--new');
+          // $('#content').before(newContent);
+          // pages.updateMetaData(newContent, oldPage);
+          // pages.updatePath(newPage, href);
+          // pages.checkExternalLinks();
+          // casePage.init();
+          // if (workCase) {
+          //   pages.animateCase(oldPage, newPage, workCase);
+          // } else {
+          //   pages.animatePages(oldPage, newPage);
+          // }
+          // this.set('resolveUrl', event.target.value);
+          // this.set('title', xhr.response.detail.response.title);
+        } else {
+          alert('Request failed.  Returned status of ' + xhr.status);
         }
+      };
+      var startLoad = performance.now();
+      xhr.send();
+
+      this.classList.add('onclick');
+      this.classList.remove('initial');
+
+      document.title = "new title";
+      history.pushState("new-page");
+    }
+
+    _loadImage(img) {
+      if (img && !img.src) {
+        img.src = img.getAttribute('data-src');
       }
     }
   }
