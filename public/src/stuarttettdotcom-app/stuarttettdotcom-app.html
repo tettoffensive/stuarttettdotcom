@@ -23,7 +23,6 @@
     .wrapper > * {
       margin: 0px;
       margin-bottom: 8px;
-      width: 100%;
     }
 
     .shapes {
@@ -42,6 +41,7 @@
 </div>
 <div class="wrapper">
   <skew-header></skew-header>
+  <skew-info-card description="Stuart has a unique background with a double major in Art &amp; Design and Computer Science, which give way to a rare skill-set of strong visual and analytical problem-solving skills."></skew-info-card>
   <template is="dom-repeat" items="{{cards}}">
     <skew-card title=[[item.title]] description=[[item.description]] img=[[item.image]]></skew-card>
   </template>
