@@ -1,4 +1,7 @@
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.4/TweenLite.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.4/TimelineLite.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.4/plugins/CSSPlugin.min.js"></script>
 <!-- cubic-bezier(0.15, 0.005, 0.155, 1) -->
 <dom-module id="skew-card">
   <template>
@@ -16,8 +19,6 @@
       background-clip:content-box;
       outline: 1px solid transparent;
       transform-origin: left top;
-      /* transition: height 0.5s linear; */
-      /* transition: box-shadow 0.5s linear; */
 
       display: flex;
       flex-direction: row;
@@ -40,7 +41,6 @@
     }
 
     :host(.returning) {
-      transform: skewY(-3deg);
       height: 256px;
       width: 100%;
     }
@@ -55,7 +55,6 @@
       position: absolute;
       left: 10%;
       top: 10%;
-      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.35);
     }
 
     :host(.initial) > * {
@@ -109,20 +108,6 @@
       transform-origin: 0px 6px;
     }
 
-    /* .label:before {
-    position: absolute;
-    left: 0;
-    top: -25px;
-    transform: skewY(-3deg);
-    content: '';
-    transform-origin: left top;
-    background-color: inherit;
-    height: 50px;
-    width: 100%;
-    -webkit-backface-visibility: hidden;
-    z-index: 5;
-    } */
-
     .t2 {
       font-family: 'BioRhyme';
       font-weight: 800;
@@ -141,7 +126,7 @@
     }
 
     .label p { padding: 20px; }
-    /* :host(.initial):hover .label { width: 35%; } */
+
     :host(.initial):hover {
       /* height: 512px; */
     }
@@ -159,6 +144,9 @@
   </template>
 
   <script>
+  // otherwise GSAP skewY != css skewY https://greensock.com/docs/Plugins/CSSPlugin
+  CSSPlugin.defaultSkewType = "simple";
+
   class SkewCard extends Polymer.Element {
     static get is() { return 'skew-card'; }
     static get properties() {
@@ -183,16 +171,20 @@
     }
 
     ready() {
+      // add default classes
       this.classList.add('initial');
       this.classList.add('back');
       this.addEventListener('click', this._onClick);
       super.ready();
+      // keep track of default title
       this._defaultTitle = document.title;
     }
 
     constructor() {
       super();
+      // closed state = false
       this._state = false;
+      // for history back and forward buttons
       this._popState = this._popState.bind(this);
     }
 
@@ -213,16 +205,17 @@
 
     connectedCallback() {
       super.connectedCallback();
+      // for history back and forward buttons
       window.addEventListener('popstate', this._popState);
     }
 
     disconnectedCallback() {
       super.disconnectedCallback();
+      // for history back and forward buttons
       window.removeEventListener('popstate', this._popState);
     }
 
-    _openCard() {
-      this.transitionToState = true;
+    _loadPageData() {
       var xhr = new XMLHttpRequest();
       xhr.open('GET', 'builduptv/index.html');
       xhr.onload = function() {
@@ -256,6 +249,13 @@
       // Calculate the time from starting to load the data for use in animation timing
       var startLoad = performance.now();
       xhr.send(); // send the request
+    }
+
+    // Called when you click on a closed card
+    _openCard() {
+      this.transitionToState = true; // transition to open
+      // Load the data for the opening page async - don't wait for the data to animate
+      this._loadPageData();
 
       // FLIP animation
       // First
@@ -272,44 +272,51 @@
       let deltaY = first.top - last.top;
       let deltaW = first.width / last.width;
       let deltaH = first.height / last.height;
-      this.style.transform = `
+      // Create transforms
+      let thisFromTransform = `
       translate(${deltaX}px, ${deltaY}px)
       skewY(-3deg)
       scale(${deltaW}, ${deltaH})
       `;
-      // Invert the children (double-inversion) so they look normal
-      Array.from(this.shadowRoot.children).forEach( child => {
-        child.style.transform = `
-        scale(${1.0/deltaW}, ${1.0/deltaH})
-        skewY(3deg)
-        `;
-      });
-      // Now animate!
-      var oldTransition = this.style.transition;
-      setTimeout( () => {
-        var children = this.shadowRoot.children;
-        Array.from(this.shadowRoot.children).forEach( child => {
-          child.style.transition = "transform 0.5s linear";
-          child.style.transform = "";
-        });
-        this.style.transition = "transform 0.5s linear";
-        this.style.transform = "";
-      }, 10.0);
-
+      let thisToTransform = `
+      translate(0,0)
+      scale(1,1)
+      skewY(0deg)
+      `;
+      // Animate
+      var t1 = new TimelineLite();
+      t1.addLabel("openCard", 0);
+      let duration = 0.5;
+      // shadow
+      t1.add( TweenLite.to(this, duration, {boxShadow: "0 30px 60px rgba(0, 0, 0, 0.35)"}),"openCard");
+      // transform
+      t1.add( TweenLite.fromTo(this, duration, {transform: thisFromTransform, force3D: true}, {transform: thisToTransform,
+        force3D: true, // fixes glitch in Safari
+        onUpdate: () => {
+          // Invert scale for children to maintain text size
+          let sx = 1.0/this._gsTransform.scaleX;
+          let sy = 1.0/this._gsTransform.scaleY;
+          let skewY = -this._gsTransform.skewX; // for some reason GSAP skewY=0 and GSAP skewX=CSS skewY
+          Array.from(this.shadowRoot.children).forEach( child => {
+            TweenLite.set(child, {scaleX : sx, scaleY: sy, skewY: skewY});
+          });
+        },
+        onComplete: () => {
+          this.style.transform = ""; // using clearProps messes up last iteration of onUpdate
+          Array.from(this.shadowRoot.children).forEach( child => {
+            child.style.transform = "";
+          });
+        },
+        ease: Power3.easeInOut,
+      }), "openCard");
+      // Page history
       document.title = "new title";
       history.pushState(null, null, "new-page");
     }
 
+    // Called when you click on a opened card or back button
     _closeCard() {
-      this.transitionToState = false;
-      this.style.transition = "";
-      this.style.transform = ""; // don't want to override class transform
-      Array.from(this.shadowRoot.children).forEach( child => {
-        child.style.transition = "";
-        Array.from(child.children).forEach( child => {
-          child.style.transition = "";
-        });
-      });
+      this.transitionToState = false; // close the card
       // FLIP animation
       // First
       let first = this.getBoundingClientRect();
@@ -319,56 +326,66 @@
       this.style.transform = ""; // without skew
       let last = this.getBoundingClientRect();
       this.style.transform = transform; // restore skew
-
       // Invert
       let deltaX = first.left - last.left;
       let deltaY = first.top - last.top;
       let deltaW = first.width / last.width;
       let deltaH = first.height / last.height;
-      this.style.transform = `
+      // Create transform
+      let thisFromTransform = `
       translate(${deltaX}px, ${deltaY}px)
       scale(${deltaW}, ${deltaH})
+      skewY(0deg)
       `;
-
-      // Invert the children (double-inversion) so they look normal
-      Array.from(this.shadowRoot.children).forEach( child => {
-        if (child.classList.contains('label')) {
-          child.style.transform = `
-          scale(${1.0/deltaW}, 1.0)
-          `
-          child.children[0].style.transform = `
-          scale(1.0, ${1.0/deltaH})
-          `;
-        } else {
-          child.style.transform = `
-          scale(${1.0/deltaW}, ${1.0/deltaH})
-          `
-        }
-      });
-
-      // Now animate!
-      var oldTransition = this.style.transition;
-      setTimeout( () => {
-        var children = this.shadowRoot.children;
-        this.style.transition = "transform 0.5s linear";
-        this.style.transform = transform;
-        Array.from(this.shadowRoot.children).forEach( child => {
-          if (child.classList.contains('label')) {
-            // child.children[0].style.transition = "none";//transform 0.5s linear";
-            setTimeout( () => {
-            child.children[0].style.transform = "";
-          },0);
-          }
-          // child.style.transition = "transform 0.5s linear";
-          setTimeout( () => {
-          child.style.transform = "";
-        },0);
-        });
-        this.classList.replace('front','back');
-        this.classList.replace('returning','initial');
-      }, 10.0);
-
-      document.title = this.defaultTitle;
+      let thisToTransform = `
+      translate(0,0)
+      scale(1,1)
+      skewY(-3deg)
+      `;
+      // Animate
+      var t2 = new TimelineLite();
+      t2.addLabel("closeCard", 0);
+      let duration = 0.5;
+      // shadow
+      t2.add( TweenLite.to(this, duration, {boxShadow: "none"}),"openCard");
+      // transform
+      t2.add( TweenLite.fromTo(this, duration, {transform: thisFromTransform, force3D: true}, {transform: thisToTransform,
+        force3D: true, // for buggy animation glitch in Safari
+        onUpdate: () => {
+          // Invert the scale for children and grandchildren to maintain text size
+          let sx = 1.0/this._gsTransform.scaleX;
+          let sy = 1.0/this._gsTransform.scaleY;
+          let skewY = -this._gsTransform.skewX; // for some reason GSAP skewY=0 and GSAP skewX=CSS skewY
+          Array.from(this.shadowRoot.children).forEach( child => {
+            if (child.classList.contains('label')) {
+              TweenLite.set(child, {scaleX: sx, skewY: skewY}); // only counter the width of the dark background
+              Array.from(child.children).forEach( grandchild => {
+                TweenLite.set(grandchild, {scaleY: sy}); // parent is scaled down in width, add in the scale down in height for text
+              });
+            } else {
+              TweenLite.set(child, {scaleX : sx, scaleY: sy, skewY: skewY });
+            }
+          });
+        },
+        onComplete: () => {
+          // move back in z-index
+          this.classList.replace('front','back');
+          // return to regularly scheduled CSS
+          this.classList.replace('returning','initial');
+          // Set the page title back
+          document.title = this.defaultTitle;
+          // using clearProps messes up last iteration of onUpdate
+          this.style.transform = "";
+          Array.from(this.shadowRoot.children).forEach( child => {
+            Array.from(this.shadowRoot.children).forEach( grandchild => {
+              grandchild.style.transform = "";
+            });
+            child.style.transform = "";
+          });
+        },
+        ease: Power3.easeInOut
+      }),
+      "closeCard");
     }
 
     _onClick(event) {
@@ -380,7 +397,6 @@
     }
 
     _popState(event) {
-      console.log(this.state);
       if (event.target != event.currentTarget || !this.state) {
         return; // event is window so this probably isn't necessary
       }
