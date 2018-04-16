@@ -151,8 +151,8 @@
 
   // Used for interpotalion in the animation for closing the card
   function remap(x, inMin, inMax, outMin, outMax) {
-      let remap = (x - inMin) * (outMax - outMin) / (inMax - inMin) + outMin;
-      return Math.min(Math.max(remap, outMin), outMax);
+    let remap = (x - inMin) * (outMax - outMin) / (inMax - inMin) + outMin;
+    return Math.min(Math.max(remap, outMin), outMax);
   }
 
   class SkewCard extends Polymer.Element {
@@ -267,14 +267,21 @@
 
       // FLIP animation
       // First
+      let skewFirst = this.getBoundingClientRect();
       let transform = this.style.transform;
       this.style.transform = "none"; // without skew
       let first = this.getBoundingClientRect();
+      let childFirsts = Array.from(this.shadowRoot.children).map( child => {
+        return child.getBoundingClientRect();
+      });
       this.style.transform = transform; // restore skew
       // Last
       this.classList.replace('back','front');
       this.classList.replace('initial','onclick');
       let last = this.getBoundingClientRect();
+      let childLasts = Array.from(this.shadowRoot.children).map( child => {
+        return child.getBoundingClientRect();
+      });
       // Invert
       let deltaX = first.left - last.left;
       let deltaY = first.top - last.top;
@@ -305,8 +312,21 @@
           let sx = 1.0/this._gsTransform.scaleX;
           let sy = 1.0/this._gsTransform.scaleY;
           let skewY = -this._gsTransform.skewX; // for some reason GSAP skewY=0 and GSAP skewX=CSS skewY
-          Array.from(this.shadowRoot.children).forEach( child => {
-            TweenLite.set(child, {scaleX : sx, scaleY: sy, skewY: skewY});
+          Array.from(this.shadowRoot.children).forEach( (child,i) => {
+            if (child.classList.contains('label')) {
+              TweenLite.set(child, {scaleX : sx, scaleY: sy, skewY: skewY});
+            } else if (child.classList.contains('content')) {
+              // Get the remainder of whitespace after the label. we'll scale down the content image with this space
+              let parentWidth = (this.getBoundingClientRect().width - 279.0);
+              let childFirst = childFirsts[i];
+              let childLast = childLasts[i];
+              // Calc interpolation in Y direction from the total height of the parent. as parent scales down in Y, so does content.
+              let scaleY = (childLast.height*this._gsTransform.scaleY); // this gives us the scale to multiply the desiredHeight by so that the child equals that value.
+              TweenLite.set(child, {skewY: "0deg"});
+              let desiredHeight = remap(this.getBoundingClientRect().height, skewFirst.height, last.height, childFirst.height, childLast.height);
+              // The X is based of the width of the parent rect minus the width of the label. If the child is supposed to be 500px in Y, then 500px / scaleY = a scaleYb. child.width*scaleYb = 500px
+              TweenLite.set(child, {scaleX : parentWidth/(childLast.width*this._gsTransform.scaleX), scaleY: desiredHeight / scaleY, skewY: skewY, transformOrigin: "right top" });
+            }
           });
         },
         onComplete: () => {
@@ -317,6 +337,7 @@
         },
         ease: Power3.easeInOut,
       }), "openCard");
+      // setTimeout(() => { t1.pause()}, 0.1);
       // Page history
       document.title = "new title";
       history.pushState(null, null, "new-page");
@@ -369,9 +390,6 @@
           let sy = 1.0/this._gsTransform.scaleY;
           let skewY = -this._gsTransform.skewX; // for some reason GSAP skewY=0 and GSAP skewX=CSS skewY
 
-          // Get the remainder of whitespace after the label. we'll scale down the content image with this space
-          let parentWidth = (this.getBoundingClientRect().width - 279.5); // 724.39…
-
           Array.from(this.shadowRoot.children).forEach( (child, i) => {
             // The label background should be height 100% and width 280px
             if (child.classList.contains('label')) {
@@ -379,15 +397,17 @@
               Array.from(child.children).forEach( grandchild => {
                 TweenLite.set(grandchild, {scaleY: sy}); // parent is scaled down in width, add in the scale down in height for text
               });
-            // The content should remain fixed to the right edge of the label and the right edge of the parent and interpolate height between values determined by flexbox
+              // The content should remain fixed to the right edge of the label and the right edge of the parent and interpolate height between values determined by flexbox
             } else if (child.classList.contains('content')) {
+              // Get the remainder of whitespace after the label. we'll scale down the content image with this space
+              let parentWidth = (this.getBoundingClientRect().width - 279.5); // 724.39…
               let childFirst = childFirsts[i];
               let childLast = childLasts[i];
               // Calc interpolation in Y direction from the total height of the parent. as parent scales down in Y, so does content.
-              let scaleY = (childLast.height*this._gsTransform.scaleY); // this gives us the scale to multiply the desiredWidth by so that the child equals that value.
-              let desiredWidth = remap(this.getBoundingClientRect().height, last.height, first.height, childLast.height, childFirst.height);
+              let scaleY = (childLast.height*this._gsTransform.scaleY); // this gives us the scale to multiply the desiredHeight by so that the child equals that value.
+              let desiredHeight = remap(this.getBoundingClientRect().height, last.height, first.height, childLast.height, childFirst.height);
               // The X is based of the width of the parent rect minus the width of the label. If the child is supposed to be 500px in Y, then 500px / scaleY = a scaleYb. child.width*scaleYb = 500px
-              TweenLite.set(child, {scaleX : parentWidth/(childLast.width*this._gsTransform.scaleX), scaleY: desiredWidth / scaleY, skewY: skewY, transformOrigin: "right top" });
+              TweenLite.set(child, {scaleX : parentWidth/(childLast.width*this._gsTransform.scaleX), scaleY: desiredHeight / scaleY, skewY: skewY, transformOrigin: "right top" });
             }
           });
         },
