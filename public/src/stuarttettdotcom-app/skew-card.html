@@ -275,6 +275,20 @@
         return child.getBoundingClientRect();
       });
       this.style.transform = transform; // restore skew
+
+      // let's move the element out of the dom
+      let parent = this.parentElement;
+      var blank = document.createElement("div");
+      blank.style.height = "256px";
+      blank.style.width = "100%";
+      blank.style.padding = "0px";
+      blank.style.transformOrigin = "left top";
+      blank.style.transform = "skewY(-3deg)";
+      blank.innerHTML = " ";
+      parent.replaceChild(blank,this);
+      this._blank = blank;
+      parent.parentElement.appendChild(this);
+
       // Last
       this.classList.replace('back','front');
       this.classList.replace('initial','onclick');
@@ -337,7 +351,7 @@
         },
         ease: Power3.easeInOut,
       }), "openCard");
-      // setTimeout(() => { t1.pause()}, 0.1);
+      // setTimeout(() => { t1.pause()}, 0.0);
       // Page history
       document.title = "new title";
       history.pushState(null, null, "new-page");
@@ -352,6 +366,9 @@
       let childFirsts = Array.from(this.shadowRoot.children).map( child => {
         return child.getBoundingClientRect();
       });
+      // Move the element back into the flex list
+      let parent = this._blank.parentElement;
+      parent.replaceChild(this,this._blank);
       // Last
       this.classList.replace('onclick','returning');
       let last = this.getBoundingClientRect();
