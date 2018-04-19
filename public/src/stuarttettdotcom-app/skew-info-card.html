@@ -21,7 +21,7 @@
     }
 
     :host > * {
-      padding: 20px 0;
+      padding: 40px 8px;
       transform-origin: left top;
       transform: skewY(3deg);
       max-width: 415px;
@@ -33,19 +33,29 @@
       font-family: 'Space Mono';
       font-weight: 700;
       font-style: italic;
-      font-size: 18px;
+      font-size: 14px;
       color: #FFFFFF;
       letter-spacing: 0.6px;
       text-align: left;
-
+      /* border: 1px solid red; */
+      /* width: 38ch; */
+      margin: auto;
     }
 
-    .grow p { padding: 20px; }
-    :host(:hover) .grow { width: 35%; }
+    @media screen and (min-width: 320px) {
+      :host p {
+        font-size: calc(14px + 4 * ((100vw - 320px) / 480));
+      }
+    }
 
+    @media screen and (min-width: 800px) {
+      :host p {
+        font-size: 18px;
+      }
+    }
     </style>
     <div>
-      <p class="d2">[[description]]</p>
+      <p>[[description]]</p>
     </div>
   </template>
 

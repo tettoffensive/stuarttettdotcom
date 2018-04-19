@@ -6,7 +6,18 @@
 <dom-module id="skew-card">
   <template>
     <style>
+    figure,p {
+      display: block;
+      margin: 0px;
+      padding 0px;
+      -moz-box-sizing: border-box;
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box;
+    }
+
     :host {
+      --card-closed-height: 256px;
+
       cursor: pointer;
       background-color: #ffffff;
       color: #000;
@@ -22,7 +33,7 @@
       display: flex;
       flex-direction: row;
       flex-wrap: nowrap;
-      align-items: flex-start;
+      align-items: stretch;
     }
 
     :host(.front) {
@@ -35,12 +46,12 @@
 
     :host(.initial) {
       transform: skewY(-3deg);
-      height: 256px;
+      height: var(--card-closed-height);
       width: 100%;
     }
 
     :host(.returning) {
-      height: 256px;
+      height: var(--card-closed-height);
       width: 100%;
     }
 
@@ -64,53 +75,43 @@
       transform-origin: right top;
       flex-grow: 1;
       flex-shrink: 1;
-      position: relative;
-      background: linear-gradient(217deg, rgba(255,0,0,.8), rgba(255,0,0,0) 70.71%),
-      linear-gradient(127deg, rgba(0,255,0,.8), rgba(0,255,0,0) 70.71%),
-      linear-gradient(336deg, rgba(0,0,255,.8), rgba(0,0,255,0) 70.71%);
+      overflow: hidden;
+      min-height: 284px;
     }
 
-    .content img {
-      margin: auto;
-      position: absolute;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      left: 0;
+    .image {
+      background-repeat: no-repeat;
+      background-position: top center;
+      min-height: 284px;
     }
 
-    .content:before {
-      display: block;
-      content: ' ';
-      width: 100%;
-      padding-top: calc(503 / 578 * 100%);
+    .image.contain {
+      background-size: contain;
+    }
+
+    .image.cover {
+      background-size: cover;
     }
 
     .label {
-      position: relative;
-      top: -25px;
-      left: 0;
-      right: 0;
       overflow: hidden;
       background-color: #3F4A48;
       color: #ffffff;
-      height: 112%;
+      min-height: 272px;
+      height: 100%;
       width: 280px;
-      transform-origin: 0px 25px;
+      transform-origin: right top;
       z-index: 1;
+      flex-shrink: 0;
     }
 
     .label .text {
-      position: relative;
-      left: 0;
-      top: 0;
-      right: 0;
       width: 280px;
-      /* height: 100%; */
       transform-origin: 0px 6px;
     }
 
     .t2 {
+      margin-top: 20px;
       font-family: 'BioRhyme';
       font-weight: 800;
       font-style: normal;
@@ -129,20 +130,15 @@
 
     .label p { padding: 20px; }
 
-    :host(.initial):hover {
-      /* height: 512px; */
-    }
-
     </style>
-    <div class="label">
-      <div class="text">
+    <div id="label" class="label">
+      <div id="text" class="text">
         <p class="t2">[[title]]</p></a>
         <p class="d2">[[description]]</p>
       </div>
     </div>
-    <div class="content">
-      <!-- <img src="[[img]]" /> -->
-    </div>
+    <figure id="content" class="content image cover" style="background-image: url([[img]])">
+    </figure>
   </template>
 
   <script>
@@ -154,6 +150,19 @@
     let remap = (x - inMin) * (outMax - outMin) / (inMax - inMin) + outMin;
     return Math.min(Math.max(remap, outMin), outMax);
   }
+
+  // function imageCover( imageRect, containerRect) {
+  //   let imageWidth = imageRect.width;
+  //   let imageHeight = imageRect.height;
+  //   let containerWidth = containerRect.width;
+  //   let containerHeight = containerRect.height;
+  //   let imageRatio = imageHeight / imageWidth;
+  //   let containerRatio = containerHeight / containerWidth;
+  //   let coverImageSize = (containerRatio > imageRatio) ? { width: (containerHeight / imageRatio), height: containerHeight} : { width: containerWidth, height: (containerWidth / imageRatio) };
+  //   let returnValue = { x: (coverImageSize.width / imageRect.width ), y: (coverImageSize.height / imageRect.height) };
+  //   console.log(`{ x: (${imageRect.width} / ${coverImageSize.width}), y: (${imageRect.height} / ${coverImageSize.height}) };`)
+  //   return returnValue;
+  // }
 
   class SkewCard extends Polymer.Element {
     static get is() { return 'skew-card'; }
@@ -278,12 +287,9 @@
 
       // let's move the element out of the dom
       let parent = this.parentElement;
-      var blank = document.createElement("div");
-      blank.style.height = "256px";
-      blank.style.width = "100%";
-      blank.style.padding = "0px";
-      blank.style.transformOrigin = "left top";
-      blank.style.transform = "skewY(-3deg)";
+      // var blank = document.createElement("div");
+      var blank = this.cloneNode(true);
+      blank.visibility = "none";
       blank.innerHTML = " ";
       parent.replaceChild(blank,this);
       this._blank = blank;
@@ -313,7 +319,7 @@
       skewY(0deg)
       `;
       // Animate
-      var t1 = new TimelineLite();
+      var t1 = new TimelineLite({ paused: true });
       t1.addLabel("openCard", 0);
       let duration = 0.5;
       // shadow
@@ -328,7 +334,7 @@
           let skewY = -this._gsTransform.skewX; // for some reason GSAP skewY=0 and GSAP skewX=CSS skewY
           Array.from(this.shadowRoot.children).forEach( (child,i) => {
             if (child.classList.contains('label')) {
-              TweenLite.set(child, {scaleX : sx, scaleY: sy, skewY: skewY});
+              TweenLite.set(child, {scaleX : sx, scaleY: sy, skewY: skewY, transformOrigin: "0px 6px"});
             } else if (child.classList.contains('content')) {
               // Get the remainder of whitespace after the label. we'll scale down the content image with this space
               let parentWidth = (this.getBoundingClientRect().width - 279.0);
@@ -345,12 +351,15 @@
         },
         onComplete: () => {
           this.style.transform = ""; // using clearProps messes up last iteration of onUpdate
+          // this.style.transformOrigin = "";
           Array.from(this.shadowRoot.children).forEach( child => {
             child.style.transform = "";
+            // child.style.transformOrigin = "";
           });
         },
         ease: Power3.easeInOut,
       }), "openCard");
+      t1.restart();
       // setTimeout(() => { t1.pause()}, 0.0);
       // Page history
       document.title = "new title";
@@ -393,7 +402,7 @@
       skewY(-3deg)
       `;
       // Animate
-      var t2 = new TimelineLite();
+      var t2 = new TimelineLite({ paused: true });
       t2.addLabel("closeCard", 0);
       let duration = 0.5;
       // shadow
@@ -410,9 +419,9 @@
           Array.from(this.shadowRoot.children).forEach( (child, i) => {
             // The label background should be height 100% and width 280px
             if (child.classList.contains('label')) {
-              TweenLite.set(child, {scaleX: sx, skewY: skewY}); // only counter the width of the dark background
+              TweenLite.set(child, {scaleX: sx, skewY: skewY, transformOrigin: "left top"}); // only counter the width of the dark background
               Array.from(child.children).forEach( grandchild => {
-                TweenLite.set(grandchild, {scaleY: sy}); // parent is scaled down in width, add in the scale down in height for text
+                TweenLite.set(grandchild, {scaleY: sy, transformOrigin: "0px -20px"}); // parent is scaled down in width, add in the scale down in height for text
               });
               // The content should remain fixed to the right edge of the label and the right edge of the parent and interpolate height between values determined by flexbox
             } else if (child.classList.contains('content')) {
@@ -425,6 +434,10 @@
               let desiredHeight = remap(this.getBoundingClientRect().height, last.height, first.height, childLast.height, childFirst.height);
               // The X is based of the width of the parent rect minus the width of the label. If the child is supposed to be 500px in Y, then 500px / scaleY = a scaleYb. child.width*scaleYb = 500px
               TweenLite.set(child, {scaleX : parentWidth/(childLast.width*this._gsTransform.scaleX), scaleY: desiredHeight / scaleY, skewY: skewY, transformOrigin: "right top" });
+
+              Array.from(child.children).forEach( grandchild => {
+                TweenLite.set(grandchild, {scaleY: sy}); // parent is scaled down in width, add in the scale down in height for text
+              });
             }
           });
         },
@@ -440,13 +453,16 @@
           Array.from(this.shadowRoot.children).forEach( child => {
             Array.from(this.shadowRoot.children).forEach( grandchild => {
               grandchild.style.transform = "";
+              grandchild.style.transformOrigin = "";
             });
             child.style.transform = "";
+            child.style.transformOrigin = "";
           });
         },
         ease: Power3.easeInOut
       }),
       "closeCard");
+      t2.restart();
       // setTimeout(() => { t2.pause()}, 2);
     }
 

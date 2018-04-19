@@ -66,7 +66,7 @@ class StuarttettdotcomApp extends Polymer.Element {
             {type: 'skew-card',
             description: 'Created a logo for an online community platform for “makers” in the D.I.Y. community.',
             title: 'BuildUp.tv',
-            image:'/images/buildup_mockup.png',
+            image:'/images/buildup_mockup.jpg',
             link: './buildup',
           },
 
@@ -90,6 +90,40 @@ class StuarttettdotcomApp extends Polymer.Element {
         ];}
       }
     }
+  }
+
+  ready() {
+    super.ready();
+    this.addEventListener('dom-change', () => {
+      let wrapper = this.shadowRoot.querySelectorAll("skew-card");
+      Array.from(wrapper).forEach( child => {
+        child.addEventListener('dom-update', (event) => {
+          console.log("updated " + child);
+          console.log("event " + event.detail.removed);
+        });
+      });
+    });
+  }
+
+  connectedCallback() {
+    super.connectedCallback();
+    // this._observer = new Polymer.FlattenedNodesObserver(this, (info) => {
+    //   this.info = info;
+    //   console.log("info: " + info);
+    // });
+    // this._observer = Polymer.DomApi.observeNodes((element, info) => {
+    //   console.log("info: " + info + " " + element);
+    // });
+  }
+
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    // this._observer.disconect();
+  }
+
+  _domUpdated(event) {
+    console.log("updated!");
+    console.log(event);
   }
 }
 
