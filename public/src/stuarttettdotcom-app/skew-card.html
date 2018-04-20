@@ -6,6 +6,7 @@
 <dom-module id="skew-card">
   <template>
     <style>
+    /* In different browsers figure,p margin/padding is different */
     figure,p {
       display: block;
       margin: 0px;
@@ -16,19 +17,18 @@
     }
 
     :host {
-      --card-closed-height: 256px;
+      --card-closed-height: 500px;
 
+      transform-origin: left top;
       cursor: pointer;
-      background-color: #ffffff;
-      color: #000;
-      overflow: hidden;
+      background-color: transparent;
       padding: 0px;
+      /* Different browsers alias skewY differently - chrome kinda sucks */
       -webkit-backface-visibility:hidden;
       backface-visibility:hidden;
       -webkit-background-clip:content-box;
       background-clip:content-box;
       outline: 1px solid transparent;
-      transform-origin: left top;
 
       display: flex;
       flex-direction: row;
@@ -36,29 +36,29 @@
       align-items: stretch;
     }
 
+    /*  When animating open, put host in front */
     :host(.front) {
-      z-index: 100;
+      z-index: 1;
     }
-
+    /*  When animating closed, put host back */
     :host(.back) {
       z-index: 0;
     }
 
+    /*  Initial Skewed State */
     :host(.initial) {
       transform: skewY(-3deg);
       height: var(--card-closed-height);
       width: 100%;
     }
 
+    /*  When animating closed. Everything in initial but the skew */
     :host(.returning) {
       height: var(--card-closed-height);
       width: 100%;
     }
 
-    :host::transitioning {
-      pointer-events: none;
-    }
-
+    /* When user clicks, this class replaces .initial class */
     :host(.onclick) {
       height: 80%;
       width: 80%;
@@ -67,41 +67,78 @@
       top: 10%;
     }
 
-    :host(.initial) > * {
+    /* Counter host skewY with an equal and opposite skew */
+    :host(.initial) #label, #content {
       transform: skewY(3deg);
     }
 
+    /* For label shadow to be on top of content shadow */
+    .z1 {
+      z-index: 1;
+    }
+
+    .z0 {
+      z-index: 0;
+    }
+
+    /* Shadow is actually in the before */
+    .shadow {
+      position: relative;
+    }
+
+    .shadow:before {
+      content: " ";
+      position: absolute;
+      top: 0.5px; /* Chrome has an ugly white gap at the top */
+      bottom: 0.55px; /* Chrome has an even uglier white gap at the bottom */
+      left: 0;
+      right: 0;
+      z-index: -1;
+      box-shadow: 0 0 20px 0px rgba(0,0,0,0.35);
+    }
+
+    /* Extra div so that the shadow doesn't get clipped */
+    .clip {
+      overflow: hidden;
+      height: 100%;
+    }
+
+    /* This way the label is larger in Y than the content, so it looks like overlapping */
+    .content-shrink {
+      flex-grow: 1;
+      flex-shrink: 1;
+      height: 90%;
+      margin: auto 0px auto 0px;
+    }
+
+    /* Contains the image */
     .content {
       transform-origin: right top;
       flex-grow: 1;
       flex-shrink: 1;
       overflow: hidden;
-      min-height: 284px;
+      min-height: 540px; /* prevent blank space at the bottom when skewed */
+      background-color: white;
     }
 
     .image {
       background-repeat: no-repeat;
       background-position: top center;
-      min-height: 284px;
-    }
-
-    .image.contain {
-      background-size: contain;
+      min-height: 540px;
     }
 
     .image.cover {
       background-size: cover;
     }
 
+    /* Image explanation with title/description */
     .label {
       overflow: hidden;
-      background-color: #3F4A48;
       color: #ffffff;
-      min-height: 272px;
+      min-height: 515px;
       height: 100%;
       width: 280px;
-      transform-origin: right top;
-      z-index: 1;
+      transform-origin: left top;
       flex-shrink: 0;
     }
 
@@ -110,34 +147,52 @@
       transform-origin: 0px 6px;
     }
 
-    .t2 {
-      margin-top: 20px;
+    .title {
+      margin-top: 24px;
       font-family: 'BioRhyme';
       font-weight: 800;
       font-style: normal;
-      font-size: 18px;
+      font-size: 24px;
       color: #FFFFFF;
       letter-spacing: 1px;
       text-align: left;
     }
 
-    .d2 {
+    .description {
       font-family: 'Space Mono';
-      font-size: 14px;
+      font-size: 16px;
       font-weight: 400;
       font-style: italic;
+      line-height: 24px;
+      letter-spacing: 0.5px;
+      margin: 0px;
+      padding: 0px;
     }
 
-    .label p { padding: 20px; }
+    /* Padding everywhere but the top so no extra gap in between */
+    .label p { padding: 0px 24px 24px 24px; }
+
+    /* Background color on the label-clip (so no extra gap at the bottom) */
+    .dark-background {
+      background-color: #3F4A48;
+    }
 
     </style>
-    <div id="label" class="label">
-      <div id="text" class="text">
-        <p class="t2">[[title]]</p></a>
-        <p class="d2">[[description]]</p>
+    <div id="label-shadow" class="shadow z1">
+      <div id="label-clip" class="clip dark-background">
+        <div id="label" class="label">
+          <div id="text" class="text clip">
+            <p class="title">[[title]]</p></a>
+            <p class="description">[[description]]</p>
+          </div>
+        </div>
       </div>
     </div>
-    <figure id="content" class="content image cover" style="background-image: url([[img]])">
+    <div id="content-shrink" class="content-shrink shadow z0">
+      <div id="content-clip" class="clip">
+        <figure id="content" class="content image cover" style="background-image: url([[img]])">
+        </div>
+      </div>
     </figure>
   </template>
 
@@ -322,8 +377,8 @@
       var t1 = new TimelineLite({ paused: true });
       t1.addLabel("openCard", 0);
       let duration = 0.5;
-      // shadow
-      t1.add( TweenLite.to(this, duration, {boxShadow: "0 30px 60px rgba(0, 0, 0, 0.35)"}),"openCard");
+      // shadow from box-shadow: 0 0 20px 0 rgba(63,74,72,0.10);/* skew-card: */
+      t1.add( TweenLite.to(this, duration, {boxShadow: "0 30px 60px rgba(63,74,72,0.35)"}),"openCard");
       // transform
       t1.add( TweenLite.fromTo(this, duration, {transform: thisFromTransform, force3D: true}, {transform: thisToTransform,
         force3D: true, // fixes glitch in Safari
