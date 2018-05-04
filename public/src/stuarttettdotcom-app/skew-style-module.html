@@ -1,0 +1,211 @@
+<!-- Define some custom properties in a style module. -->
+<dom-module id='skew-style-module'>
+  <template>
+    <style>
+    figure,p {
+      display: block;
+      margin: 0px;
+      padding 0px;
+      -moz-box-sizing: border-box;
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box;
+    }
+
+    /* Padding everywhere but the top so no extra gap in between */
+    .label p { padding: 0px 24px 24px 24px; }
+
+    .ct-initial {
+      position: relative; /* important for shadow */
+      height: 90%;
+    }
+
+    .ct-onclick {
+      position: absolute;
+      top: 30px;
+      left: calc(280px + 30px);
+      width: calc(100% - 280px - 60px);
+      /* max-width: 1024px; */
+      height: calc(100vw - 30px);
+      max-height: 1024px;
+      min-height: 375px;
+    }
+
+    .lbl-initial {
+      position: relative; // important for shadow
+    }
+
+    .lbl-onclick {
+      position: absolute;
+      top: 30px;
+      left: 30px;
+      height: calc(100vw - 30px);
+      max-height: 1024px;
+      min-height: 375px;
+    }
+
+    /* Background color on the label-clip (so no extra gap at the bottom) */
+    .dark-background {
+      background-color: #3F4A48;
+    }
+
+    .z3 {
+      z-index: 3;
+    }
+
+    /* For label shadow to be on top of content shadow */
+    .z2 {
+      z-index: 2;
+    }
+
+    .z1 {
+      z-index: 1;
+    }
+
+    .z0 {
+      z-index: 0;
+    }
+
+    /* Shadow is actually in the before */
+    .shadow {
+
+    }
+
+    .shadow:before {
+      content: " ";
+      position: absolute;
+      top: 0.5px; /* Chrome has an ugly white gap at the top */
+      bottom: 0.55px; /* Chrome has an even uglier white gap at the bottom */
+      left: 0;
+      right: 0;
+      z-index: -1;
+      box-shadow: 0 0 20px 0px rgba(0,0,0,0.35);
+    }
+
+    .btn-shadow {
+        box-shadow: 0 20px 20px 0px rgba(0,0,0,0.05);
+    }
+
+    /* Extra div so that the shadow doesn't get clipped */
+    .clip {
+      overflow: hidden;
+      height: 100%;
+    }
+
+    /* This way the label is larger in Y than the content, so it looks like overlapping */
+    .content-shrink {
+      flex-grow: 1;
+      flex-shrink: 1;
+      margin: auto 0px auto 0px;
+      background-color: #54F0CE;
+    }
+
+    /* Contains the image */
+    .content {
+      transform-origin: right top;
+      flex-grow: 1;
+      flex-shrink: 1;
+      overflow: hidden;
+      min-height: 540px; /* prevent blank space at the bottom when skewed */
+    }
+
+    .image {
+      background-repeat: no-repeat;
+      background-position: top center;
+      min-height: 540px;
+      height: 100%;
+    }
+
+    .image.cover {
+      background-size: cover;
+    }
+
+    /* Image explanation with title/description */
+    .label {
+      overflow: hidden;
+      color: #ffffff;
+      min-height: 515px;
+      height: 100%;
+      width: 280px;
+      transform-origin: left top;
+      flex-shrink: 0;
+    }
+
+    .label .text {
+      width: 280px;
+      transform-origin: 0px 6px;
+      padding-top: 24px;
+    }
+
+    .title {
+      margin-top: 24px;
+      font-family: 'BioRhyme';
+      font-weight: 800;
+      font-style: normal;
+      font-size: 24px;
+      color: #FFFFFF;
+      letter-spacing: 1px;
+      text-align: left;
+    }
+
+    .description {
+      font-family: 'Space Mono';
+      font-size: 16px;
+      font-weight: 400;
+      font-style: italic;
+      line-height: 24px;
+      letter-spacing: 0.5px;
+      margin: 0px;
+      padding: 0px;
+    }
+
+    .grid-8-1-auto {
+      grid-column: 1 / -2;
+      grid-row: 1;
+    }
+
+    .grid-8-end-1 {
+      grid-column: -2;
+      grid-row: 1;
+      margin: auto;
+    }
+
+    .btn {
+      background-color: #54F0CE;
+      color: #F3F3F3;
+      width: 60px;
+      height: 50px;
+    }
+
+    .btn svg {
+      margin: auto;
+    }
+
+    .btn-tr {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+    }
+
+    .btn-bc {
+      position: relative;
+      top: 1028px;
+      left: 50vw;
+    }
+
+
+    .btn-flex {
+      display: flex;
+      align-items: center;
+      height: 100%;
+    }
+
+    .btn-flex svg {
+      width: auto;
+      height: auto;
+    }
+
+
+
+    </style>
+  </template>
+</dom-module>

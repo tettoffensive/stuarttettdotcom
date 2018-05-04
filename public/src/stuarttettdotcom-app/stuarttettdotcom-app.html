@@ -1,15 +1,21 @@
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="skew-style-module.html">
 <link rel="import" href="skew-header.html">
 <link rel="import" href="skew-card.html">
 <link rel="import" href="skew-info-card.html">
 <link rel="import" href="scatter-shapes.html">
+<link rel="import" href="stuarttettdotcom-app.html">
+<link rel="import" href="full-card.html">
+<link rel="import" href="stt-close-btn.html">
+<link rel="import" href="stt-scroll-btn.html">
 
 <dom-module id="stuarttettdotcom-app">
   <template>
-    <style>
+    <style include="skew-style-module">
     :host {
       display: block;
     }
+
     .wrapper {
       margin: auto;
       margin-top: 100px;
@@ -40,17 +46,26 @@
   </style>
   <scatter-shapes class="shapes one"></scatter-shapes>
   <div class="page">
+
+    <template is="dom-if" if="{{detail}}" restamp>
+      <full-card title="BuildUp.tv" description="Created a logo for an online community platform for “makers” in the D.I.Y. community." img="/images/buildup_mockup.jpg" on-close="_onClickClose"></full-card>
+    </template>
+
+    <template is="dom-if" if="{{!detail}}" restamp>
     <div class="wrapper">
       <skew-header></skew-header>
-      <skew-info-card description="Stuart has a unique background with a double major in Art &amp; Design and Computer Science, which give way to a rare skill-set of strong visual and analytical problem-solving skills."></skew-info-card>
-      <template is="dom-repeat" items="{{cards}}">
-        <skew-card title=[[item.title]] description=[[item.description]] img=[[item.image]]></skew-card>
+      <!-- <skew-info-card description="Stuart has a unique background with a double major in Art &amp; Design and Computer Science, which give way to a rare skill-set of strong visual and analytical problem-solving skills."></skew-info-card> -->
+      <template is="dom-repeat" id="thecards" items="{{cards}}">
+        <skew-card title=[[item.title]] description=[[item.description]] img=[[item.image]] on-click="_onClick"></skew-card>
       </template>
     </div>
+  </template>
+
   </div>
 </template>
 
 <script>
+"use strict"
 /**
 * @customElement
 * @polymer
@@ -59,6 +74,7 @@ class StuarttettdotcomApp extends Polymer.Element {
   static get is() { return 'stuarttettdotcom-app'; }
   static get properties() {
     return {
+      detail: {type: String, value: '', reflectToAttribute: true },
       cards: {
         type: Array,
         value() {
@@ -70,30 +86,36 @@ class StuarttettdotcomApp extends Polymer.Element {
             link: './buildup',
           },
 
-          {type: 'skew-card',
-          description: 'Created a warm and respectful logo for an institute for couples therapy.',
-          title: 'Jewish EFT Institute',
-          image:'',
-          link: ''},
-
-          {type: 'skew-card',
-          description: 'Designed a label for a craft beer aimed at customers who typically prefer easy-drinking beers',
-          title: 'Big Sissy Lager',
-          image:'/',
-          link: ''},
-
-          {type: 'skew-card',
-          description: '',
-          title: '',
-          image:'',
-          link: ''},
+          // {type: 'skew-card',
+          // description: 'Created a warm and respectful logo for an institute for couples therapy.',
+          // title: 'Jewish EFT Institute',
+          // image:'',
+          // link: ''},
+          //
+          // {type: 'skew-card',
+          // description: 'Designed a label for a craft beer aimed at customers who typically prefer easy-drinking beers',
+          // title: 'Big Sissy Lager',
+          // image:'/',
+          // link: ''},
+          //
+          // {type: 'skew-card',
+          // description: '',
+          // title: '',
+          // image:'',
+          // link: ''},
         ];}
       }
     }
   }
 
+  constructor(name) {
+    super();
+    this._lastClickElement = null;
+  }
+
   ready() {
     super.ready();
+    console.log(this.detail);
     this.addEventListener('dom-change', () => {
       let wrapper = this.shadowRoot.querySelectorAll("skew-card");
       Array.from(wrapper).forEach( child => {
@@ -119,6 +141,46 @@ class StuarttettdotcomApp extends Polymer.Element {
   disconnectedCallback() {
     super.disconnectedCallback();
     // this._observer.disconect();
+  }
+
+  _onClick(event) {
+
+    if (this._lastClickElement != null) {
+      return;
+    }
+
+    let el = event.target;
+    this._lastClickElement = el;
+    // let model = this.$.thecards.modelForElement(el);
+    el.openCard(event, (label, content) => {
+      this.detail = "true";
+      // Page history
+      document.title = "BuildUp.tv";
+      history.pushState(null, null, "builduptv");
+      label.style.visibility = "hidden";
+      content.style.visibility = "hidden";
+    });
+
+  }
+
+  _onClickClose(event) {
+    console.log("A");
+    if (this._lastClickElement == null) {
+      return;
+    }
+console.log("B");
+    let el = this._lastClickElement;
+    this._lastClickElement = null;
+    // let model = this.$.thecards.modelForElement(el);
+    this.detail = "false";
+    el.closeCard(event, (label, content) => {
+      // Page history
+      document.title = "Stuart Tett Dot Com";
+      history.pushState(null, null, "");
+      label.style.visibility = "hidden";
+      content.style.visibility = "hidden";
+    });
+
   }
 
   _domUpdated(event) {

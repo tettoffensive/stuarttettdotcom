@@ -5,17 +5,8 @@
 <!-- cubic-bezier(0.15, 0.005, 0.155, 1) -->
 <dom-module id="skew-card">
   <template>
-    <style>
+    <style include="skew-style-module">
     /* In different browsers figure,p margin/padding is different */
-    figure,p {
-      display: block;
-      margin: 0px;
-      padding 0px;
-      -moz-box-sizing: border-box;
-      -webkit-box-sizing: border-box;
-      box-sizing: border-box;
-    }
-
     :host {
       --card-closed-height: 500px;
 
@@ -72,114 +63,9 @@
       transform: skewY(3deg);
     }
 
-    /* For label shadow to be on top of content shadow */
-    .z1 {
-      z-index: 1;
-    }
-
-    .z0 {
-      z-index: 0;
-    }
-
-    /* Shadow is actually in the before */
-    .shadow {
-      position: relative;
-    }
-
-    .shadow:before {
-      content: " ";
-      position: absolute;
-      top: 0.5px; /* Chrome has an ugly white gap at the top */
-      bottom: 0.55px; /* Chrome has an even uglier white gap at the bottom */
-      left: 0;
-      right: 0;
-      z-index: -1;
-      box-shadow: 0 0 20px 0px rgba(0,0,0,0.35);
-    }
-
-    /* Extra div so that the shadow doesn't get clipped */
-    .clip {
-      overflow: hidden;
-      height: 100%;
-    }
-
-    /* This way the label is larger in Y than the content, so it looks like overlapping */
-    .content-shrink {
-      flex-grow: 1;
-      flex-shrink: 1;
-      height: 90%;
-      margin: auto 0px auto 0px;
-    }
-
-    /* Contains the image */
-    .content {
-      transform-origin: right top;
-      flex-grow: 1;
-      flex-shrink: 1;
-      overflow: hidden;
-      min-height: 540px; /* prevent blank space at the bottom when skewed */
-      background-color: white;
-    }
-
-    .image {
-      background-repeat: no-repeat;
-      background-position: top center;
-      min-height: 540px;
-    }
-
-    .image.cover {
-      background-size: cover;
-    }
-
-    /* Image explanation with title/description */
-    .label {
-      overflow: hidden;
-      color: #ffffff;
-      min-height: 515px;
-      height: 100%;
-      width: 280px;
-      transform-origin: left top;
-      flex-shrink: 0;
-    }
-
-    .label .text {
-      width: 280px;
-      transform-origin: 0px 6px;
-    }
-
-    .title {
-      margin-top: 24px;
-      font-family: 'BioRhyme';
-      font-weight: 800;
-      font-style: normal;
-      font-size: 24px;
-      color: #FFFFFF;
-      letter-spacing: 1px;
-      text-align: left;
-    }
-
-    .description {
-      font-family: 'Space Mono';
-      font-size: 16px;
-      font-weight: 400;
-      font-style: italic;
-      line-height: 24px;
-      letter-spacing: 0.5px;
-      margin: 0px;
-      padding: 0px;
-    }
-
-    /* Padding everywhere but the top so no extra gap in between */
-    .label p { padding: 0px 24px 24px 24px; }
-
-    /* Background color on the label-clip (so no extra gap at the bottom) */
-    .dark-background {
-      background-color: #3F4A48;
-    }
-
     </style>
-    <div id="label-shadow" class="shadow z1">
-      <div id="label-clip" class="clip dark-background">
+    <div id="labelShadow" class="shadow z2 lbl-initial">
+      <div id="labelClip" class="clip dark-background">
         <div id="label" class="label">
           <div id="text" class="text clip">
             <p class="title">[[title]]</p></a>
@@ -188,8 +74,8 @@
         </div>
       </div>
     </div>
-    <div id="content-shrink" class="content-shrink shadow z0">
-      <div id="content-clip" class="clip">
+    <div id="contentShrink" class="content-shrink shadow z1 ct-initial">
+      <div id="contentClip" class="clip">
         <figure id="content" class="content image cover" style="background-image: url([[img]])">
         </div>
       </div>
@@ -246,16 +132,18 @@
       // add default classes
       this.classList.add('initial');
       this.classList.add('back');
-      this.addEventListener('click', this._onClick);
+      // this.addEventListener('click', this._onClick);
       super.ready();
       // keep track of default title
       this._defaultTitle = document.title;
+      this.domReady = true;
     }
 
     constructor() {
       super();
       // closed state = false
       this._state = false;
+      this._tl = null;
       // for history back and forward buttons
       this._popState = this._popState.bind(this);
     }
@@ -287,253 +175,384 @@
       window.removeEventListener('popstate', this._popState);
     }
 
-    _loadPageData() {
-      var xhr = new XMLHttpRequest();
-      xhr.open('GET', 'builduptv/index.html');
-      xhr.onload = function() {
-        if (xhr.status === 200) {
-          // alert('hello there: ' + xhr.responseText);
-          // var newContent = xhr.responseText.find('#content');
-          // var newPage = $(newContent).attr('data-page');
-          // var tempElement = document.createElement('div');
-          // tempElement.innerHTML = data;
-          // var styles = tempElement.querySelector('#ce-fontset').innerHTML;
-          // document.querySelector('#ce-fontset').innerHTML = styles;
-          //
-          // $(newContent).addClass('ed-page--new');
-          // $('#content').before(newContent);
-          // pages.updateMetaData(newContent, oldPage);
-          // pages.updatePath(newPage, href);
-          // pages.checkExternalLinks();
-          // casePage.init();
-          // if (workCase) {
-          //   pages.animateCase(oldPage, newPage, workCase);
-          // } else {
-          //   pages.animatePages(oldPage, newPage);
-          // }
-          // this.set('resolveUrl', event.target.value);
-          // this.set('title', xhr.response.detail.response.title);
-        } else {
-          alert('Request failed.  Returned status of ' + xhr.status);
-        }
-      };
-
-      // Calculate the time from starting to load the data for use in animation timing
-      var startLoad = performance.now();
-      xhr.send(); // send the request
-    }
+    // _loadPageData() {
+    //
+    //   return;
+    //   var xhr = new XMLHttpRequest();
+    //   xhr.overrideMimeType('application/xml')
+    //   xhr.open('GET', 'builduptv/index.html');
+    //   xhr.onload = function() {
+    //     if (xhr.status === 200) {
+    //       // alert('hello there: ' + xhr.responseText);
+    //       // let parser = new DOMParser();
+    //       // var xmlDoc = parser.parseFromString(xhr.responseText,"text/xml");
+    //       // console.log(xmlDoc);
+    //       var newContent = xhr.responseXML.getElementsByTagName("body")[0];
+    //       let docBody = document.getElementsByTagName("body")[0];
+    //       console.log(docBody);
+    //       docBody.replaceChild(newContent.firstElementChild,docBody.firstElementChild);
+    //       return;
+    //       // var newPage = $(newContent).attr('data-page');
+    //       // $(newContent).addClass('ed-page--new');
+    //       // $('#content').before(newContent);
+    //       // pages.updateMetaData(newContent, oldPage);
+    //       // pages.updatePath(newPage, href);
+    //       // pages.checkExternalLinks();
+    //       // casePage.init();
+    //       // if (workCase) {
+    //       //   pages.animateCase(oldPage, newPage, workCase);
+    //       // } else {
+    //       //   pages.animatePages(oldPage, newPage);
+    //       // }
+    //       // this.set('resolveUrl', event.target.value);
+    //       // t¡his.set('title', xhr.response.detail.response.title);
+    //     } else {
+    //       alert('Request failed.  Returned status of ' + xhr.status);
+    //     }
+    //   };
+    //
+    //   // Calculate the time from starting to load the data for use in animation timing
+    //   var startLoad = performance.now();
+    //   xhr.send(); // send the request
+    // }
 
     // Called when you click on a closed card
-    _openCard() {
+    _openCard(callback) {
       this.transitionToState = true; // transition to open
       // Load the data for the opening page async - don't wait for the data to animate
-      this._loadPageData();
 
       // FLIP animation
+      let animLabelSource = this.$.labelShadow;
+      let animImageSource = this.$.contentShrink;
       // First
-      let skewFirst = this.getBoundingClientRect();
       let transform = this.style.transform;
       this.style.transform = "none"; // without skew
-      let first = this.getBoundingClientRect();
-      let childFirsts = Array.from(this.shadowRoot.children).map( child => {
-        return child.getBoundingClientRect();
-      });
+      let first = animLabelSource.getBoundingClientRect();
+      let imageFirst = animImageSource.getBoundingClientRect();
       this.style.transform = transform; // restore skew
 
       // let's move the element out of the dom
-      let parent = this.parentElement;
-      // var blank = document.createElement("div");
-      var blank = this.cloneNode(true);
-      blank.visibility = "none";
-      blank.innerHTML = " ";
-      parent.replaceChild(blank,this);
-      this._blank = blank;
-      parent.parentElement.appendChild(this);
+      let animLabelDest = animLabelSource.cloneNode(true);
+      animLabelDest.style.visibility = "hidden";
+      this.parentElement.parentElement.appendChild(animLabelDest);
+
+      let animImageDest = animImageSource.cloneNode(true);
+      animImageDest.style.visibility = "hidden";
+      this.parentElement.parentElement.appendChild(animImageDest);
 
       // Last
-      this.classList.replace('back','front');
-      this.classList.replace('initial','onclick');
-      let last = this.getBoundingClientRect();
-      let childLasts = Array.from(this.shadowRoot.children).map( child => {
-        return child.getBoundingClientRect();
-      });
+      animLabelDest.classList.replace('lbl-initial','lbl-onclick');
+      let last = animLabelDest.getBoundingClientRect();
+      animImageDest.classList.replace('ct-initial','ct-onclick');
+      let imageLast = animLabelDest.getBoundingClientRect();
       // Invert
       let deltaX = first.left - last.left;
       let deltaY = first.top - last.top;
       let deltaW = first.width / last.width;
       let deltaH = first.height / last.height;
+      // Invert
+      let ideltaX = imageFirst.left - imageLast.left;
+      let ideltaY = imageFirst.top - imageLast.top;
+      let ideltaW = imageFirst.width / imageLast.width;
+      let ideltaH = imageFirst.height / imageLast.height;
       // Create transforms
-      let thisFromTransform = `
+      let fromTransform = `
       translate(${deltaX}px, ${deltaY}px)
-      skewY(-3deg)
       scale(${deltaW}, ${deltaH})
       `;
-      let thisToTransform = `
+      let imageFromTransform = `
+      translate(${ideltaX}px, ${ideltaY}px)
+      scale(${ideltaW}, ${ideltaH})
+      `
+      let toTransform = `
       translate(0,0)
       scale(1,1)
-      skewY(0deg)
       `;
       // Animate
-      var t1 = new TimelineLite({ paused: true });
-      t1.addLabel("openCard", 0);
-      let duration = 0.5;
-      // shadow from box-shadow: 0 0 20px 0 rgba(63,74,72,0.10);/* skew-card: */
-      t1.add( TweenLite.to(this, duration, {boxShadow: "0 30px 60px rgba(63,74,72,0.35)"}),"openCard");
-      // transform
-      t1.add( TweenLite.fromTo(this, duration, {transform: thisFromTransform, force3D: true}, {transform: thisToTransform,
+      var tl = new TimelineLite({ paused: true });
+      // Put the destination pieces in their "First" states
+      TweenLite.set(animLabelDest, {transform: fromTransform, transformOrigin: "left top"});
+      TweenLite.set(animImageDest, {transform: imageFromTransform, transformOrigin: "right top"});
+
+      let unskewDuration = 0.15;
+      var delay = 0;
+      tl.addLabel("unskewLabel", delay);
+      delay += unskewDuration;
+
+      let scaleUpLabelDuration = 0.15;
+      tl.addLabel("scaleUpLabel", delay);
+      delay += scaleUpLabelDuration;
+
+      delay = 0.01; // reset
+      let fadeOutImageDuration = 0.25;
+      tl.addLabel("fadeOutImage", delay);
+      delay += fadeOutImageDuration;
+
+      let unskewContentDuration = 0.15;
+      tl.addLabel("unskewContentDuration", delay);
+      delay += unskewContentDuration;
+
+      let scaleUpContentDuration = 0.15;
+      tl.addLabel("scaleUpContent", delay);
+      delay += scaleUpContentDuration;
+
+      // Unskew Label
+      tl.add( TweenLite.to(this.$.label, unskewDuration, { alpha: 0 }), "unskewLabel");
+      tl.add( TweenLite.to(this.$.labelShadow, unskewDuration, {skewY: 3, skewType: "simple", transformOrigin: "left top",
+      force3D: true, // fixes glitch in Safari
+      onUpdate: () => {
+        let skewY = -this.$.labelShadow._gsTransform.skewY;
+        TweenLite.set(this.$.label, {skewY: skewY, skewType: "simple", transformOrigin: "left top"});
+      },
+      onComplete: () => {
+        animLabelDest.style.visibility = "";
+        animLabelDest.querySelector(".label").style.visibility = "hidden";
+        animLabelSource.style.visibility = "hidden";
+      },
+      onReverseComplete: () => {
+        animLabelDest.style.visibility = "hidden";
+        animLabelDest.querySelector(".label").style.visibility = "";
+        animLabelSource.style.visibility = "";
+      },
+      ease: Power3.easeIn,
+    }), "unskewLabel");
+    // Scale Up Label
+    tl.add( TweenLite.to(animLabelDest, scaleUpLabelDuration,
+      { transform: toTransform,
+        transformOrigin: "left top",
+        force3D: true,
+        ease: Power3.easeOut,
+      }), "scaleUpLabel");
+      // Fade Out the content Image
+      tl.add( TweenLite.to(this.$.content, fadeOutImageDuration,
+        {
+          backgroundImage: '',
+          // backgroundColor: '#54F0CE',
+          ease: Power3.easeInOut,
+        }), "fadeOutImage");
+        // Unskew
+        tl.add( TweenLite.to(this.$.content, unskewContentDuration,
+          {
+            skewY: 3, skewType: "simple", transformOrigin: "right top",
+            onUpdate: () => {
+
+            }, onComplete: () => {
+              animImageDest.style.visibility = "";
+              let content = animImageDest.querySelector(".content");
+              content.style.backgroundImage = "";
+              animImageSource.style.visibility = "hidden";
+            },
+            onReverseComplete: () => {
+              animImageDest.style.visibility = "hidden";
+              let content = animImageDest.querySelector(".content");
+              // TODO: restore background image
+              // content.style.backgroundImage = "";
+              animImageSource.style.visibility = "";
+            },
+            ease: Power3.easeIn,
+          }), "unskewContentDuration");
+        // Scale Up
+        tl.add( TweenLite.to(animImageDest, scaleUpContentDuration, {transform: toTransform,
         force3D: true, // fixes glitch in Safari
         onUpdate: () => {
-          // Invert scale for children to maintain text size
-          let sx = 1.0/this._gsTransform.scaleX;
-          let sy = 1.0/this._gsTransform.scaleY;
-          let skewY = -this._gsTransform.skewX; // for some reason GSAP skewY=0 and GSAP skewX=CSS skewY
-          Array.from(this.shadowRoot.children).forEach( (child,i) => {
-            if (child.classList.contains('label')) {
-              TweenLite.set(child, {scaleX : sx, scaleY: sy, skewY: skewY, transformOrigin: "0px 6px"});
-            } else if (child.classList.contains('content')) {
-              // Get the remainder of whitespace after the label. we'll scale down the content image with this space
-              let parentWidth = (this.getBoundingClientRect().width - 279.0);
-              let childFirst = childFirsts[i];
-              let childLast = childLasts[i];
-              // Calc interpolation in Y direction from the total height of the parent. as parent scales down in Y, so does content.
-              let scaleY = (childLast.height*this._gsTransform.scaleY); // this gives us the scale to multiply the desiredHeight by so that the child equals that value.
-              TweenLite.set(child, {skewY: "0deg"});
-              let desiredHeight = remap(this.getBoundingClientRect().height, skewFirst.height, last.height, childFirst.height, childLast.height);
-              // The X is based of the width of the parent rect minus the width of the label. If the child is supposed to be 500px in Y, then 500px / scaleY = a scaleYb. child.width*scaleYb = 500px
-              TweenLite.set(child, {scaleX : parentWidth/(childLast.width*this._gsTransform.scaleX), scaleY: desiredHeight / scaleY, skewY: skewY, transformOrigin: "right top" });
-            }
-          });
+          let sx = 1.0/animLabelDest._gsTransform.scaleX;
+          let sy = 1.0/animLabelDest._gsTransform.scaleY;
+          let content = animImageDest.children[0];
+          // let content = animImageDest.querySelector(".content");
+          TweenLite.set(content, { scaleX: sx, scaleY: sy, transformOrigin: "right top"});
+        }, onComplete: () => {
+          setTimeout(() => {
+            callback(animLabelDest,animImageDest);
+          },1);
         },
-        onComplete: () => {
-          this.style.transform = ""; // using clearProps messes up last iteration of onUpdate
-          // this.style.transformOrigin = "";
-          Array.from(this.shadowRoot.children).forEach( child => {
-            child.style.transform = "";
-            // child.style.transformOrigin = "";
-          });
+        onReverseComplete: () => {
+          alert("reverse complete!!!");
+          setTimeout(() => {
+            callback(animLabelDest,animImageDest);
+          },1);
         },
-        ease: Power3.easeInOut,
-      }), "openCard");
-      t1.restart();
-      // setTimeout(() => { t1.pause()}, 0.0);
-      // Page history
-      document.title = "new title";
-      history.pushState(null, null, "new-page");
+        ease: Power3.easeOut,
+      }), "scaleUpContent");
+      tl.restart();
+      this._tl = tl;
     }
 
-    // Called when you click on a opened card or back button
-    _closeCard() {
-      this.transitionToState = false; // close the card
-      // FLIP animation
-      // First
-      let first = this.getBoundingClientRect();
-      let childFirsts = Array.from(this.shadowRoot.children).map( child => {
-        return child.getBoundingClientRect();
-      });
-      // Move the element back into the flex list
-      let parent = this._blank.parentElement;
-      parent.replaceChild(this,this._blank);
-      // Last
-      this.classList.replace('onclick','returning');
-      let last = this.getBoundingClientRect();
-      let childLasts = Array.from(this.shadowRoot.children).map( child => {
-        return child.getBoundingClientRect();
-      });
-
-      // Invert
-      let deltaX = first.left - last.left;
-      let deltaY = first.top - last.top;
-      let deltaW = first.width / last.width;
-      let deltaH = first.height / last.height;
-      // Create transforms for From and To - we are scaling down and putting back the skew
-      let thisFromTransform = `
-      translate(${deltaX}px, ${deltaY}px)
-      scale(${deltaW}, ${deltaH})
-      skewY(0deg)
-      `;
-      let thisToTransform = `
-      translate(0,0)
-      scale(1,1)
-      skewY(-3deg)
-      `;
-      // Animate
-      var t2 = new TimelineLite({ paused: true });
-      t2.addLabel("closeCard", 0);
-      let duration = 0.5;
-      // shadow
-      t2.add( TweenLite.to(this, duration, {boxShadow: "none"}),"openCard");
-      // transform
-      t2.add( TweenLite.fromTo(this, duration, {transform: thisFromTransform, force3D: true}, {transform: thisToTransform,
-        force3D: true, // for buggy animation glitch in Safari
-        onUpdate: () => {
-          // Invert the scale for children and grandchildren to maintain text size
-          let sx = 1.0/this._gsTransform.scaleX;
-          let sy = 1.0/this._gsTransform.scaleY;
-          let skewY = -this._gsTransform.skewX; // for some reason GSAP skewY=0 and GSAP skewX=CSS skewY
-
-          Array.from(this.shadowRoot.children).forEach( (child, i) => {
-            // The label background should be height 100% and width 280px
-            if (child.classList.contains('label')) {
-              TweenLite.set(child, {scaleX: sx, skewY: skewY, transformOrigin: "left top"}); // only counter the width of the dark background
-              Array.from(child.children).forEach( grandchild => {
-                TweenLite.set(grandchild, {scaleY: sy, transformOrigin: "0px -20px"}); // parent is scaled down in width, add in the scale down in height for text
-              });
-              // The content should remain fixed to the right edge of the label and the right edge of the parent and interpolate height between values determined by flexbox
-            } else if (child.classList.contains('content')) {
-              // Get the remainder of whitespace after the label. we'll scale down the content image with this space
-              let parentWidth = (this.getBoundingClientRect().width - 279.5); // 724.39…
-              let childFirst = childFirsts[i];
-              let childLast = childLasts[i];
-              // Calc interpolation in Y direction from the total height of the parent. as parent scales down in Y, so does content.
-              let scaleY = (childLast.height*this._gsTransform.scaleY); // this gives us the scale to multiply the desiredHeight by so that the child equals that value.
-              let desiredHeight = remap(this.getBoundingClientRect().height, last.height, first.height, childLast.height, childFirst.height);
-              // The X is based of the width of the parent rect minus the width of the label. If the child is supposed to be 500px in Y, then 500px / scaleY = a scaleYb. child.width*scaleYb = 500px
-              TweenLite.set(child, {scaleX : parentWidth/(childLast.width*this._gsTransform.scaleX), scaleY: desiredHeight / scaleY, skewY: skewY, transformOrigin: "right top" });
-
-              Array.from(child.children).forEach( grandchild => {
-                TweenLite.set(grandchild, {scaleY: sy}); // parent is scaled down in width, add in the scale down in height for text
-              });
-            }
-          });
-        },
-        onComplete: () => {
-          // move back in z-index
-          this.classList.replace('front','back');
-          // return to regularly scheduled CSS
-          this.classList.replace('returning','initial');
-          // Set the page title back
-          document.title = this.defaultTitle;
-          // using clearProps messes up last iteration of onUpdate
-          this.style.transform = "";
-          Array.from(this.shadowRoot.children).forEach( child => {
-            Array.from(this.shadowRoot.children).forEach( grandchild => {
-              grandchild.style.transform = "";
-              grandchild.style.transformOrigin = "";
-            });
-            child.style.transform = "";
-            child.style.transformOrigin = "";
-          });
-        },
-        ease: Power3.easeInOut
-      }),
-      "closeCard");
-      t2.restart();
-      // setTimeout(() => { t2.pause()}, 2);
+    // Called when you click on a closed card
+    _closeCard(callback) {
+      this.transitionToState = false; // transition to open
+      this._tl.reverse();
+      console.log("F");
+    //   // Load the data for the opening page async - don't wait for the data to animate
+    //
+    //   // FLIP animation
+    //   let animLabelSource = this.$.labelShadow;
+    //   let animImageSource = this.$.contentShrink;
+    //   // First
+    //   let transform = this.style.transform;
+    //   this.style.transform = "none"; // without skew
+    //   let first = animLabelSource.getBoundingClientRect();
+    //   let imageFirst = animImageSource.getBoundingClientRect();
+    //   this.style.transform = transform; // restore skew
+    //
+    //   // let's move the element out of the dom
+    //   let animLabelDest = animLabelSource.cloneNode(true);
+    //   animLabelDest.style.visibility = "hidden";
+    //   this.parentElement.parentElement.appendChild(animLabelDest);
+    //
+    //   let animImageDest = animImageSource.cloneNode(true);
+    //   animImageDest.style.visibility = "hidden";
+    //   this.parentElement.parentElement.appendChild(animImageDest);
+    //
+    //   // Last
+    //   animLabelDest.classList.replace('lbl-initial','lbl-onclick');
+    //   let last = animLabelDest.getBoundingClientRect();
+    //   animImageDest.classList.replace('ct-initial','ct-onclick');
+    //   let imageLast = animLabelDest.getBoundingClientRect();
+    //   // Invert
+    //   let deltaX = first.left - last.left;
+    //   let deltaY = first.top - last.top;
+    //   let deltaW = first.width / last.width;
+    //   let deltaH = first.height / last.height;
+    //   // Invert
+    //   let ideltaX = imageFirst.left - imageLast.left;
+    //   let ideltaY = imageFirst.top - imageLast.top;
+    //   let ideltaW = imageFirst.width / imageLast.width;
+    //   let ideltaH = imageFirst.height / imageLast.height;
+    //   // Create transforms
+    //   let fromTransform = `
+    //   translate(${deltaX}px, ${deltaY}px)
+    //   scale(${deltaW}, ${deltaH})
+    //   `;
+    //   let imageFromTransform = `
+    //   translate(${ideltaX}px, ${ideltaY}px)
+    //   scale(${ideltaW}, ${ideltaH})
+    //   `
+    //   let toTransform = `
+    //   translate(0,0)
+    //   scale(1,1)
+    //   `;
+    //   // Animate
+    //   var tl = new TimelineLite({ paused: true });
+    //   // Put the destination pieces in their "First" states
+    //   TweenLite.set(animLabelDest, {transform: fromTransform, transformOrigin: "left top"});
+    //   TweenLite.set(animImageDest, {transform: imageFromTransform, transformOrigin: "right top"});
+    //
+    //   let unskewDuration = 0.15;
+    //   var delay = 0;
+    //   tl.addLabel("unskewLabel", delay);
+    //   delay += unskewDuration;
+    //
+    //   let scaleUpLabelDuration = 0.15;
+    //   tl.addLabel("scaleUpLabel", delay);
+    //   delay += scaleUpLabelDuration;
+    //
+    //   delay = 0.01; // reset
+    //   let fadeOutImageDuration = 0.25;
+    //   tl.addLabel("fadeOutImage", delay);
+    //   delay += fadeOutImageDuration;
+    //
+    //   let unskewContentDuration = 0.15;
+    //   tl.addLabel("unskewContentDuration", delay);
+    //   delay += unskewContentDuration;
+    //
+    //   let scaleUpContentDuration = 0.15;
+    //   tl.addLabel("scaleUpContent", delay);
+    //   delay += scaleUpContentDuration;
+    //
+    //   // Unskew Label
+    //   tl.add( TweenLite.to(this.$.label, unskewDuration, { alpha: 0 }), "unskewLabel");
+    //   tl.add( TweenLite.to(this.$.labelShadow, unskewDuration, {skewY: 3, skewType: "simple", transformOrigin: "left top",
+    //   force3D: true, // fixes glitch in Safari
+    //   onUpdate: () => {
+    //     let skewY = -this.$.labelShadow._gsTransform.skewY;
+    //     TweenLite.set(this.$.label, {skewY: skewY, skewType: "simple", transformOrigin: "left top"});
+    //   },
+    //   onComplete: () => {
+    //     animLabelDest.style.visibility = "";
+    //     animLabelDest.querySelector(".label").style.visibility = "hidden";
+    //     animLabelSource.style.visibility = "hidden";
+    //   },
+    //   ease: Power3.easeIn,
+    // }), "unskewLabel");
+    // // Scale Up Label
+    // tl.add( TweenLite.to(animLabelDest, scaleUpLabelDuration,
+    //   { transform: toTransform,
+    //     transformOrigin: "left top",
+    //     force3D: true,
+    //     ease: Power3.easeOut,
+    //   }), "scaleUpLabel");
+    //   // Fade Out the content Image
+    //   tl.add( TweenLite.to(this.$.content, fadeOutImageDuration,
+    //     {
+    //       backgroundImage: '',
+    //       // backgroundColor: '#54F0CE',
+    //       ease: Power3.easeInOut,
+    //     }), "fadeOutImage");
+    //     // Unskew
+    //     tl.add( TweenLite.to(this.$.content, unskewContentDuration,
+    //       {
+    //         skewY: 3, skewType: "simple", transformOrigin: "right top",
+    //         onUpdate: () => {
+    //
+    //         }, onComplete: () => {
+    //           animImageDest.style.visibility = "";
+    //           let content = animImageDest.querySelector(".content");
+    //           content.style.backgroundImage = "";
+    //           // content.style.backgroundColor = "#54F0CE";
+    //           animImageSource.style.visibility = "hidden";
+    //         },
+    //         ease: Power3.easeIn,
+    //       }), "unskewContentDuration");
+    //     // Scale Up
+    //     tl.add( TweenLite.to(animImageDest, scaleUpContentDuration, {transform: toTransform,
+    //     force3D: true, // fixes glitch in Safari
+    //     onUpdate: () => {
+    //       let sx = 1.0/animLabelDest._gsTransform.scaleX;
+    //       let sy = 1.0/animLabelDest._gsTransform.scaleY;
+    //       let content = animImageDest.children[0];
+    //       // let content = animImageDest.querySelector(".content");
+    //       TweenLite.set(content, { scaleX: sx, scaleY: sy, transformOrigin: "right top"});
+    //     }, onComplete: () => {
+    //       setTimeout(() => {
+    //         callback(animLabelDest,animImageDest);
+    //       },1);
+    //     },
+    //     ease: Power3.easeOut,
+    //   }), "scaleUpContent");
+    //   tl.restart();
     }
 
-    _onClick(event) {
+    openCard(event, callback) {
       if (event.target != event.currentTarget) {
         return;
       }
+      if (!this.domReady) {
+        return;
+      }
       event.preventDefault();
-      this.state ? this._closeCard() : this._openCard();
+      this._openCard(callback);
+    }
+
+    closeCard(event, callback) {
+      console.log("C");
+      if (event.target != event.currentTarget) {
+        return;
+      }
+      console.log("D");
+      if (!this.domReady) {
+        return;
+      }
+      console.log("E");
+      event.preventDefault();
+      this._closeCard(callback);
     }
 
     _popState(event) {
       if (event.target != event.currentTarget || !this.state) {
         return; // event is window so this probably isn't necessary
       }
-      this.state ? this._closeCard() : this._openCard();
+      event.preventDefault();
+      this._openCard();
     }
 
     _loadImage(img) {
