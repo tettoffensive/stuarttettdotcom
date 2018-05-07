@@ -63,504 +63,632 @@
       transform: skewY(3deg);
     }
 
+    .btn-hidden {
+      display: none;
+    }
+
     </style>
-    <div id="labelShadow" class="shadow z2 lbl-initial">
-      <div id="labelClip" class="clip dark-background">
-        <div id="label" class="label">
-          <div id="text" class="text clip">
-            <p class="title">[[title]]</p></a>
-            <p class="description">[[description]]</p>
-          </div>
-        </div>
+    <!-- <template is="dom-if" if="{{detail}}" restamp>
+    <div>
+    <stt-close-btn on-click="_onClickClose"></stt-close-btn>
+    <stt-scroll-btn on-click="_onClickScroll"></stt-scroll-btn>
+    <div id="labelShadow" class="shadow z2 lbl-onclick">
+    <div id="labelClip" class="clip dark-background">
+    <div id="label" class="label">
+    <div id="text" class="text clip">
+    <p class="title">[[title]]</p></a>
+    <p class="description">[[description]]</p>
+  </div>
+</div>
+</div>
+</div>
+<div id="contentShrink" class="content-shrink shadow z1 ct-onclick">
+<div id="contentClip" class="clip">
+<figure id="content" class="content image cover" style="background-image: url([[img]])">
+</div>
+</div>
+</figure>
+</div>
+</template> -->
+<div id="fullCard" style="display: none; visibility: hidden;">
+  <stt-close-btn id="closeBtn" on-click="_onClickClose"></stt-close-btn>
+  <stt-scroll-btn id="scrollBtn" on-click="_onClickScroll"></stt-scroll-btn>
+</div>
+<div id="labelShadow" class="shadow z2">
+  <div id="labelClip" class="clip dark-background">
+    <div id="label" class="label">
+      <div id="text" class="text clip">
+        <p class="title">[[title]]</p></a>
+        <p class="description">[[description]]</p>
       </div>
     </div>
-    <div id="contentShrink" class="content-shrink shadow z1 ct-initial">
-      <div id="contentClip" class="clip">
-        <figure id="content" class="content image cover" style="background-image: url([[img]])">
-        </div>
-      </div>
-    </figure>
-  </template>
+  </div>
+</div>
+<div id="contentShrink" class="content-shrink shadow z1">
+  <div id="contentClip" class="clip">
+    <figure id="content" class="content image cover" style="background-image: url([[img]])">
+    </div>
+  </div>
+</figure>
+</template>
 
-  <script>
-  // otherwise GSAP skewY != css skewY https://greensock.com/docs/Plugins/CSSPlugin
-  CSSPlugin.defaultSkewType = "simple";
+<script>
+// otherwise GSAP skewY != css skewY https://greensock.com/docs/Plugins/CSSPlugin
+CSSPlugin.defaultSkewType = "simple";
 
-  // Used for interpotalion in the animation for closing the card
-  function remap(x, inMin, inMax, outMin, outMax) {
-    let remap = (x - inMin) * (outMax - outMin) / (inMax - inMin) + outMin;
-    return Math.min(Math.max(remap, outMin), outMax);
+// Used for interpotalion in the animation for closing the card
+function remap(x, inMin, inMax, outMin, outMax) {
+  let remap = (x - inMin) * (outMax - outMin) / (inMax - inMin) + outMin;
+  return Math.min(Math.max(remap, outMin), outMax);
+}
+
+function removeFromParent(el) {
+  el.parentNode.removeChild(el);
+}
+
+// function imageCover( imageRect, containerRect) {
+//   let imageWidth = imageRect.width;
+//   let imageHeight = imageRect.height;
+//   let containerWidth = containerRect.width;
+//   let containerHeight = containerRect.height;
+//   let imageRatio = imageHeight / imageWidth;
+//   let containerRatio = containerHeight / containerWidth;
+//   let coverImageSize = (containerRatio > imageRatio) ? { width: (containerHeight / imageRatio), height: containerHeight} : { width: containerWidth, height: (containerWidth / imageRatio) };
+//   let returnValue = { x: (coverImageSize.width / imageRect.width ), y: (coverImageSize.height / imageRect.height) };
+//   console.log(`{ x: (${imageRect.width} / ${coverImageSize.width}), y: (${imageRect.height} / ${coverImageSize.height}) };`)
+//   return returnValue;
+// }
+
+class SkewCard extends Polymer.Element {
+  static get is() { return 'skew-card'; }
+  static get properties() {
+    return {
+      detail: {type: String, value: '', reflectToAttribute: true, observer: '_detailChanged' },
+      title: {
+        type: String,
+        reflectToAttribute: true,
+      },
+      description: {
+        type: String,
+        reflectToAttribute: true,
+      },
+      img: {
+        type: String,
+        reflectToAttribute: true,
+      },
+      link: {
+        type: String,
+        reflectToAttribute: true,
+      },
+    }
   }
 
-  // function imageCover( imageRect, containerRect) {
-  //   let imageWidth = imageRect.width;
-  //   let imageHeight = imageRect.height;
-  //   let containerWidth = containerRect.width;
-  //   let containerHeight = containerRect.height;
-  //   let imageRatio = imageHeight / imageWidth;
-  //   let containerRatio = containerHeight / containerWidth;
-  //   let coverImageSize = (containerRatio > imageRatio) ? { width: (containerHeight / imageRatio), height: containerHeight} : { width: containerWidth, height: (containerWidth / imageRatio) };
-  //   let returnValue = { x: (coverImageSize.width / imageRect.width ), y: (coverImageSize.height / imageRect.height) };
-  //   console.log(`{ x: (${imageRect.width} / ${coverImageSize.width}), y: (${imageRect.height} / ${coverImageSize.height}) };`)
-  //   return returnValue;
+  _detailChanged(newValue, oldValue) {
+    if (newValue) {
+      this._tryCloneNodesForDetail();
+
+      this.classList.replace('initial','onclick');
+      this.classList.replace('back','front');
+      this.$.labelShadow.classList.replace('lbl-initial','lbl-onclick');
+      this.$.contentShrink.classList.replace('ct-initial','ct-onclick');
+
+      this.animLabelDest.style.display = "";
+      this.animImageDest.style.display = "";
+      this.animImageDest.style.visibility = "";
+      this.animLabelDest.style.visibility = "";
+
+      if (!this._transitioning) {
+        this.$.labelShadow.style.visibility = "hidden";
+        this.$.contentShrink.style.visibility = "hidden";
+      }
+
+    } else {
+      this.classList.replace('onclick','initial');
+      this.classList.replace('front','back');
+      this.$.labelShadow.classList.replace('lbl-onclick','lbl-initial');
+      this.$.contentShrink.classList.replace('lbl-onclick','lbl-initial');
+      //
+      // if (!this._transitioning) {
+      //   this.$.labelShadow.style.visibility = "";
+      //   this.$.contentShrink.style.visibility = "";
+      //   if (this.animLabelDest) {
+      //     this.animLabelDest.style.display = "none";
+      //     this.animImageDest.style.display = "none";
+      //   }
+      //   if (this.animImageDest) {
+      //     this.animImageDest.style.visibility = "hidden";
+      //     this.animLabelDest.style.visibility = "hidden";
+      //   }
+      // }
+    }
+  }
+
+  ready() {
+    super.ready();
+    // keep track of default title
+    this._defaultTitle = document.title;
+    this.domReady = true;
+
+    // add default classes
+    this.classList.add('initial');
+    this.classList.add('back');
+    this.$.labelShadow.classList.add('lbl-initial');
+    this.$.contentShrink.classList.add('ct-initial');
+  }
+
+  constructor() {
+    super();
+    // closed state = false
+    this._transitioning = false;
+    this._tl = null;
+    this.animLabelDest = null;
+    this.animLabelSource = null;
+    // for history back and forward buttons
+    this._popState = this._popState.bind(this);
+  }
+
+  get defaultTitle() {
+    return this._defaultTitle;
+  }
+
+  get state() {
+    return this._transitioning;
+  }
+
+  set transitioning(value) {
+    if (this._transitioning == value) {
+      throw "Trying to transition to an unsupported state";
+    }
+    this._transitioning = value;
+  }
+
+  connectedCallback() {
+    super.connectedCallback();
+    // for history back and forward buttons
+    window.addEventListener('popstate', this._popState);
+  }
+
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    // for history back and forward buttons
+    window.removeEventListener('popstate', this._popState);
+  }
+
+  // _loadPageData() {
+  //
+  //   return;
+  //   var xhr = new XMLHttpRequest();
+  //   xhr.overrideMimeType('application/xml')
+  //   xhr.open('GET', 'builduptv/index.html');
+  //   xhr.onload = function() {
+  //     if (xhr.status === 200) {
+  //       // alert('hello there: ' + xhr.responseText);
+  //       // let parser = new DOMParser();
+  //       // var xmlDoc = parser.parseFromString(xhr.responseText,"text/xml");
+  //       // console.log(xmlDoc);
+  //       var newContent = xhr.responseXML.getElementsByTagName("body")[0];
+  //       let docBody = document.getElementsByTagName("body")[0];
+  //       console.log(docBody);
+  //       docBody.replaceChild(newContent.firstElementChild,docBody.firstElementChild);
+  //       return;
+  //       // var newPage = $(newContent).attr('data-page');
+  //       // $(newContent).addClass('ed-page--new');
+  //       // $('#content').before(newContent);
+  //       // pages.updateMetaData(newContent, oldPage);
+  //       // pages.updatePath(newPage, href);
+  //       // pages.checkExternalLinks();
+  //       // casePage.init();
+  //       // if (workCase) {
+  //       //   pages.animateCase(oldPage, newPage, workCase);
+  //       // } else {
+  //       //   pages.animatePages(oldPage, newPage);
+  //       // }
+  //       // this.set('resolveUrl', event.target.value);
+  //       // t¡his.set('title', xhr.response.detail.response.title);
+  //     } else {
+  //       alert('Request failed.  Returned status of ' + xhr.status);
+  //     }
+  //   };
+  //
+  //   // Calculate the time from starting to load the data for use in animation timing
+  //   var startLoad = performance.now();
+  //   xhr.send(); // send the request
   // }
 
-  class SkewCard extends Polymer.Element {
-    static get is() { return 'skew-card'; }
-    static get properties() {
-      return {
-        title: {
-          type: String,
-          reflectToAttribute: true,
-        },
-        description: {
-          type: String,
-          reflectToAttribute: true,
-        },
-        img: {
-          type: String,
-          reflectToAttribute: true,
-        },
-        link: {
-          type: String,
-          reflectToAttribute: true,
-        },
-      }
+  _tryCloneNodesForDetail() {
+
+    if (this.divFullCard == null) {
+      this.divFullCard = this.$.fullCard.cloneNode(true);
+      this.parentElement.parentElement.appendChild(this.divFullCard);
+      this.divFullCard.style.visibility = "";
+      this.divFullCard.style.display = "";
     }
 
-    ready() {
-      // add default classes
-      this.classList.add('initial');
-      this.classList.add('back');
-      // this.addEventListener('click', this._onClick);
-      super.ready();
-      // keep track of default title
-      this._defaultTitle = document.title;
-      this.domReady = true;
+    if (this.animImageDest == null) {
+      this.animImageDest = this.$.contentShrink.cloneNode(true);
+      this.animImageDest.classList.replace('ct-initial','ct-onclick');
+      this.divFullCard.appendChild(this.animImageDest, this.divFullCard.firstChild);
+      this.animImageDest.style.visibility = "hidden";
+      this.animImageDest.style.display = "none";
     }
 
-    constructor() {
-      super();
-      // closed state = false
-      this._state = false;
-      this._tl = null;
-      // for history back and forward buttons
-      this._popState = this._popState.bind(this);
-    }
-
-    get defaultTitle() {
-      return this._defaultTitle;
-    }
-
-    get state() {
-      return this._state;
-    }
-
-    set transitionToState(value) {
-      if (this._state == value) {
-        throw "Trying to transition to an unsupported state";
-      }
-      this._state = value;
-    }
-
-    connectedCallback() {
-      super.connectedCallback();
-      // for history back and forward buttons
-      window.addEventListener('popstate', this._popState);
-    }
-
-    disconnectedCallback() {
-      super.disconnectedCallback();
-      // for history back and forward buttons
-      window.removeEventListener('popstate', this._popState);
-    }
-
-    // _loadPageData() {
-    //
-    //   return;
-    //   var xhr = new XMLHttpRequest();
-    //   xhr.overrideMimeType('application/xml')
-    //   xhr.open('GET', 'builduptv/index.html');
-    //   xhr.onload = function() {
-    //     if (xhr.status === 200) {
-    //       // alert('hello there: ' + xhr.responseText);
-    //       // let parser = new DOMParser();
-    //       // var xmlDoc = parser.parseFromString(xhr.responseText,"text/xml");
-    //       // console.log(xmlDoc);
-    //       var newContent = xhr.responseXML.getElementsByTagName("body")[0];
-    //       let docBody = document.getElementsByTagName("body")[0];
-    //       console.log(docBody);
-    //       docBody.replaceChild(newContent.firstElementChild,docBody.firstElementChild);
-    //       return;
-    //       // var newPage = $(newContent).attr('data-page');
-    //       // $(newContent).addClass('ed-page--new');
-    //       // $('#content').before(newContent);
-    //       // pages.updateMetaData(newContent, oldPage);
-    //       // pages.updatePath(newPage, href);
-    //       // pages.checkExternalLinks();
-    //       // casePage.init();
-    //       // if (workCase) {
-    //       //   pages.animateCase(oldPage, newPage, workCase);
-    //       // } else {
-    //       //   pages.animatePages(oldPage, newPage);
-    //       // }
-    //       // this.set('resolveUrl', event.target.value);
-    //       // t¡his.set('title', xhr.response.detail.response.title);
-    //     } else {
-    //       alert('Request failed.  Returned status of ' + xhr.status);
-    //     }
-    //   };
-    //
-    //   // Calculate the time from starting to load the data for use in animation timing
-    //   var startLoad = performance.now();
-    //   xhr.send(); // send the request
-    // }
-
-    // Called when you click on a closed card
-    _openCard(callback) {
-      this.transitionToState = true; // transition to open
-      // Load the data for the opening page async - don't wait for the data to animate
-
-      // FLIP animation
-      let animLabelSource = this.$.labelShadow;
-      let animImageSource = this.$.contentShrink;
-      // First
-      let transform = this.style.transform;
-      this.style.transform = "none"; // without skew
-      let first = animLabelSource.getBoundingClientRect();
-      let imageFirst = animImageSource.getBoundingClientRect();
-      this.style.transform = transform; // restore skew
-
+    if (this.animLabelDest == null) {
       // let's move the element out of the dom
-      let animLabelDest = animLabelSource.cloneNode(true);
+      this.animLabelDest = this.$.labelShadow.cloneNode(true);
+      this.animLabelDest.classList.replace('lbl-initial','lbl-onclick');
+      this.divFullCard.insertBefore(this.animLabelDest, this.divFullCard.firstChild);
+      this.animLabelDest.style.visibility = "hidden";
+      this.animLabelDest.style.display = "none";
+    }
+
+  }
+
+  // Called when you click on a closed card
+  _openCard(callback) {
+    this.transitioning = true; // transition to open
+    // Load the data for the opening page async - don't wait for the data to animate
+
+    // FLIP animation
+    let animLabelSource = this.$.labelShadow;
+    let animImageSource = this.$.contentShrink;
+    // First
+    let transform = this.style.transform;
+    this.style.transform = "none"; // without skew
+    let first = animLabelSource.getBoundingClientRect();
+    let imageFirst = animImageSource.getBoundingClientRect();
+    this.style.transform = transform; // restore skew
+
+    this._tryCloneNodesForDetail();
+
+    let animLabelDest = this.animLabelDest;
+    let animImageDest = this.animImageDest;
+
+    // Last
+    let last = this.animLabelDest.getBoundingClientRect();
+    let imageLast = this.animLabelDest.getBoundingClientRect();
+    // Invert
+    let deltaX = first.left - last.left;
+    let deltaY = first.top - last.top;
+    let deltaW = first.width / last.width;
+    let deltaH = first.height / last.height;
+    // Invert
+    let ideltaX = imageFirst.left - imageLast.left;
+    let ideltaY = imageFirst.top - imageLast.top;
+    let ideltaW = imageFirst.width / imageLast.width;
+    let ideltaH = imageFirst.height / imageLast.height;
+    // Create transforms
+    let fromTransform = `
+    translate(${deltaX}px, ${deltaY}px)
+    scale(${deltaW}, ${deltaH})
+    `;
+    let imageFromTransform = `
+    translate(${ideltaX}px, ${ideltaY}px)
+    scale(${ideltaW}, ${ideltaH})
+    `
+    let toTransform = `
+    translate(0,0)
+    scale(1,1)
+    `;
+    // Animate
+    var tl = new TimelineLite({ paused: true });
+    // Put the destination pieces in their "First" states
+    TweenLite.set(animLabelDest, {transform: fromTransform, transformOrigin: "left top"});
+    TweenLite.set(animImageDest, {transform: imageFromTransform, transformOrigin: "right top"});
+
+    let unskewDuration = 0.15;
+    var delay = 0;
+    tl.addLabel("unskewLabel", delay);
+    delay += unskewDuration;
+
+    let scaleUpLabelDuration = 0.25;
+    tl.addLabel("scaleUpLabel", delay);
+    delay += scaleUpLabelDuration;
+
+    delay = 0.01; // reset
+    let fadeOutImageDuration = 0.25;
+    tl.addLabel("fadeOutImage", delay);
+    delay += fadeOutImageDuration;
+
+    let unskewContentDuration = 0.15;
+    tl.addLabel("unskewContentDuration", delay);
+    delay += unskewContentDuration;
+
+    let scaleUpContentDuration = 0.25;
+    tl.addLabel("scaleUpContent", delay);
+    delay += scaleUpContentDuration;
+
+    let fadeInDetailsDuration = 1.0;
+    let fadeInDetails = tl.addLabel("fadeInDetails", delay);
+    delay += fadeInDetailsDuration;
+
+    // Unskew Label
+    tl.add( TweenLite.to(this.$.label, unskewDuration, { alpha: 0 }), "unskewLabel");
+    tl.add( TweenLite.to(this.$.labelShadow, unskewDuration, {skewY: 3, skewType: "simple", transformOrigin: "left top",
+    force3D: true, // fixes glitch in Safari
+    onUpdate: () => {
+      let skewY = -this.$.labelShadow._gsTransform.skewY;
+      TweenLite.set(this.$.label, {skewY: skewY, skewType: "simple", transformOrigin: "left top"});
+    },
+    onComplete: () => {
+      animLabelDest.style.visibility = "";
+      animLabelDest.style.display = "";
+      animLabelDest.querySelector(".label").style.visibility = "hidden";
+      animLabelSource.style.visibility = "hidden";
+    },
+    onReverseComplete: () => {
       animLabelDest.style.visibility = "hidden";
-      this.parentElement.parentElement.appendChild(animLabelDest);
-
-      let animImageDest = animImageSource.cloneNode(true);
-      animImageDest.style.visibility = "hidden";
-      this.parentElement.parentElement.appendChild(animImageDest);
-
-      // Last
-      animLabelDest.classList.replace('lbl-initial','lbl-onclick');
-      let last = animLabelDest.getBoundingClientRect();
-      animImageDest.classList.replace('ct-initial','ct-onclick');
-      let imageLast = animLabelDest.getBoundingClientRect();
-      // Invert
-      let deltaX = first.left - last.left;
-      let deltaY = first.top - last.top;
-      let deltaW = first.width / last.width;
-      let deltaH = first.height / last.height;
-      // Invert
-      let ideltaX = imageFirst.left - imageLast.left;
-      let ideltaY = imageFirst.top - imageLast.top;
-      let ideltaW = imageFirst.width / imageLast.width;
-      let ideltaH = imageFirst.height / imageLast.height;
-      // Create transforms
-      let fromTransform = `
-      translate(${deltaX}px, ${deltaY}px)
-      scale(${deltaW}, ${deltaH})
-      `;
-      let imageFromTransform = `
-      translate(${ideltaX}px, ${ideltaY}px)
-      scale(${ideltaW}, ${ideltaH})
-      `
-      let toTransform = `
-      translate(0,0)
-      scale(1,1)
-      `;
-      // Animate
-      var tl = new TimelineLite({ paused: true });
-      // Put the destination pieces in their "First" states
-      TweenLite.set(animLabelDest, {transform: fromTransform, transformOrigin: "left top"});
-      TweenLite.set(animImageDest, {transform: imageFromTransform, transformOrigin: "right top"});
-
-      let unskewDuration = 0.15;
-      var delay = 0;
-      tl.addLabel("unskewLabel", delay);
-      delay += unskewDuration;
-
-      let scaleUpLabelDuration = 0.15;
-      tl.addLabel("scaleUpLabel", delay);
-      delay += scaleUpLabelDuration;
-
-      delay = 0.01; // reset
-      let fadeOutImageDuration = 0.25;
-      tl.addLabel("fadeOutImage", delay);
-      delay += fadeOutImageDuration;
-
-      let unskewContentDuration = 0.15;
-      tl.addLabel("unskewContentDuration", delay);
-      delay += unskewContentDuration;
-
-      let scaleUpContentDuration = 0.15;
-      tl.addLabel("scaleUpContent", delay);
-      delay += scaleUpContentDuration;
-
-      // Unskew Label
-      tl.add( TweenLite.to(this.$.label, unskewDuration, { alpha: 0 }), "unskewLabel");
-      tl.add( TweenLite.to(this.$.labelShadow, unskewDuration, {skewY: 3, skewType: "simple", transformOrigin: "left top",
-      force3D: true, // fixes glitch in Safari
-      onUpdate: () => {
-        let skewY = -this.$.labelShadow._gsTransform.skewY;
-        TweenLite.set(this.$.label, {skewY: skewY, skewType: "simple", transformOrigin: "left top"});
-      },
-      onComplete: () => {
-        animLabelDest.style.visibility = "";
-        animLabelDest.querySelector(".label").style.visibility = "hidden";
-        animLabelSource.style.visibility = "hidden";
-      },
-      onReverseComplete: () => {
-        animLabelDest.style.visibility = "hidden";
-        animLabelDest.querySelector(".label").style.visibility = "";
-        animLabelSource.style.visibility = "";
-      },
-      ease: Power3.easeIn,
-    }), "unskewLabel");
-    // Scale Up Label
-    tl.add( TweenLite.to(animLabelDest, scaleUpLabelDuration,
-      { transform: toTransform,
-        transformOrigin: "left top",
-        force3D: true,
-        ease: Power3.easeOut,
-      }), "scaleUpLabel");
-      // Fade Out the content Image
-      tl.add( TweenLite.to(this.$.content, fadeOutImageDuration,
+      animLabelDest.style.display = "none";
+      animLabelDest.querySelector(".label").style.visibility = "";
+      animLabelSource.style.visibility = "";
+    },
+    ease: Power3.easeIn,
+  }), "unskewLabel");
+  // Scale Up Label
+  tl.add( TweenLite.to(animLabelDest, scaleUpLabelDuration,
+    { transform: toTransform,
+      transformOrigin: "left top",
+      force3D: true,
+      ease: Power3.easeOut,
+    }), "scaleUpLabel");
+    // Fade Out the content Image
+    tl.add( TweenLite.to(this.$.content, fadeOutImageDuration,
+      {
+        autoAlpha: 0,
+        // backgroundColor: '#54F0CE',
+        ease: Power3.easeInOut,
+      }), "fadeOutImage");
+      // Unskew
+      tl.add( TweenLite.to(this.$.content, unskewContentDuration,
         {
-          backgroundImage: '',
-          // backgroundColor: '#54F0CE',
-          ease: Power3.easeInOut,
-        }), "fadeOutImage");
-        // Unskew
-        tl.add( TweenLite.to(this.$.content, unskewContentDuration,
-          {
-            skewY: 3, skewType: "simple", transformOrigin: "right top",
-            onUpdate: () => {
+          skewY: 3, skewType: "simple", transformOrigin: "right top",
+          onUpdate: () => {
 
-            }, onComplete: () => {
-              animImageDest.style.visibility = "";
-              let content = animImageDest.querySelector(".content");
-              content.style.backgroundImage = "";
-              animImageSource.style.visibility = "hidden";
-            },
-            onReverseComplete: () => {
-              animImageDest.style.visibility = "hidden";
-              let content = animImageDest.querySelector(".content");
-              // TODO: restore background image
-              // content.style.backgroundImage = "";
-              animImageSource.style.visibility = "";
-            },
-            ease: Power3.easeIn,
-          }), "unskewContentDuration");
+          }, onComplete: () => {
+            animImageDest.style.visibility = "";
+            animImageDest.style.display = "";
+            animImageSource.style.visibility = "hidden";
+          },
+          onReverseComplete: () => {
+            animImageDest.style.visibility = "hidden";
+            animImageDest.style.display = "none";
+            animImageSource.style.visibility = "";
+          },
+          ease: Power3.easeIn,
+        }), "unskewContentDuration");
         // Scale Up
         tl.add( TweenLite.to(animImageDest, scaleUpContentDuration, {transform: toTransform,
-        force3D: true, // fixes glitch in Safari
-        onUpdate: () => {
-          let sx = 1.0/animLabelDest._gsTransform.scaleX;
-          let sy = 1.0/animLabelDest._gsTransform.scaleY;
-          let content = animImageDest.children[0];
-          // let content = animImageDest.querySelector(".content");
-          TweenLite.set(content, { scaleX: sx, scaleY: sy, transformOrigin: "right top"});
-        }, onComplete: () => {
-          setTimeout(() => {
-            callback(animLabelDest,animImageDest);
-          },1);
-        },
-        onReverseComplete: () => {
-          alert("reverse complete!!!");
-          setTimeout(() => {
-            callback(animLabelDest,animImageDest);
-          },1);
-        },
-        ease: Power3.easeOut,
-      }), "scaleUpContent");
-      tl.restart();
-      this._tl = tl;
-    }
+          force3D: true, // fixes glitch in Safari
+          onUpdate: () => {
+            let sx = 1.0/animLabelDest._gsTransform.scaleX;
+            let sy = 1.0/animLabelDest._gsTransform.scaleY;
+            let content = animImageDest.children[0];
+            // let content = animImageDest.querySelector(".content");
+            TweenLite.set(content, { scaleX: sx, scaleY: sy, transformOrigin: "right top"});
+          }, onComplete: () => {
+            // setTimeout(() => {
+            //   this.detail = true;
+            //   callback(animLabelDest,animImageDest);
+            //   this.transitioning = false;
+            // },1);
+          },
+          onReverseComplete: () => {
+            // setTimeout(() => {
+            //   this.detail = false;
+            //   callback(animLabelDest,animImageDest);
+            //   this.transitioning = false;
+            // },1);
+          },
+          ease: Power3.easeOut,
+        }), "scaleUpContent");
 
-    // Called when you click on a closed card
-    _closeCard(callback) {
-      this.transitionToState = false; // transition to open
-      this._tl.reverse();
-      console.log("F");
-    //   // Load the data for the opening page async - don't wait for the data to animate
-    //
-    //   // FLIP animation
-    //   let animLabelSource = this.$.labelShadow;
-    //   let animImageSource = this.$.contentShrink;
-    //   // First
-    //   let transform = this.style.transform;
-    //   this.style.transform = "none"; // without skew
-    //   let first = animLabelSource.getBoundingClientRect();
-    //   let imageFirst = animImageSource.getBoundingClientRect();
-    //   this.style.transform = transform; // restore skew
-    //
-    //   // let's move the element out of the dom
-    //   let animLabelDest = animLabelSource.cloneNode(true);
-    //   animLabelDest.style.visibility = "hidden";
-    //   this.parentElement.parentElement.appendChild(animLabelDest);
-    //
-    //   let animImageDest = animImageSource.cloneNode(true);
-    //   animImageDest.style.visibility = "hidden";
-    //   this.parentElement.parentElement.appendChild(animImageDest);
-    //
-    //   // Last
-    //   animLabelDest.classList.replace('lbl-initial','lbl-onclick');
-    //   let last = animLabelDest.getBoundingClientRect();
-    //   animImageDest.classList.replace('ct-initial','ct-onclick');
-    //   let imageLast = animLabelDest.getBoundingClientRect();
-    //   // Invert
-    //   let deltaX = first.left - last.left;
-    //   let deltaY = first.top - last.top;
-    //   let deltaW = first.width / last.width;
-    //   let deltaH = first.height / last.height;
-    //   // Invert
-    //   let ideltaX = imageFirst.left - imageLast.left;
-    //   let ideltaY = imageFirst.top - imageLast.top;
-    //   let ideltaW = imageFirst.width / imageLast.width;
-    //   let ideltaH = imageFirst.height / imageLast.height;
-    //   // Create transforms
-    //   let fromTransform = `
-    //   translate(${deltaX}px, ${deltaY}px)
-    //   scale(${deltaW}, ${deltaH})
-    //   `;
-    //   let imageFromTransform = `
-    //   translate(${ideltaX}px, ${ideltaY}px)
-    //   scale(${ideltaW}, ${ideltaH})
-    //   `
-    //   let toTransform = `
-    //   translate(0,0)
-    //   scale(1,1)
-    //   `;
-    //   // Animate
-    //   var tl = new TimelineLite({ paused: true });
-    //   // Put the destination pieces in their "First" states
-    //   TweenLite.set(animLabelDest, {transform: fromTransform, transformOrigin: "left top"});
-    //   TweenLite.set(animImageDest, {transform: imageFromTransform, transformOrigin: "right top"});
-    //
-    //   let unskewDuration = 0.15;
-    //   var delay = 0;
-    //   tl.addLabel("unskewLabel", delay);
-    //   delay += unskewDuration;
-    //
-    //   let scaleUpLabelDuration = 0.15;
-    //   tl.addLabel("scaleUpLabel", delay);
-    //   delay += scaleUpLabelDuration;
-    //
-    //   delay = 0.01; // reset
-    //   let fadeOutImageDuration = 0.25;
-    //   tl.addLabel("fadeOutImage", delay);
-    //   delay += fadeOutImageDuration;
-    //
-    //   let unskewContentDuration = 0.15;
-    //   tl.addLabel("unskewContentDuration", delay);
-    //   delay += unskewContentDuration;
-    //
-    //   let scaleUpContentDuration = 0.15;
-    //   tl.addLabel("scaleUpContent", delay);
-    //   delay += scaleUpContentDuration;
-    //
-    //   // Unskew Label
-    //   tl.add( TweenLite.to(this.$.label, unskewDuration, { alpha: 0 }), "unskewLabel");
-    //   tl.add( TweenLite.to(this.$.labelShadow, unskewDuration, {skewY: 3, skewType: "simple", transformOrigin: "left top",
-    //   force3D: true, // fixes glitch in Safari
-    //   onUpdate: () => {
-    //     let skewY = -this.$.labelShadow._gsTransform.skewY;
-    //     TweenLite.set(this.$.label, {skewY: skewY, skewType: "simple", transformOrigin: "left top"});
-    //   },
-    //   onComplete: () => {
-    //     animLabelDest.style.visibility = "";
-    //     animLabelDest.querySelector(".label").style.visibility = "hidden";
-    //     animLabelSource.style.visibility = "hidden";
-    //   },
-    //   ease: Power3.easeIn,
-    // }), "unskewLabel");
-    // // Scale Up Label
-    // tl.add( TweenLite.to(animLabelDest, scaleUpLabelDuration,
-    //   { transform: toTransform,
-    //     transformOrigin: "left top",
-    //     force3D: true,
-    //     ease: Power3.easeOut,
-    //   }), "scaleUpLabel");
-    //   // Fade Out the content Image
-    //   tl.add( TweenLite.to(this.$.content, fadeOutImageDuration,
-    //     {
-    //       backgroundImage: '',
-    //       // backgroundColor: '#54F0CE',
-    //       ease: Power3.easeInOut,
-    //     }), "fadeOutImage");
-    //     // Unskew
-    //     tl.add( TweenLite.to(this.$.content, unskewContentDuration,
-    //       {
-    //         skewY: 3, skewType: "simple", transformOrigin: "right top",
-    //         onUpdate: () => {
-    //
-    //         }, onComplete: () => {
-    //           animImageDest.style.visibility = "";
-    //           let content = animImageDest.querySelector(".content");
-    //           content.style.backgroundImage = "";
-    //           // content.style.backgroundColor = "#54F0CE";
-    //           animImageSource.style.visibility = "hidden";
-    //         },
-    //         ease: Power3.easeIn,
-    //       }), "unskewContentDuration");
-    //     // Scale Up
-    //     tl.add( TweenLite.to(animImageDest, scaleUpContentDuration, {transform: toTransform,
-    //     force3D: true, // fixes glitch in Safari
-    //     onUpdate: () => {
-    //       let sx = 1.0/animLabelDest._gsTransform.scaleX;
-    //       let sy = 1.0/animLabelDest._gsTransform.scaleY;
-    //       let content = animImageDest.children[0];
-    //       // let content = animImageDest.querySelector(".content");
-    //       TweenLite.set(content, { scaleX: sx, scaleY: sy, transformOrigin: "right top"});
-    //     }, onComplete: () => {
-    //       setTimeout(() => {
-    //         callback(animLabelDest,animImageDest);
-    //       },1);
-    //     },
-    //     ease: Power3.easeOut,
-    //   }), "scaleUpContent");
-    //   tl.restart();
-    }
+        tl.add( TweenLite.from(animLabelDest.querySelector("#label"), fadeInDetailsDuration, { autoAlpha: 0, ease: Power3.easeInOut,}), fadeInDetails);
+        tl.add( TweenLite.from(animImageDest.querySelector("#content"), fadeInDetailsDuration, { autoAlpha: 0, ease: Power3.easeInOut,}), fadeInDetails);
+        tl.add( TweenLite.from(this.divFullCard.querySelector('#closeBtn').$.close, fadeInDetailsDuration, { x: window.innerWidth + 100, ease: Power3.easeInOut, }), fadeInDetails);
+        tl.add( TweenLite.from(this.divFullCard.querySelector('#scrollBtn').$.scroll, fadeInDetailsDuration, { y: window.innerHeight + 100, ease: Power3.easeInOut,
+          onComplete: () => {
+            setTimeout(() => {
+              this.detail = true;
+              callback(animLabelDest,animImageDest);
+              this.transitioning = false;
+            },1);
+          },
+          onReverseComplete: () => {
+            setTimeout(() => {
+              this.detail = false;
+              callback(animLabelDest,animImageDest);
+              this.transitioning = false;
+            },1);
+          },
+          ease: Power3.easeOut,
+        }), "fadeInDetails");
+        tl.restart();
+        this._tl = tl;
+      }
 
-    openCard(event, callback) {
-      if (event.target != event.currentTarget) {
-        return;
+      // Called when you click on a closed card
+      _closeCard(callback) {
+        this.transitioning = true; // transition to open
+        this._tl.reverse();
+        console.log("F");
+        //   // Load the data for the opening page async - don't wait for the data to animate
+        //
+        //   // FLIP animation
+        //   let animLabelSource = this.$.labelShadow;
+        //   let animImageSource = this.$.contentShrink;
+        //   // First
+        //   let transform = this.style.transform;
+        //   this.style.transform = "none"; // without skew
+        //   let first = animLabelSource.getBoundingClientRect();
+        //   let imageFirst = animImageSource.getBoundingClientRect();
+        //   this.style.transform = transform; // restore skew
+        //
+        //   // let's move the element out of the dom
+        //   let animLabelDest = animLabelSource.cloneNode(true);
+        //   animLabelDest.style.visibility = "hidden";
+        //   this.parentElement.parentElement.appendChild(animLabelDest);
+        //
+        //   let animImageDest = animImageSource.cloneNode(true);
+        //   animImageDest.style.visibility = "hidden";
+        //   this.parentElement.parentElement.appendChild(animImageDest);
+        //
+        //   // Last
+        //   animLabelDest.classList.replace('lbl-initial','lbl-onclick');
+        //   let last = animLabelDest.getBoundingClientRect();
+        //   animImageDest.classList.replace('ct-initial','ct-onclick');
+        //   let imageLast = animLabelDest.getBoundingClientRect();
+        //   // Invert
+        //   let deltaX = first.left - last.left;
+        //   let deltaY = first.top - last.top;
+        //   let deltaW = first.width / last.width;
+        //   let deltaH = first.height / last.height;
+        //   // Invert
+        //   let ideltaX = imageFirst.left - imageLast.left;
+        //   let ideltaY = imageFirst.top - imageLast.top;
+        //   let ideltaW = imageFirst.width / imageLast.width;
+        //   let ideltaH = imageFirst.height / imageLast.height;
+        //   // Create transforms
+        //   let fromTransform = `
+        //   translate(${deltaX}px, ${deltaY}px)
+        //   scale(${deltaW}, ${deltaH})
+        //   `;
+        //   let imageFromTransform = `
+        //   translate(${ideltaX}px, ${ideltaY}px)
+        //   scale(${ideltaW}, ${ideltaH})
+        //   `
+        //   let toTransform = `
+        //   translate(0,0)
+        //   scale(1,1)
+        //   `;
+        //   // Animate
+        //   var tl = new TimelineLite({ paused: true });
+        //   // Put the destination pieces in their "First" states
+        //   TweenLite.set(animLabelDest, {transform: fromTransform, transformOrigin: "left top"});
+        //   TweenLite.set(animImageDest, {transform: imageFromTransform, transformOrigin: "right top"});
+        //
+        //   let unskewDuration = 0.15;
+        //   var delay = 0;
+        //   tl.addLabel("unskewLabel", delay);
+        //   delay += unskewDuration;
+        //
+        //   let scaleUpLabelDuration = 0.15;
+        //   tl.addLabel("scaleUpLabel", delay);
+        //   delay += scaleUpLabelDuration;
+        //
+        //   delay = 0.01; // reset
+        //   let fadeOutImageDuration = 0.25;
+        //   tl.addLabel("fadeOutImage", delay);
+        //   delay += fadeOutImageDuration;
+        //
+        //   let unskewContentDuration = 0.15;
+        //   tl.addLabel("unskewContentDuration", delay);
+        //   delay += unskewContentDuration;
+        //
+        //   let scaleUpContentDuration = 0.15;
+        //   tl.addLabel("scaleUpContent", delay);
+        //   delay += scaleUpContentDuration;
+        //
+        //   // Unskew Label
+        //   tl.add( TweenLite.to(this.$.label, unskewDuration, { alpha: 0 }), "unskewLabel");
+        //   tl.add( TweenLite.to(this.$.labelShadow, unskewDuration, {skewY: 3, skewType: "simple", transformOrigin: "left top",
+        //   force3D: true, // fixes glitch in Safari
+        //   onUpdate: () => {
+        //     let skewY = -this.$.labelShadow._gsTransform.skewY;
+        //     TweenLite.set(this.$.label, {skewY: skewY, skewType: "simple", transformOrigin: "left top"});
+        //   },
+        //   onComplete: () => {
+        //     animLabelDest.style.visibility = "";
+        //     animLabelDest.querySelector(".label").style.visibility = "hidden";
+        //     animLabelSource.style.visibility = "hidden";
+        //   },
+        //   ease: Power3.easeIn,
+        // }), "unskewLabel");
+        // // Scale Up Label
+        // tl.add( TweenLite.to(animLabelDest, scaleUpLabelDuration,
+        //   { transform: toTransform,
+        //     transformOrigin: "left top",
+        //     force3D: true,
+        //     ease: Power3.easeOut,
+        //   }), "scaleUpLabel");
+        //   // Fade Out the content Image
+        //   tl.add( TweenLite.to(this.$.content, fadeOutImageDuration,
+        //     {
+        //       backgroundImage: '',
+        //       // backgroundColor: '#54F0CE',
+        //       ease: Power3.easeInOut,
+        //     }), "fadeOutImage");
+        //     // Unskew
+        //     tl.add( TweenLite.to(this.$.content, unskewContentDuration,
+        //       {
+        //         skewY: 3, skewType: "simple", transformOrigin: "right top",
+        //         onUpdate: () => {
+        //
+        //         }, onComplete: () => {
+        //           animImageDest.style.visibility = "";
+        //           let content = animImageDest.querySelector(".content");
+        //           content.style.backgroundImage = "";
+        //           // content.style.backgroundColor = "#54F0CE";
+        //           animImageSource.style.visibility = "hidden";
+        //         },
+        //         ease: Power3.easeIn,
+        //       }), "unskewContentDuration");
+        //     // Scale Up
+        //     tl.add( TweenLite.to(animImageDest, scaleUpContentDuration, {transform: toTransform,
+        //     force3D: true, // fixes glitch in Safari
+        //     onUpdate: () => {
+        //       let sx = 1.0/animLabelDest._gsTransform.scaleX;
+        //       let sy = 1.0/animLabelDest._gsTransform.scaleY;
+        //       let content = animImageDest.children[0];
+        //       // let content = animImageDest.querySelector(".content");
+        //       TweenLite.set(content, { scaleX: sx, scaleY: sy, transformOrigin: "right top"});
+        //     }, onComplete: () => {
+        //       setTimeout(() => {
+        //         callback(animLabelDest,animImageDest);
+        //       },1);
+        //     },
+        //     ease: Power3.easeOut,
+        //   }), "scaleUpContent");
+        //   tl.restart();
       }
-      if (!this.domReady) {
-        return;
-      }
-      event.preventDefault();
-      this._openCard(callback);
-    }
 
-    closeCard(event, callback) {
-      console.log("C");
-      if (event.target != event.currentTarget) {
-        return;
+      openCard(event, callback) {
+        if (event.target != event.currentTarget) {
+          return;
+        }
+        if (!this.domReady) {
+          return;
+        }
+        event.preventDefault();
+        this._openCard(callback);
       }
-      console.log("D");
-      if (!this.domReady) {
-        return;
-      }
-      console.log("E");
-      event.preventDefault();
-      this._closeCard(callback);
-    }
 
-    _popState(event) {
-      if (event.target != event.currentTarget || !this.state) {
-        return; // event is window so this probably isn't necessary
+      closeCard(event, callback) {
+        console.log("C");
+        if (event.target != event.currentTarget) {
+          return;
+        }
+        console.log("D");
+        if (!this.domReady) {
+          return;
+        }
+        console.log("E");
+        event.preventDefault();
+        this._closeCard(callback);
       }
-      event.preventDefault();
-      this._openCard();
-    }
 
-    _loadImage(img) {
-      if (img && !img.src) {
-        img.src = img.getAttribute('data-src');
+      _popState(event) {
+        if (event.target != event.currentTarget || !this.state) {
+          return; // event is window so this probably isn't necessary
+        }
+        event.preventDefault();
+        this._openCard();
+      }
+
+      _loadImage(img) {
+        if (img && !img.src) {
+          img.src = img.getAttribute('data-src');
+        }
       }
     }
-  }
-  window.customElements.define(SkewCard.is, SkewCard);
-  </script>
-</dom-module>
+    window.customElements.define(SkewCard.is, SkewCard);
+    </script>
+  </dom-module>

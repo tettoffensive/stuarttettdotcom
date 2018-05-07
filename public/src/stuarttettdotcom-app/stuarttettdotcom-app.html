@@ -45,22 +45,18 @@
   }
   </style>
   <scatter-shapes class="shapes one"></scatter-shapes>
-  <div class="page">
-
-    <template is="dom-if" if="{{detail}}" restamp>
-      <full-card title="BuildUp.tv" description="Created a logo for an online community platform for “makers” in the D.I.Y. community." img="/images/buildup_mockup.jpg" on-close="_onClickClose"></full-card>
-    </template>
-
-    <template is="dom-if" if="{{!detail}}" restamp>
-    <div class="wrapper">
+  <div id="page" class="page">
+    <div id="wrapper" class="wrapper">
       <skew-header></skew-header>
       <!-- <skew-info-card description="Stuart has a unique background with a double major in Art &amp; Design and Computer Science, which give way to a rare skill-set of strong visual and analytical problem-solving skills."></skew-info-card> -->
-      <template is="dom-repeat" id="thecards" items="{{cards}}">
-        <skew-card title=[[item.title]] description=[[item.description]] img=[[item.image]] on-click="_onClick"></skew-card>
+      <template is="dom-repeat" id="thecards" items="{{cards}}" on-dom-change="_cardsDomChange">
+        <skew-card id=[[item.link]] link=[[item.link]] title=[[item.title]]
+        description=[[item.description]]
+        img=[[item.image]]
+        on-click="_onClick"
+        on-close="_onClickClose"></skew-card>
       </template>
     </div>
-  </template>
-
   </div>
 </template>
 
@@ -74,7 +70,7 @@ class StuarttettdotcomApp extends Polymer.Element {
   static get is() { return 'stuarttettdotcom-app'; }
   static get properties() {
     return {
-      detail: {type: String, value: '', reflectToAttribute: true },
+      detail: {type: String, value: '', reflectToAttribute: true, observer: '_detailChanged' },
       cards: {
         type: Array,
         value() {
@@ -83,7 +79,7 @@ class StuarttettdotcomApp extends Polymer.Element {
             description: 'Created a logo for an online community platform for “makers” in the D.I.Y. community.',
             title: 'BuildUp.tv',
             image:'/images/buildup_mockup.jpg',
-            link: './buildup',
+            link: 'builduptv',
           },
 
           // {type: 'skew-card',
@@ -115,32 +111,20 @@ class StuarttettdotcomApp extends Polymer.Element {
 
   ready() {
     super.ready();
-    console.log(this.detail);
-    this.addEventListener('dom-change', () => {
-      let wrapper = this.shadowRoot.querySelectorAll("skew-card");
-      Array.from(wrapper).forEach( child => {
-        child.addEventListener('dom-update', (event) => {
-          console.log("updated " + child);
-          console.log("event " + event.detail.removed);
-        });
-      });
-    });
+  }
+
+  _cardsDomChange(event) {
+    if (this.detail) {
+      this._updateDetailFor(this.detail);
+    }
   }
 
   connectedCallback() {
     super.connectedCallback();
-    // this._observer = new Polymer.FlattenedNodesObserver(this, (info) => {
-    //   this.info = info;
-    //   console.log("info: " + info);
-    // });
-    // this._observer = Polymer.DomApi.observeNodes((element, info) => {
-    //   console.log("info: " + info + " " + element);
-    // });
   }
 
   disconnectedCallback() {
     super.disconnectedCallback();
-    // this._observer.disconect();
   }
 
   _onClick(event) {
@@ -153,14 +137,38 @@ class StuarttettdotcomApp extends Polymer.Element {
     this._lastClickElement = el;
     // let model = this.$.thecards.modelForElement(el);
     el.openCard(event, (label, content) => {
-      this.detail = "true";
+      // el.detail = "true";
       // Page history
       document.title = "BuildUp.tv";
       history.pushState(null, null, "builduptv");
-      label.style.visibility = "hidden";
-      content.style.visibility = "hidden";
+      // label.style.visibility = "hidden";
+      // content.style.visibility = "hidden";
     });
 
+  }
+
+  _detailChanged(newValue, oldValue) {
+    // console.log("changed");
+    // if (newValue) {
+    //   console.log("here " + this.$.thecards);
+    //   let el = this.shadowRoot.querySelector('#builduptv');
+    //   if (!el) {return;}
+    //   console.log("element: " + el);
+    //   let model = this.$.thecards.modelForElement(el);
+    //   if (!model) {return;}
+    //   console.log("model: " + model);
+    //   model.detail = "true";
+    // }
+  }
+
+  _updateDetailFor(newValue) {
+    let el = this.shadowRoot.querySelector('skew-card[link="' + newValue + '"]');
+    let model = this.$.thecards.modelForElement(el);
+    if (!model) {
+      return;
+    }
+    el.detail = "true";
+    model.detail = "true";
   }
 
   _onClickClose(event) {
@@ -168,11 +176,11 @@ class StuarttettdotcomApp extends Polymer.Element {
     if (this._lastClickElement == null) {
       return;
     }
-console.log("B");
+    console.log("B");
     let el = this._lastClickElement;
     this._lastClickElement = null;
     // let model = this.$.thecards.modelForElement(el);
-    this.detail = "false";
+    el.detail = "false";
     el.closeCard(event, (label, content) => {
       // Page history
       document.title = "Stuart Tett Dot Com";
@@ -181,11 +189,6 @@ console.log("B");
       content.style.visibility = "hidden";
     });
 
-  }
-
-  _domUpdated(event) {
-    console.log("updated!");
-    console.log(event);
   }
 }
 
