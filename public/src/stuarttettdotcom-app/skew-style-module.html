@@ -12,7 +12,8 @@
     }
 
     /* Padding everywhere but the top so no extra gap in between */
-    .label p { padding: 0px 24px 24px 24px; }
+    .label p.title { padding: 0px 24px 24px 24px; }
+    .label p.description { padding: 0px 24px 24px 26px; }
 
     .ct-initial {
       position: relative; /* important for shadow */
@@ -21,13 +22,13 @@
 
     .ct-onclick {
       position: absolute;
-      top: 30px;
+      top: 60px;
       left: calc(280px + 30px);
       width: calc(100% - 280px - 60px);
       /* max-width: 1024px; */
       height: calc(100vw - 30px);
-      max-height: 1024px;
-      min-height: 375px;
+      max-height: 964px;
+      min-height: 337px;
     }
 
     .lbl-initial {
@@ -122,7 +123,7 @@
     /* Image explanation with title/description */
     .label {
       overflow: hidden;
-      color: #ffffff;
+      color: #F3F3F3;
       min-height: 515px;
       height: 100%;
       width: 280px;
@@ -133,7 +134,7 @@
     .label .text {
       width: 280px;
       transform-origin: 0px 6px;
-      padding-top: 24px;
+      padding-top: 6px;
     }
 
     .title {
@@ -141,8 +142,8 @@
       font-family: 'BioRhyme';
       font-weight: 800;
       font-style: normal;
-      font-size: 24px;
-      color: #FFFFFF;
+      font-size: 36px;
+      color: #F3F3F3;
       letter-spacing: 1px;
       text-align: left;
     }
@@ -182,14 +183,14 @@
 
     .btn-tr {
       position: absolute;
-      top: 20px;
+      top: 35px;
       right: 20px;
     }
 
     .btn-bc {
       position: absolute;
-      top: 1028px;
-      left: 50vw;
+      top: 997px;
+      left: 52vw;
     }
 
 
