@@ -140,7 +140,7 @@ class StuarttettdotcomApp extends Polymer.Element {
       // el.detail = "true";
       // Page history
       document.title = "BuildUp.tv";
-      history.pushState(null, null, "builduptv");
+      history.pushState(null, "Stuart Tett - BuildUp.tv", "builduptv");
       // label.style.visibility = "hidden";
       // content.style.visibility = "hidden";
     });
@@ -162,29 +162,32 @@ class StuarttettdotcomApp extends Polymer.Element {
   }
 
   _updateDetailFor(newValue) {
-    let el = this.shadowRoot.querySelector('skew-card[link="' + newValue + '"]');
-    let model = this.$.thecards.modelForElement(el);
-    if (!model) {
-      return;
-    }
-    el.detail = "true";
-    model.detail = "true";
+    window.requestAnimationFrame(() => {
+      let el = this.shadowRoot.querySelector('skew-card[link="' + newValue + '"]');
+      let model = this.$.thecards.modelForElement(el);
+      if (!model) {
+        return;
+      }
+      el.transitioning = true; // transition to open
+      el.tryCardAnimation(true).play("scaleUpContentFinish", false);
+
+      model.detail = "true";
+      this._lastClickElement = el;
+    });
   }
 
   _onClickClose(event) {
-    console.log("A");
     if (this._lastClickElement == null) {
       return;
     }
-    console.log("B");
     let el = this._lastClickElement;
     this._lastClickElement = null;
     // let model = this.$.thecards.modelForElement(el);
     el.detail = "false";
     el.closeCard(event, (label, content) => {
       // Page history
-      document.title = "Stuart Tett Dot Com";
-      history.pushState(null, null, "");
+      document.title = "Stuart Tett | Design & Code";
+      history.pushState(null, document.title, "");
       label.style.visibility = "hidden";
       content.style.visibility = "hidden";
     });

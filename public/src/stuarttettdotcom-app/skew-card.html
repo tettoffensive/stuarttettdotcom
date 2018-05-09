@@ -310,10 +310,10 @@
 
     }
 
-    _tryCreateCardAnimation() {
+    tryCardAnimation(animation) {
 
       if (this._tl != null) {
-        return;
+        return this._tl;
       }
 
       // FLIP animation
@@ -367,30 +367,30 @@
       TweenLite.set(animLabelDest, {transform: fromTransform, transformOrigin: "left top"});
       TweenLite.set(animImageDest, {transform: imageFromTransform, transformOrigin: "right top"});
 
-      let unskewDuration = 0.15;
+      let unskewDuration = animation ? 0.15 : 0;
       var delay = 0;
       tl.addLabel("unskewLabel", delay);
       delay += unskewDuration;
       // "Finish" is for anything on completion and on start of reverse
       tl.addLabel("unskewLabelFinish", delay);
 
-      let scaleUpLabelDuration = 0.25;
+      let scaleUpLabelDuration = animation ? 0.25 : 0;
       tl.addLabel("scaleUpLabel", delay);
       delay += scaleUpLabelDuration;
       tl.addLabel("scaleUpLabelFinish", delay);
 
-      delay = 0.01; // reset
-      let fadeOutImageDuration = 0.25;
+      delay = animation ? 0.01 : 0; // reset
+      let fadeOutImageDuration = animation ? 0.25 : 0;
       tl.addLabel("fadeOutImage", delay);
       delay += fadeOutImageDuration;
       tl.addLabel("fadeOutImageFinish", delay);
 
-      let unskewContentDuration = 0.15;
+      let unskewContentDuration = animation ? 0.15 : 0;
       tl.addLabel("unskewContent", delay);
       delay += unskewContentDuration;
       tl.addLabel("unskewContentFinish", delay);
 
-      let scaleUpContentDuration = 0.25;
+      let scaleUpContentDuration = animation ? 0.25 : 0;
       tl.addLabel("scaleUpContent", delay);
       delay += scaleUpContentDuration;
       tl.addLabel("scaleUpContentFinish", delay);
@@ -399,6 +399,7 @@
       let fadeInDetails = tl.addLabel("fadeInDetails", delay);
       delay += fadeInDetailsDuration;
       tl.addLabel("fadeInDetailsFinish", delay);
+      tl.addLabel("end", delay); // end of animation
 
       // Unskew Label
       tl.add( TweenLite.fromTo(this.$.label, unskewDuration, { autoAlpha: 1 }, { autoAlpha: 0 }), "unskewLabel");
@@ -421,8 +422,8 @@
     }), "unskewLabel");
     // Now that we've unskewed the label, swap it out with the clone that will scale up
     tl.add( TweenLite.to(animLabelDest, 0, { visibility: 'visible', immediateRender: false, display: 'block' }), "unskewLabelFinish")
-      .add( TweenLite.to(animLabelSource, 0, { visibility: 'hidden', immediateRender: false }), "unskewLabelFinish")
-      .add( TweenLite.to(animLabelDest.querySelector(".label"), 0, { visibility: 'hidden', immediateRender: false }), "unskewLabelFinish");
+    .add( TweenLite.to(animLabelSource, 0, { visibility: 'hidden', immediateRender: false }), "unskewLabelFinish")
+    .add( TweenLite.to(animLabelDest.querySelector(".label"), 0, { visibility: 'hidden', immediateRender: false }), "unskewLabelFinish");
     // Scale Up Label clone
     tl.add( TweenLite.fromTo(animLabelDest, scaleUpLabelDuration, { transform: fromTransform }, { transform: toTransform,
       transformOrigin: "left top",
@@ -441,50 +442,35 @@
     }), "unskewContent");
     // Now that we've unskewed the image, swap it out with the clone that'll scale up
     tl.add( TweenLite.to(animImageDest, 0, { visibility: 'visible', immediateRender: false, display: 'block' }), "unskewContentFinish")
-      .add( TweenLite.to(animImageSource, 0, { visibility: 'hidden', immediateRender: false }), "unskewContentFinish")
+    .add( TweenLite.to(animImageSource, 0, { visibility: 'hidden', immediateRender: false }), "unskewContentFinish")
     // Scale Up the clone
     tl.add( TweenLite.fromTo(animImageDest, scaleUpContentDuration, { transform: imageFromTransform, transformOrigin: "left top" }, { transform: toTransform, transformOrigin: "left top",
-      force3D: true, // fixes glitch in Safari
-      onUpdateParams:["{self}"],
-      onUpdate: (tween) => {
-        if (!tween.isActive() && tween.progress() != 1) { return; }
-        console.log("image tween " + tween.progress() + " " + tween.totalProgress() + " " + tween.isActive());
-        let sx = 1.0/animImageDest._gsTransform.scaleX;
-        let sy = 1.0/animImageDest._gsTransform.scaleY;
-        let content = animImageDest.children[0];
-        // let content = animImageDest.querySelector(".content");
-        // TweenLite.set(content, { scaleX: sx, scaleY: sy, transformOrigin: "right top"});
-      },
-      ease: Power3.easeOut,
-    }), "scaleUpContent");
+    force3D: true, // fixes glitch in Safari
+    onUpdateParams:["{self}"],
+    onUpdate: (tween) => {
+      if (!tween.isActive() && tween.progress() == 1) { return; }
+      let sx = 1.0/animImageDest._gsTransform.scaleX;
+      let sy = 1.0/animImageDest._gsTransform.scaleY;
+      let content = animImageDest.children[0];
+      // let content = animImageDest.querySelector(".content");
+      // TweenLite.set(content, { scaleX: sx, scaleY: sy, transformOrigin: "right top"});
+    },
+    ease: Power3.easeOut,
+  }), "scaleUpContent");
 
-    tl.add( TweenLite.fromTo(animLabelDest.querySelector("#label"), fadeInDetailsDuration, { autoAlpha: 0 }, { autoAlpha: 1, ease: Power3.easeInOut,
-      onStartParams:["{self}"],
-      onStart: (tween) => {
-        console.log(tween.progress());
-      },
-    }), "fadeInDetails");
-    tl.add( TweenLite.fromTo(animImageDest.querySelector("#content"), fadeInDetailsDuration, { autoAlpha: 0}, { autoAlpha: 1, ease: Power3.easeInOut,
-      onStartParams:["{self}"],
-      onStart: (tween) => {
-        console.log(tween.progress());
-      },
-    }), "fadeInDetails");
-    tl.add( TweenLite.from(this.divFullCard.querySelector('#closeBtn').$.close, fadeInDetailsDuration, { x: window.innerWidth + 100, ease: Power3.easeInOut,
-      onStartParams:["{self}"],
-      onStart: (tween) => {
-        console.log(tween.progress());
-      },
-    }), "fadeInDetails");
-    tl.add( TweenLite.from(this.divFullCard.querySelector('#scrollBtn').$.scroll, fadeInDetailsDuration, { y: window.innerHeight + 100, ease: Power3.easeInOut,
-      onStartParams:["{self}"],
-      onStart: (tween) => {
-        console.log(tween.progress());
-      },
-      onComplete: () => {
-        setTimeout(() => {
-          this.detail = true;
+  tl.add( TweenLite.fromTo(animLabelDest.querySelector("#label"), fadeInDetailsDuration, { autoAlpha: 0 }, { autoAlpha: 1, ease: Power3.easeInOut,
+  }), "fadeInDetails");
+  tl.add( TweenLite.fromTo(animImageDest.querySelector("#content"), fadeInDetailsDuration, { autoAlpha: 0}, { autoAlpha: 1, ease: Power3.easeInOut,
+  }), "fadeInDetails");
+  tl.add( TweenLite.from(this.divFullCard.querySelector('#closeBtn').$.close, fadeInDetailsDuration, { x: window.innerWidth + 100, ease: Power3.easeInOut,
+  }), "fadeInDetails");
+  tl.add( TweenLite.from(this.divFullCard.querySelector('#scrollBtn').$.scroll, fadeInDetailsDuration, { y: window.innerHeight + 100, ease: Power3.easeInOut,
+    onComplete: () => {
+      setTimeout(() => {
+        this.detail = true;
+        if (this._openCallback) {
           this._openCallback(animLabelDest,animImageDest);
+        }
           this.transitioning = false;
         },1);
       },
@@ -492,6 +478,7 @@
       immediateRender: true,
     }), "fadeInDetails");
     this._tl = tl;
+    return this._tl;
   }
 
   // Called when you click on a closed card
@@ -499,16 +486,14 @@
     this.transitioning = true; // transition to open
     // Load the data for the opening page async - don't wait for the data to animate
     this._openCallback = callback;
-    this._tryCreateCardAnimation();
-    this._tl.restart();
+    this.tryCardAnimation(true).restart();
   }
 
   // Called when you click on a closed card
   _closeCard(callback) {
     this.transitioning = true; // transition to open
     this._closeCallback = callback;
-    this._tryCreateCardAnimation();
-    this._tl.reverse();
+    this.tryCardAnimation(true).reverse();
   }
 
   openCard(event, callback) {
