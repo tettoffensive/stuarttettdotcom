@@ -70,8 +70,8 @@
 
     </style>
     <div id="fullCard" style="display: none; visibility: hidden;">
-      <stt-close-btn id="closeBtn" on-click="_onClickClose"></stt-close-btn>
-      <stt-scroll-btn id="scrollBtn" on-click="_onClickScroll"></stt-scroll-btn>
+      <stt-close-btn id="closeBtn"></stt-close-btn>
+      <stt-scroll-btn id="scrollBtn"></stt-scroll-btn>
     </div>
     <div id="labelShadow" class="shadow z2">
       <div id="labelClip" class="clip dark-background">
@@ -347,7 +347,7 @@
       this._toTransform = toTransform
       // Animate
       var tl = new TimelineLite({ paused: true });
-      tl.add( TweenLite.to(this.divFullCard, 0, { display: 'block'}), 0)
+      tl.add( TweenLite.to(this.divFullCard, 0, { display: 'block', width: "100%", height: "100vh"}), 0)
         .add( TweenLite.to(this.animLabelDest, 0, { display: 'block'}), 0)
         .add( TweenLite.to(this.animImageDest, 0, { display: 'block'}), 0);
       // Put the destination pieces in their "First" states

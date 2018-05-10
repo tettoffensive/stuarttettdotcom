@@ -1,4 +1,8 @@
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.4/TweenLite.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.4/TimelineLite.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.4/plugins/CSSPlugin.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.4/plugins/ScrollToPlugin.min.js"></script>
 <link rel="import" href="skew-style-module.html">
 <link rel="import" href="skew-header.html">
 <link rel="import" href="skew-card.html">
@@ -48,16 +52,19 @@
   <div id="page" class="page">
     <div id="wrapper" class="wrapper">
       <skew-header></skew-header>
-      <!-- <skew-info-card description="Stuart has a unique background with a double major in Art &amp; Design and Computer Science, which give way to a rare skill-set of strong visual and analytical problem-solving skills."></skew-info-card> -->
+      <skew-info-card description="Stuart has a unique background with a double major in Art &amp; Design and Computer Science, which give way to a rare skill-set of strong visual and analytical problem-solving skills."></skew-info-card>
       <template is="dom-repeat" id="thecards" items="{{cards}}" on-dom-change="_cardsDomChange">
         <skew-card id=[[item.link]] link=[[item.link]] title=[[item.title]]
         description=[[item.description]]
         img=[[item.image]]
         on-click="_onClick"
-        on-close="_onClickClose"></skew-card>
+        on-close="_onClickClose"
+        on-scroll="_onClickScroll"
+        ></skew-card>
       </template>
     </div>
   </div>
+  <div id="contentDetails" class="z1" style="display: none; visibility: hidden; height: 100vh; background-color: white;">asdfas</div>
 </template>
 
 <script>
@@ -165,6 +172,23 @@ class StuarttettdotcomApp extends Polymer.Element {
     });
   }
 
+  _onClickScroll(event) {
+    if (this._lastClickElement == null) {
+      // shouldn't be visible
+      throw "Scroll button shouldn't be visible";
+      return;
+    }
+    let details = this.$.contentDetails;
+    if (details == null) {
+      return;
+    }
+    var tl = new TimelineLite({ paused: false });
+    TweenLite.set(details, { display: 'block' });
+    let yOffset = details.getBoundingClientRect().top;
+    tl.add( TweenLite.to(details, 0.5, { autoAlpha: 1}), 0)
+      .add( TweenLite.to(window, 1, {scrollTo: yOffset }), 0);
+  }
+
   _onClickClose(event) {
     if (this._lastClickElement == null) {
       return;
@@ -173,6 +197,14 @@ class StuarttettdotcomApp extends Polymer.Element {
     this._lastClickElement = null;
     // let model = this.$.thecards.modelForElement(el);
     el.detail = "false";
+
+    let details = this.$.contentDetails;
+    if (details != null) {
+      var tl = new TimelineLite({ paused: false });
+      tl.add( TweenLite.to(details, 0.5, { autoAlpha: 0, display: 'none'}), 0)
+      .add( TweenLite.to(window, 1, {scrollTo: 0 }), 0);
+    }
+
     el.closeCard(event, (label, content) => {
       // Page history
       document.title = "Stuart Tett | Design & Code";
