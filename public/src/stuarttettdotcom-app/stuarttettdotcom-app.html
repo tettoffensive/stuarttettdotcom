@@ -82,23 +82,23 @@ class StuarttettdotcomApp extends Polymer.Element {
             link: 'builduptv',
           },
 
-          // {type: 'skew-card',
-          // description: 'Created a warm and respectful logo for an institute for couples therapy.',
-          // title: 'Jewish EFT Institute',
-          // image:'',
-          // link: ''},
-          //
-          // {type: 'skew-card',
-          // description: 'Designed a label for a craft beer aimed at customers who typically prefer easy-drinking beers',
-          // title: 'Big Sissy Lager',
-          // image:'/',
-          // link: ''},
-          //
-          // {type: 'skew-card',
-          // description: '',
-          // title: '',
-          // image:'',
-          // link: ''},
+          {type: 'skew-card',
+          description: 'Created a warm and respectful logo for an institute for couples therapy.',
+          title: 'Jewish EFT Institute',
+          image:'',
+          link: 'jewishetf'},
+
+          {type: 'skew-card',
+          description: 'Designed a label for a craft beer aimed at customers who typically prefer easy-drinking beers',
+          title: 'Big Sissy Lager',
+          image:'',
+          link: 'bigsissy'},
+
+          {type: 'skew-card',
+          description: '',
+          title: 'SousChef',
+          image:'',
+          link: 'souschef'},
         ];}
       }
     }
@@ -135,30 +135,19 @@ class StuarttettdotcomApp extends Polymer.Element {
 
     let el = event.target;
     this._lastClickElement = el;
-    // let model = this.$.thecards.modelForElement(el);
+    let model = this.$.thecards.modelForElement(el);
+    let cardInArray = this.cards[model.index];
+    console.log(`model ${model.link} ${model.title}`);
     el.openCard(event, (label, content) => {
-      // el.detail = "true";
       // Page history
-      document.title = "BuildUp.tv";
-      history.pushState(null, "Stuart Tett - BuildUp.tv", "builduptv");
-      // label.style.visibility = "hidden";
-      // content.style.visibility = "hidden";
+      document.title = cardInArray.title;
+      history.pushState(null, `Stuart Tett - ${cardInArray.title}`, cardInArray.link);
     });
 
   }
 
   _detailChanged(newValue, oldValue) {
-    // console.log("changed");
-    // if (newValue) {
-    //   console.log("here " + this.$.thecards);
-    //   let el = this.shadowRoot.querySelector('#builduptv');
-    //   if (!el) {return;}
-    //   console.log("element: " + el);
-    //   let model = this.$.thecards.modelForElement(el);
-    //   if (!model) {return;}
-    //   console.log("model: " + model);
-    //   model.detail = "true";
-    // }
+
   }
 
   _updateDetailFor(newValue) {
@@ -187,7 +176,7 @@ class StuarttettdotcomApp extends Polymer.Element {
     el.closeCard(event, (label, content) => {
       // Page history
       document.title = "Stuart Tett | Design & Code";
-      history.pushState(null, document.title, "");
+      history.pushState(null, document.title, "/");
       label.style.visibility = "hidden";
       content.style.visibility = "hidden";
     });

@@ -2,6 +2,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.4/TweenLite.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.4/TimelineLite.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.4/plugins/CSSPlugin.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.4/plugins/ScrollToPlugin.min.js"></script>
 <!-- cubic-bezier(0.15, 0.005, 0.155, 1) -->
 <dom-module id="skew-card">
   <template>
@@ -160,25 +161,8 @@
           this.$.contentShrink.style.visibility = "hidden";
         }
 
-      } else {
-        // this.classList.replace('onclick','initial');
-        // this.classList.replace('front','back');
-        // this.$.labelShadow.classList.replace('lbl-onclick','lbl-initial');
-        // this.$.contentShrink.classList.replace('ct-onclick','ct-initial');
-
-        //
-        // if (!this._transitioning) {
-        //   this.$.labelShadow.style.visibility = "";
-        //   this.$.contentShrink.style.visibility = "";
-        //   if (this.animLabelDest) {
-        //     this.animLabelDest.style.display = "none";
-        //     this.animImageDest.style.display = "none";
-        //   }
-        //   if (this.animImageDest) {
-        //     this.animImageDest.style.visibility = "hidden";
-        //     this.animLabelDest.style.visibility = "hidden";
-        //   }
-        // }
+      } else if (this.divFullCard != null) {
+          this.divFullCard.style.display = "none";
       }
     }
 
@@ -363,6 +347,9 @@
       this._toTransform = toTransform
       // Animate
       var tl = new TimelineLite({ paused: true });
+      tl.add( TweenLite.to(this.divFullCard, 0, { display: 'block'}), 0)
+        .add( TweenLite.to(this.animLabelDest, 0, { display: 'block'}), 0)
+        .add( TweenLite.to(this.animImageDest, 0, { display: 'block'}), 0);
       // Put the destination pieces in their "First" states
       TweenLite.set(animLabelDest, {transform: fromTransform, transformOrigin: "left top"});
       TweenLite.set(animImageDest, {transform: imageFromTransform, transformOrigin: "right top"});
@@ -430,6 +417,7 @@
       force3D: true,
       ease: Power3.easeOut,
     }), "scaleUpLabel");
+    tl.add( TweenLite.to(window, 1, { scrollTo: 0, ease: Power3.easeInOut}), "scaleUpLabel");
     // Fade Out the content Image
     tl.add( TweenLite.fromTo(this.$.content, fadeOutImageDuration, { autoAlpha: 1}, { autoAlpha: 0,
       ease: Power3.easeInOut,
@@ -456,8 +444,9 @@
       // TweenLite.set(content, { scaleX: sx, scaleY: sy, transformOrigin: "right top"});
     },
     ease: Power3.easeOut,
+  }), "unskewContentFinish");
+  tl.add( TweenLite.to(this.parentElement.parentElement.querySelector("#wrapper"), fadeInDetailsDuration, { autoAlpha: 0, display: 'none', ease: Power3.easeInOut
   }), "scaleUpContent");
-
   tl.add( TweenLite.fromTo(animLabelDest.querySelector("#label"), fadeInDetailsDuration, { autoAlpha: 0 }, { autoAlpha: 1, ease: Power3.easeInOut,
   }), "fadeInDetails");
   tl.add( TweenLite.fromTo(animImageDest.querySelector("#content"), fadeInDetailsDuration, { autoAlpha: 0}, { autoAlpha: 1, ease: Power3.easeInOut,
@@ -486,6 +475,7 @@
     this.transitioning = true; // transition to open
     // Load the data for the opening page async - don't wait for the data to animate
     this._openCallback = callback;
+    this._tryCloneNodesForDetail();
     this.tryCardAnimation(true).restart();
   }
 
@@ -508,15 +498,12 @@
   }
 
   closeCard(event, callback) {
-    console.log("C");
     if (event.target != event.currentTarget) {
       return;
     }
-    console.log("D");
     if (!this.domReady) {
       return;
     }
-    console.log("E");
     event.preventDefault();
     this._closeCard(callback);
   }
