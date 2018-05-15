@@ -91,22 +91,21 @@ h1, h2, h3, h4, h5, h6, .header1, .header2 {
   max-width: 1482px;
   width: calc(100% - 160px);
   display: grid;
-  grid-template-rows: 385px 385px;
-  grid-template-columns: 50% auto;
-  grid-template-areas:
-    "grid_tl grid_tr"
-    "grid_b2 grid_b2";
+  grid-auto-rows: 385px;
+  grid-template-columns: repeat(auto-fill, minmax(max-content, 701px));
   grid-gap: 40px;
 }
 
-.grid_tl {
-  grid-area: grid_tl;
-  background-color: #275054;
-  overflow: hidden;
+#contentDetails > div {
+  justify-self: center;
+  align-self: center;
 }
 
-.grid_tr {
-  grid-area: grid_tr;
+.grid_tl {
+  background-color: #275054;
+}
+
+.grid_tr p {
   padding: 34px;
   font-family: 'Space Mono';
   font-size: 18px;
@@ -114,16 +113,12 @@ h1, h2, h3, h4, h5, h6, .header1, .header2 {
   letter-spacing: 0.6px;
   text-align: left;
   line-height: 26px;
-  justify-self: center;
-  align-self: center;
   max-width: 386px;
-}
-
-.grid_tr p {
   padding-bottom: 26px;
 }
 
 .grid_b2 {
-  grid-area: grid_b2;
+  // grid-area: grid_b2;
   background-color: #f3f3f3;
+  grid-column: 1 / -1;
 }
