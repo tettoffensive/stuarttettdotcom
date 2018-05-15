@@ -70,8 +70,8 @@
 
     </style>
     <div id="fullCard" style="display: none; visibility: hidden;">
-      <stt-close-btn id="closeBtn"></stt-close-btn>
-      <stt-scroll-btn id="scrollBtn"></stt-scroll-btn>
+      <stt-close-btn id="closeBtn" class="btn-tr z3"></stt-close-btn>
+      <stt-scroll-btn id="scrollBtn" class="btn-bc z3"></stt-scroll-btn>
     </div>
     <div id="labelShadow" class="shadow z2">
       <div id="labelClip" class="clip dark-background">
@@ -218,47 +218,6 @@
       // for history back and forward buttons
       window.removeEventListener('popstate', this._popState);
     }
-
-    // _loadPageData() {
-    //
-    //   return;
-    //   var xhr = new XMLHttpRequest();
-    //   xhr.overrideMimeType('application/xml')
-    //   xhr.open('GET', 'builduptv/index.html');
-    //   xhr.onload = function() {
-    //     if (xhr.status === 200) {
-    //       // alert('hello there: ' + xhr.responseText);
-    //       // let parser = new DOMParser();
-    //       // var xmlDoc = parser.parseFromString(xhr.responseText,"text/xml");
-    //       // console.log(xmlDoc);
-    //       var newContent = xhr.responseXML.getElementsByTagName("body")[0];
-    //       let docBody = document.getElementsByTagName("body")[0];
-    //       console.log(docBody);
-    //       docBody.replaceChild(newContent.firstElementChild,docBody.firstElementChild);
-    //       return;
-    //       // var newPage = $(newContent).attr('data-page');
-    //       // $(newContent).addClass('ed-page--new');
-    //       // $('#content').before(newContent);
-    //       // pages.updateMetaData(newContent, oldPage);
-    //       // pages.updatePath(newPage, href);
-    //       // pages.checkExternalLinks();
-    //       // casePage.init();
-    //       // if (workCase) {
-    //       //   pages.animateCase(oldPage, newPage, workCase);
-    //       // } else {
-    //       //   pages.animatePages(oldPage, newPage);
-    //       // }
-    //       // this.set('resolveUrl', event.target.value);
-    //       // t¡his.set('title', xhr.response.detail.response.title);
-    //     } else {
-    //       alert('Request failed.  Returned status of ' + xhr.status);
-    //     }
-    //   };
-    //
-    //   // Calculate the time from starting to load the data for use in animation timing
-    //   var startLoad = performance.now();
-    //   xhr.send(); // send the request
-    // }
 
     _tryCloneNodesForDetail() {
 

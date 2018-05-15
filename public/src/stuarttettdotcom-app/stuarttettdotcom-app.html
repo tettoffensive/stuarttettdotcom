@@ -64,7 +64,6 @@
       </template>
     </div>
   </div>
-  <div id="contentDetails" class="z1" style="display: none; visibility: hidden; height: 100vh; background-color: white;">asdfas</div>
 </template>
 
 <script>
@@ -77,36 +76,42 @@ class StuarttettdotcomApp extends Polymer.Element {
   static get is() { return 'stuarttettdotcom-app'; }
   static get properties() {
     return {
+      html: String,
       detail: {type: String, value: '', reflectToAttribute: true, observer: '_detailChanged' },
       cards: {
         type: Array,
         value() {
           return [
             {type: 'skew-card',
-            description: 'Created a logo for an online community platform for “makers” in the D.I.Y. community.',
+            description: 'UX/UI Design for an app that helps with meal-planning based off of ingredients on hand.',
+            title: 'SousChef',
+            image:'/images/souschef_mockup.png',
+            link: 'souschef'},
+
+            {type: 'skew-card',
+            title: 'Doppler\'s Dogpatch',
+            description: 'A logo for a small-batch premium ice cream company.',
+            image:'/images/dopplers_mockup.jpg',
+            link: 'dopplers'},
+
+            {type: 'skew-card',
+            description: 'A logo for an online community platform for “makers” in the D.I.Y. community.',
             title: 'BuildUp.tv',
             image:'/images/buildup_mockup.jpg',
-            link: 'builduptv',
-          },
+            link: 'builduptv'},
 
-          {type: 'skew-card',
-          description: 'Created a warm and respectful logo for an institute for couples therapy.',
-          title: 'Jewish EFT Institute',
-          image:'',
-          link: 'jewishetf'},
+            {type: 'skew-card',
+            description: 'A collection of logo concepts', /*'Created a warm and respectful logo for an institute for couples therapy.',*/
+            title: 'Logos',
+            image:'/images/jewish-eft-logo1.png',
+            link: 'concepts'},
 
-          {type: 'skew-card',
-          description: 'Designed a label for a craft beer aimed at customers who typically prefer easy-drinking beers',
-          title: 'Big Sissy Lager',
-          image:'',
-          link: 'bigsissy'},
-
-          {type: 'skew-card',
-          description: '',
-          title: 'SousChef',
-          image:'',
-          link: 'souschef'},
-        ];}
+            {type: 'skew-card',
+            description: 'A label for a craft beer aimed at customers who typically prefer easy-drinking beers',
+            title: 'Big Sissy Lager',
+            image:'/images/bigsissy-mockup.jpg',
+            link: 'bigsissy'},
+          ];}
       }
     }
   }
@@ -134,6 +139,52 @@ class StuarttettdotcomApp extends Polymer.Element {
     super.disconnectedCallback();
   }
 
+  _loadPageData(page) {
+    var xhr = new XMLHttpRequest();
+    xhr.overrideMimeType('application/xml')
+    xhr.open('GET', page + '/index.html', true);
+    xhr.onload = function() {
+      if (xhr.status === 200) {
+        let docBody = document.getElementsByTagName("body")[0];
+        let docContent = document.querySelector("#contentDetails");
+        let newNode = document.importNode(xhr.responseXML.getElementsByTagName("section")[0], true);
+        if (docContent) {
+          docBody.replaceChild(newNode,docContent);
+        } else {
+          docBody.appendChild(newNode);
+        }
+        let docScript = document.querySelector("#detailsScript");
+        let newScript = document.importNode(xhr.responseXML.getElementById("detailsScript"), true);
+        if (docScript) {
+          docBody.replaceChild(newScript,docScript);
+        } else {
+          docBody.appendChild(newScript);
+        }
+        return;
+        // var newPage = $(newContent).attr('data-page');
+        // $(newContent).addClass('ed-page--new');
+        // $('#content').before(newContent);
+        // pages.updateMetaData(newContent, oldPage);
+        // pages.updatePath(newPage, href);
+        // pages.checkExternalLinks();
+        // casePage.init();
+        // if (workCase) {
+        //   pages.animateCase(oldPage, newPage, workCase);
+        // } else {
+        //   pages.animatePages(oldPage, newPage);
+        // }
+        // this.set('resolveUrl', event.target.value);
+        // t¡his.set('title', xhr.response.detail.response.title);
+      } else {
+        alert('Request failed.  Returned status of ' + xhr.status);
+      }
+    };
+
+    // Calculate the time from starting to load the data for use in animation timing
+    var startLoad = performance.now();
+    xhr.send(); // send the request
+  }
+
   _onClick(event) {
 
     if (this._lastClickElement != null) {
@@ -144,8 +195,8 @@ class StuarttettdotcomApp extends Polymer.Element {
     this._lastClickElement = el;
     let model = this.$.thecards.modelForElement(el);
     let cardInArray = this.cards[model.index];
-    console.log(`model ${model.link} ${model.title}`);
     el.openCard(event, (label, content) => {
+      this._loadPageData(cardInArray.link);
       // Page history
       document.title = cardInArray.title;
       history.pushState(null, `Stuart Tett - ${cardInArray.title}`, cardInArray.link);
@@ -178,15 +229,20 @@ class StuarttettdotcomApp extends Polymer.Element {
       throw "Scroll button shouldn't be visible";
       return;
     }
-    let details = this.$.contentDetails;
+    let details = document.querySelector("#contentDetails");
     if (details == null) {
       return;
     }
     var tl = new TimelineLite({ paused: false });
-    TweenLite.set(details, { display: 'block' });
-    let yOffset = details.getBoundingClientRect().top;
+    TweenLite.set(details, { display: 'grid' });
+    this.dispatchEvent(new CustomEvent( 'displayed', {}));
+    let yOffset = details.getBoundingClientRect().top - 60;
     tl.add( TweenLite.to(details, 0.5, { autoAlpha: 1}), 0)
-      .add( TweenLite.to(window, 1, {scrollTo: yOffset }), 0);
+      .add( TweenLite.to(window, 1, {scrollTo: yOffset,
+      onComplete: () => {
+        this.dispatchEvent(new CustomEvent('down', {}));
+      } }), 0);
+
   }
 
   _onClickClose(event) {
@@ -198,7 +254,7 @@ class StuarttettdotcomApp extends Polymer.Element {
     // let model = this.$.thecards.modelForElement(el);
     el.detail = "false";
 
-    let details = this.$.contentDetails;
+    let details = document.querySelector("#contentDetails");
     if (details != null) {
       var tl = new TimelineLite({ paused: false });
       tl.add( TweenLite.to(details, 0.5, { autoAlpha: 0, display: 'none'}), 0)

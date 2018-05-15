@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="stylesheet" type="text/css" href="../stylesheets/reset.css" />
+  <link href="https://fonts.googleapis.com/css?family=BioRhyme:800|Space+Mono:400,400i,700i" rel="stylesheet" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes" />
+  <meta name="description" content="Stuart Tett | Design/Code" />
+  <link rel="manifest" href="/manifest.json" />
+  <script src="../bower_components/webcomponentsjs/webcomponents-loader.js"></script>
+  <link rel="import" href="../src/stuarttettdotcom-app/stuarttettdotcom-app.html" />
+  <title>Stuart Tett | Design &amp; Code</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+  <link rel="stylesheet" type="text/css" href="/stylesheets/style.css" />
+</head>
+<body xmlns="http://www.w3.org/1999/xhtml">
+  <stuarttettdotcom-app id="app" detail="souschef"></stuarttettdotcom-app>
+  <section id="contentDetails" class="z1" style="display: none; visibility: hidden; min-height: 100vh;">
+    <figure id="content" class="grid_tl image contain" style="background-image: url('/images/buildup_dark.png')"></figure>
+    <div id="caption" class="grid_tr">
+      <p>The logo was designed primarily for the website dedicated towards makers in the D.I.Y. community.</p>
+      <p>The goal was a simple, clean, readable logo. The ends of the U and P suggest wood construction or pencil ends.</p>
+    </div>
+    <figure id="content2" class="grid_b2 image cover" style="background-image: url('/images/buildup_light.png')"></figure>
+  </section>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.5/ScrollMagic.min.js"></script>
+  <script src="/scripts/animation.gsap.js"></script>
+  <script id="detailsScript">
+  document.querySelector('#app').addEventListener('displayed', function (e) {
+    // build scene
+    var controller = new ScrollMagic.Controller();
+    var tl = new TimelineLite();
+    let content = document.querySelector('#content');
+    let caption = document.querySelector('#caption');
+    let content2 = document.querySelector('#content2');
+    console.log(`aasdfsfda ${window.innerWidth} - ${caption.offsetLeft} = ${window.innerWidth - caption.offsetLeft}`)
+    tl.add( TweenLite.from(content, 1, { x: -(content.offsetWidth + content.offsetLeft + 10), ease: Power3.easeInOut, autoAlpha: 0 }), 0.1)
+      .add( TweenLite.from(caption, 1, { x: (window.innerWidth - caption.offsetLeft + 10), ease: Power3.easeInOut, autoAlpha: 0 }), 0.35)
+      .add( TweenLite.from(content2, 1, { x: -(content2.offsetWidth + content2.offsetLeft + 10), ease: Power3.easeInOut, autoAlpha: 0 }), 0.75);
+    var scene = new ScrollMagic.Scene({triggerElement: "#contentDetails"})
+    // animate color and top border in relation to scroll position
+    .setTween( tl ) // the tween durtion can be omitted and defaults to 1
+    .addTo(controller);
+  }, {once: true});
+  </script>
+</body>
+</html>

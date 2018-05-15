@@ -22,9 +22,9 @@
 
     .ct-onclick {
       position: absolute;
-      top: 60px;
-      left: calc(280px + 30px);
-      width: calc(100% - 280px - 60px);
+      top: calc(30px + 80px);
+      left: calc(280px + 80px);
+      width: calc(100% - 280px - 160px);
       /* max-width: 1024px; */
       height: calc(100vh - 30px);
       max-height: 964px;
@@ -37,9 +37,9 @@
 
     .lbl-onclick {
       position: absolute;
-      top: 30px;
-      left: 30px;
-      height: calc(100vh - 30px);
+      top: 80px;
+      left: 80px;
+      height: calc(100vh - 80px);
       max-height: 1024px;
       min-height: 375px;
     }
@@ -79,11 +79,11 @@
       left: 0;
       right: 0;
       z-index: -1;
-      box-shadow: 0 0 20px 0px rgba(0,0,0,0.35);
+      box-shadow: 0 0 20px 0px rgba(0,0,0,0.25);
     }
 
     .btn-shadow {
-        box-shadow: 0 20px 20px 0px rgba(0,0,0,0.05);
+      box-shadow: 0 0 20px 0px rgba(0,0,0,0.25);
     }
 
     /* Extra div so that the shadow doesn't get clipped */
@@ -111,7 +111,7 @@
 
     .image {
       background-repeat: no-repeat;
-      background-position: top center;
+      background-position: center;
       min-height: 540px;
       height: 100%;
     }
@@ -183,16 +183,15 @@
 
     .btn-tr {
       position: absolute;
-      top: 35px;
-      right: 20px;
+      top: 85px;
+      right: calc(80px - 30px);
     }
 
     .btn-bc {
       position: absolute;
-      top: 997px;
+      top: calc(1024px + 30px);
       left: 52vw;
     }
-
 
     .btn-flex {
       display: flex;
@@ -205,7 +204,9 @@
       height: auto;
     }
 
-
+    #fullCard {
+      max-height: 1245px;
+    }
 
     </style>
   </template>
