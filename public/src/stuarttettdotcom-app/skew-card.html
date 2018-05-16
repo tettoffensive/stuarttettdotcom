@@ -145,22 +145,10 @@
     _detailChanged(newValue, oldValue) {
       if (newValue) {
         this._tryCloneNodesForDetail();
-
-        // this.classList.replace('initial','onclick');
-        // this.classList.replace('back','front');
-        // this.$.labelShadow.classList.replace('lbl-initial','lbl-onclick');
-        // this.$.contentShrink.classList.replace('ct-initial','ct-onclick');
-
         this.animLabelDest.style.display = "";
         this.animImageDest.style.display = "";
         this.animImageDest.style.visibility = "";
         this.animLabelDest.style.visibility = "";
-
-        if (!this._transitioning) {
-          this.$.labelShadow.style.visibility = "hidden";
-          this.$.contentShrink.style.visibility = "hidden";
-        }
-
       } else if (this.divFullCard != null) {
           this.divFullCard.style.display = "none";
       }
@@ -230,7 +218,7 @@
           this.dispatchEvent(new CustomEvent('close', {}));
         });
         this.divFullCard.querySelector('#scrollBtn').addEventListener('click', (event) => {
-          this.dispatchEvent(new CustomEvent('scroll', {}));
+          this.dispatchEvent(new CustomEvent('scroll', { detail: { button: event.target }}));
         });
       }
 
@@ -342,6 +330,7 @@
       tl.addLabel("scaleUpContentFinish", delay);
 
       let fadeInDetailsDuration = 1.0;
+      let fadeOutWrapperDuration = animation ? fadeInDetailsDuration : 0;
       let fadeInDetails = tl.addLabel("fadeInDetails", delay);
       delay += fadeInDetailsDuration;
       tl.addLabel("fadeInDetailsFinish", delay);
@@ -367,9 +356,9 @@
       ease: Power3.easeIn,
     }), "unskewLabel");
     // Now that we've unskewed the label, swap it out with the clone that will scale up
-    tl.add( TweenLite.to(animLabelDest, 0, { visibility: 'visible', immediateRender: false, display: 'block' }), "unskewLabelFinish")
-    .add( TweenLite.to(animLabelSource, 0, { visibility: 'hidden', immediateRender: false }), "unskewLabelFinish")
-    .add( TweenLite.to(animLabelDest.querySelector(".label"), 0, { visibility: 'hidden', immediateRender: false }), "unskewLabelFinish");
+    tl.add( TweenLite.to(animLabelDest, 0, { visibility: 'visible', immediateRender: animation ? true : false, display: 'block' }), "unskewLabelFinish")
+      .add( TweenLite.fromTo(animLabelSource, 0, { autoAlpha: 1, immediateRender: animation ? true : false }, { autoAlpha: 0 }), "unskewLabelFinish")
+      .add( TweenLite.to(animLabelDest.querySelector(".label"), 0, { visibility: 'hidden', immediateRender: animation ? true : false }), "unskewLabelFinish");
     // Scale Up Label clone
     tl.add( TweenLite.fromTo(animLabelDest, scaleUpLabelDuration, { transform: fromTransform }, { transform: toTransform,
       transformOrigin: "left top",
@@ -388,8 +377,8 @@
       ease: Power3.easeIn,
     }), "unskewContent");
     // Now that we've unskewed the image, swap it out with the clone that'll scale up
-    tl.add( TweenLite.to(animImageDest, 0, { visibility: 'visible', immediateRender: false, display: 'block' }), "unskewContentFinish")
-    .add( TweenLite.to(animImageSource, 0, { visibility: 'hidden', immediateRender: false }), "unskewContentFinish")
+    tl.add( TweenLite.to(animImageDest, 0, { visibility: 'visible', immediateRender: animation ? true : false, display: 'block' }), "unskewContentFinish")
+    .add( TweenLite.fromTo(animImageSource, 0, { autoAlpha: 1 }, { autoAlpha: 0 }), "unskewContentFinish")
     // Scale Up the clone
     tl.add( TweenLite.fromTo(animImageDest, scaleUpContentDuration, { transform: imageFromTransform, transformOrigin: "left top" }, { transform: toTransform, transformOrigin: "left top",
     force3D: true, // fixes glitch in Safari
@@ -404,7 +393,7 @@
     },
     ease: Power3.easeOut,
   }), "unskewContentFinish");
-  tl.add( TweenLite.to(this.parentElement.parentElement.querySelector("#wrapper"), fadeInDetailsDuration, { autoAlpha: 0, display: 'none', ease: Power3.easeInOut
+  tl.add( TweenLite.to(this.parentElement.parentElement.querySelector("#wrapper"), fadeOutWrapperDuration, { autoAlpha: 0, display: 'none', ease: Power3.easeInOut
   }), "scaleUpContent");
   tl.add( TweenLite.fromTo(animLabelDest.querySelector("#label"), fadeInDetailsDuration, { autoAlpha: 0 }, { autoAlpha: 1, ease: Power3.easeInOut,
   }), "fadeInDetails");

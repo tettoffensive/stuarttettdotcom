@@ -9,7 +9,6 @@
 <link rel="import" href="skew-info-card.html">
 <link rel="import" href="scatter-shapes.html">
 <link rel="import" href="stuarttettdotcom-app.html">
-<link rel="import" href="full-card.html">
 <link rel="import" href="stt-close-btn.html">
 <link rel="import" href="stt-scroll-btn.html">
 
@@ -29,6 +28,10 @@
       display: flex;
       flex-wrap: wrap;
       align-items: flex-start;
+    }
+
+    .hideChildren > * {
+      visibility: hidden;
     }
 
     .wrapper > * {
@@ -51,7 +54,7 @@
   <scatter-shapes class="shapes one"></scatter-shapes>
   <div id="page" class="page">
     <div id="wrapper" class="wrapper">
-      <skew-header></skew-header>
+      <skew-header id="thecards"></skew-header>
       <skew-info-card description="Stuart has a unique background with a double major in Art &amp; Design and Computer Science, which give way to a rare skill-set of strong visual and analytical problem-solving skills."></skew-info-card>
       <template is="dom-repeat" id="thecards" items="{{cards}}" on-dom-change="_cardsDomChange">
         <skew-card id=[[item.link]] link=[[item.link]] title=[[item.title]]
@@ -112,111 +115,129 @@ class StuarttettdotcomApp extends Polymer.Element {
             image:'/images/bigsissy-mockup.jpg',
             link: 'bigsissy'},
           ];}
+        }
       }
     }
-  }
 
-  constructor(name) {
-    super();
-    this._lastClickElement = null;
-  }
-
-  ready() {
-    super.ready();
-  }
-
-  _cardsDomChange(event) {
-    if (this.detail) {
-      this._updateDetailFor(this.detail);
+    constructor(name) {
+      super();
+      this._lastClickElement = null;
     }
-  }
 
-  connectedCallback() {
-    super.connectedCallback();
-  }
+    ready() {
+      super.ready();
+      if (this.detail && this.detail.length > 0) {
+        this.$.wrapper.style.display = 'none';
+      }
+    }
 
-  disconnectedCallback() {
-    super.disconnectedCallback();
-  }
+    _cardsDomChange(event) {
+      if (this.detail) {
+        this._updateDetailFor(this.detail);
+      }
+    }
 
-  _loadPageData(page) {
-    var xhr = new XMLHttpRequest();
-    xhr.overrideMimeType('application/xml')
-    xhr.open('GET', page + '/index.html', true);
-    xhr.onload = function() {
-      if (xhr.status === 200) {
-        let docBody = document.getElementsByTagName("body")[0];
-        let docContent = document.querySelector("#contentDetails");
-        let newNode = document.importNode(xhr.responseXML.getElementsByTagName("section")[0], true);
-        if (docContent) {
-          docBody.replaceChild(newNode,docContent);
+    connectedCallback() {
+      super.connectedCallback();
+    }
+
+    disconnectedCallback() {
+      super.disconnectedCallback();
+    }
+
+    _removePageData() {
+      removeFromParent(document.querySelector("#contentDetails"));
+      removeFromParent(document.querySelector("#detailsScript"));
+    }
+
+    _loadPageData(page) {
+      var xhr = new XMLHttpRequest();
+      xhr.overrideMimeType('application/xml')
+      xhr.open('GET', page + '/index.html', true);
+      xhr.onload = function() {
+        if (xhr.status === 200) {
+          let docBody = document.getElementsByTagName("body")[0];
+          let docContent = document.querySelector("#contentDetails");
+          let newNode = document.importNode(xhr.responseXML.getElementsByTagName("section")[0], true);
+          if (docContent) {
+            // console.log(`REPLACE ${newNode.id}`);
+            docBody.replaceChild(newNode,docContent);
+          } else {
+            // console.log(`APPEND ${newNode.id}`);
+            docBody.appendChild(newNode);
+          }
+          let docScript = document.querySelector("#detailsScript");
+          let newScript = document.importNode(xhr.responseXML.getElementById("detailsScript"), true);
+          if (docScript) {
+            docBody.replaceChild(newScript,docScript);
+          } else {
+            docBody.appendChild(newScript);
+          }
+          return;
+          // var newPage = $(newContent).attr('data-page');
+          // $(newContent).addClass('ed-page--new');
+          // $('#content').before(newContent);
+          // pages.updateMetaData(newContent, oldPage);
+          // pages.updatePath(newPage, href);
+          // pages.checkExternalLinks();
+          // casePage.init();
+          // if (workCase) {
+          //   pages.animateCase(oldPage, newPage, workCase);
+          // } else {
+          //   pages.animatePages(oldPage, newPage);
+          // }
+          // this.set('resolveUrl', event.target.value);
+          // t¡his.set('title', xhr.response.detail.response.title);
         } else {
-          docBody.appendChild(newNode);
+          alert('Request failed.  Returned status of ' + xhr.status);
         }
-        let docScript = document.querySelector("#detailsScript");
-        let newScript = document.importNode(xhr.responseXML.getElementById("detailsScript"), true);
-        if (docScript) {
-          docBody.replaceChild(newScript,docScript);
-        } else {
-          docBody.appendChild(newScript);
-        }
+      };
+
+      // Calculate the time from starting to load the data for use in animation timing
+      var startLoad = performance.now();
+      xhr.send(); // send the request
+    }
+
+    _onClick(event) {
+
+      if (this._lastClickElement != null) {
         return;
-        // var newPage = $(newContent).attr('data-page');
-        // $(newContent).addClass('ed-page--new');
-        // $('#content').before(newContent);
-        // pages.updateMetaData(newContent, oldPage);
-        // pages.updatePath(newPage, href);
-        // pages.checkExternalLinks();
-        // casePage.init();
-        // if (workCase) {
-        //   pages.animateCase(oldPage, newPage, workCase);
-        // } else {
-        //   pages.animatePages(oldPage, newPage);
-        // }
-        // this.set('resolveUrl', event.target.value);
-        // t¡his.set('title', xhr.response.detail.response.title);
-      } else {
-        alert('Request failed.  Returned status of ' + xhr.status);
       }
-    };
 
-    // Calculate the time from starting to load the data for use in animation timing
-    var startLoad = performance.now();
-    xhr.send(); // send the request
-  }
-
-  _onClick(event) {
-
-    if (this._lastClickElement != null) {
-      return;
-    }
-
-    let el = event.target;
-    this._lastClickElement = el;
-    let model = this.$.thecards.modelForElement(el);
-    let cardInArray = this.cards[model.index];
-    el.openCard(event, (label, content) => {
-      this._loadPageData(cardInArray.link);
-      // Page history
-      document.title = cardInArray.title;
-      history.pushState(null, `Stuart Tett - ${cardInArray.title}`, cardInArray.link);
-    });
-
-  }
-
-  _detailChanged(newValue, oldValue) {
-
-  }
-
-  _updateDetailFor(newValue) {
-    window.requestAnimationFrame(() => {
-      let el = this.shadowRoot.querySelector('skew-card[link="' + newValue + '"]');
+      let el = event.target;
+      this._lastClickElement = el;
       let model = this.$.thecards.modelForElement(el);
-      if (!model) {
-        return;
-      }
-      el.transitioning = true; // transition to open
-      el.tryCardAnimation(true).play("scaleUpContentFinish", false);
+      let cardInArray = this.cards[model.index];
+      el.openCard(event, (label, content) => {
+        this._loadPageData(cardInArray.link);
+        // Page history
+        document.title = cardInArray.title;
+        history.pushState(null, `Stuart Tett - ${cardInArray.title}`, cardInArray.link);
+      });
+
+    }
+
+    _detailChanged(newValue, oldValue) {
+
+    }
+
+    _updateDetailFor(newValue) {
+
+      window.requestAnimationFrame(() => {
+        // console.log(this.$.thecards);
+        this.$.wrapper.style.display = null;
+        let el = this.shadowRoot.querySelector('skew-card[link="' + newValue + '"]');
+        let model = this.$.thecards.modelForElement(el);
+        if (!model) {
+          return;
+        }
+        el.transitioning = true; // transition to open
+        el._openCallback = () => {
+          this.$.wrapper.classList.remove("hideChildren");
+        }
+        let animation = el.tryCardAnimation(true);
+        this.$.wrapper.classList.add("hideChildren");
+        animation.play("scaleUpContentFinish", false);
 
       model.detail = "true";
       this._lastClickElement = el;
@@ -224,6 +245,7 @@ class StuarttettdotcomApp extends Polymer.Element {
   }
 
   _onClickScroll(event) {
+
     if (this._lastClickElement == null) {
       // shouldn't be visible
       throw "Scroll button shouldn't be visible";
@@ -233,6 +255,7 @@ class StuarttettdotcomApp extends Polymer.Element {
     if (details == null) {
       return;
     }
+    let button = event.detail.button;
     var tl = new TimelineLite({ paused: false });
     TweenLite.set(details, { display: 'grid' });
     this.dispatchEvent(new CustomEvent( 'displayed', {}));
@@ -242,7 +265,7 @@ class StuarttettdotcomApp extends Polymer.Element {
       onComplete: () => {
         this.dispatchEvent(new CustomEvent('down', {}));
       } }), 0);
-
+    // tl.add( TweenLite.to(button, 0.5, { transform: }))
   }
 
   _onClickClose(event) {
@@ -267,6 +290,7 @@ class StuarttettdotcomApp extends Polymer.Element {
       history.pushState(null, document.title, "/");
       label.style.visibility = "hidden";
       content.style.visibility = "hidden";
+      this._removePageData();
     });
 
   }
