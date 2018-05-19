@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <link rel="stylesheet" type="text/css" href="../fonts/fonts.css" />
   <link rel="stylesheet" type="text/css" href="../stylesheets/reset.css" />
-  <link href="https://fonts.googleapis.com/css?family=BioRhyme:800|Space+Mono:400,400i,700i" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css?family=BioRhyme:800" rel="stylesheet" />
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes" />
   <meta name="description" content="Stuart Tett | Design/Code" />
@@ -34,28 +35,82 @@
 <body xmlns="http://www.w3.org/1999/xhtml">
   <stuarttettdotcom-app id="app" detail="souschef"></stuarttettdotcom-app>
   <section id="contentDetails" class="z1" style="display: none; visibility: hidden; min-height: 100vh;">
-    <figure id="content" class="grid_tl image contain" style="background-image: url('/images/buildup_dark.png')"></figure>
-    <div id="caption" class="grid_tr">
-      <p>The logo was designed primarily for the website dedicated towards makers in the D.I.Y. community.</p>
-      <p>The goal was a simple, clean, readable logo. The ends of the U and P suggest wood construction or pencil ends.</p>
+    <figure id="content1" class="image cover fourSeventyTwo" style="background-image: url('/images/souschef-original-ui.png')">
+    </figure>
+    <div id="caption1" class="one-col">
+      <p>SousChef was originally an idea formed my me and my co-founder to develop an app that utilized the iPhone's computer vision capabilities to recognize food<span class="kern">s.</span></p>
+      <p>Ye<span class="kern">s,</span> it is similar to the Not a Hot Dog app from HBO's Silicon Valley <span class="kern">;)</span></p>
     </div>
-    <figure id="content2" class="grid_b2 image cover" style="background-image: url('/images/buildup_light.png')"></figure>
+    <div id="caption2" class="one-col">
+      <p>After some early exploration of mocking up some screen<span class="kern">s,</span> I realized that the core problem is meal-plannin<span class="kern">g.</span> And that it's best served as a recipe-first app. Not a camera-first ap<span class="kern">p.</span></p>
+      <p>Users want to know what they can make with the ingredients that they hav<span class="kern">e.</span> But they also want to stop throwing out food that goes bad because they don't use i<span class="kern">t.</span></p>
+    </div>
+    <figure id="content1b" class="image contain fourSeventyTwo" style="background-image: url('/images/souschef-sketches.png')">
+    </figure>
+    <div id="caption2b" class="grid-span two-col dark-on-light">
+      <p>I went back to the drawing board and came up with some user persona<span class="kern">s.</span> <span class="bold-italic emphasis">I chose 3 to work with.</span></p>
+    </div>
+    <figure id="content2a" class="">
+      <img src="/images/souschef-persona1.png" alt="Retired Schoolteacher Persona"/>
+    </figure>
+    <figure id="content2b" class="">
+      <img src="/images/souschef-persona2.png" alt="Food Nerd Persona"/>
+    </figure>
+    <div id="caption3" class="one-col-dark dark-on-light">
+      <p>The main difference between the personas is <span class="bold-italic emphasis">how they want the suggested recipes sorted and filtere<span class="kern">d.</span></span> They all prioritize different things in the meals they want to coo<span class="kern">k.</span></p>
+    </div>
+    <figure id="content2c" class="">
+      <img src="/images/souschef-persona3.png" alt="Working Mom Personal"/>
+    </figure>
+    <figure id="content3a" class="">
+      <img src="/images/souschef-Recipes-Variations.png" alt="Recipe View Variations"/>
+      <figcaption>The carousel is a nice blance between seeing multiple recipes at the same time and having detailed information about each recip<span class="kern">e.</span></figcaption>
+    </figure>
+    <figure id="content3b" class="">
+      <img src="/images/souschef-Pantry-Variations.png" alt="Pantry View Variations"/>
+      <figcaption>While not as visually interestin<span class="kern">g,</span> the table view is a great overview off all the ingredients on han<span class="kern">d.</span></figcaption>
+    </figure>
+    <figure id="content3c" class="">
+      <img src="/images/souschef-Filter-Variations.png" alt="Filter View Variations"/>
+      <figcaption>While a little harder to discove<span class="kern">r,</span> the pull down is a great option since it doesn't require taking up visual real estate with a button and other apps have set precedent for user<span class="kern">s.</span></figcaption>
+    </figure>
+    <div id="caption4" class="one-col">
+      <p>I then explored a few variations for each of the main views— the recipe<span class="kern">s,</span> the ingredients pantry, and the recipe filterin<span class="kern">g.</span></p>
+    </div>
+    <div id="caption5" class="one-col-dark">
+      <p>I decided that the home base of the app will be the recipes vie<span class="kern">w.</span> Once a recipe is chosen the user can press a button to &quot;start&quot; the recip<span class="kern">e.</span></p>
+      <p><span class="emphasis">From the tab bar the user can navigate to the pantr<span class="kern">y.</span></span> Here they can manually add/remove ingredients as well as search for recipes based on specific ingredient<span class="kern">s.</span>
+        In the future they may add ingredients by camera, smart fridge, or voice comman<span class="kern">d.</span></p>
+      <p>The filter menu is opened by touching the screen and dragging the finger dow<span class="kern">n.</span>
+        Originally<span class="kern">,</span>I had the x buttons on the filters removing the item from the lis<span class="kern">t.</span>
+      <span class="emphasis">I realized that this would require another interface to add a filter back to the lis<span class="kern">t.</span></span>
+      So instead I changed it to just gray out the item and place it at the en<span class="kern">d.</span>
+      A tap on the + button brings it right bac<span class="kern">k.</span>
+    </p>
+    </div>
+    <figure id="content" class="">
+      <img src="/images/souschef-User-Flows.png" alt="User Flows"/>
+    </figure>
   </section>
   <script src="http://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.5/ScrollMagic.min.js"></script>
   <script src="/scripts/animation.gsap.js"></script>
+  <script src="/scripts/utils.js"></script>
   <script id="detailsScript">
   document.querySelector('#app').addEventListener('displayed', function (e) {
     // build scene
     var controller = new ScrollMagic.Controller();
+    let children = document.querySelectorAll('#contentDetails > figure');
+    var delay = 0;
     var tl = new TimelineLite();
-    let content = document.querySelector('#content');
-    let caption = document.querySelector('#caption');
-    let content2 = document.querySelector('#content2');
-    tl.add( TweenLite.from(content, 1, { x: -(content.offsetWidth + content.offsetLeft + 10), ease: Power3.easeInOut, autoAlpha: 0 }), 0.1)
-      .add( TweenLite.from(caption, 1, { x: (window.innerWidth - caption.offsetLeft + 10), ease: Power3.easeInOut, autoAlpha: 0 }), 0.35)
-      .add( TweenLite.from(content2, 1, { x: -(content2.offsetWidth + content2.offsetLeft + 10), ease: Power3.easeInOut, autoAlpha: 0 }), 0.75);
-    var scene = new ScrollMagic.Scene({triggerElement: "#contentDetails"})
-    // animate color and top border in relation to scroll position
+    forEach(children, (index, item) => {
+      if (item.offsetLeft >= window.innerWidth*0.5) {
+        tl.add( TweenLite.from(item, 1, { x: (window.innerWidth - item.offsetLeft + 10), ease: Power3.easeInOut }), delay)
+      } else {
+        tl.add( TweenLite.from(item, 1, { x: -(item.offsetWidth + item.offsetLeft + 10), ease: Power3.easeInOut }), delay)
+      }
+      delay += 0.25;
+    });
+    var scene = new ScrollMagic.Scene({triggerElement: '#contentDetails'})
     .setTween( tl ) // the tween durtion can be omitted and defaults to 1
     .addTo(controller);
   }, {once: true});
