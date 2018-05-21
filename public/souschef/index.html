@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <link rel="stylesheet" type="text/css" href="../fonts/fonts.css" />
-  <link rel="stylesheet" type="text/css" href="../stylesheets/reset.css" />
-  <link href="https://fonts.googleapis.com/css?family=BioRhyme:800" rel="stylesheet" />
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes" />
   <meta name="description" content="Stuart Tett | Design/Code" />
+  <link rel="stylesheet" type="text/css" href="../fonts/fonts.css" />
+  <link rel="stylesheet" type="text/css" href="../stylesheets/reset.css" />
+  <link href="https://fonts.googleapis.com/css?family=BioRhyme:800" rel="stylesheet" />
   <link rel="manifest" href="/manifest.json" />
   <script src="../bower_components/webcomponentsjs/webcomponents-loader.js"></script>
   <link rel="import" href="../src/stuarttettdotcom-app/stuarttettdotcom-app.html" />
@@ -38,11 +38,10 @@
     <figure id="content1" class="image cover fourSeventyTwo" style="background-image: url('/images/souschef-original-ui.png')">
     </figure>
     <div id="caption1" class="one-col">
-      <p>SousChef was originally an idea formed my me and my co-founder to develop an app that utilized the iPhone's computer vision capabilities to recognize food<span class="kern">s.</span></p>
-      <p>Ye<span class="kern">s,</span> it is similar to the Not a Hot Dog app from HBO's Silicon Valley <span class="kern">;)</span></p>
+      <p>My co-founder and I originally formed an idea to develop an app that utilizes the iPhone's computer vision capabilities to recognize foods in the household to suggest recipe<span class="kern">s.</span></p>
     </div>
     <div id="caption2" class="one-col">
-      <p>After some early exploration of mocking up some screen<span class="kern">s,</span> I realized that the core problem is meal-plannin<span class="kern">g.</span> And that it's best served as a recipe-first app. Not a camera-first ap<span class="kern">p.</span></p>
+      <p>After some early exploration mocking up some screen<span class="kern">s,</span> I realized that the core problem we were trying to solve is meal-plannin<span class="kern">g.</span> It's best served as a recipe-first app, not a camera-first ap<span class="kern">p.</span></p>
       <p>Users want to know what they can make with the ingredients that they hav<span class="kern">e.</span> But they also want to stop throwing out food that goes bad because they don't use i<span class="kern">t.</span></p>
     </div>
     <figure id="content1b" class="image contain fourSeventyTwo" style="background-image: url('/images/souschef-sketches.png')">
@@ -62,6 +61,9 @@
     <figure id="content2c" class="">
       <img src="/images/souschef-persona3.png" alt="Working Mom Personal"/>
     </figure>
+    <div id="caption4" class="one-col">
+      <p>I then explored a few variations for each of the main views— the recipe<span class="kern">s,</span> the ingredients pantry, and the recipe filterin<span class="kern">g.</span></p>
+    </div>
     <figure id="content3a" class="">
       <img src="/images/souschef-Recipes-Variations.png" alt="Recipe View Variations"/>
       <figcaption>The carousel is a nice blance between seeing multiple recipes at the same time and having detailed information about each recip<span class="kern">e.</span></figcaption>
@@ -74,18 +76,14 @@
       <img src="/images/souschef-Filter-Variations.png" alt="Filter View Variations"/>
       <figcaption>While a little harder to discove<span class="kern">r,</span> the pull down is a great option since it doesn't require taking up visual real estate with a button and other apps have set precedent for user<span class="kern">s.</span></figcaption>
     </figure>
-    <div id="caption4" class="one-col">
-      <p>I then explored a few variations for each of the main views— the recipe<span class="kern">s,</span> the ingredients pantry, and the recipe filterin<span class="kern">g.</span></p>
-    </div>
     <div id="caption5" class="one-col-dark">
       <p>I decided that the home base of the app will be the recipes vie<span class="kern">w.</span> Once a recipe is chosen the user can press a button to &quot;start&quot; the recip<span class="kern">e.</span></p>
       <p><span class="emphasis">From the tab bar the user can navigate to the pantr<span class="kern">y.</span></span> Here they can manually add/remove ingredients as well as search for recipes based on specific ingredient<span class="kern">s.</span>
         In the future they may add ingredients by camera, smart fridge, or voice comman<span class="kern">d.</span></p>
-      <p>The filter menu is opened by touching the screen and dragging the finger dow<span class="kern">n.</span>
-        Originally<span class="kern">,</span>I had the x buttons on the filters removing the item from the lis<span class="kern">t.</span>
-      <span class="emphasis">I realized that this would require another interface to add a filter back to the lis<span class="kern">t.</span></span>
-      So instead I changed it to just gray out the item and place it at the en<span class="kern">d.</span>
-      A tap on the + button brings it right bac<span class="kern">k.</span>
+      <p>Originally<span class="kern">,</span> I designed the filtering options so that the 'x' buttons on each option, removed that item from the lis<span class="kern">t.</span>
+      I realized that for adding a filter option back to the list another interface would be neede<span class="kern">d.</span>
+      Instead I changed it to just gray out the item on 'x' and place it at the en<span class="kern">d.</span>
+      A tap on the '+' button enables that option agai<span class="kern">n.</span>
     </p>
     </div>
     <figure id="content" class="">
@@ -93,7 +91,7 @@
     </figure>
   </section>
   <script src="http://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.5/ScrollMagic.min.js"></script>
-  <script src="/scripts/animation.gsap.js"></script>
+  <script src="/scripts/animation.gsap.min.js"></script>
   <script src="/scripts/utils.js"></script>
   <script id="detailsScript">
   document.querySelector('#app').addEventListener('displayed', function (e) {

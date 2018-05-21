@@ -175,7 +175,7 @@
       this.animLabelDest = null;
       this.animLabelSource = null;
       // for history back and forward buttons
-      this._popState = this._popState.bind(this);
+      // this._popState = this._popState.bind(this);
       this._tl = null;
       this._openCallback = this._closeCallback = null;
     }
@@ -198,13 +198,13 @@
     connectedCallback() {
       super.connectedCallback();
       // for history back and forward buttons
-      window.addEventListener('popstate', this._popState);
+      // window.addEventListener('popstate', this._popState);
     }
 
     disconnectedCallback() {
       super.disconnectedCallback();
       // for history back and forward buttons
-      window.removeEventListener('popstate', this._popState);
+      // window.removeEventListener('popstate', this._popState);
     }
 
     _tryCloneNodesForDetail() {
@@ -446,23 +446,23 @@
   }
 
   closeCard(event, callback) {
-    if (event.target != event.currentTarget) {
-      return;
-    }
+    // if (event.target != event.currentTarget) {
+    //   return;
+    // }
     if (!this.domReady) {
       return;
     }
-    event.preventDefault();
+    // event.preventDefault();
     this._closeCard(callback);
   }
 
-  _popState(event) {
-    if (event.target != event.currentTarget || !this.state) {
-      return; // event is window so this probably isn't necessary
-    }
-    event.preventDefault();
-    this._openCard();
-  }
+  // _popState(event) {
+  //   if (event.target != event.currentTarget || !this.state) {
+  //     return; // event is window so this probably isn't necessary
+  //   }
+  //   event.preventDefault();
+  //   this._openCard();
+  // }
 
   _loadImage(img) {
     if (img && !img.src) {

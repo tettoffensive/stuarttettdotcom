@@ -21,14 +21,20 @@
     }
 
     .ct-onclick {
-      position: absolute;
-      top: calc(30px + 80px);
-      left: calc(280px + 80px);
-      width: calc(100% - 280px - 160px);
-      /* max-width: 1024px; */
-      height: calc(100vh - 30px);
-      max-height: 964px;
-      min-height: 337px;
+        height: 65min;
+    }
+
+    @media screen and (min-width: 660px) {
+      .ct-onclick {
+        position: absolute;
+        top: calc(30px + 80px);
+        left: calc(280px + 80px);
+        width: calc(100% - 280px - 160px);
+        /* max-width: 1024px; */
+        height: calc(100vh - 30px);
+        max-height: 964px;
+        min-height: 337px;
+      }
     }
 
     .lbl-initial {
@@ -36,12 +42,18 @@
     }
 
     .lbl-onclick {
-      position: absolute;
-      top: 80px;
-      left: 80px;
-      height: calc(100vh - 80px);
-      max-height: 1024px;
-      min-height: 375px;
+
+    }
+
+    @media screen and (min-width: 660px) {
+      .lbl-onclick {
+        position: absolute;
+        top: 80px;
+        left: 80px;
+        height: calc(100vh - 80px);
+        min-height: 375px;
+        max-height: 1024px;
+      }
     }
 
     /* Background color on the label-clip (so no extra gap at the bottom) */
@@ -124,7 +136,9 @@
     .label {
       overflow: hidden;
       color: #F3F3F3;
-      min-height: 515px;
+      @media screen and (min-width: 660px) {
+        min-height: 515px;
+      }
       height: 100%;
       width: 280px;
       transform-origin: left top;

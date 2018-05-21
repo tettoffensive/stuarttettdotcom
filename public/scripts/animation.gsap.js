@@ -12,11 +12,11 @@
 * Both the `lite` and the `max` versions of the GSAP library are supported.  
 * The most basic requirement is `TweenLite`.
 * 
-* To have access to this extension, please include `plugins/animation.gsap.js`.
+* To have access to this extension, please include `plugins/animation.gsap.min.js`.
 * @requires {@link http://greensock.com/gsap|GSAP ~1.14.x}
 * @mixin animation.GSAP
 */
-(function (root, factory) {
+(function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
     define(['ScrollMagic', 'TweenMax', 'TimelineMax'], factory);
