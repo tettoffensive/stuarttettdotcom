@@ -199,12 +199,25 @@
       super.connectedCallback();
       // for history back and forward buttons
       // window.addEventListener('popstate', this._popState);
+      window.addEventListener("resize", this._resize.bind(this));
     }
 
     disconnectedCallback() {
       super.disconnectedCallback();
       // for history back and forward buttons
       // window.removeEventListener('popstate', this._popState);
+      window.removeEventListener("resize", this._resize.bind(this));
+    }
+
+    _resize(event) {
+      if (this.animLabelDest) {
+        var height = this.animLabelDest.offsetHeight;
+        let btn = this.divFullCard.querySelector('#scrollBtn');
+        console.log(height);
+        console.log(btn);
+        height += 30;
+        btn.style.top = height + "px";
+      }
     }
 
     _tryCloneNodesForDetail() {
@@ -268,6 +281,16 @@
       // Last
       let last = this.animLabelDest.getBoundingClientRect();
       let imageLast = this.animImageDest.getBoundingClientRect();
+
+      if (this.animLabelDest) {
+        var height = this.animLabelDest.offsetHeight;
+        let btn = this.divFullCard.querySelector('#scrollBtn');
+        console.log(height);
+        console.log(btn);
+        height += 30;
+        btn.style.top = height + "px";
+      }
+
       // Invert
       let deltaX = first.left - last.left;
       let deltaY = first.top - last.top;
