@@ -1,0 +1,46 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+
+<dom-module id="stt-close-btn">
+  <template>
+    <style include="skew-style-module">
+
+    :host {
+      cursor: pointer;
+    }
+
+    #close #x {
+      transform: rotate(-45deg);
+    }
+    </style>
+    <div id="close" class="btn z3 btn-shadow">
+      <div id="btn" class="btn-flex">
+        <svg viewBox="0 0 15 14.5" width="15px" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+          <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+            <g id="Desktop-Skew-Copy-2"  stroke="#F3F3F3" stroke-width="2">
+              <g id="close-button-copy">
+                <g id="x" transform-origin="50% 50%">
+                  <path d="M7.5,8 L0,8" id="Path-2"></path>
+                  <path d="M15,8 L7.5,8" id="Path-2-Copy"></path>
+                  <path d="M10.7142857,4 L3.21428571,4" id="Path-2-Copy-3" transform="translate(6.964286, 4.500000) rotate(-270.000000) translate(-6.964286, -4.500000) "></path>
+                  <path d="M10.7142857,11 L3.21428571,11" id="Path-2-Copy-2" transform="translate(6.964286, 11.500000) rotate(-270.000000) translate(-6.964286, -11.500000) "></path>
+                </g>
+              </g>
+            </g>
+          </g>
+        </svg>
+      </div>
+    </div>
+  </template>
+
+  <script>
+
+  class SttCloseBtn extends Polymer.Element {
+    static get is() { return 'stt-close-btn'; }
+    static get properties() {
+      return {
+      }
+    }
+  }
+  window.customElements.define(SttCloseBtn.is, SttCloseBtn);
+  </script>
+</dom-module>

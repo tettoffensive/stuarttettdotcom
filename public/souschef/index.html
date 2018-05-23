@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes" />
+  <meta name="description" content="Stuart Tett | Design/Code" />
+  <link rel="stylesheet" type="text/css" href="../fonts/fonts.css" />
+  <link rel="stylesheet" type="text/css" href="../stylesheets/reset.css" />
+  <link href="https://fonts.googleapis.com/css?family=BioRhyme:800" rel="stylesheet" />
+  <link rel="manifest" href="/manifest.json" />
+  <script src="../bower_components/webcomponentsjs/webcomponents-loader.js"></script>
+  <link rel="import" href="../src/stuarttettdotcom-app/stuarttettdotcom-app.html" />
+  <title>Stuart Tett | Design &amp; Code</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+  <link rel="stylesheet" type="text/css" href="/stylesheets/style.css" />
+  <script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-42078109-2"></script>
+  <script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments)};
+  gtag('js', new Date());
+
+  gtag('config', 'UA-42078109-2');
+  </script>
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-42078109-2', 'auto');
+  ga('send', 'pageview');
+
+  </script>
+</head>
+<body xmlns="http://www.w3.org/1999/xhtml">
+  <stuarttettdotcom-app id="app" detail="souschef"></stuarttettdotcom-app>
+  <section id="contentDetails" class="z1" style="display: none; visibility: hidden; min-height: 100vh;">
+    <figure id="content1" class="image cover fourSeventyTwo" style="background-image: url('/images/souschef-original-ui.png')">
+    </figure>
+    <div id="caption1" class="one-col">
+      <p>My co-founder and I originally formed an idea to develop an app that utilizes the iPhone's computer vision capabilities to recognize foods in the household to suggest recipe<span class="kern">s.</span></p>
+    </div>
+    <div id="caption2" class="one-col">
+      <p>After some early exploration mocking up some screen<span class="kern">s,</span> I realized that the core problem we were trying to solve is meal-plannin<span class="kern">g.</span> It's best served as a recipe-first app, not a camera-first ap<span class="kern">p.</span></p>
+      <p>Users want to know what they can make with the ingredients that they hav<span class="kern">e.</span> But they also want to stop throwing out food that goes bad because they don't use i<span class="kern">t.</span></p>
+    </div>
+    <figure id="content1b" class="image contain fourSeventyTwo" style="background-image: url('/images/souschef-sketches.png')">
+    </figure>
+    <div id="caption2b" class="grid-span two-col dark-on-light">
+      <p>I went back to the drawing board and came up with some user persona<span class="kern">s.</span> <span class="bold-italic emphasis">I chose 3 to work with.</span></p>
+    </div>
+    <figure id="content2a" class="">
+      <img src="/images/souschef-persona1.png" alt="Retired Schoolteacher Persona"/>
+    </figure>
+    <figure id="content2b" class="">
+      <img src="/images/souschef-persona2.png" alt="Food Nerd Persona"/>
+    </figure>
+    <div id="caption3" class="one-col-dark dark-on-light">
+      <p>The main difference between the personas is <span class="bold-italic emphasis">how they want the suggested recipes sorted and filtere<span class="kern">d.</span></span> They all prioritize different things in the meals they want to coo<span class="kern">k.</span></p>
+    </div>
+    <figure id="content2c" class="">
+      <img src="/images/souschef-persona3.png" alt="Working Mom Personal"/>
+    </figure>
+    <div id="caption4" class="one-col">
+      <p>I then explored a few variations for each of the main views— the recipe<span class="kern">s,</span> the ingredients pantry, and the recipe filterin<span class="kern">g.</span></p>
+    </div>
+    <figure id="content3a" class="">
+      <img src="/images/souschef-Recipes-Variations.png" alt="Recipe View Variations"/>
+      <figcaption>The carousel is a nice blance between seeing multiple recipes at the same time and having detailed information about each recip<span class="kern">e.</span></figcaption>
+    </figure>
+    <figure id="content3b" class="">
+      <img src="/images/souschef-Pantry-Variations.png" alt="Pantry View Variations"/>
+      <figcaption>While not as visually interestin<span class="kern">g,</span> the table view is a great overview off all the ingredients on han<span class="kern">d.</span></figcaption>
+    </figure>
+    <figure id="content3c" class="">
+      <img src="/images/souschef-Filter-Variations.png" alt="Filter View Variations"/>
+      <figcaption>While a little harder to discove<span class="kern">r,</span> the pull down is a great option since it doesn't require taking up visual real estate with a button and other apps have set precedent for user<span class="kern">s.</span></figcaption>
+    </figure>
+    <div id="caption5" class="one-col-dark">
+      <p>I decided that the home base of the app will be the recipes vie<span class="kern">w.</span> Once a recipe is chosen the user can press a button to &quot;start&quot; the recip<span class="kern">e.</span></p>
+      <p><span class="emphasis">From the tab bar the user can navigate to the pantr<span class="kern">y.</span></span> Here they can manually add/remove ingredients as well as search for recipes based on specific ingredient<span class="kern">s.</span>
+        In the future they may add ingredients by camera, smart fridge, or voice comman<span class="kern">d.</span></p>
+      <p>Originally<span class="kern">,</span> I designed the filtering options so that the 'x' buttons on each option, removed that item from the lis<span class="kern">t.</span>
+      I realized that for adding a filter option back to the list another interface would be neede<span class="kern">d.</span>
+      Instead I changed it to just gray out the item on 'x' and place it at the en<span class="kern">d.</span>
+      A tap on the '+' button enables that option agai<span class="kern">n.</span>
+    </p>
+    </div>
+    <figure id="content" class="">
+      <img src="/images/souschef-User-Flows.png" alt="User Flows"/>
+    </figure>
+  </section>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.5/ScrollMagic.min.js"></script>
+  <script src="/scripts/animation.gsap.min.js"></script>
+  <script src="/scripts/utils.js"></script>
+  <script id="detailsScript">
+  document.querySelector('#app').addEventListener('displayed', function (e) {
+    // build scene
+    var controller = new ScrollMagic.Controller();
+    let children = document.querySelectorAll('#contentDetails > figure');
+    var delay = 0;
+    var tl = new TimelineLite();
+    forEach(children, (index, item) => {
+      if (item.offsetLeft >= window.innerWidth*0.5) {
+        tl.add( TweenLite.from(item, 1, { x: (window.innerWidth - item.offsetLeft + 10), ease: Power3.easeInOut }), delay)
+      } else {
+        tl.add( TweenLite.from(item, 1, { x: -(item.offsetWidth + item.offsetLeft + 10), ease: Power3.easeInOut }), delay)
+      }
+      delay += 0.25;
+    });
+    var scene = new ScrollMagic.Scene({triggerElement: '#contentDetails'})
+    .setTween( tl ) // the tween durtion can be omitted and defaults to 1
+    .addTo(controller);
+  }, {once: true});
+  </script>
+</body>
+</html>

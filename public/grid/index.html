@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="stylesheet" type="text/css" href="../fonts/fonts.css" />
+  <link rel="stylesheet" type="text/css" href="../stylesheets/reset.css" />
+  <link href="https://fonts.googleapis.com/css?family=BioRhyme:800" rel="stylesheet" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes" />
+  <meta name="description" content="Stuart Tett | Design/Code" />
+  <link rel="manifest" href="/manifest.json" />
+  <script src="../bower_components/webcomponentsjs/webcomponents-loader.js"></script>
+  <link rel="import" href="../src/stuarttettdotcom-app/stuarttettdotcom-app.html" />
+  <title>Stuart Tett | Design &amp; Code</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+  <link rel="stylesheet" type="text/css" href="/stylesheets/style.css" />
+  <script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-42078109-2"></script>
+  <script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments)};
+  gtag('js', new Date());
+
+  gtag('config', 'UA-42078109-2');
+  </script>
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-42078109-2', 'auto');
+  ga('send', 'pageview');
+
+  </script>
+</head>
+<body xmlns="http://www.w3.org/1999/xhtml">
+  <stuarttettdotcom-app id="app" detail="grid"></stuarttettdotcom-app>
+  <section id="contentDetails" class="z1" style="display: none; visibility: hidden; min-height: 100vh;">
+    <figure id="content1" class="image contain fourSeventyTwo" style="background-image: url('/images/grid-home.jpg')">
+    </figure>
+    <div id="caption1" class="one-col">
+      <p>When I joined Binary Thum<span class="kern">b,</span> the Grid app had released its first version into the App Stor<span class="kern">e.</span> The app allowed users to collaborate on spreadsheets full of video, images, and text in real-tim<span class="kern">e.</span> It was a solid MV<span class="kern">P,</span> but their were some much needed improvements in the overall experienc<span class="kern">e.</span></p>
+    </div>
+    <div id="caption2" class="one-col">
+      <p>The spreadsheet was an infinite canvas of tile<span class="kern">s.</span> There were no limitations on the number of images, and how many tiles each images takes u<span class="kern">p.</span></p>
+      <p><span class="emphasis">This was causing performance issue<span class="kern">s.</span></span></p>
+      <p>Grid may be a spreadsheet, but it is meant to showcase multimedia in a beautiful wa<span class="kern">y.</span></p>
+    </div>
+    <figure id="content2" class="image contain" style="background-image: url('/images/grid-image-tiles.jpg')">
+    </figure>
+    <div id="caption3" class="grid-span two-col dark-on-light">
+      <p>The engineering team had optimized the loading/unloading of tiles dynamicall<span class="kern">y,</span> <span class="emphasis">but the animation still wasn't buttery smoot<span class="kern">h.</span></span></p>
+    </div>
+    <div id="caption4" class="one-col">
+      <p>I made a prototype of the home view in OpenGL, and the performance looked promisin<span class="kern">g.</span></p>
+      <p>We converted the spreadsheet canvas to OpenGL and stress tested i<span class="kern">t.</span> We were now getting a consistent 60fp<span class="kern">s.</span> It felt so much more responsive in the hands of the use<span class="kern">r.</span></p>
+    </div>
+    <div id="caption3" class="one-col-dark dark-on-light">
+      <p>While the new user experience was superio<span class="kern">r,</span> the conversion had some major engineering challenge<span class="kern">s.</span> It was costly to rebuild standard UI component<span class="kern">s.</span></p>
+    </div>
+    <figure id="content3" class="image contain" style="background-image: url('/images/grid-backpack.gif')">
+    </figure>
+    <div id="caption3" class="one-col">
+      <p>Another experience issue came with the introduction of Backpac<span class="kern">k.</span> This let the user pick photos and videos to add to the Gri<span class="kern">d.</span> But it took up so much screen real estat<span class="kern">e.</span></p>
+      <p><span class="emphasis">I came up with a solution of quickly fading out the Backpack</span> when the user dragged an element out to be placed on the gri<span class="kern">d.</span> This way the user could see more of the canvas while placing, but still have a large enough Backpack to easily explore and choos<span class="kern">e.</span></p>
+    </div>
+  </section>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.5/ScrollMagic.min.js"></script>
+  <script src="/scripts/animation.gsap.min.js"></script>
+  <script src="/scripts/utils.js"></script>
+  <script id="detailsScript">
+  document.querySelector('#app').addEventListener('displayed', function (e) {
+    // build scene
+    var controller = new ScrollMagic.Controller();
+    let children = document.querySelectorAll('#contentDetails > figure');
+    var delay = 0;
+    var tl = new TimelineLite();
+    forEach(children, (index, item) => {
+      if (item.offsetLeft >= window.innerWidth*0.5) {
+        tl.add( TweenLite.from(item, 1, { x: (window.innerWidth - item.offsetLeft + 10), ease: Power3.easeInOut }), delay)
+      } else {
+        tl.add( TweenLite.from(item, 1, { x: -(item.offsetWidth + item.offsetLeft + 10), ease: Power3.easeInOut }), delay)
+      }
+      delay += 0.25;
+    });
+    var scene = new ScrollMagic.Scene({triggerElement: '#contentDetails'})
+    .setTween( tl ) // the tween durtion can be omitted and defaults to 1
+    .addTo(controller);
+  }, {once: true});
+  </script>
+</body>
+</html>

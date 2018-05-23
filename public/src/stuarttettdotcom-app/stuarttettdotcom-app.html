@@ -1,0 +1,349 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.4/TweenLite.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.4/TimelineLite.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.4/plugins/CSSPlugin.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.4/plugins/ScrollToPlugin.min.js"></script>
+<link rel="import" href="skew-style-module.html">
+<link rel="import" href="skew-header.html">
+<link rel="import" href="skew-card.html">
+<link rel="import" href="skew-info-card.html">
+<link rel="import" href="scatter-shapes.html">
+<link rel="import" href="stuarttettdotcom-app.html">
+<link rel="import" href="stt-close-btn.html">
+<link rel="import" href="stt-scroll-btn.html">
+
+<dom-module id="stuarttettdotcom-app">
+  <template>
+    <style include="skew-style-module">
+    :host {
+      display: block;
+    }
+
+    .wrapper {
+      margin: auto;
+      margin-top: 100px;
+      /* width: 800px; */
+      width: calc(100% - 16px);
+      max-width: 1024px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-start;
+    }
+
+    .hideChildren > * {
+      visibility: hidden;
+    }
+
+    .wrapper > * {
+      margin: 0px;
+      margin-bottom: 16px;
+    }
+
+    .shapes {
+      position: fixed;
+      width: 100%;
+      height: 120%;
+      left: 0;
+    }
+
+    .one {
+      top: 0;
+    }
+  }
+  </style>
+  <scatter-shapes class="shapes one"></scatter-shapes>
+  <div id="page" class="page">
+    <div id="wrapper" class="wrapper">
+      <skew-header id="thecards"></skew-header>
+      <skew-info-card description="I design products and user experiences for happy humans."></skew-info-card>
+      <template is="dom-repeat" id="thecards" items="{{cards}}" on-dom-change="_cardsDomChange">
+        <skew-card id=[[item.link]] link=[[item.link]] title=[[item.title]]
+        description=[[item.description]]
+        img=[[item.image]]
+        on-click="_onClick"
+        on-close="_onClickClose"
+        on-scroll="_onClickScroll"
+        ></skew-card>
+      </template>
+    </div>
+  </div>
+</template>
+
+<script>
+"use strict"
+/**
+* @customElement
+* @polymer
+*/
+class StuarttettdotcomApp extends Polymer.Element {
+  static get is() { return 'stuarttettdotcom-app'; }
+  static get properties() {
+    return {
+      html: String,
+      detail: {type: String, value: '', reflectToAttribute: true, observer: '_detailChanged' },
+      cards: {
+        type: Array,
+        value() {
+          return [
+            {type: 'skew-card',
+            description: 'A mobile app that helps people waste less food by suggesting meals with ingredients they already have on hand.',
+            title: 'SousChef',
+            image:'/images/souschef_mockup.png',
+            link: 'souschef'},
+
+            {type: 'skew-card',
+            description: 'A mobile video app for editing and sharing stories.',
+            title: 'Channel',
+            image:'/images/channel-cover.png',
+            link: 'channel'},
+
+            {type: 'skew-card',
+            description: 'A collaborative multimedia spreadsheet for the iPad and iPhone.',
+            title: 'Grid',
+            image:'/images/grid-cover.png',
+            link: 'grid'},
+
+            {type: 'skew-card',
+            description: 'A mobile app for sharing photos and videos with a simple swipe.',
+            title: 'Swipe',
+            year: '2015',
+            company: 'Swipe Labs',
+            role: 'Lead iOS Developer',
+            image:'/images/swipe-cover.png',
+            link: 'swipe'},
+
+            // {type: 'skew-card',
+            // title: 'Doppler\'s Dogpatch',
+            // description: 'A logo for a small-batch premium ice cream company.',
+            // image:'/images/dopplers_mockup.jpg',
+            // link: 'dopplers'},
+
+            // {type: 'skew-card',
+            // description: 'A logo for an online community platform for “makers” in the D.I.Y. community.',
+            // title: 'BuildUp.tv',
+            // image:'/images/buildup_mockup.jpg',
+            // link: 'builduptv'},
+
+            {type: 'skew-card',
+            description: 'A collection of logo concepts', /*'Created a warm and respectful logo for an institute for couples therapy.',*/
+            title: 'Logos',
+            image:'/images/logos-cover.png',
+            link: 'logos'},
+
+            {type: 'skew-card',
+            description: 'I began my career as an Effects artists on films such as How To Train Your Dragon.', /*'Created a warm and respectful logo for an institute for couples therapy.',*/
+            title: 'Effects',
+            image:'/images/reel-cover.png',
+            link: 'reel'},
+
+            // {type: 'skew-card',
+            // description: 'A label for a craft beer aimed at customers who typically prefer easy-drinking beers',
+            // title: 'Big Sissy Lager',
+            // image:'/images/bigsissy-mockup.jpg',
+            // link: 'bigsissy'},
+          ];}
+        }
+      }
+    }
+
+    constructor(name) {
+      super();
+      this._lastClickElement = null;
+    }
+
+    ready() {
+      super.ready();
+      if (this.detail && this.detail.length > 0) {
+        this.$.wrapper.style.display = 'none';
+      }
+    }
+
+    _cardsDomChange(event) {
+      if (this.detail) {
+        this._updateDetailFor(this.detail);
+      }
+    }
+
+    connectedCallback() {
+      super.connectedCallback();
+      window.onpopstate = (event) => {
+        event.preventDefault();
+        console.log(`${event} ${event.state}`);
+        if (this._lastClickElement != null) {
+          this._onClickClose();
+        }
+      }
+    }
+
+    disconnectedCallback() {
+      super.disconnectedCallback();
+    }
+
+    _removePageData() {
+      removeFromParent(document.querySelector("#contentDetails"));
+      removeFromParent(document.querySelector("#detailsScript"));
+    }
+
+    _loadPageData(page) {
+      var xhr = new XMLHttpRequest();
+      xhr.overrideMimeType('application/xml')
+      xhr.open('GET', page + '/index.html', true);
+      xhr.onload = () => {
+        if (xhr.status === 200) {
+          let docBody = document.getElementsByTagName("body")[0];
+          let docContent = document.querySelector("#contentDetails");
+          let newNode = document.importNode(xhr.responseXML.getElementsByTagName("section")[0], true);
+          if (docContent) {
+            // console.log(`REPLACE ${newNode.id}`);
+            docBody.replaceChild(newNode,docContent);
+          } else {
+            // console.log(`APPEND ${newNode.id}`);
+            docBody.appendChild(newNode);
+          }
+          let docScript = document.querySelector("#detailsScript");
+          let newScript = document.importNode(xhr.responseXML.getElementById("detailsScript"), true);
+          if (docScript) {
+            docBody.replaceChild(newScript,docScript);
+          } else {
+            docBody.appendChild(newScript);
+          }
+          setTimeout(() => {
+            this._tryShowDetailsSection();
+          }, 100);
+          return;
+          // var newPage = $(newContent).attr('data-page');
+          // $(newContent).addClass('ed-page--new');
+          // $('#content').before(newContent);
+          // pages.updateMetaData(newContent, oldPage);
+          // pages.updatePath(newPage, href);
+          // pages.checkExternalLinks();
+          // casePage.init();
+          // if (workCase) {
+          //   pages.animateCase(oldPage, newPage, workCase);
+          // } else {
+          //   pages.animatePages(oldPage, newPage);
+          // }
+          // this.set('resolveUrl', event.target.value);
+          // t¡his.set('title', xhr.response.detail.response.title);
+        } else {
+          alert('Request failed.  Returned status of ' + xhr.status);
+        }
+      };
+
+      // Calculate the time from starting to load the data for use in animation timing
+      var startLoad = performance.now();
+      xhr.send(); // send the request
+    }
+
+    _onClick(event) {
+
+      if (this._lastClickElement != null) {
+        return;
+      }
+
+      let el = event.target;
+      this._lastClickElement = el;
+      let model = this.$.thecards.modelForElement(el);
+      let cardInArray = this.cards[model.index];
+      el.openCard(event, (label, content) => {
+        this._loadPageData(cardInArray.link);
+        // Page history
+        document.title = cardInArray.title;
+        history.pushState(null, `Stuart Tett - ${cardInArray.title}`, cardInArray.link);
+      });
+
+    }
+
+    _detailChanged(newValue, oldValue) {
+
+    }
+
+    _updateDetailFor(newValue) {
+
+      window.requestAnimationFrame(() => {
+        // console.log(this.$.thecards);
+        this.$.wrapper.style.display = null;
+        let el = this.shadowRoot.querySelector('skew-card[link="' + newValue + '"]');
+        let model = this.$.thecards.modelForElement(el);
+        if (!model) {
+          return;
+        }
+        el.transitioning = true; // transition to open
+        el._openCallback = () => {
+          this.$.wrapper.classList.remove("hideChildren");
+        }
+        let animation = el.tryCardAnimation(true);
+        this.$.wrapper.classList.add("hideChildren");
+        animation.play("scaleUpContentFinish", false);
+
+      model.detail = "true";
+      this._lastClickElement = el;
+      setTimeout(() => {
+        this._tryShowDetailsSection();
+      }, 100);
+    });
+  }
+
+  _tryShowDetailsSection() {
+    let details = document.querySelector("#contentDetails");
+    if (details == null) {
+      return null;
+    }
+    if (details.style.display === 'none') {
+      details.style.display = 'grid';
+      details.style.visibility = 'inherit';
+      this.dispatchEvent(new CustomEvent( 'displayed', {}));
+    }
+    return details;
+  }
+
+  _onClickScroll(event) {
+
+    if (this._lastClickElement == null) {
+      // shouldn't be visible
+      throw "Scroll button shouldn't be visible";
+      return;
+    }
+    let details = this._tryShowDetailsSection();
+    let button = event.detail.button;
+
+    var tl = new TimelineLite({ paused: false });
+    let yOffset = details.getBoundingClientRect().top - 60;
+    tl.add( TweenLite.to(window, 1, {scrollTo: yOffset,
+      onComplete: () => {
+        this.dispatchEvent(new CustomEvent('down', {}));
+      } }), 0.2);
+    // tl.add( TweenLite.to(button, 0.5, { transform: 'rotate(180deg)', position: 'fixed', right: '80px' }));
+  }
+
+  _onClickClose(event) {
+    if (this._lastClickElement == null) {
+      return;
+    }
+    let el = this._lastClickElement;
+    this._lastClickElement = null;
+    // let model = this.$.thecards.modelForElement(el);
+    el.detail = "false";
+
+    let details = document.querySelector("#contentDetails");
+    if (details != null) {
+      var tl = new TimelineLite({ paused: false });
+      tl.add( TweenLite.to(details, 0.5, { autoAlpha: 0, display: 'none'}), 0)
+      .add( TweenLite.to(window, 1, {scrollTo: 0 }), 0);
+    }
+
+    el.closeCard(event, (label, content) => {
+      // Page history
+      document.title = "Stuart Tett | Design & Code";
+      history.pushState(null, document.title, "/");
+      label.style.visibility = "hidden";
+      content.style.visibility = "hidden";
+      this._removePageData();
+    });
+
+  }
+}
+
+window.customElements.define(StuarttettdotcomApp.is, StuarttettdotcomApp);
+</script>
+</dom-module>

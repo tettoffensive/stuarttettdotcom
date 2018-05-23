@@ -1,8 +1,18 @@
 <!DOCTYPE html>
-<html>
-<head>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" type="text/css" href="../fonts/fonts.css" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/reset.css" />
+    <link href="https://fonts.googleapis.com/css?family=BioRhyme:800|Space+Mono:400,400i,700i" rel="stylesheet" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes" />
+    <meta name="description" content="Stuart Tett | Design/Code" />
+    <!-- See https://goo.gl/OOhYW5 -->
+    <link rel="manifest" href="/manifest.json" />
+    <script src="./bower_components/webcomponentsjs/webcomponents-loader.js"></script>
+    <link rel="import" href="./src/stuarttettdotcom-app/stuarttettdotcom-app.html" />
   <!-- Global Site Tag (gtag.js) - Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-42078109-2"></script>
+  <script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-42078109-2"></script>
   <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments)};
@@ -10,10 +20,6 @@
 
   gtag('config', 'UA-42078109-2');
   </script>
-  <title>Stuart Tett | Freelance Designer</title>
-
-  <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-  <link rel="stylesheet" type="text/css" href="stylesheets/style.css" />
 
   <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -26,239 +32,14 @@
 
   </script>
 
-  <script src="https://code.jquery.com/jquery-1.10.1.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.2/TweenMax.min.js"></script>
-  <script>
-
-  $(document).ready(() => {
-
-    $('.last-letter-spacing > * > *, button').html((i, text) => {
-      return text.slice(0,-1) + "<span class=\"last-letter-style\" style=\"font-family: inherit;\">" + text.slice(-1) + "</span>"
-    });
-
-    var tl = new TimelineMax({});
-    var strBtn = "";
-    var animBtn = "";
-    var strModal = "";
-    var animModal = "";
-
-    // Click to SHOW the Correct Modal
-    $('.r-stack > li').click((e) => {
-
-      if (tl.isActive()) {
-        return;
-      }
-
-      animBtn = document.querySelector("#btn"+e.target.id.slice(3));
-      animModal = document.querySelector("#m"+e.target.id.slice(3));
-      tl.clear();
-      tl.invalidate();
-      tl.kill();
-
-      tl.set(animBtn,{clearProps: 'all',zIndex: 5000})
-      .to(animBtn, 0.3, { className: "+=open", ease:Cubic.easeOut })
-      .set("#modal", { autoAlpha: 1})
-      .set(animModal, { display: 'inline-block', autoAlpha: 1 })
-      .fromTo(animModal, 0.5, { height: '0px', ease:Cubic.easeOut }, { height: '550px' });
-      tl.play();
-    })
-
-    $('#modal').click((e) => {
-      if (e.target === e.currentTarget) {
-        // $('.container').removeClass("blur");
-        if (!tl.isActive()) {
-          tl.reverse();
-          var url = $('#vReel').attr('src');
-          $('#vReel').attr('src', '');
-          $('#vReel').attr('src', url);
-        }
-      }
-    });
-
-    $(window).load(() => {
-      $('.r-stack > li').each(( i, item ) => {
-
-        var id = "#" + item.id;
-        var width = item.getBoundingClientRect().width;
-        var scaleX = 800.0 / width;
-        var invScaleX = width / 800.0;
-        var modal = "#m"+id.slice(3);
-
-        $("<style>")
-        .prop("type", "text/css")
-        .html("\
-        " + id + ".open { \
-          transform: translateX(-800px) scaleX(calc("+ scaleX + ")); \
-        } \
-        " + modal + " {\
-          transform: translateX()\
-        } \
-        " + id + ".open > * { \
-          transform: scaleX(calc("+ invScaleX + ")); \
-        }")
-        .appendTo("head");
-      });
-    })
-
-  });
-  </script>
+  <title>Stuart Tett | Design &amp; Code</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+  <link rel="stylesheet" type="text/css" href="/stylesheets/style.css" />
 </head>
 <body>
-  <div class="container">
-    <ul class="l-stack last-letter-spacing">
-      <li class="header">Stuart</li>
-      <li class="header">Tett</li>
-      <li>Logo</li>
-      <li>Brand</li>
-      <li>Illustration</li>
-      <li>Animation</li>
-      <li>Mobile</li>
-      <li>Web</li>
-    </ul>
-    <div class="grid-column-2">
-      <svg width="266px" height="597px" viewBox="0 0 266 597" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-        <!-- Generator: Sketch 45.2 (43514) - http://www.bohemiancoding.com/sketch -->
-        <desc>Created with Sketch.</desc>
-        <defs></defs>
-        <g id="Desktop-Experiments" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-          <g id="Desktop-HD-Copy-10" transform="translate(-565.000000, -191.000000)">
-            <g id="Logo" transform="translate(619.000000, 480.000000)" fill="#4A4A4A">
-              <polygon id="Fill-1" points="0.0910507394 0.794807075 0.0910507394 49.4625009 80.1007394 49.4625009 80.1007394 307.011937 128.768433 307.011937 128.768433 49.4625009 210.532106 49.4625009 210.532106 0.794807075"></polygon>
-            </g>
-            <path d="M565.389342,191 L565,324.349481 L620.091829,324.349481 L620.091829,459.840341 L830.338214,460.422406 L830.338214,246.091829 L697.765469,245.702488 L697.765469,191 L565.389342,191 Z M590.696542,216.307201 L672.458268,216.307201 L672.458268,245.507817 L620.091829,245.507817 L620.091829,271.007742 L685.111868,271.007742 L804.834395,271.204359 L804.445054,434.727811 L645.39903,434.338469 L645.39903,324.349481 L750.521249,324.349481 L750.521249,347.904645 L673.820963,347.904645 L673.820963,373.406516 L775.830396,373.406516 L776.02312,298.845663 L645.39903,298.845663 L590.503818,298.845663 L590.696542,216.307201 Z" id="flame" fill="#FCA290"></path>
-          </g>
-        </g>
-      </svg>
-    </div>
-    <ul class="r-stack last-letter-spacing">
-      <li id="btnWork">
-        <div>Work</div>
-      </li>
-      <li id="btnAbout">
-        <div>About</div>
-      </li>
-      <li id="btnContact">
-        <div>Contact</div>
-      </li>
-      <li id="btnResume">
-        <div>Resume</div>
-      </li>
-      <li id="btnReel">
-        <div>Reel</div>
-      </li>
-    </ul>
-  </div><!-- #container -->
-  <div id="modal">
-    <div class="overlay"></div>
-    <div id="mWork" class="modal">
-      <!-- <div class="title">Work</div> -->
-      <div class="content horiz">
-        <div class="entry">
-          <div class="image">
-            <img src="./images/buildup_mockup.png" alt="" />
-            <h2 class="caption">Buildup&nbsp;.&nbsp;tv</h2>
-          </div>
-        </div>
-        <div class="entry">
-          <div class="image">
-            <img src="./images/buildup_mockup.png" alt="" />
-            <h2 class="caption">Buildup&nbsp;.&nbsp;tv</h2>
-          </div>
-        </div>
-        <div class="entry">
-          <div class="image">
-            <img src="./images/buildup_mockup.png" alt="" />
-            <h2 class="caption">Buildup&nbsp;.&nbsp;tv</h2>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div id="mAbout" class="modal">
-      <div class="content">
-        <p><span class="bold">Stuart has a unique background with a double major in Art &amp; Design and  Computer Science,</span> which give way to a rare skill-set of strong visual and analytical problem-solving skills. He spent 6 years with DreamWorks Animation as an Effects Animator prior to joining Grid (YC S12), where he excelled quickly and transitioned into a CTO role within his first 6 months. He continued developing mobile apps at Swipe Labs for 2 years. But he missed the creative freedom of doing visual work and is now concentrating on design.</p>
-        <p class="bold">He is now available for hire for freelance for designing logos, branding, UI/UX for mobile and web.</p>
-        <button>contact</button>
-      </div>
-    </div>
-    <div id="mContact" class="modal loading">
-      <div class="content">
-        <form>Hi Stuart,<br/>
-          My name is <input type="name" value placeholder="Marty McFly"></input>,<br/>
-          I need a <select placeholder="logo design"><optgroup>
-            <option>logo design</option>
-            <option>illustration</option>
-            <option>other</option></optgroup>
-          </select>.<br/>
-          My budget is <select placeholder="logo design">
-            <option>&lt; $1000 USD</option>
-            <option>$1000 - $3500 USD</option>
-            <option>$3500 - $7000 USD</option>
-            <option>&gt; $7000 USD</option>
-          </select>.<br/>
-          You can reach me at <input type="email" value placeholder="marty@thefuture.com"></input>.<br/>
-          <button>send</button>
-        </form>
-      </div>
-    </div>
-    <div id="mResume" class="modal">
-      <div class="content vert">
-        <div class="entry">
-          <div class="info">
-            <div class="date">July 2015 &ndash; June 2017</div>
-            <div class="role">Lead iOS Engineer @ Swipe Labs</div>
-          </div>
-          <div class="more">…</div>
-        </div>
-        <div class="entry">
-          <div class="info">
-            <div class="date">December 2013 &ndash; June 2015</div>
-            <div class="role">CTO + iOS Engineer @ Grid by Binary Thumb</div>
-          </div>
-          <div class="more">…</div>
-        </div>
-        <div class="entry">
-          <div class="info">
-            <div class="date">August 2013 &ndash; October 2013</div>
-            <div class="role">Effects Artist on Non-Stop @ Prime Focus World</div>
-          </div>
-          <div class="more">…</div>
-        </div>
-        <div class="entry">
-          <div class="info">
-            <div class="date">July 2007 &ndash; August 2013</div>
-            <div class="role">Effects Artist @ DreamWorks Animation</div>
-          </div>
-          <div class="more">…</div>
-        </div>
-        <div class="entry">
-          <div class="info">
-            <div class="date">August 2006 &ndash; July 2007</div>
-            <div class="role">Graduate Research Assistant @ Texas A&amp;M VizLab</div>
-          </div>
-          <div class="more">…</div>
-        </div>
-        <div class="entry">
-          <div class="info">
-            <div class="date">September 2004 &ndash; May 2005</div>
-            <div class="role">Research Assistant @ Virtual Reality Appl…Center</div>
-          </div>
-          <div class="more">…</div>
-        </div>
-        <div class="entry">
-          <div class="info">
-            <div class="date">Summers 2001 &ndash; 2003</div>
-            <div class="role">Information Systems Intern @ Alliance Systems Ltd.</div>
-          </div>
-          <div class="more">…</div>
-        </div>
-      </div>
-    </div>
-    <div id="mReel" class="modal">
-      <div class="content">
-        <iframe id="vReel" src="https://player.vimeo.com/video/68357859?color=fca290&title=0&byline=0&portrait=0" width="747" height="420" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
-      </div>
-    </div>
-  </div>
+  <stuarttettdotcom-app id="app"></stuarttettdotcom-app>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.5/ScrollMagic.min.js"></script>
+  <script src="/scripts/animation.gsap.min.js"></script>
+  <script src="/scripts/utils.js"></script>
 </body>
 </html>

@@ -1,0 +1,231 @@
+<!-- Define some custom properties in a style module. -->
+<dom-module id='skew-style-module'>
+  <template>
+    <style>
+    figure,p {
+      display: block;
+      margin: 0px;
+      padding 0px;
+      -moz-box-sizing: border-box;
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box;
+    }
+
+    /* Padding everywhere but the top so no extra gap in between */
+    .label p.title { padding: 0px 24px 24px 24px; }
+    .label p.description { padding: 0px 24px 24px 26px; }
+
+    .ct-initial {
+      position: relative; /* important for shadow */
+      height: 90%;
+    }
+
+    .ct-onclick {
+        height: 65min;
+    }
+
+    @media screen and (min-width: 660px) {
+      .ct-onclick {
+        position: absolute;
+        top: calc(30px + 80px);
+        left: calc(280px + 80px);
+        width: calc(100% - 280px - 160px);
+        /* max-width: 1024px; */
+        height: calc(100vh - 150px);
+        max-height: 964px;
+        min-height: 337px;
+      }
+    }
+
+    .lbl-initial {
+      position: relative; // important for shadow
+    }
+
+    .lbl-onclick {
+
+    }
+
+    @media screen and (min-width: 660px) {
+      .lbl-onclick {
+        position: absolute;
+        top: 80px;
+        left: 80px;
+        height: calc(100vh - 80px);
+        min-height: 375px;
+        max-height: 1024px;
+      }
+    }
+
+    /* Background color on the label-clip (so no extra gap at the bottom) */
+    .dark-background {
+      background-color: #3F4A48;
+    }
+
+    .z3 {
+      z-index: 3;
+    }
+
+    /* For label shadow to be on top of content shadow */
+    .z2 {
+      z-index: 2;
+    }
+
+    .z1 {
+      z-index: 1;
+    }
+
+    .z0 {
+      z-index: 0;
+    }
+
+    /* Shadow is actually in the before */
+    .shadow {
+
+    }
+
+    .shadow:before {
+      content: " ";
+      position: absolute;
+      top: 0.5px; /* Chrome has an ugly white gap at the top */
+      bottom: 0.55px; /* Chrome has an even uglier white gap at the bottom */
+      left: 0;
+      right: 0;
+      z-index: -1;
+      box-shadow: 0 0 20px 0px rgba(0,0,0,0.25);
+    }
+
+    .btn-shadow {
+      box-shadow: 0 0 20px 0px rgba(0,0,0,0.25);
+    }
+
+    /* Extra div so that the shadow doesn't get clipped */
+    .clip {
+      overflow: hidden;
+      height: 100%;
+    }
+
+    /* This way the label is larger in Y than the content, so it looks like overlapping */
+    .content-shrink {
+      flex-grow: 1;
+      flex-shrink: 1;
+      margin: auto 0px auto 0px;
+      background-color: #858C8B;
+    }
+
+    /* Contains the image */
+    .content {
+      transform-origin: right top;
+      flex-grow: 1;
+      flex-shrink: 1;
+      overflow: hidden;
+      min-height: 540px; /* prevent blank space at the bottom when skewed */
+    }
+
+    .image {
+      background-repeat: no-repeat;
+      background-position: 50% 50%;
+      min-height: 540px;
+      height: 100%;
+    }
+
+    .image.cover {
+      background-size: cover;
+    }
+
+    /* Image explanation with title/description */
+    .label {
+      overflow: hidden;
+      color: #F3F3F3;
+      @media screen and (min-width: 660px) {
+        min-height: 515px;
+      }
+      height: 100%;
+      width: 280px;
+      transform-origin: left top;
+      flex-shrink: 0;
+    }
+
+    .label .text {
+      width: 280px;
+      transform-origin: 0px 6px;
+      padding-top: 6px;
+    }
+
+    .title {
+      margin-top: 24px;
+      font-family: 'BioRhyme';
+      font-weight: 800;
+      font-style: normal;
+      font-size: 36px;
+      color: #F3F3F3;
+      letter-spacing: 1px;
+      text-align: left;
+    }
+
+    .description {
+      font-family: 'DecimaMonoRound-Italic';
+      font-weight: normal;
+      font-style: normal;
+      font-variant-ligatures: none;
+      font-size: 18px;
+      font-weight: 400;
+      line-height: 1.25em;
+      letter-spacing: 0.5px;
+      margin: 0px;
+      padding: 0px;
+    }
+
+    .grid-8-1-auto {
+      grid-column: 1 / -2;
+      grid-row: 1;
+    }
+
+    .grid-8-end-1 {
+      grid-column: -2;
+      grid-row: 1;
+      margin: auto;
+    }
+
+    .btn {
+      background-color: #54F0CE;
+      color: #F3F3F3;
+      width: 60px;
+      height: 50px;
+    }
+
+    .btn svg {
+      margin: auto;
+    }
+
+    .btn-tr {
+      position: absolute;
+      top: 85px;
+      right: calc(80px - 30px);
+    }
+
+    .btn-bc {
+      position: absolute;
+      top: 1054px;
+      top: calc( min(1054px, 100vh - 60px) );
+      left: 50%;
+    }
+
+    .btn-flex {
+      display: flex;
+      align-items: center;
+      height: 100%;
+    }
+
+    .btn-flex svg {
+      width: auto;
+      height: auto;
+    }
+
+    #fullCard {
+      padding-bottom: 40px;
+      max-height: 1245px;
+    }
+
+    </style>
+  </template>
+</dom-module>
