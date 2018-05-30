@@ -14,6 +14,15 @@
     /* Padding everywhere but the top so no extra gap in between */
     .label p.title { padding: 0px 24px 24px 24px; }
     .label p.description { padding: 0px 24px 24px 26px; }
+    .label p.tags {
+      padding: 0px 24px 48px 26px;
+      color: #858C8B;
+    }
+
+    .lbl-initial p.tags {
+      transform-origin: right top;
+      transform: skewY(-3deg);
+    }
 
     .ct-initial {
       position: relative; /* important for shadow */
@@ -149,6 +158,8 @@
       width: 280px;
       transform-origin: 0px 6px;
       padding-top: 6px;
+      display: flex;
+      flex-direction: column;
     }
 
     .title {
@@ -173,6 +184,8 @@
       letter-spacing: 0.5px;
       margin: 0px;
       padding: 0px;
+      flex-grow: 1;
+      color: #f3f3f3;
     }
 
     .grid-8-1-auto {

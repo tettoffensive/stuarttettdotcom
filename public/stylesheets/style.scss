@@ -97,6 +97,7 @@ $break-desktop-large: 1200px;
   width: calc(100% - 60px);
   grid-gap: 30px;
   padding-bottom: 30px;
+  overflow: hidden;
 
   @media screen and (min-width: $break-mobile) {
     max-width: 1482px;
@@ -215,8 +216,21 @@ $break-desktop-large: 1200px;
   max-width: 772px;
 }
 
+.two-col-extra {
+  max-width: 972px;
+}
+
 .grid-span {
   grid-column: 1 / -1;
+}
+
+.dark-list > li {
+  list-style: disc;
+  margin: 10px 40px;
+}
+
+.dark-list {
+  // margin-bottom: 40px;
 }
 
 .buildup-light {
@@ -243,3 +257,29 @@ figcaption {
     padding: 40px;
   }
 }
+
+.carousel {
+  width: calc(100% - 60px);
+  overflow: hidden;
+
+  & ul {
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    list-style-type:none;
+    margin:0;
+    padding:0;
+    overflow-x: scroll;
+    -webkit-overflow-scrolling: touch;
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+  }
+    & li {
+      flex: 0 0 auto;
+      max-width: 100%;
+      min-width: 100%;
+      min-height: 200px;
+      & img {
+        width: 100%;
+      }
+    }
+  }

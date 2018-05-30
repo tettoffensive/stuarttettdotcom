@@ -79,6 +79,7 @@
           <div id="text" class="text clip">
             <p class="title">[[title]]</p></a>
             <p class="description">[[description]]</p>
+            <p class="tags">[[tags]]</p>
           </div>
         </div>
       </div>
@@ -139,6 +140,10 @@
           type: String,
           reflectToAttribute: true,
         },
+        tags: {
+          type: String,
+          reflectToAttribute: true,
+        }
       }
     }
 
