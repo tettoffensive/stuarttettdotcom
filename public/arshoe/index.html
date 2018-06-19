@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes" />
+  <meta name="description" content="Stuart Tett | Design/Code" />
+  <link rel="stylesheet" type="text/css" href="../fonts/fonts.css" />
+  <link rel="stylesheet" type="text/css" href="../stylesheets/reset.css" />
+  <link href="https://fonts.googleapis.com/css?family=BioRhyme:800" rel="stylesheet" />
+  <link rel="manifest" href="/manifest.json" />
+  <script src="../bower_components/webcomponentsjs/webcomponents-loader.js"></script>
+  <link rel="import" href="../src/stuarttettdotcom-app/stuarttettdotcom-app.html" />
+  <title>Stuart Tett | Design &amp; Code</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+  <link rel="stylesheet" type="text/css" href="/stylesheets/style.css" />
+  <script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-42078109-2"></script>
+  <script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments)};
+  gtag('js', new Date());
+
+  gtag('config', 'UA-42078109-2');
+  </script>
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-42078109-2', 'auto');
+  ga('set', 'page', '/arshoe');
+  ga('send', 'pageview');
+
+  </script>
+</head>
+<body xmlns="http://www.w3.org/1999/xhtml">
+  <stuarttettdotcom-app id="app" detail="arshoe"></stuarttettdotcom-app>
+  <section id="contentDetails" class="z1" style="display: none; visibility: hidden; min-height: 100vh;">
+    <figure class="image contain fourSeventyTwo" style="background-image: url('/images/arshoe-splash.jpg')">
+    </figure>
+    <div class="one-col">
+      <p>While convenient, online shoe shopping asks the customer to gamble on what shoes they might like.</p>
+      <p>The current user experience is risky and doesn't engage the customer effectively. The customer must be convinced to order the shoes before they've fully visualized wearing them.</p>
+    </div>
+    <div class="grid-span two-col-extra">
+      <p>Only after the delay of shipping can a customer see what the shoes look like on themselves. That delay may even prevent them from making the purchase. Even with companies swallowing the shipping costs, it's still a point of friction.</p>
+    </div>
+    <div class="grid-span two-col dark-on-light">
+      <p><span class="emphasis bold-italic">Can we engage the customer earlier and reduce risk by giving customers a better glimpse of what wearing the shoes will look like?</span></p>
+    </div>
+    <div class="one-col">
+      <p>I began with sketching out ideas for an augmented reality interface for a mobile device where the user could see the shoes on their feet.</p>
+      <p>ARKit requires users to first calibrate the AR device to find the ground, and find the feet to track them and match the 3D shoe models.</p>
+    </div>
+    <figure class="image contain fourSeventyTwo" style="background-image: url('/images/arshoe-sketch-all.jpg')">
+    </figure>
+    <figure class="image contain fourSeventyTwo" style="background-image: url('/images/arshoe-sketch-feet.jpg')">
+    </figure>
+    <div class="one-col">
+      <p>I explored a few different options for finding the feet. Most of which involved tapping or drawing on the screen.</p>
+      <p>One idea of placing virtual placeholders to “step into” seemed less burdonsome on the user and a more engaging experience since the action is done in the real world and not the screen.</p>
+    </div>
+    <div class="one-col">
+      <p>Since it may not be as flexible as the other methods, I decided to allow the user to drag, rotate, and scale the feet from the phone screen to fine tune as needed.</p>
+      <p>I expect to find with testing that most users are able to step in and click the “Shoe Me!” button without the fine-tuning.</p>
+    </div>
+    <figure class="image contain fourSeventyTwo" style="background-image: url('/images/arshoe-step-inside.jpg')">
+    </figure>
+    <div class="two-col grid-span dark-on-light">
+      <p>I wanted to keep the app as simple as possible and only build up complexity as needed.<span class="emphasis bold-italic">I first concentrated on the shoe selection flow, followed by the purchasing flow.</span></p>
+    </div>
+    <figure class="image contain fourSeventyTwo" style="background-image: url('/images/arshoe-shoes.jpg')">
+    </figure>
+    <div class="one-col">
+      <p>My thinking was to be able to swipe the screen and have one set of shoes transition to another. This transition is a good place to add entertainment.</p>
+      <p>Color selection could be done by tapping different swatches. I decided to offload the sizing to a settings screen so the user could pick that ahead of time and reduce the clutter on the screen.</p>
+    </div>
+    <div class="grid-span two-col-extra">
+      <p>I've put the logo of the app in the physical environment rather than on screen. It's all about bringing the user into the virtual experience.</p>
+      <p>This is making me question having the on screen buttons at all.</p>
+    </div>
+    <div class="two-col grid-span dark-on-light">
+      <p><span class="emphasis bold-italic">What interactions could be moved from the screen into the physical environment?</span></p>
+    </div>
+    <figure class="image contain fourSeventyTwo" style="background-image: url('/images/arshoe-button-ground.jpg')">
+    </figure>
+      <div class="one-col">
+      <p>Could there be buttons on the floor that the user could step on with the shoes? This would keep the users eye in the environment where the shoes are rather than focused on the screen plane.</p>
+      <p>This would also cause the user to move their feet more and see the augmented reality in action.</p>
+    </div>
+    <div class="one-col">
+      <p>Once a user has found a shoe they like the two main things they might want to do is order it to be shipped to their home or share it on social media to ask the opinions of others.</p>
+      <p>Initially I had two buttons on screen&#8212;the price button, and the share button.</p>
+    </div>
+    <figure class="image contain fourSeventyTwo" style="background-image: url('/images/arshoe-twobuttons.jpg')">
+    </figure>
+    <figure class="image contain fourSeventyTwo" style="background-image: url('/images/arshoe-buttons.jpg')">
+    </figure>
+    <div class="one-col">
+      <p>New buttons take up precious screen real-estate, and can be overwhelming, so I like to be careful.</p>
+      <p>But I did see the need for a settings button, and a shopping cart button. There is also a reset button because, there may be issues with the calibration of the AR.</p>
+    </div>
+    <div class="one-col">
+      <p>For the purchasing feature I wanted to keep it as close to one-click ordering as possible. So the shopping cart has just the shoe model, size, price, and total. More detailed information (and editing and deleting capabilities) are hidden behind a simple tap.</p>
+    </div>
+    <figure class="image contain fourSeventyTwo" style="background-image: url('/images/arshoe-purchasing.jpg')">
+    </figure>
+    <figure class="image contain fourSeventyTwo" style="background-image: url('/images/arshoe-settings.jpg')">
+    </figure>
+    <div class="one-col">
+      <p>Required information for payment and shipping is in the settings menu&#8212;the first thing the user sees when opening the app in the onboarding experience. They can access this at any time, and only have to fill it out before purchase.</p>
+    </div>
+    <div class="two-col-extra grid-span">
+      <p>Putting the settings in the onboarding before the camera view was a decision to more gradually bring the user into the app. To set the tone for the app, rather than jumping straight to the camera.</p>
+      <p>The user can skip over the onboarding and come back to the settings when it’s valuable to them&#8212;when they need to purchase something.</p>
+    </div>
+    <div class="one-col">
+      <p>I visited an athletic shoe store at the mall to observe the customers and sales people. And while my initial problem was about online ordering, I came to the conclusion that this might work for an in-store experience as well.</p>
+      <p>It’s difficult to get the attention of the sales staff to get shoes to try on.</p>
+    </div>
+    <figure class="image contain fourSeventyTwo" style="background-image: url('/images/arshoe-store.jpg')">
+    </figure>
+    <div class="two-col grid-span dark-on-light">
+      <p><span class="emphasis bold-italic">What if the app was a tool for pre-selecting shoes to try on in store?</span></p>
+    </div>
+    <div class="two-col-extra grid-span">
+      <p>If I were designing that app for just the in store experience, it would be a bit different, but I tried to incorporate both cases into my design.</p>
+      <p>The user can pick their store via location permission if given. Then instead of clicking purchase, they can click “Try On” button. When the shoes are ready, the user will get a push notification. If they’ve given a profile photo, a sticker with their photo and their name will be with the stack of shoes to try on.</p>
+    </div>
+    <div class="one-col">
+      <p>For any ordering issues that may arise, I haven’t built out any in-app flows to deal with it at this point. I simply point them to the existing customer service options&#8212;online chat and phone services.</p>
+    </div>
+    <figure class="image contain fourSeventyTwo" style="background-image: url('/images/arshoe-support.jpg')">
+    </figure>
+    <figure class="image contain fourSeventyTwo" style="background-image: url('/images/arshoe-mirror.jpg')">
+    </figure>
+    <div class="one-col">
+      <p>One of the major points of feedback I've gotten about the app is that people (particularly, women) will want to see how shoes go with an outfit, which just doesn't work looking down at your feet.</p>
+    </div>
+    <div class="two-col grid-span dark-on-light">
+      <p><span class="emphasis bold-italic">My initial thought was to show the AR experience in a mirror view mode.</span></p>
+    </div>
+    <div class="two-col-extra grid-span">
+      <p>However, this is a technical challenge and not supported on ARKit out of the box. Another solution that will work out of a box, but is not as convenient, is a second device. If a friend holds another device in connection with your device (in ARKit 2), then they will be able to see the same virtual content. But I would like for users to be able to use the app on their own.</p>
+      <p>I think for this app to give the users the full experience of seeing themselves in 1st and 3rd person, the technology will have to use image recognition to identify the feet (similar to facial recognition). In this manor, the shoes could be placed on the feet in either mode. While a greater technical challenge, without it, the product falls flat.</p>
+    </div>
+    <figure class="image contain grid-span fourSeventyTwoX" style="background-image: url('/images/arshoe-flow.jpg')">
+    </figure>
+  </section>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.5/ScrollMagic.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.4/TweenLite.min.js"></script>
+  <script src="/scripts/animation.gsap.min.js"></script>
+  <script src="/scripts/utils.js"></script>
+  <script id="detailsScript">
+  document.querySelector('#app').addEventListener('displayed', function (e) {
+    // build scene
+    var controller = new ScrollMagic.Controller();
+    let children = document.querySelectorAll('#contentDetails > figure');
+    var delay = 0;
+    var tl = new TimelineLite();
+    forEach(children, (index, item) => {
+      if (item.offsetLeft >= window.innerWidth*0.5) {
+        tl.add( TweenLite.from(item, 1, { x: (window.innerWidth - item.offsetLeft + 10), ease: Power3.easeInOut }), delay)
+      } else {
+        tl.add( TweenLite.from(item, 1, { x: -(item.offsetWidth + item.offsetLeft + 10), ease: Power3.easeInOut }), delay)
+      }
+      delay += 0.25;
+    });
+    var scene = new ScrollMagic.Scene({triggerElement: '#contentDetails'})
+    .setTween( tl ) // the tween durtion can be omitted and defaults to 1
+    .addTo(controller);
+  }, {once: true});
+  </script>
+</body>
+</html>

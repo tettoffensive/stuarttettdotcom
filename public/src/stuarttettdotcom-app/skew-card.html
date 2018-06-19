@@ -106,19 +106,6 @@
     el.parentNode.removeChild(el);
   }
 
-  // function imageCover( imageRect, containerRect) {
-  //   let imageWidth = imageRect.width;
-  //   let imageHeight = imageRect.height;
-  //   let containerWidth = containerRect.width;
-  //   let containerHeight = containerRect.height;
-  //   let imageRatio = imageHeight / imageWidth;
-  //   let containerRatio = containerHeight / containerWidth;
-  //   let coverImageSize = (containerRatio > imageRatio) ? { width: (containerHeight / imageRatio), height: containerHeight} : { width: containerWidth, height: (containerWidth / imageRatio) };
-  //   let returnValue = { x: (coverImageSize.width / imageRect.width ), y: (coverImageSize.height / imageRect.height) };
-  //   console.log(`{ x: (${imageRect.width} / ${coverImageSize.width}), y: (${imageRect.height} / ${coverImageSize.height}) };`)
-  //   return returnValue;
-  // }
-
   class SkewCard extends Polymer.Element {
     static get is() { return 'skew-card'; }
     static get properties() {
@@ -218,8 +205,6 @@
       if (this.animLabelDest) {
         var height = this.animLabelDest.offsetHeight;
         let btn = this.divFullCard.querySelector('#scrollBtn');
-        console.log(height);
-        console.log(btn);
         height += 30;
         btn.style.top = height + "px";
       }

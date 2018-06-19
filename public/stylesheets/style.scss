@@ -102,7 +102,6 @@ $break-desktop-large: 1200px;
   @media screen and (min-width: $break-mobile) {
     max-width: 1482px;
     width: calc(100% - 160px);
-    grid-auto-rows: minmax(max-content, 385px);
     grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
     grid-gap: 80px 40px;
     padding-bottom: 80px;
@@ -169,6 +168,11 @@ $break-desktop-large: 1200px;
   }
 }
 
+.fourSeventyTwoX {
+  min-height: 65vmin;
+  width: 100%;
+}
+
 #contentDetails {
   font-family: 'DecimaMonoRound';
   font-weight: normal;
@@ -176,9 +180,9 @@ $break-desktop-large: 1200px;
   font-variant-ligatures: none;
   font-size: 16px;
   color: #3F4A48;
-  letter-spacing: 0.6px;
   text-align: left;
-  line-height: 1.25em;
+  line-height: 1.75em;
+  background-color: #DCDEE0;
 
   @media screen and (min-width: $break-mobile) {
     font-size: 26px;
@@ -205,7 +209,7 @@ $break-desktop-large: 1200px;
 }
 
 .one-col {
-  max-width: 500px;
+  max-width: 650px;
 }
 
 .one-col-dark {

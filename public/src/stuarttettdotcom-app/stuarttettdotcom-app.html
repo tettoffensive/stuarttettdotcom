@@ -94,25 +94,18 @@ class StuarttettdotcomApp extends Polymer.Element {
             tags: 'UX, UI, Graphic Design'},
 
             {type: 'skew-card',
-            description: 'My project for IDEOU\'s From Ideas To Action course targeting San Francisco\'s sluggish public transit.',
-            title: 'Aerial Transit in San Francisco',
-            image:'/images/ita-cover.png',
-            link: 'ita',
-            tags: 'Design Thinking, Graphic Design'},
+            description: 'A mobile app that helps people decide what shoes to order online through augmented reality.',
+            title: 'Augmented Reality Shoes',
+            image:'/images/ar-shoe.jpg',
+            link: 'arshoe',
+            tags: 'UX, UI'},
 
             {type: 'skew-card',
             description: 'A mobile video app for editing and sharing stories.',
             title: 'Channel',
             image:'/images/channel-cover.png',
             link: 'channel',
-            tags: 'iOS Development, UX'},
-
-            {type: 'skew-card',
-            description: 'A collaborative multimedia spreadsheet for the iPad and iPhone.',
-            title: 'Grid',
-            image:'/images/grid-cover.png',
-            link: 'grid',
-            tags: 'iOS Development, UX'},
+            tags: 'iOS Development'},
 
             {type: 'skew-card',
             description: 'A mobile app for sharing photos and videos with a simple swipe.',
@@ -122,6 +115,13 @@ class StuarttettdotcomApp extends Polymer.Element {
             role: 'Lead iOS Developer',
             image:'/images/swipe-cover.png',
             link: 'swipe',
+            tags: 'iOS Development'},
+
+            {type: 'skew-card',
+            description: 'A collaborative multimedia spreadsheet for the iPad and iPhone.',
+            title: 'Grid',
+            image:'/images/grid-cover.png',
+            link: 'grid',
             tags: 'iOS Development, UX'},
 
             {type: 'skew-card',
@@ -130,6 +130,13 @@ class StuarttettdotcomApp extends Polymer.Element {
             image:'/images/logos-cover.png',
             link: 'logos',
             tags: 'Graphic Design'},
+
+            {type: 'skew-card',
+            description: 'My project for IDEOU\'s From Ideas To Action course targeting San Francisco\'s sluggish public transit.',
+            title: 'Aerial Transit in San Francisco',
+            image:'/images/ita-cover.png',
+            link: 'ita',
+            tags: 'Design Thinking, Graphic Design'},
 
             {type: 'skew-card',
             description: 'I began my career as an Effects artists on films such as How To Train Your Dragon.', /*'Created a warm and respectful logo for an institute for couples therapy.',*/
@@ -164,7 +171,6 @@ class StuarttettdotcomApp extends Polymer.Element {
       super.connectedCallback();
       window.onpopstate = (event) => {
         event.preventDefault();
-        console.log(`${event} ${event.state}`);
         if (this._lastClickElement != null) {
           this._onClickClose();
         }
@@ -186,14 +192,15 @@ class StuarttettdotcomApp extends Polymer.Element {
       xhr.open('GET', page + '/index.html', true);
       xhr.onload = () => {
         if (xhr.status === 200) {
+          ga('set', 'page', page);
+          ga('send', 'pageview');
+
           let docBody = document.getElementsByTagName("body")[0];
           let docContent = document.querySelector("#contentDetails");
           let newNode = document.importNode(xhr.responseXML.getElementsByTagName("section")[0], true);
           if (docContent) {
-            // console.log(`REPLACE ${newNode.id}`);
             docBody.replaceChild(newNode,docContent);
           } else {
-            // console.log(`APPEND ${newNode.id}`);
             docBody.appendChild(newNode);
           }
           let docScript = document.querySelector("#detailsScript");
@@ -257,7 +264,6 @@ class StuarttettdotcomApp extends Polymer.Element {
     _updateDetailFor(newValue) {
 
       window.requestAnimationFrame(() => {
-        // console.log(this.$.thecards);
         this.$.wrapper.style.display = null;
         let el = this.shadowRoot.querySelector('skew-card[link="' + newValue + '"]');
         let model = this.$.thecards.modelForElement(el);
