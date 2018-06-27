@@ -40,10 +40,13 @@
     </figure>
     <div id="caption1" class="one-col">
       <p>In today's society, cooking week&#8211;night dinner's is a challenge. Often people don't think about it until their commute home after a long work day. They look in their fridge and are paralyzed. So they order delivery.</p>
-      <p>This gets expensive with delivery and service charges. It is also wasteful, when you throw out food you've forgotten about and didn't use in time.</p>
+      <p>This gets expensive with delivery and service charges. Often times you overlook ingredients you could have used and they end up going bad when you don't use them.</p>
     </div>
     <div class="two-col-extra dark-on-light grid-span">
-      <p><span class="emphasis bold-italic">Could mobile computer vision help you cook meals by keeping an inventory of ingredients on hand?</span></p>
+      <p><span class="emphasis bold-italic">How could we help people cook meals with the ingredients they have on hand?</span></p>
+    </div>
+    <div class="two-col-extra grid-span">
+      <p>We decided to explore using computer vision and augmented reality capabilities of the iPhone to help people manage an inventory of ingredients they have on hand.</p>
     </div>
     <div id="caption2" class="one-col">
       <p>After some early exploration with mocks in Sketc<span class="kern">h,</span> I realized that the core problem we were trying to solve is meal-plannin<span class="kern">g.</span> It's best served as a recipe-first app, not a camera-first ap<span class="kern">p.</span></p>
@@ -52,7 +55,10 @@
     <figure id="content1b" class="image contain fourSeventyTwo" style="background-image: url('/images/souschef-sketches.png')">
     </figure>
     <div id="caption2b" class="grid-span two-col dark-on-light">
-      <p>I went back to the drawing board and came up with some user persona<span class="kern">s.</span> <span class="bold-italic emphasis">I chose 3 to work with.</span></p>
+      <p><span class="bold-italic emphasis">I went back to the drawing board and chose 3 user personas to explor<span class="kern">e.</span></span></p>
+    </div>
+    <div class="grid-span two-col">
+      <p>I based the personas on friends and family who had expressed interest in the app. The main difference between the personas is how they want the suggested recipes sorted.</p>
     </div>
     <figure id="content2a" class="">
       <img src="/images/souschef-persona1.png" alt="Retired Schoolteacher Persona"/>
@@ -61,12 +67,12 @@
       <img src="/images/souschef-persona2.png" alt="Food Nerd Persona"/>
     </figure>
     <div id="caption3" class="one-col-dark dark-on-light">
-      <p>The main difference between the personas is <span class="bold-italic emphasis">how they want the suggested recipes sorted and filtere<span class="kern">d.</span></span> They all prioritize different things in the meals they want to coo<span class="kern">k.</span></p>
+      <p><span class="bold-italic emphasis">Each persona prioritizes different things in the meals they want to coo<span class="kern">k.</span></span></p>
     </div>
     <figure id="content2c" class="">
       <img src="/images/souschef-persona3.png" alt="Working Mom Personal"/>
     </figure>
-    <div id="caption4" class="one-col">
+    <div id="caption4" class="two-col-extra grid-span">
       <p>I then explored a few variations for each of the main views— the recipe<span class="kern">s,</span> the ingredients pantry, and the recipe filterin<span class="kern">g.</span></p>
     </div>
     <figure id="content3a" class="">
@@ -95,7 +101,7 @@
       <img src="/images/souschef-User-Flows.png" alt="User Flows"/>
     </figure>
     <div class="dark-on-light grid-span two-col">
-      <p><span class="emphasis">In considering the onboarding experience for a new user, I thought about how the user can get to what they are after&#8212;the recipes.</span></p>
+      <p><span class="bold-italic emphasis">I thought about how the user can get to what they are after&#8212;the recipes.</span></p>
     </div>
     <div class="grid-span two-col-extra">
       <p>Recipes with ingredients you have on hand aren't available unless the app knows what ingredients you have on hand <span class="kern">;)</span> So the first thing to do is ask the user to enter some ingredients.</p>
@@ -104,7 +110,7 @@
       <p>It's better for the app to just return popular recipes in the case that the pantry is empty or doesn't have enough ingredients to make any recipe suggestions relevant.</p>
     </div>
     <div class="dark-on-light grid-span two-col">
-      <p><span class="emphasis">We also need an effecient way for the user to do simple data-entry for the pantry.</span></p>
+      <p><span class="bold-italic emphasis">We also need an effecient way for the user to do simple data-entry for the pantry.</span></p>
     </div>
     <div class="grid-span two-col-extra">
       <p>In it's conception the idea was to scan your kitchen with the phone and the items would be recognized by the app. This is difficult to implement and error prone. But as the model improves this could prove a convenient way to enter the data.</p>
@@ -112,7 +118,7 @@
       <p>In the meantime, typing on a mobile keyboard all the ingredients you have is rather tedious. I think a superior method would be for the user to speak into the phone's microphone and convert that speech to text to be entered into the database.</p>
       <p>Even if there are mistakes, the corrections would be significantly easier than to manually enter all of the ingredients.</p>
     </div>
-    <div id="caption11" class="grid-span dark-on-light">
+    <div id="caption11" class="grid-span">
       <p>My next steps are to look at the experiences of:</p>
       <ul class="dark-list">
         <li>What happens when the user decides to cook a particular recipe?</li>

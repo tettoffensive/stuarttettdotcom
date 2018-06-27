@@ -39,17 +39,21 @@
     <figure class="image contain fourSeventyTwo" style="background-image: url('/images/arshoe-splash.jpg')">
     </figure>
     <div class="one-col">
-      <p>While convenient, online shoe shopping asks the customer to gamble on what shoes they might like.</p>
-      <p>The current user experience is risky and doesn't engage the customer effectively. The customer must be convinced to order the shoes before they've fully visualized wearing them.</p>
+      <p>What if you could try on shoes without going into the store or waiting day(s) for a delivery?</p>
+      <p>For online shoe shopping the customer must be convinced to order the shoes before they've worn them.</p>
     </div>
     <div class="grid-span two-col-extra">
       <p>Only after the delay of shipping can a customer see what the shoes look like on themselves. That delay may even prevent them from making the purchase. Even with companies swallowing the shipping costs, it's still a point of friction.</p>
     </div>
     <div class="grid-span two-col dark-on-light">
-      <p><span class="emphasis bold-italic">Can we engage the customer earlier and reduce risk by giving customers a better glimpse of what wearing the shoes will look like?</span></p>
+      <p><span class="emphasis bold-italic">Can we give customers a better glimpse of what wearing the shoes will be like?</span></p>
+    </div>
+    <div class="grid-span two-col-extra">
+      <p>With the latest technologies around augmented reality in mobile devices, we might be able to show the user what the shoes will look like on their feet.</p>
+      <p>So how can we detect the feet?</p>
     </div>
     <div class="one-col">
-      <p>I began with sketching out ideas for an augmented reality interface for a mobile device where the user could see the shoes on their feet.</p>
+      <p>I began with sketching out ideas for ways for the camera to track the feet. Automatically recognizing and tracking like facial recognition is complicated. So I wondered, if a simple user interface could be designed for the user to tell the camera where the feet are without difficulty.</p>
       <p>ARKit requires users to first calibrate the AR device to find the ground, and find the feet to track them and match the 3D shoe models.</p>
     </div>
     <figure class="image contain fourSeventyTwo" style="background-image: url('/images/arshoe-sketch-all.jpg')">
@@ -64,12 +68,12 @@
       <p>Since it may not be as flexible as the other methods, I decided to allow the user to drag, rotate, and scale the feet from the phone screen to fine tune as needed.</p>
       <p>I expect to find with testing that most users are able to step in and click the “Shoe Me!” button without the fine-tuning.</p>
     </div>
-    <figure class="image contain fourSeventyTwo" style="background-image: url('/images/arshoe-step-inside.jpg')">
+    <figure class="image contain fourSeventyTwo" style="background-image: url('/images/arshoe-step-inside.png')">
     </figure>
     <div class="two-col grid-span dark-on-light">
-      <p>I wanted to keep the app as simple as possible and only build up complexity as needed.<span class="emphasis bold-italic">I first concentrated on the shoe selection flow, followed by the purchasing flow.</span></p>
+      <p><span class="emphasis bold-italic">I wanted to keep the app as simple as possible with only a shoe selection flow and purchasing flow.</span></p>
     </div>
-    <figure class="image contain fourSeventyTwo" style="background-image: url('/images/arshoe-shoes.jpg')">
+    <figure class="image contain fourSeventyTwo" style="background-image: url('/images/arshoe-shoes.png')">
     </figure>
     <div class="one-col">
       <p>My thinking was to be able to swipe the screen and have one set of shoes transition to another. This transition is a good place to add entertainment.</p>
@@ -82,7 +86,7 @@
     <div class="two-col grid-span dark-on-light">
       <p><span class="emphasis bold-italic">What interactions could be moved from the screen into the physical environment?</span></p>
     </div>
-    <figure class="image contain fourSeventyTwo" style="background-image: url('/images/arshoe-button-ground.jpg')">
+    <figure class="image contain fourSeventyTwo" style="background-image: url('/images/arshoe-button-ground.png')">
     </figure>
       <div class="one-col">
       <p>Could there be buttons on the floor that the user could step on with the shoes? This would keep the users eye in the environment where the shoes are rather than focused on the screen plane.</p>
@@ -92,20 +96,18 @@
       <p>Once a user has found a shoe they like the two main things they might want to do is order it to be shipped to their home or share it on social media to ask the opinions of others.</p>
       <p>Initially I had two buttons on screen&#8212;the price button, and the share button.</p>
     </div>
-    <figure class="image contain fourSeventyTwo" style="background-image: url('/images/arshoe-twobuttons.jpg')">
+    <figure class="image contain fourSeventyTwo" style="background-image: url('/images/arshoe-twobuttons.png')">
     </figure>
-    <figure class="image contain fourSeventyTwo" style="background-image: url('/images/arshoe-buttons.jpg')">
-    </figure>
-    <div class="one-col">
+    <div class="two-col-extra grid-span">
       <p>New buttons take up precious screen real-estate, and can be overwhelming, so I like to be careful.</p>
       <p>But I did see the need for a settings button, and a shopping cart button. There is also a reset button because, there may be issues with the calibration of the AR.</p>
     </div>
     <div class="one-col">
       <p>For the purchasing feature I wanted to keep it as close to one-click ordering as possible. So the shopping cart has just the shoe model, size, price, and total. More detailed information (and editing and deleting capabilities) are hidden behind a simple tap.</p>
     </div>
-    <figure class="image contain fourSeventyTwo" style="background-image: url('/images/arshoe-purchasing.jpg')">
+    <figure class="image contain fourSeventyTwo" style="background-image: url('/images/arshoe-purchasing.png')">
     </figure>
-    <figure class="image contain fourSeventyTwo" style="background-image: url('/images/arshoe-settings.jpg')">
+    <figure class="image contain fourSeventyTwo" style="background-image: url('/images/arshoe-settings.png')">
     </figure>
     <div class="one-col">
       <p>Required information for payment and shipping is in the settings menu&#8212;the first thing the user sees when opening the app in the onboarding experience. They can access this at any time, and only have to fill it out before purchase.</p>
@@ -130,9 +132,9 @@
     <div class="one-col">
       <p>For any ordering issues that may arise, I haven’t built out any in-app flows to deal with it at this point. I simply point them to the existing customer service options&#8212;online chat and phone services.</p>
     </div>
-    <figure class="image contain fourSeventyTwo" style="background-image: url('/images/arshoe-support.jpg')">
+    <figure class="image contain fourSeventyTwo" style="background-image: url('/images/arshoe-support.png')">
     </figure>
-    <figure class="image contain fourSeventyTwo" style="background-image: url('/images/arshoe-mirror.jpg')">
+    <figure class="image contain fourSeventyTwo" style="background-image: url('/images/arshoe-mirror.png')">
     </figure>
     <div class="one-col">
       <p>One of the major points of feedback I've gotten about the app is that people (particularly, women) will want to see how shoes go with an outfit, which just doesn't work looking down at your feet.</p>
@@ -144,8 +146,6 @@
       <p>However, this is a technical challenge and not supported on ARKit out of the box. Another solution that will work out of a box, but is not as convenient, is a second device. If a friend holds another device in connection with your device (in ARKit 2), then they will be able to see the same virtual content. But I would like for users to be able to use the app on their own.</p>
       <p>I think for this app to give the users the full experience of seeing themselves in 1st and 3rd person, the technology will have to use image recognition to identify the feet (similar to facial recognition). In this manor, the shoes could be placed on the feet in either mode. While a greater technical challenge, without it, the product falls flat.</p>
     </div>
-    <figure class="image contain grid-span fourSeventyTwoX" style="background-image: url('/images/arshoe-flow.jpg')">
-    </figure>
   </section>
   <script src="http://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.5/ScrollMagic.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.4/TweenLite.min.js"></script>

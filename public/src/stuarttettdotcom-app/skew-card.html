@@ -23,9 +23,34 @@
       outline: 1px solid transparent;
 
       display: flex;
-      flex-direction: row;
+      flex-direction: column;
       flex-wrap: nowrap;
       align-items: stretch;
+    }
+
+
+    @media screen and (min-width: 800px) {
+      :host {
+        flex-direction: row;
+      }
+
+      :host(.initial) {
+        height: var(--card-closed-height);
+        width: 100%;
+      }
+
+      :host(.returning) {
+        height: var(--card-closed-height);
+        width: 100%;
+      }
+
+      :host(.onclick) {
+        height: 80%;
+        width: 80%;
+        position: absolute;
+        left: 10%;
+        top: 10%;
+      }
     }
 
     /*  When animating open, put host in front */
@@ -40,23 +65,23 @@
     /*  Initial Skewed State */
     :host(.initial) {
       transform: skewY(-3deg);
-      height: var(--card-closed-height);
+      /* height: var(--card-closed-height); */
       width: 100%;
     }
 
     /*  When animating closed. Everything in initial but the skew */
     :host(.returning) {
-      height: var(--card-closed-height);
+      /* height: var(--card-closed-height); */
       width: 100%;
     }
 
     /* When user clicks, this class replaces .initial class */
     :host(.onclick) {
-      height: 80%;
-      width: 80%;
-      position: absolute;
-      left: 10%;
-      top: 10%;
+      /* height: 80%; */
+      /* width: 80%; */
+      /* position: absolute; */
+      /* left: 10%; */
+      /* top: 10%; */
     }
 
     /* Counter host skewY with an equal and opposite skew */
@@ -202,11 +227,15 @@
     }
 
     _resize(event) {
-      if (this.animLabelDest) {
+      let btn = this.divFullCard.querySelector('#scrollBtn');
+      if (window.innerWidth < 660) {
+        btn.style.top = '';
+        this.divFullCard.style.height = '';
+      } else if (this.animLabelDest) {
         var height = this.animLabelDest.offsetHeight;
-        let btn = this.divFullCard.querySelector('#scrollBtn');
         height += 30;
         btn.style.top = height + "px";
+        this.divFullCard.style.height = '100vh';
       }
     }
 
@@ -272,11 +301,11 @@
       let last = this.animLabelDest.getBoundingClientRect();
       let imageLast = this.animImageDest.getBoundingClientRect();
 
-      if (this.animLabelDest) {
+      let btn = this.divFullCard.querySelector('#scrollBtn');
+      if (window.innerWidth < 660) {
+        btn.style.top = '';
+      } else if (this.animLabelDest) {
         var height = this.animLabelDest.offsetHeight;
-        let btn = this.divFullCard.querySelector('#scrollBtn');
-        console.log(height);
-        console.log(btn);
         height += 30;
         btn.style.top = height + "px";
       }
@@ -307,7 +336,13 @@
       this._toTransform = toTransform
       // Animate
       var tl = new TimelineLite({ paused: true });
-      tl.add( TweenLite.to(this.divFullCard, 0, { display: 'block', width: "100%", height: "100vh"}), 0)
+
+      var heightString = "";
+      if (window.innerWidth >= 660) {
+        heightString = "100vh";
+      }
+
+      tl.add( TweenLite.to(this.divFullCard, 0, { display: 'block', width: "100%", height: heightString}), 0)
         .add( TweenLite.to(this.animLabelDest, 0, { display: 'block'}), 0)
         .add( TweenLite.to(this.animImageDest, 0, { display: 'block'}), 0);
       // Put the destination pieces in their "First" states
