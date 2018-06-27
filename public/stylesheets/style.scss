@@ -102,7 +102,7 @@ $break-desktop-large: 1200px;
   width: calc(100% - 60px);
   grid-gap: 30px;
   padding-bottom: 30px;
-  overflow: hidden;
+  overflow: visible;
 
   @media screen and (min-width: $break-mobile) {
     max-width: 1482px;
