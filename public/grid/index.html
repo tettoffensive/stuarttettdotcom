@@ -43,26 +43,34 @@
     </div>
     <div id="caption2" class="one-col">
       <p>The spreadsheet was an infinite canvas of tile<span class="kern">s.</span> There were no limitations on the number of images, and how many tiles each images takes u<span class="kern">p.</span></p>
-      <p><span class="emphasis">This was causing performance issue<span class="kern">s.</span></span></p>
+      <p>This was causing the scrolling and other animation to slow way down. The extreme case is a single image per tile (row and column).</p>
       <p>Grid may be a spreadsheet, but it is meant to showcase multimedia in a beautiful wa<span class="kern">y.</span></p>
+    </div>
+    <figure id="content2" class="image contain" style="background-image: url('/images/grid-blank-canvas.jpg')">
+    </figure>
+    <div id="caption3" class="grid-span two-col dark-on-light">
+      <p><span class="emphasis bold-italic">How can we allow users to add as much rich media as they want while maintaining buttery smooth animation?</span></p>
+    </div>
+    <div id="caption4" class="one-col">
+      <p>We looked to the world of mobile gaming, where the rendering wasn't done with Apple's UIKit, but the lower-level OpenGL.</p>
+      <p>I made a prototype of the home view in OpenGL, and the performance looked promisin<span class="kern">g.</span></p>
+      <p>We decided to convert the spreadsheet canvas to OpenGL and stress tested i<span class="kern">t.</span> We were now getting a consistent 60fp<span class="kern">s.</span> It felt so much more responsive in the hands of the use<span class="kern">r.</span></p>
+      <p>While the new user experience was superio<span class="kern">r,</span> the conversion had some major engineering challenge<span class="kern">s.</span> It was costly to rebuild standard UI component<span class="kern">s.</span></p>
     </div>
     <figure id="content2" class="image contain" style="background-image: url('/images/grid-image-tiles.jpg')">
     </figure>
     <div id="caption3" class="grid-span two-col dark-on-light">
-      <p>The engineering team had optimized the loading/unloading of tiles dynamicall<span class="kern">y,</span> <span class="emphasis">but the animation still wasn't buttery smoot<span class="kern">h.</span></span></p>
+      <p><span class="emphasis bold-italic">How can we keep the canvas clear when placing items in the Backpack?</span></p>
     </div>
-    <div id="caption4" class="one-col">
-      <p>I made a prototype of the home view in OpenGL, and the performance looked promisin<span class="kern">g.</span></p>
-      <p>We converted the spreadsheet canvas to OpenGL and stress tested i<span class="kern">t.</span> We were now getting a consistent 60fp<span class="kern">s.</span> It felt so much more responsive in the hands of the use<span class="kern">r.</span></p>
-    </div>
-    <div id="caption3" class="one-col-dark dark-on-light">
-      <p>While the new user experience was superio<span class="kern">r,</span> the conversion had some major engineering challenge<span class="kern">s.</span> It was costly to rebuild standard UI component<span class="kern">s.</span></p>
-    </div>
-    <figure id="content3" class="image contain" style="background-image: url('/images/grid-backpack.gif')">
+    <figure id="content3" class="image contain fourSeventyTwo" style="background-image: url('/images/grid-backpack.gif')">
     </figure>
     <div id="caption3" class="one-col">
       <p>Another experience issue came with the introduction of Backpac<span class="kern">k.</span> This let the user pick photos and videos to add to the Gri<span class="kern">d.</span> But it took up so much screen real estat<span class="kern">e.</span></p>
-      <p><span class="emphasis">I came up with a solution of quickly fading out the Backpack</span> when the user dragged an element out to be placed on the gri<span class="kern">d.</span> This way the user could see more of the canvas while placing, but still have a large enough Backpack to easily explore and choos<span class="kern">e.</span></p>
+      <p>In the design specs it animated upward across the screen. But to move it out of the way quickly would be either slow or too distracting if sped up.</p>
+      <p>I came up with a solution of quickly fading out the Backpack when the user dragged an element out to be placed on the gri<span class="kern">d.</span></p>
+    </div>
+    <div class="grid-span two-col-extra">
+      <p>When we tried it out ourselves and in our user testing sessions, this proved effective. The user could easily grab images from the backpack and place it anywhere on the screen without being distracted by the disappearing Backpack.</p>
     </div>
     <div id="caption11" class="grid-span dark-on-light">
       <p>Additional Credits: Josh Leong&#8212;Lead Designer</p>
