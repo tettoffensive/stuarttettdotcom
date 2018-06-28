@@ -39,23 +39,29 @@
     <figure id="content2a" class="">
       <img src="/images/channel-post.png" alt="Post Channel"/>
     </figure>
-    <div id="caption1" class="one-col">
-      <p>Channel began as an app that allowed users to edit videos together on their phone and post them into "channels" with other related video<span class="kern">s.</span> One of the issues early on in development was the experience of the content creato<span class="kern">r.</span></p>
-      <p>When a user posts a video, it is processed on the device, and uploaded to the serve<span class="kern">r.</span> From there it is encoded on the backen<span class="kern">d.</span> Even as we improved our encoding tim<span class="kern">e,</span> it was still not instantaneou<span class="kern">s.</span></p>
+    <div class="one-col">
+      <p>Channel began as an app that allowed any user to edit videos together on their phone and post them into "channels" with other related video<span class="kern">s.</span></p>
+      <p>When a user posts a video, it is processed on the device, and uploaded to the server for encoding before it streams in the channe<span class="kern">l.</span></p>
     </div>
-    <div id="caption1" class="grid-span dark-on-light two-col">
-      <p><span class="emphasis">Users were confused when they posted a vide<span class="kern">o,</span> but it didn't show up in the channel right awa<span class="kern">y.</span></span></p>
-      <p><span class="emphasis">It didn't feel like the post was successfu<span class="kern">l.</span></span></p>
+    <div class="grid-span two-col">
+      <p>When we pushed out the alpha build to the company, most found it confusing when they went from the posting flow to the channel and their video wasn't ther<span class="kern">e.</span></p>
+    </div>
+    <div class="grid-span dark-on-light two-col">
+      <p><span class="emphasis bold-italic">How can we improve the experience for users after posting a new video?</span></p>
+    </div>
+    <div class="grid-span two-col">
+      <p>One possibility was to just simply tell the user, "Success! Your video will stream momentarily".</p>
+      <p>But we felt it would have a greater impact if the user could just see the video in the stream someho<span class="kern">w.</span></p>
     </div>
     <figure id="content2b" class="">
       <img src="/images/channel-posting-flow.png" alt="Post Channel"/>
     </figure>
     <div id="caption1" class="one-col">
-      <p>Part of my role as developer was to solve user experience issues like this that involved technical solutions.</p>
+      <p>Part of my role as developer was to solve user experience issues like this that involved technical solution<span class="kern">s.</span></p>
       <p>I came up with a solution of keeping a cached copy of the video and inserting it at the start of the channel fee<span class="kern">d.</span></p><p>The video would then be removed once it came down from the server after encodin<span class="kern">g.</span></p>
     </div>
     <div class="two-col-extra grid-span">
-      <p>From the users perspective, when they posted a new video, the app went straight to the channel they posted in and started playing their video. While there may be a delay in the rest of the world seeing the new video, the user seeing their own video right away gives them that validation that their content is out there.</p>
+      <p>On our next alpha release, the app went seemlessly from posting to playing the video at the head of the channel. There was no more confusion and it just felt norma<span class="kern">l.</span></p>
     </div>
     <div id="caption11" class="grid-span dark-on-light">
       <p>Additional Credits: Edwin de Jongh&#8212;Lead Designer, Product Manager&#8212;Marwan Roushdy</p>
