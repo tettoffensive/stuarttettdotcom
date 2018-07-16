@@ -1,4 +1,4 @@
-<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/polymer/polymer-element.html" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.4/TweenLite.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.4/TimelineLite.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.4/plugins/CSSPlugin.min.js"></script>
@@ -89,6 +89,36 @@
       transform: skewY(3deg);
     }
 
+    :host(.hundred-pct) {
+      height: 100%;
+    }
+
+    :host(.initial) #contentZoom {
+      transition: all 0.5s;
+      transition-timing-function: cubic-bezier(.35,.0,.35,1.29);
+    }
+
+    :host(.initial:hover) #contentZoom {
+      transform-origin: center;
+      transform: scale(1.05);
+    }
+
+    :host(.initial) #arrow {
+      position: absolute;
+      /* padding: 24px; */
+      right: 0px;
+      bottom: 0px;
+      z-index: 100;
+      transition: all 0.5s;
+      transition-timing-function: cubic-bezier(.35,.0,.35,1.29);
+    }
+
+    :host(.initial:hover) #arrow {
+      transform: translateY(-24px);
+      background-color: #3F4A48;
+      /* padding: 24px; */
+    }
+
     .btn-hidden {
       display: none;
     }
@@ -102,7 +132,7 @@
       <div id="labelClip" class="clip dark-background">
         <div id="label" class="label" style="height: 100%;">
           <div id="text" class="text clip">
-            <p class="title">[[title]]</p></a>
+            <p class="title">[[title]]</p>
             <p class="description">[[description]]</p>
             <p class="tags">[[tags]]</p>
           </div>
@@ -111,10 +141,17 @@
     </div>
     <div id="contentShrink" class="content-shrink shadow z1">
       <div id="contentClip" class="clip">
+        <div id="contentZoom" style="height: 100%;">
         <figure id="content" class="content image cover" style="background-image: url([[img]])">
-        </div>
+        </figure>
       </div>
-    </figure>
+      </div>
+      <svg id="arrow" width="112px" height="75px" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+        <g id="arrow-draw" transform="translate(32, 27)" width="64px" height="27px" fill="#54F0CE" fill-rule="nonzero">
+          <path d="M56.0553834,13.5 L45.0553834,7 L45.0553834,20 L56.0553834,13.5 Z M40.9446166,15.5 L0,15.5 L0,11.5 L40.9446166,11.5 L40.9446166,7.0417191e-16 L63.9446166,13.5 L40.9446166,27 L40.9446166,15.5 Z" id="Combined-Shape"></path>
+        </g>
+      </svg>
+    </div>
   </template>
 
   <script>
