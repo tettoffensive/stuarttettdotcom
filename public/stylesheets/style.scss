@@ -124,7 +124,7 @@ $break-desktop-large: 1200px;
 }
 
 .bold-italic {
-  font-family: 'DecimaMonoRound-BoldItalic';
+  font-family: 'DecimaMonoRound-BoldItalic','Space Mono',mono;
 }
 
 .emphasis {
@@ -136,15 +136,15 @@ $break-desktop-large: 1200px;
 }
 
 .italic {
-  font-family: 'DecimaMonoRound-Italic';
+  font-family: 'DecimaMonoRound-Italic','Space Mono',mono;
 }
 
 .bold {
-  font-family: 'DecimaMonoRound-Bold';
+  font-family: 'DecimaMonoRound-Bold','Space Mono',mono;
 }
 
 .normal {
-  font-family: 'DecimaMonoRound';
+  font-family: 'DecimaMonoRound','Space Mono',mono;
 }
 
 .dark-on-light {
@@ -155,7 +155,7 @@ $break-desktop-large: 1200px;
     padding: 80px;
   }
   & p {
-    font-family: 'DecimaMonoRound-Italic';
+    font-family: 'DecimaMonoRound-Italic','Space Mono',mono;
     color: #f3f3f3;
   }
 }
@@ -179,7 +179,7 @@ $break-desktop-large: 1200px;
 }
 
 #contentDetails {
-  font-family: 'DecimaMonoRound';
+  font-family: 'DecimaMonoRound','Space Mono',mono;
   font-weight: normal;
   font-style: normal;
   font-variant-ligatures: none;
@@ -200,7 +200,7 @@ $break-desktop-large: 1200px;
 
 #contentDetails div:not(.dark-on-light) {
   & p {
-    font-family: 'DecimaMonoRound';
+    font-family: 'DecimaMonoRound','Space Mono',mono;
   }
   color: inherit;
 }
