@@ -176,6 +176,7 @@ class StuarttettdotcomApp extends Polymer.Element {
 
     connectedCallback() {
       super.connectedCallback();
+      window.addEventListener("scroll", this._scroll.bind(this));
       window.onpopstate = (event) => {
         event.preventDefault();
         if (this._lastClickElement != null) {
@@ -184,8 +185,37 @@ class StuarttettdotcomApp extends Polymer.Element {
       }
     }
 
+
+
     disconnectedCallback() {
       super.disconnectedCallback();
+      window.removeEventListener("scroll", this._scroll.bind(this));
+    }
+
+    _scroll(event) {
+      var percentage = ( ( window.scrollY  + window.innerHeight ) / document.body.clientHeight ) * 100
+      // console.log(document.body.clientHeight);
+      if(percentage > 99){
+
+        // scrollPercentages.scroll100 = true;
+        ga('send', 'event', { eventCategory: 'Scroll', eventAction: '100%'});
+
+      } else if(percentage > 75){
+
+        // scrollPercentages.scroll75 = true;
+        ga('send', 'event', { eventCategory: 'Scroll', eventAction: '75%'});
+
+      } else if(percentage > 50){
+
+        // scrollPercentages.scroll50 = true;
+        ga('send', 'event', { eventCategory: 'Scroll', eventAction: '50%'});
+
+      } else if(percentage > 25){
+
+        // scrollPercentages.scroll25 = true;
+        ga('send', 'event', { eventCategory: 'Scroll', eventAction: '25%'});
+
+      };
     }
 
     _removePageData() {
@@ -220,23 +250,8 @@ class StuarttettdotcomApp extends Polymer.Element {
           setTimeout(() => {
             this._tryShowDetailsSection();
           }, 100);
-          return;
-          // var newPage = $(newContent).attr('data-page');
-          // $(newContent).addClass('ed-page--new');
-          // $('#content').before(newContent);
-          // pages.updateMetaData(newContent, oldPage);
-          // pages.updatePath(newPage, href);
-          // pages.checkExternalLinks();
-          // casePage.init();
-          // if (workCase) {
-          //   pages.animateCase(oldPage, newPage, workCase);
-          // } else {
-          //   pages.animatePages(oldPage, newPage);
-          // }
-          // this.set('resolveUrl', event.target.value);
-          // t¡his.set('title', xhr.response.detail.response.title);
         } else {
-          alert('Request failed.  Returned status of ' + xhr.status);
+          ga('send', 'event', 'Error', 'pageload', page);
         }
       };
 

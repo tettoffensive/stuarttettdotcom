@@ -254,6 +254,15 @@
       // for history back and forward buttons
       // window.addEventListener('popstate', this._popState);
       window.addEventListener("resize", this._resize.bind(this));
+      var startPerformance = Math.round(performance.now());
+      this.addEventListener("mouseover", (event) => {
+        startPerformance = Math.round(performance.now());
+        ga('send', 'event', 'Hover', 'page', this.title);
+      });
+      this.addEventListener("mouseout", (event) => {
+        ga('send', 'timing', 'Hover', 'hover', Math.round(performance.now() - startPerformance), this.title);
+      });
+
     }
 
     disconnectedCallback() {
@@ -261,6 +270,8 @@
       // for history back and forward buttons
       // window.removeEventListener('popstate', this._popState);
       window.removeEventListener("resize", this._resize.bind(this));
+      this.removeEventListener("mouseover");
+      this.removeEventListener("mouseout");
     }
 
     _resize(event) {
