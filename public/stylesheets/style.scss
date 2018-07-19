@@ -43,12 +43,12 @@ $system-font: -apple-system, BlinkMacSystemFont,"Segoe UI", "Roboto", "Oxygen", 
 $black: #100100;
 $white: #f1f1f1;
 $dark: #3F4A48;
-$light: #DCDEE0;
+$light: #E6E8EB;
 $accent: #54F0CE;
 
 body {
   font-family: $body-font;
-  background-color: $light;
+  background: $light;
   @include font-smoothing(on);
   padding: 0;
   margin: 0;
@@ -81,8 +81,24 @@ h1, h2, h3, h4, h5, h6, .header1, .header2 {
   background-repeat: no-repeat;
   background-position: center;
 
-  -webkit-filter: drop-shadow(0px 10px 20px #b2b2b2);
-  filter: drop-shadow(0px 10px 20px #b2b2b2);
+  -webkit-filter: drop-shadow(0px 10px 20px rgba(0,0,0,0.05));
+  filter: drop-shadow(0px 10px 20px rgba(0,0,0,0.05));
+}
+
+.scatter-shapes:hover {
+  filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=0, OffY=0,Color='#59FFDB')";
+  -webkit-filter: drop-shadow(0px 0px 10px #59FFDB);
+  filter: drop-shadow(0px 0px 10px #59FFDB);
+  background-color: black;
+}
+
+.scatter-shapes {
+  display: block;
+  position: absolute;
+  -webkit-filter: drop-shadow(0);
+  filter: drop-shadow(0);
+  transition: all .5s ease-in-out;
+  color: white;
 }
 
 .image.cover {
@@ -124,7 +140,7 @@ $break-desktop-large: 1200px;
 }
 
 .bold-italic {
-  font-family: 'DecimaMonoRound-BoldItalic','Space Mono',mono;
+  font-family: 'DecimaMonoRound-BoldItalic','Space Mono',monospace;
 }
 
 .emphasis {
@@ -136,27 +152,27 @@ $break-desktop-large: 1200px;
 }
 
 .italic {
-  font-family: 'DecimaMonoRound-Italic','Space Mono',mono;
+  font-family: 'DecimaMonoRound-Italic','Space Mono',monospace;
 }
 
 .bold {
-  font-family: 'DecimaMonoRound-Bold','Space Mono',mono;
+  font-family: 'DecimaMonoRound-Bold','Space Mono',monospace;
 }
 
 .normal {
-  font-family: 'DecimaMonoRound','Space Mono',mono;
+  font-family: 'DecimaMonoRound','Space Mono',monospace;
 }
 
 .dark-on-light {
-  background-color: #3F4A48;
-  color: #f3f3f3;
+  background: linear-gradient(-180deg, #4E5251 4%, #3F4A48 98%);
+  color: #ffffff;
   padding: 30px;
   @media screen and (min-width: $break-mobile) {
     padding: 80px;
   }
   & p {
-    font-family: 'DecimaMonoRound-Italic','Space Mono',mono;
-    color: #f3f3f3;
+    font-family: 'DecimaMonoRound-Italic','Space Mono',monospace;
+    color: #ffffff;
   }
 }
 
@@ -179,7 +195,7 @@ $break-desktop-large: 1200px;
 }
 
 #contentDetails {
-  font-family: 'DecimaMonoRound','Space Mono',mono;
+  font-family: 'DecimaMonoRound','Space Mono',monospace;
   font-weight: normal;
   font-style: normal;
   font-variant-ligatures: none;
@@ -187,7 +203,7 @@ $break-desktop-large: 1200px;
   color: #3F4A48;
   text-align: left;
   line-height: 1.75em;
-  background-color: #DCDEE0;
+  background: $light;
 
   @media screen and (min-width: $break-mobile) {
     font-size: 26px;
@@ -200,7 +216,7 @@ $break-desktop-large: 1200px;
 
 #contentDetails div:not(.dark-on-light) {
   & p {
-    font-family: 'DecimaMonoRound','Space Mono',mono;
+    font-family: 'DecimaMonoRound','Space Mono',monospace;
   }
   color: inherit;
 }
@@ -243,7 +259,7 @@ $break-desktop-large: 1200px;
 }
 
 .buildup-light {
-  background-color: #f3f3f3;
+  background-color: #ffffff;
 }
 
 figure:not(.image) {

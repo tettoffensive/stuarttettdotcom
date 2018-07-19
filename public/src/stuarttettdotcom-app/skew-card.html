@@ -105,7 +105,6 @@
 
     :host(.initial) #arrow {
       position: absolute;
-      /* padding: 24px; */
       right: 0px;
       bottom: 0px;
       z-index: 100;
@@ -115,12 +114,7 @@
 
     :host(.initial:hover) #arrow {
       transform: translateY(-24px);
-      background-color: #3F4A48;
-      /* padding: 24px; */
-    }
-
-    .btn-hidden {
-      display: none;
+      background-image: linear-gradient(-180deg, #4E5251 4%, #3F4A48 98%);
     }
 
     </style>
@@ -132,9 +126,9 @@
       <div id="labelClip" class="clip dark-background">
         <div id="label" class="label" style="height: 100%;">
           <div id="text" class="text clip">
-            <p class="title">[[title]]</p>
-            <p class="description">[[description]]</p>
-            <p class="tags">[[tags]]</p>
+            <p class="title agent-1">[[title]]</p>
+            <p class="description agent-2">[[description]]</p>
+            <p class="tags"><span class="agent-3">[[tags]]</span></p>
           </div>
         </div>
       </div>
@@ -146,8 +140,8 @@
         </figure>
       </div>
       </div>
-      <svg id="arrow" width="112px" height="75px" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-        <g id="arrow-draw" transform="translate(32, 27)" width="64px" height="27px" fill="#54F0CE" fill-rule="nonzero">
+      <svg id="arrow" class="hidden" width="112px" height="75px" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+        <g id="arrow-draw" transform="translate(30, 25)" width="64px" height="27px" fill="#54F0CE" fill-rule="nonzero">
           <path d="M56.0553834,13.5 L45.0553834,7 L45.0553834,20 L56.0553834,13.5 Z M40.9446166,15.5 L0,15.5 L0,11.5 L40.9446166,11.5 L40.9446166,7.0417191e-16 L63.9446166,13.5 L40.9446166,27 L40.9446166,15.5 Z" id="Combined-Shape"></path>
         </g>
       </svg>

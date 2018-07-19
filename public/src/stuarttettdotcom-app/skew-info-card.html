@@ -4,8 +4,8 @@
   <template>
     <style include="skew-style-module">
     :host {
-      background-color: #3F4A48;
-      color: #F3F3F3;
+      background: linear-gradient(-180deg, #4E5251 4%, #3F4A48 98%);
+      color: #ffffff;
       padding: 0px;
       transform: skewY(-3deg);
       overflow: hidden;
@@ -30,7 +30,7 @@
     }
 
     :host p {
-      font-family: 'DecimaMonoRound-Italic','Space Mono',mono;
+      font-family: 'DecimaMonoRound-BoldItalic','Space Mono',monospace;
       font-weight: normal;
       font-style: normal;
       font-size: 24px;
@@ -38,19 +38,17 @@
       letter-spacing: 0.6px;
       line-height: 1.25em;
       text-align: left;
-      /* border: 1px solid red; */
-      /* width: 38ch; */
       margin: auto;
     }
 
     .vertCenter {
       display: table;
+      transform: skewY(3deg) translateY(-12px);
     }
 
     .vertCenter > p {
       display: table-cell;
       vertical-align: middle;
-      transform: translateY(-10px);
     }
 
     @media screen and (min-width: 320px) {
@@ -71,7 +69,7 @@
     }
     </style>
     <div class="vertCenter">
-      <p>[[description]]</p>
+      <p class="agent-1">[[description]]</p>
     </div>
   </template>
 

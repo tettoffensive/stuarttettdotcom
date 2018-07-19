@@ -33,6 +33,10 @@
         height: 65min;
     }
 
+    :not(.ct-initial) .hidden {
+      display: none;
+    }
+
     @media screen and (min-width: 660px) {
       .ct-onclick {
         position: absolute;
@@ -65,9 +69,69 @@
       }
     }
 
+    @keyframes fade-in-right {
+      from {
+        opacity: 0;
+        transform: translateX(-15px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    @keyframes fade-in-top {
+      from {
+        opacity: 0;
+        transform: translateY(-15px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes grow-top {
+      from {
+        transform: scaleY(0);
+      }
+      to {
+        transform: scaleY(1);
+      }
+    }
+
+    .agent-0 {
+      opacity: 0;
+      animation: fade-in-right ease 0.4s forwards;
+    }
+
+    .agent-4 {
+      transform: scaleY(0);
+      transform-origin: bottom;
+      animation: grow-top ease 0.2s forwards;
+      animation-delay: 2.0s;
+    }
+
+    .agent-1, .agent-3 {
+      opacity: 0;
+      animation: fade-in-top ease 0.4s forwards;
+      animation-delay: 1s;
+    }
+
+    .agent-2 {
+      transform: scaleY(0);
+      transform-origin: top;
+      animation: grow-top cubic-bezier(0.785, 0.135, 0.15, 0.86) 0.5s forwards;
+      animation-delay: 1.4s;
+    }
+
+    .agent-3 {
+      animation-delay: 1.8s;
+    }
+
     /* Background color on the label-clip (so no extra gap at the bottom) */
     .dark-background {
-      background-color: #3F4A48;
+       background-image: linear-gradient(-180deg, #4E5251 4%, #3F4A48 98%);
     }
 
     .z3 {
@@ -100,11 +164,11 @@
       left: 0;
       right: 0;
       z-index: -1;
-      box-shadow: 0 10px 20px 0px rgba(0,0,0,0.25);
+      box-shadow: 0 10px 20px 0px rgba(0,0,0,0.05);
     }
 
     .btn-shadow {
-      box-shadow: 0 10px 20px 0px rgba(0,0,0,0.25);
+      box-shadow: 0 10px 20px 0px rgba(0,0,0,0.05);
     }
 
     /* Extra div so that the shadow doesn't get clipped */
@@ -144,7 +208,7 @@
     /* Image explanation with title/description */
     .label {
       overflow: hidden;
-      color: #F3F3F3;
+      color: #ffffff;
       height: 100%;
       @media screen and (min-width: 660px) {
         min-height: 515px;
@@ -169,13 +233,13 @@
       font-weight: 800;
       font-style: normal;
       font-size: 36px;
-      color: #F3F3F3;
+      color: #ffffff;
       letter-spacing: 1px;
       text-align: left;
     }
 
     .description {
-      font-family: 'DecimaMonoRound-Italic','Space Mono',mono;
+      font-family: 'DecimaMonoRound-Italic','Space Mono',monospace;
       font-weight: normal;
       font-style: normal;
       font-variant-ligatures: none;
@@ -186,7 +250,7 @@
       margin: 0px;
       padding: 0px;
       flex-grow: 1;
-      color: #f3f3f3;
+      color: #ffffff;
     }
 
     .grid-8-1-auto {
@@ -201,14 +265,16 @@
     }
 
     .btn {
-      background-color: #54F0CE;
-      color: #F3F3F3;
-      width: 60px;
+      background: linear-gradient(-180deg, #8CF9E9 0%, #54F0CE 100%);;
+      color: #ffffff;
+      width: 57px;
       height: 50px;
     }
 
     .btn svg {
       margin: auto;
+      position: relative;
+      left: 1px;
     }
 
     .btn-tr {
