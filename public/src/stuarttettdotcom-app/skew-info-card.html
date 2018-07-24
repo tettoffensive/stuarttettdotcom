@@ -18,14 +18,13 @@
       transform-origin: left top;
       height: 300px;
       width: 100%;
+      display: flex;
     }
 
     :host > * {
-      /* padding: 0px 66px; */
       transform-origin: left top;
       transform: skewY(3deg);
       max-width: 500px;
-      height: 100%;
       margin: auto;
     }
 
@@ -38,23 +37,13 @@
       letter-spacing: 0.6px;
       line-height: 1.25em;
       text-align: left;
-      margin: auto;
+      padding-left: 24px;
     }
 
-    .vertCenter {
-      display: table;
-      transform: skewY(3deg) translateY(-12px);
-    }
-
-    .vertCenter > p {
-      display: table-cell;
-      vertical-align: middle;
-    }
-
-    @media screen and (min-width: 320px) {
+    @media screen and (min-width: 375px) {
       :host p {
         /* font-size: calc([minimum size] + ([maximum size] - [minimum size]) * ((100vw - [minimum viewport width]) / ([maximum viewport width] - [minimum viewport width]))); */
-        font-size: calc(24px + 12 * ((100vw - 320px) / 480));
+        font-size: calc(24px + 12 * ((100vw - 375px) / 425));
       }
     }
 
@@ -68,7 +57,7 @@
       }
     }
     </style>
-    <div class="vertCenter">
+    <div>
       <p class="agent-1">[[description]]</p>
     </div>
   </template>
