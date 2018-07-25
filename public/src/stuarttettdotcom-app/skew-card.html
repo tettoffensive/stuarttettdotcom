@@ -47,7 +47,7 @@
       :host(.onclick) {
         height: 80%;
         width: 80%;
-        position: static;
+        position: absolute;
         left: 10%;
         top: 10%;
       }
@@ -206,6 +206,7 @@
 
     constructor() {
       super();
+      this.desktopThreshold = 660; // 660 pixels is the min width for desktop mode vs. mobile
       // closed state = false
       this._transitioning = false;
       this._tl = null;
@@ -259,7 +260,7 @@
 
     _resize(event) {
       let btn = this.divFullCard.querySelector('#scrollBtn');
-      if (window.innerWidth < 660) {
+      if (this.isMobile()) {
         btn.style.top = '';
         this.divFullCard.style.height = '';
       } else if (this.animLabelDest) {
@@ -304,6 +305,14 @@
 
     }
 
+    isDesktop() {
+      return (window.innerWidth >= this.desktopThreshold);
+    }
+
+    isMobile() {
+      return (window.innerWidth < this.desktopThreshold);
+    }
+
     tryCardAnimation(animation) {
 
       if (this._tl != null) {
@@ -329,13 +338,18 @@
       let animImageDest = this.animImageDest;
 
       // Last
-      this.animLabelDest.style.position = 'fixed';
-      this.animImageDest.style.position = 'fixed';
+      if (this.isDesktop()) {
+        this.animLabelDest.style.position = 'fixed';
+        this.animImageDest.style.position = 'fixed';
+      } else {
+        this.divFullCard.style.position = 'fixed';
+        this.divFullCard.style.top = '0px';
+      }
       let last = this.animLabelDest.getBoundingClientRect();
       let imageLast = this.animImageDest.getBoundingClientRect();
 
       let btn = this.divFullCard.querySelector('#scrollBtn');
-      if (window.innerWidth < 660) {
+      if (this.isMobile()) {
         btn.style.top = '';
       } else if (this.animLabelDest) {
         var height = this.animLabelDest.offsetHeight;
@@ -371,9 +385,17 @@
       var tl = new TimelineLite({ paused: true });
 
       var heightString = "";
-      if (window.innerWidth >= 660) {
+      if (this.isDesktop()) {
         heightString = "100vh";
       }
+
+      // this.divFullCard.style.display = 'block';
+      // this.divFullCard.style.width = '100%';
+      // this.animLabelDest.style.display = 'block';
+      // this.animImageDest.style.display = 'block';
+      // this.animLabelDest.style.visibility = '';
+      // this.animImageDest.style.visibility = '';
+      // return;
 
       tl.add( TweenLite.to(this.divFullCard, 0, { display: 'block', width: "100%", height: heightString}), 0)
         .add( TweenLite.to(this.animLabelDest, 0, { display: 'block'}), 0)
@@ -500,13 +522,17 @@
       ease: Power3.easeOut,
       immediateRender: true,
     }), "fadeInDetails");
-    tl.add( TweenLite.to(animLabelDest, 0, { ease: Power3.easeInOut, position: 'absolute', immediateRender: false,
+    if (this.isMobile()) {
+      tl.add( TweenLite.to(this.divFullCard, 0, { ease: Power3.easeInOut, position: '', immediateRender: false,
+      }), "end");
+    }
+    tl.add( TweenLite.to(animLabelDest, 0, { ease: Power3.easeInOut, position: '', immediateRender: false,
     }), "end");
-    tl.add( TweenLite.to(animImageDest, 0, { ease: Power3.easeInOut, position: 'absolute', immediateRender: false,
+    tl.add( TweenLite.to(animImageDest, 0, { ease: Power3.easeInOut, position: '', immediateRender: false,
     }), "end");
-    tl.add( TweenLite.to(this.divFullCard.querySelector('#closeBtn'), 0, { ease: Power3.easeInOut, position: 'absolute', immediateRender: false,
+    tl.add( TweenLite.to(this.divFullCard.querySelector('#closeBtn'), 0, { ease: Power3.easeInOut, position: '', immediateRender: false,
     }), "end");
-    tl.add( TweenLite.to(this.divFullCard.querySelector('#scrollBtn'), 0, { ease: Power3.easeInOut, position: 'absolute', immediateRender: false,
+    tl.add( TweenLite.to(this.divFullCard.querySelector('#scrollBtn'), 0, { ease: Power3.easeInOut, position: '', immediateRender: false,
     }), "end");
 
     this._tl = tl;

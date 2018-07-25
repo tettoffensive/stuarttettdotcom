@@ -43,7 +43,6 @@
         top: calc(30px + 80px);
         left: calc(280px + 80px);
         width: calc(100% - 280px - 160px);
-        /* max-width: 1024px; */
         height: calc(100vh - 150px);
         max-height: 964px;
         min-height: 337px;
@@ -182,7 +181,8 @@
       flex-grow: 1;
       flex-shrink: 1;
       margin: auto 0px auto 0px;
-      background-color: #858C8B;
+      /* background-color: #858C8B; */
+      background-image: linear-gradient(-180deg, #4E5251 4%, #3F4A48 98%);
     }
 
     /* Contains the image */
@@ -191,14 +191,23 @@
       flex-grow: 1;
       flex-shrink: 1;
       overflow: hidden;
-      min-height: 540px; /* prevent blank space at the bottom when skewed */
+      height: 400px;
     }
 
     .image {
       background-repeat: no-repeat;
       background-position: 50% 50%;
-      min-height: 540px;
       height: 100%;
+      min-height: 400px;
+    }
+
+    @media screen and (min-width: 660px) {
+      .content {
+        min-height: 540px;
+      }
+      .image {
+        min-height: 540px;
+      }
     }
 
     .image.cover {
@@ -209,22 +218,36 @@
     .label {
       overflow: hidden;
       color: #ffffff;
+      min-height: 300px;
+      max-height: 300px;
       height: 100%;
-      @media screen and (min-width: 660px) {
-        min-height: 515px;
-      }
-      height: 100%;
-      width: 280px;
       transform-origin: left top;
       flex-shrink: 0;
     }
 
+    @media screen and (min-width: 660px) {
+      .label {
+        min-height: none;
+        max-height: none;
+        width: 280px;
+      }
+
+      .label .text {
+        width: 280px;
+        min-height: none;
+      }
+    }
+
+    /* @media screen and (min-width: 660px) {
+      min-height: 515px;
+    } */
+
     .label .text {
-      width: 280px;
       transform-origin: 0px 6px;
       padding-top: 6px;
       display: flex;
       flex-direction: column;
+      min-height: 300px;
     }
 
     .title {
@@ -285,7 +308,7 @@
 
     .btn-bc {
       position: absolute;
-      top: 875px;
+      top: 675px;
       left: calc(50% - 30px);
     }
 
