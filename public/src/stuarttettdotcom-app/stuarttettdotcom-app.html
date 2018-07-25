@@ -159,6 +159,7 @@ class StuarttettdotcomApp extends Polymer.Element {
     constructor(name) {
       super();
       this._lastClickElement = null;
+      this._lastWindowPosition = 0;
     }
 
     ready() {
@@ -270,6 +271,7 @@ class StuarttettdotcomApp extends Polymer.Element {
       this._lastClickElement = el;
       let model = this.$.thecards.modelForElement(el);
       let cardInArray = this.cards[model.index];
+      this._lastWindowPosition = window.scrollY;
       el.openCard(event, (label, content) => {
         this._loadPageData(cardInArray.link);
         // Page history
@@ -348,12 +350,11 @@ class StuarttettdotcomApp extends Polymer.Element {
     this._lastClickElement = null;
     // let model = this.$.thecards.modelForElement(el);
     el.detail = "false";
-
+    window.scrollTo(0,this._lastWindowPosition);
     let details = document.querySelector("#contentDetails");
     if (details != null) {
       var tl = new TimelineLite({ paused: false });
-      tl.add( TweenLite.to(details, 0.5, { autoAlpha: 0, display: 'none'}), 0)
-      .add( TweenLite.to(window, 1, {scrollTo: 0 }), 0);
+      tl.add( TweenLite.to(details, 0.5, { autoAlpha: 0, display: 'none'}), 0);
     }
 
     el.closeCard(event, (label, content) => {
