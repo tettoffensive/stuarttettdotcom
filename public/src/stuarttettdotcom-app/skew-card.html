@@ -259,6 +259,8 @@
     }
 
     _resize(event) {
+      if (!this.divFullCard) { return; }
+      
       let btn = this.divFullCard.querySelector('#scrollBtn');
       if (this.isMobile()) {
         btn.style.top = '';

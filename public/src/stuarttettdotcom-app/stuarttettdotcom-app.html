@@ -221,7 +221,18 @@ class StuarttettdotcomApp extends Polymer.Element {
 
     _removePageData() {
       removeFromParent(document.querySelector("#contentDetails"));
+      removeFromParent(document.querySelector("#footer"));
       removeFromParent(document.querySelector("#detailsScript"));
+    }
+
+    _replaceQueryWithTag(docBody, selector, node) {
+      let docContent = document.querySelector(selector);
+      let newNode = document.importNode(node, true);
+      if (docContent) {
+        docBody.replaceChild(newNode,docContent);
+      } else {
+        docBody.appendChild(newNode);
+      }
     }
 
     _loadPageData(page) {
@@ -234,20 +245,10 @@ class StuarttettdotcomApp extends Polymer.Element {
           ga('send', 'pageview');
 
           let docBody = document.getElementsByTagName("body")[0];
-          let docContent = document.querySelector("#contentDetails");
-          let newNode = document.importNode(xhr.responseXML.getElementsByTagName("section")[0], true);
-          if (docContent) {
-            docBody.replaceChild(newNode,docContent);
-          } else {
-            docBody.appendChild(newNode);
-          }
-          let docScript = document.querySelector("#detailsScript");
-          let newScript = document.importNode(xhr.responseXML.getElementById("detailsScript"), true);
-          if (docScript) {
-            docBody.replaceChild(newScript,docScript);
-          } else {
-            docBody.appendChild(newScript);
-          }
+          this._replaceQueryWithTag(docBody, "#contentDetails", xhr.responseXML.getElementsByTagName("section")[0]);
+          this._replaceQueryWithTag(docBody, "#footer", xhr.responseXML.getElementsByTagName("footer")[0]);
+          this._replaceQueryWithTag(docBody, "#detailsScript",xhr.responseXML.getElementById("detailsScript"));
+
           setTimeout(() => {
             this._tryShowDetailsSection();
           }, 100);
