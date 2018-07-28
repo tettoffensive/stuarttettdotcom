@@ -35,49 +35,79 @@
 <body xmlns="http://www.w3.org/1999/xhtml">
   <stuarttettdotcom-app id="app" detail="souschef"></stuarttettdotcom-app>
   <section id="contentDetails" class="z1" style="display: none; visibility: hidden; min-height: 100vh;">
-    <figure id="content1" class="image cover fourSeventyTwo" style="background-image: url('/images/souschef-original-ui.png')">
+    <figure class="image contain fourSeventyTwo" style="background-image: url('/images/souschef-original-ui.png')">
     </figure>
     <div id="caption1" class="one-col">
       <p>In today's society, cooking week&#8211;night dinner's is a challenge. Often people don't think about it until their commute home after a long work day. They look in their fridge and are paralyzed. So they order delivery.</p>
       <p>This gets expensive with delivery and service charges. Often times you overlook ingredients you could have used and they end up going bad when you don't use them.</p>
     </div>
     <div class="two-col-extra dark-on-light grid-span">
-      <p><span class="emphasis bold-italic">How could we help people cook meals with the ingredients they have on hand?</span></p>
-    </div>
-    <figure class="image contain fourSeventyTwo" style="background-image: url('/images/souschef-scan.png')">
-    </figure>
-    <div class="one-col">
-      <p>We decided to explore using computer vision and augmented reality capabilities of the iPhone to help people manage an inventory of ingredients they have on hand.</p>
+      <p><span class="emphasis bold-italic">How could we help busy people with their weeknight meals?</span></p>
     </div>
     <div id="caption2" class="one-col">
-      <p>After some early exploration with mocks in Sketc<span class="kern">h,</span> I realized that the core problem we were trying to solve is meal-plannin<span class="kern">g.</span> It's best served as a recipe-first app, not a camera-first ap<span class="kern">p.</span></p>
-      <p>Users want to know what they can make with the ingredients that they hav<span class="kern">e.</span> But they also want to stop throwing out food that goes bad because they don't use i<span class="kern">t.</span></p>
+      <p>The core problem is meal-plannin<span class="kern">g.</span></p>
+      <p>Our target users have busy lives. Users need help making the time to plan and cook meals.</p>
+      <p>I began by sketching out ways a mobile app could achieve thi<span class="kern">s.</span></p>
     </div>
-    <figure id="content1b" class="image contain fourSeventyTwo" style="background-image: url('/images/souschef-sketches.png')">
+    <figure class="image contain fourSeventyTwo" style="background-image: url('/images/souschef-problem.jpg')">
     </figure>
+    <figure class="image contain fourSeventyTwo" style="background-image: url('/images/souschef-planning-sketch.png')">
+    </figure>
+    <div class="one-col">
+      <p>An app keeping track of ingredients you have on hand can suggest more appropriate recipes.</p>
+      <p>Strategic notifications can help remind busy people so everything is ready to go.</p>
+    </div>
+    <div class="one-col">
+      <p>Most recipes in apps and books have you jumping around and missing steps when you're trying to cook something for the first time.</p>
+      <p>The app can help guide you through the recipe and offer hands-free voice controls for messy chefs.</p>
+    </div>
+    <figure class="image contain fourSeventyTwo" style="background-image: url('/images/souschef-cooking-sketch.png')">
+    </figure>
+    <!-- Recipe Iteration -->
+    <div class="two-col-extra dark-on-light grid-span">
+      <p><span class="emphasis bold-italic">How might we organize recipe details to help users to select a dish to cook?</span></p>
+    </div>
+    <figure class="">
+      <img src="/images/souschef-Recipes-Variations.png" alt="Recipe View Variations"/>
+    </figure>
+    <div id="caption4" class="one-col">
+      <p>I believe the carousel is a good balance between seeing multiple recipes at the same time and having detailed information about each recip<span class="kern">e.</span></p>
+    </div>
+    <figure class="image contain grid-span fourSeventyTwo" style="background-image: url('/images/souschef-recipe-iterations.png')">
+    </figure>
+    <div class="grid-span two-col">
+      <p>Based on user feedback from mocks, I settled on "Yuck" and "Yum" icons for influencing recipe suggestions. I removed the "Save for Later" because users thought it was redundant and confusing.</p>
+    </div>
+    <div class="one-col">
+      <p>Rather than having ordering automatically scheduled, users felt more comfortable clicking a button to add to their shopping cart. Users can also choose to make the meal now or schedule it for another time or day.</p>
+    </div>
+    <figure class="image contain fourSeventyTwo" style="background-image: url('/images/souschef-recipe-final.png')">
+    </figure>
+
+    <!-- Personas -->
     <div id="caption2b" class="grid-span two-col dark-on-light">
       <p><span class="bold-italic emphasis">How might different users explore recipes in the app?</span></p>
     </div>
-    <figure id="content2a" class="">
+    <figure class="">
       <img src="/images/souschef-persona1.png" alt="Retired Schoolteacher Persona"/>
     </figure>
     <div class="one-col">
-      <p>After going back to the drawing board I started coming up with various the personas on friends and family who had expressed interest in the app. I chose three to work with.</p>
+      <p>I talked to friends and family about their experiences with cooking recipes and recipe apps and created personas based on that research.</p>
     </div>
-    <div  class="one-col">
+    <!-- <div  class="one-col">
       <p>Each persona has different motivations and goals for why they would use an app to find recipes.</p>
-    </div>
-    <figure id="content2b" class="">
+    </div> -->
+    <figure class="">
       <img src="/images/souschef-persona2.png" alt="Food Nerd Persona"/>
     </figure>
-    <figure id="content2c" class="">
+    <figure class="">
       <img src="/images/souschef-persona3.png" alt="Working Mom Personal"/>
     </figure>
+    <!-- <div  class="one-col">
+      <p>One reason that recipe apps become so complicated is everybody has such unique requirements and tastes when it comes to food. Most apps address this by having a screen dedicated to hundreds of options.</p>
+    </div> -->
     <div  class="one-col">
-      <p>One reason that recipe apps become so complicated is everybody has such unique requirements and tastes when it comes to food.</p>
-    </div>
-    <div  class="one-col">
-      <p>I thought about how each persona would use the app to select a recipe.</p>
+      <p>I envisioned how each persona would select a recipe. My goal was to narrow down the options and still deliver recipes for different individuals.</p>
     </div>
     <figure class="">
       <img src="/images/souschef-foodnerd-recipe-selection.png" alt="Food Nerd Recipe Selection"/>
@@ -86,88 +116,80 @@
       <img src="/images/souschef-retired-recipe-selection.png" alt="Retired Schoolteacher Recipe Selection"/>
     </figure>
     <div  class="one-col">
-      <p>The biggest difference between the personas is how they want their recipes sorted and filtered as they're exploring.</p>
+      <p>The biggest difference between the personas is how they prioritize time, quality, and cost.</p>
+      <p>For the Retired Schoolteacher, the most important is cost. For the Food Nerd, it's quality. And for the Working Mom, time.</p>
     </div>
     <div  class="one-col">
-      <p>While each cares about factors like time, quality, and cost, they rank them differently.</p><p>For the Retired Schoolteacher, the most important is cost. For the Food Nerd, it's quality. And for the Working Mom, time.</p>
+      <p>If we focus on those factors, it greatly simplifies the interface.</p>
+      <p>The recommendation engine to can refine suggestions by taste&#8212; Similar to Pandora's thumbs up or down.</p>
+      <p>Asking the user the reason they gave the recipe a thumbs down can improve the algorithm to exclude specific things.</p>
     </div>
     <figure class="">
-      <img src="/images/souschef-mom-recipe-selection.png" alt="Working Mom Recipe Selection"/>
+      <img src="/images/souschef-recommend.png" alt=""/>
     </figure>
 
     <!-- Variations -->
     <div class="grid-span two-col dark-on-light">
       <p><span class="bold-italic emphasis">How might we let the user explore the recipes with their own criteria?</span></p>
     </div>
-
-    <div id="caption4" class="one-col">
-      <p>I explored a few variations for each of the main views— the recipe<span class="kern">s,</span> the ingredients pantry, and the recipe filterin<span class="kern">g.</span></p>
+    <div class="one-col">
+      <p>While less discoverabl<span class="kern">e,</span> a pull&#8211;down for recipe filtering options is a great because it doesn't require taking up visual real estate with a button and other apps have set precedent for user<span class="kern">s.</span></p>
     </div>
-    <figure id="content3a" class="">
-      <img src="/images/souschef-Recipes-Variations.png" alt="Recipe View Variations"/>
-      <figcaption>The carousel is a nice balance between seeing multiple recipes at the same time and having detailed information about each recip<span class="kern">e.</span></figcaption>
-    </figure>
-    <figure id="content3b" class="">
-      <img src="/images/souschef-Pantry-Variations.png" alt="Pantry View Variations"/>
-      <figcaption>While not as visually interestin<span class="kern">g,</span> the table view is a great overview of all the ingredients on han<span class="kern">d.</span></figcaption>
-    </figure>
-    <figure id="content3c" class="">
+    <figure class="">
       <img src="/images/souschef-Filter-Variations.png" alt="Filter View Variations"/>
-      <figcaption>While a little harder to discove<span class="kern">r,</span> the pull down is a great option since it doesn't require taking up visual real estate with a button and other apps have set precedent for user<span class="kern">s.</span></figcaption>
-    </figure>
-    <figure class="image contain fourSeventyTwo" style="background-image: url('/images/souschef-recipe-flow.png')">
-    </figure>
-    <div class="one-col">
-      <p>The user is ultimately after recipes, so I chose the recipe view as the default view of the app. Once a recipe is chosen the user can press a button to &quot;start&quot; the recip<span class="kern">e.</span></p>
-    </div>
-    <div class="one-col">
-      <p>From the tab bar the user can navigate to the pantr<span class="kern">y.</span> Here they can manually add/remove ingredients as well as search for recipes based on specific ingredient<span class="kern">s.</span>
-        In the future they may add ingredients by camera, smart fridge, or voice comman<span class="kern">d.</span></p>
-    </div>
-    <figure class="image contain fourSeventyTwo" style="background-image: url('/images/souschef-pantry-flow.png')">
     </figure>
     <figure class="image contain fourSeventyTwo" style="background-image: url('/images/souschef-filter-flow.png')">
     </figure>
     <div class="one-col">
-      <p>Originally<span class="kern">,</span> I designed the filtering options so that the 'x' buttons on each option, removed that item from the lis<span class="kern">t.</span>
-      But I wanted to avoid having another interface to add filters back to the list.
-      So I changed it to just gray out the item to indicate a disabled state.
-      A tap on the '+' button enables that filter agai<span class="kern">n.</span>
-    </p>
-    </div>
-    <div class="dark-on-light grid-span two-col">
-      <p><span class="bold-italic emphasis">How can we give users a great onboarding experience with an empty ingredient list?</span></p>
+      <p>I thought deeply about how filters and sorts could be applied. I came up with an interaction based on a '+' and 'x' button to toggle the effect of each option.</p>
     </div>
     <div class="one-col">
-      <p>The first thing a user needs to suggest recipes is to input ingredients into the pantry. But this can be tedious.</p>
-      <p>We can improve this process a bit by automatically adding common ingredients to the list that almost everyone has like salt, pepper, olive oil, water, etc. The user can confirm or deny any of these items during onboarding since nothing is a guarantee.</p>
+      <p>By simplifying down to the three factors from the personas (rating, cost, and time), I eliminated the need for filtering. Sorting by these factors meant no results are excluded.</p>
+      <p>Users felt it wasn't clear that there was a particular order to the sorts until I put everything in a vertical list and added arrows (instead of drag and drop).</p>
     </div>
-    <figure class="image contain fourSeventyTwo" style="background-image: url('/images/souschef-onboarding.png')">
+    <figure class="image contain fourSeventyTwo" style="background-image: url('/images/souschef-filter-iterations.png')">
     </figure>
-    <div class="dark-on-light grid-span two-col">
-      <p><span class="bold-italic emphasis">How can we make entering ingredients painless?</span></p>
-    </div>
-    <figure class="image contain fourSeventyTwo" style="background-image: url('/images/souschef-smart-fridge.jpg')">
+    <figure class="image contain fourSeventyTwo" style="background-image: url('/images/souschef-filter-final.png')">
     </figure>
     <div class="one-col">
-      <p>This is where the computer vision comes in. This is difficult to implement and error prone. But as the model improves this could prove a convenient way to enter the data.</p>
-      <p>Eventually, this work would be taken over by a smart fridge with cameras to keep track without needing any human involved.</p>
+      <p>Enabling and disabling sorting didn't turn out to matter so much. It's more about the order of the sorts. This simplified the interface even more and just left me with three sorts and two arrows to reorder.</p>
+    </div>
+    <div class="dark-on-light grid-span two-col">
+      <p><span class="bold-italic emphasis">How can we make entering ingredients easier?</span></p>
+    </div>
+    <figure class="image contain fourSeventyTwo" style="background-image: url('/images/souschef-scan-foods.png')">
+    </figure>
+    <div class="one-col">
+      <p>Typing each item individually on a mobile keyboard is tedious. I wondered if there was a better way.</p>
+      <p>Using image recognition to identify a variety of foods is tough implement and error prone. But as the technology improves this could prove a convenient way to enter the data.</p>
+      <p>Unfortunately, it's not reliable enough to be the primary method of input at this time.</p>
     </div>
     <div class="one-col">
-      <p>In the meantime, a more convenient method would be for the user to speak into the phone's microphone and convert that speech to text to be entered into the database.</p>
-      <p>Even if there are mistakes, the corrections would be significantly easier than to manually enter all of the ingredients.</p>
+      <p>Another powerful data entry method would be using computer vision to read the text on receipts to identify items. This is less error prone and quite convenient when doing grocery shopping in-person.</p>
     </div>
+    <figure class="image contain fourSeventyTwo" style="background-image: url('/images/souschef-scan-receipt.png')">
+    </figure>
     <figure class="image contain fourSeventyTwo" style="background-image: url('/images/souschef-voice-entry.png')">
     </figure>
-    <div id="caption11" class="grid-span">
-      <p>My next steps are to look at the experiences of:</p>
-      <ul class="dark-list">
-        <li>What happens when the user decides to cook a particular recipe?</li>
-        <li>How does the app keep track of used up or expired ingredients?</li>
-        <li>How can the app help the user with meal planning and ordering ingredients?</li>
-      </ul>
+    <div class="one-col">
+      <p>A voice interface could be a great way to quickly enter ingredients. Items are entered one at a time, but it's faster than typing as you look around your kitchen.</p>
+    </div>
+    <div class="one-col">
+    <p>Eventually smart fridges will have cameras to keep track without needing any human involved.</p>
+    <p>And since more and more shopping is done online, the app can talk directly with the online grocers to manage inventory.</p>
+  </div>
+  <figure class="image contain fourSeventyTwo" style="background-image: url('/images/souschef-smart-fridge.jpg')">
+  </figure>
+    <figure class="image contain grid-span fourSeventyTwo" style="background-image: url('/images/souschef-pantry-views.png')">
+    </figure>
+    <div class="two-col-extra grid-span">
+      <p>A simple table view where items can be entered in by typing is the best solution for now. Audio entry can be used simply by tapping the microphone.</p>
+      <p>An option to use image recognition is a supplemental feature for users to test and provide feedback as the technology improves.</p>
     </div>
   </section>
+<div class="footer">
+  <stt-scroll-btn id="scrollBtn" class="btn-bc z3" style="transform: scaleY(-1)" onclick="TweenLite.to(window, 1, {scrollTo:0});"></stt-scroll-btn>
+</div>
   <script src="http://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.5/ScrollMagic.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.4/TweenLite.min.js"></script>
   <script src="/scripts/animation.gsap.min.js"></script>

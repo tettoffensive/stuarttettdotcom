@@ -119,6 +119,7 @@ $break-desktop-large: 1200px;
   grid-gap: 30px;
   padding-bottom: 30px;
   overflow: visible;
+  justify-items: center;
 
   @media screen and (min-width: $break-mobile) {
     max-width: 1482px;
@@ -128,6 +129,15 @@ $break-desktop-large: 1200px;
     padding-bottom: 80px;
   }
 
+}
+
+@supports (initial-letter: 2) or (-webkit-initial-letter: 2) {
+  #contentDetails div:first-of-type p:first-of-type::first-letter {
+    font-family: 'DecimaMonoRound-BoldItalic';
+    margin-right: 0.25em;
+    -webkit-initial-letter: 2;
+    initial-letter: 2;
+  }
 }
 
 #contentDetails > div {
@@ -219,6 +229,15 @@ $break-desktop-large: 1200px;
     font-family: 'DecimaMonoRound','Space Mono',monospace;
   }
   color: inherit;
+}
+
+.footer {
+  display: flex;
+  padding: 40px;
+
+  & > * {
+    margin: auto;
+  }
 }
 
 .kern {
