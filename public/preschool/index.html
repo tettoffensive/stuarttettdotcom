@@ -155,20 +155,19 @@
   document.querySelector('#app').addEventListener('displayed', function (e) {
     // build scene
     var controller = new ScrollMagic.Controller();
-    let children = document.querySelectorAll('#contentDetails > figure');
-    var delay = 0;
-    var tl = new TimelineLite();
+    var children = document.querySelectorAll('#contentDetails > figure, #contentDetails p');
+
     forEach(children, (index, item) => {
-      if (item.offsetLeft >= window.innerWidth*0.5) {
-        tl.add( TweenLite.from(item, 1, { x: (window.innerWidth - item.offsetLeft + 10), ease: Power3.easeInOut }), delay)
-      } else {
-        tl.add( TweenLite.from(item, 1, { x: -(item.offsetWidth + item.offsetLeft + 10), ease: Power3.easeInOut }), delay)
-      }
-      delay += 0.25;
+
+      var tween = null;
+      tween = TweenLite.from(item, 1, { opacity: 0, y: '+=100', ease: Power3.easeOut });
+
+      var scene = new ScrollMagic.Scene({triggerElement: item, offset: -600 })
+      .reverse(false)
+      .setTween( tween ) // the tween durtion can be omitted and defaults to 1
+      .addTo(controller);
     });
-    var scene = new ScrollMagic.Scene({triggerElement: '#contentDetails'})
-    .setTween( tl ) // the tween durtion can be omitted and defaults to 1
-    .addTo(controller);
+
   }, {once: true});
   </script>
 </body>
