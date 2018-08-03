@@ -131,14 +131,14 @@ $break-desktop-large: 1200px;
 
 }
 
-@supports (initial-letter: 2) or (-webkit-initial-letter: 2) {
-  #contentDetails div:first-of-type p:first-of-type::first-letter {
-    font-family: 'DecimaMonoRound-BoldItalic';
-    margin-right: 0.25em;
-    -webkit-initial-letter: 2;
-    initial-letter: 2;
-  }
-}
+// @supports (initial-letter: 2) or (-webkit-initial-letter: 2) {
+//   #contentDetails div:first-of-type p:first-of-type::first-letter {
+//     font-family: 'DecimaMonoRound-BoldItalic','Space Mono',monospace;
+//     margin-right: 0.25em;
+//     -webkit-initial-letter: 2;
+//     initial-letter: 2;
+//   }
+// }
 
 #contentDetails > div {
   justify-self: center;
