@@ -36,6 +36,7 @@
 <body xmlns="http://www.w3.org/1999/xhtml">
   <stuarttettdotcom-app id="app" detail="grid"></stuarttettdotcom-app>
   <section id="contentDetails" class="z1" style="display: none; visibility: hidden; min-height: 100vh;">
+  <div class="progress-container fade-in"><div class="progress-bar" id="progress-bar"></div></div>
     <figure class="image contain fourSeventyTwo" style="background-image: url('/images/grid-home.jpg')">
     </figure>
     <div id="caption1" class="one-col">
@@ -70,7 +71,7 @@
       <p>I came up with a solution of quickly fading out the Backpack when the user dragged an element out to be placed on the gri<span class="kern">d.</span></p>
     </div>
     <div class="grid-span two-col-extra">
-      <p>When we tried it out ourselves and in our user testing sessions, this proved effective. The user could easily grab images from the backpack and place it anywhere on the screen without being distracted by the disappearing Backpack.</p>
+      <p class="bold-italic">When we tried it out ourselves and in our user testing sessions, this proved effective. The user could easily grab images from the backpack and place it anywhere on the screen without being distracted by the disappearing Backpack.</p>
     </div>
     <div id="caption11" class="grid-span dark-on-light">
       <p>Additional Credits: Josh Leong&#8212;Lead Designer</p>
@@ -82,24 +83,6 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.5/ScrollMagic.min.js"></script>
   <script src="/scripts/animation.gsap.min.js"></script>
   <script src="/scripts/utils.js"></script>
-  <script id="detailsScript">
-  document.querySelector('#app').addEventListener('displayed', function (e) {
-    // build scene
-    var controller = new ScrollMagic.Controller();
-    var children = document.querySelectorAll('#contentDetails > figure, #contentDetails p');
-
-    forEach(children, (index, item) => {
-
-      var tween = null;
-      tween = TweenLite.from(item, 1, { opacity: 0, y: '+=100', ease: Power3.easeOut });
-
-      var scene = new ScrollMagic.Scene({triggerElement: item, offset: -600 })
-      .reverse(false)
-      .setTween( tween ) // the tween durtion can be omitted and defaults to 1
-      .addTo(controller);
-    });
-
-  }, {once: true});
-  </script>
+  <script id="detailsScript" src="/scripts/main.js"></script>
 </body>
 </html>

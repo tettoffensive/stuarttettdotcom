@@ -35,11 +35,16 @@
 <body xmlns="http://www.w3.org/1999/xhtml">
   <stuarttettdotcom-app id="app" detail="souschef"></stuarttettdotcom-app>
   <section id="contentDetails" class="z1" style="display: none; visibility: hidden; min-height: 100vh;">
+  <div id="bar" class="progress-container fade-in"><div class="progress-bar" id="progress-bar"></div></div>
+    <!-- Intro -->
     <figure class="image contain fourSeventyTwo" style="background-image: url('/images/souschef-views.png')">
     </figure>
-    <div id="caption1" class="one-col">
+    <div class="one-col">
       <p>Cooking weeknight dinners is a challenge for working professionals. Often people don't think about it until their commute home. They look in their fridge paralyzed. They often end up ordering delivery.</p>
       <p>This gets expensive. Often times, they overlook ingredients on hand and don't use them before they spoil.</p>
+    </div>
+    <div class="two-col-extra grid-span">
+      <p>My co-founder and I wanted to see if digital technology could improve this experience. He lead the development, while I lead the interface and experience design.</p>
     </div>
     <div class="two-col-extra dark-on-light grid-span">
       <p><span class="emphasis bold-italic">How could technology help busy people with their weeknight meals?</span></p>
@@ -57,12 +62,41 @@
       <p>If an app kept track of ingredients on hand, it could suggest more appropriate recipes.</p>
       <p>This app could use strategic notifications to help remind busy people so everything is ready to go when they get home.</p>
     </div>
-    <div class="one-col">
-      <p>Most recipes in apps and books have you jumping around and missing steps when you're trying to cook something for the first time.</p>
-      <p>The app can help guide you through the recipe and offer hands-free voice controls for messy chefs.</p>
+
+    <!-- Personas -->
+    <div id="caption2b" class="grid-span two-col dark-on-light">
+      <p><span class="bold-italic emphasis">How might different users explore recipes in the app?</span></p>
     </div>
-    <figure class="image contain fourSeventyTwo" style="background-image: url('/images/souschef-cooking-sketch.png')">
-    </figure>
+    <div class="one-col">
+      <p>I talked to friends and family about their experiences with cooking recipes and recipe apps and created personas based on that research.</p>
+    </div>
+    <div class="overlap">
+      <figure class="box1">
+        <img src="/images/souschef-persona1.png" alt="Retired Schoolteacher Persona"/>
+      </figure>
+      <figure class="box2">
+        <img src="/images/souschef-persona2.png" alt="Food Nerd Persona"/>
+      </figure>
+      <figure class="box3">
+        <img src="/images/souschef-persona3.png" alt="Working Mom Personal"/>
+      </figure>
+    </div>
+    <div class="overlap">
+      <figure class="box1">
+        <img src="/images/souschef-foodnerd-recipe-selection.png" alt="Food Nerd Recipe Selection"/>
+      </figure>
+      <figure class="box2">
+        <img src="/images/souschef-retired-recipe-selection.png" alt="Retired Schoolteacher Recipe Selection"/>
+      </figure>
+      <figure class="box3">
+        <img src="/images/souschef-mom-recipe-selection.png" alt="Working Mom Recipe Selection"/>
+      </figure>
+    </div>
+    <div  class="one-col">
+      <p>The biggest difference between the personas is how they prioritize time, quality, and cost.</p>
+      <p>For the Retired Schoolteacher, the most important is cost. For the Food Nerd, it's quality. And for the Working Mom, time.</p>
+    </div>
+
     <!-- Recipe Iteration -->
     <div class="two-col-extra dark-on-light grid-span">
       <p><span class="emphasis bold-italic">How might we organize recipe details to help users to select a dish to cook?</span></p>
@@ -83,44 +117,6 @@
       <p>Rather than having grocery orders automatically scheduled, users felt more comfortable clicking a button to add to their shopping cart. Users can also choose to make the meal now or schedule it for another time or day.</p>
     </div>
     <figure class="image contain fourSeventyTwo" style="background-image: url('/images/souschef-recipe-final.png')">
-    </figure>
-
-    <!-- Personas -->
-    <div id="caption2b" class="grid-span two-col dark-on-light">
-      <p><span class="bold-italic emphasis">How might different users explore recipes in the app?</span></p>
-    </div>
-    <figure class="">
-      <img src="/images/souschef-persona1.png" alt="Retired Schoolteacher Persona"/>
-    </figure>
-    <div class="one-col">
-      <p>I talked to friends and family about their experiences with cooking recipes and recipe apps and created personas based on that research.</p>
-    </div>
-    <figure class="">
-      <img src="/images/souschef-persona2.png" alt="Food Nerd Persona"/>
-    </figure>
-    <figure class="">
-      <img src="/images/souschef-persona3.png" alt="Working Mom Personal"/>
-    </figure>
-    <div  class="one-col">
-      <p>I envisioned how each persona would select a recipe. My goal was to narrow down the options and still deliver recipes for different individuals.</p>
-    </div>
-    <figure class="">
-      <img src="/images/souschef-foodnerd-recipe-selection.png" alt="Food Nerd Recipe Selection"/>
-    </figure>
-    <figure class="">
-      <img src="/images/souschef-retired-recipe-selection.png" alt="Retired Schoolteacher Recipe Selection"/>
-    </figure>
-    <div  class="one-col">
-      <p>The biggest difference between the personas is how they prioritize time, quality, and cost.</p>
-      <p>For the Retired Schoolteacher, the most important is cost. For the Food Nerd, it's quality. And for the Working Mom, time.</p>
-    </div>
-    <div  class="one-col">
-      <p>If we focus on those factors, it greatly simplifies the interface.</p>
-      <p>The recommendation engine to can refine suggestions by taste&#8212; Similar to Pandora's thumbs up or down.</p>
-      <p>Asking the user the reason they gave the recipe a thumbs down could improve the algorithm to exclude specific things like meat.</p>
-    </div>
-    <figure class="">
-      <img src="/images/souschef-recommend.png" alt=""/>
     </figure>
 
     <!-- Variations -->
@@ -177,11 +173,17 @@
   </figure>
     <figure class="image contain grid-span fourSeventyTwo" style="background-image: url('/images/souschef-pantry-views.png')">
     </figure>
+    <!-- Conclusion -->
     <div class="two-col-extra grid-span">
-      <p>A simple table view where items can be entered in by typing is the best solution for now. Audio entry can be used simply by tapping the microphone.</p>
-      <p>An option to use image recognition is a supplemental feature for users to test and provide feedback as the technology improves.</p>
+      <p class="bold-italic">In my exploration, I've learned that current technology limits what we can do to give the best experience to people. Automatic tracking just isn't there yet. It's more of an experimental features for curious users.</p>
+      <p class="bold-italic">I'm now continuing to solve the problem by looking at how recipes can be presented to improve the cooking experience. I believe there are many improvements over existing recipe apps and books.</p>
+    </div>
+    <!-- Footer -->
+    <div class="grid-span dark-on-light">
+      <p>Additional Credits: Shane Vitarana&#8212;Developer/Co-Founder</p>
     </div>
   </section>
+
   <footer id="footer" class="footer">
     <stt-scroll-btn  class="btn-bc z3" style="transform: scaleY(-1)" onclick="TweenLite.to(window, 1, {scrollTo:0});"></stt-scroll-btn>
   </footer>
@@ -189,24 +191,6 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.4/TweenLite.min.js"></script>
   <script src="/scripts/animation.gsap.min.js"></script>
   <script src="/scripts/utils.js"></script>
-  <script id="detailsScript">
-  document.querySelector('#app').addEventListener('displayed', function (e) {
-    // build scene
-    var controller = new ScrollMagic.Controller();
-    var children = document.querySelectorAll('#contentDetails > figure, #contentDetails p');
-
-    forEach(children, (index, item) => {
-
-      var tween = null;
-      tween = TweenLite.from(item, 1, { opacity: 0, y: '+=100', ease: Power3.easeOut });
-
-      var scene = new ScrollMagic.Scene({triggerElement: item, offset: -600 })
-      .reverse(false)
-      .setTween( tween ) // the tween durtion can be omitted and defaults to 1
-      .addTo(controller);
-    });
-
-  }, {once: true});
-  </script>
+  <script id="detailsScript" src="/scripts/main.js"></script>
 </body>
 </html>
