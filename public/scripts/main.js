@@ -1,4 +1,4 @@
-document.querySelector('#app').addEventListener('displayed', function (e) {
+function scrollAnimationListener(e) {
   // build scene
   var controller = new ScrollMagic.Controller();
   var children = document.querySelectorAll('#contentDetails > figure, #contentDetails p');
@@ -18,7 +18,15 @@ document.querySelector('#app').addEventListener('displayed', function (e) {
     .addTo(controller);
   });
 
-}, {once: true});
+}
+
+function loadCaseAnimation() {
+  document.querySelector('#app').addEventListener('displayed', scrollAnimationListener, {once: true});
+}
+
+function removeCaseAnimation() {
+  document.querySelector('#app').removeEventListener('displayed', scrollAnimationListener, {once: true});
+}
 
 window.onscroll = () => {
   var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
