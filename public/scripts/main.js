@@ -33,6 +33,6 @@ window.onscroll = () => {
   var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
   var scrolled = (winScroll / height) * 100;
   var bar = document.getElementById("progress-bar");
-  if (typeof bar === "undefined" || bar.value == '') { return; };
+  if (typeof bar === "undefined" || bar === null || bar.value == '') { return; };
   bar.style.width = scrolled + "%";
 }
