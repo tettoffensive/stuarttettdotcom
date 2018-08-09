@@ -57,13 +57,14 @@
       <skew-header id="thecards"></skew-header>
       <skew-info-card description="I design products and user experiences for happy humans."></skew-info-card>
       <template is="dom-repeat" id="thecards" items="{{cards}}" on-dom-change="_cardsDomChange">
-        <skew-card id=[[item.link]] link=[[item.link]] title=[[item.title]]
+        <skew-card id=[[item.link]] link=[[item.link]] title=[[item.title]] tabindex=0 autofocus=true
         description=[[item.description]]
         tags=[[item.tags]]
         img=[[item.image]]
         on-click="_onClick"
         on-close="_onClickClose"
         on-scroll="_onClickScroll"
+        on-keydown="_onEnter"
         ></skew-card>
       </template>
     </div>
@@ -260,6 +261,12 @@ class StuarttettdotcomApp extends Polymer.Element {
       // Calculate the time from starting to load the data for use in animation timing
       var startLoad = performance.now();
       xhr.send(); // send the request
+    }
+
+    _onEnter(event) {
+      if (event.keyCode === 13) {
+        this._onClick(event);
+      }
     }
 
     _onClick(event) {

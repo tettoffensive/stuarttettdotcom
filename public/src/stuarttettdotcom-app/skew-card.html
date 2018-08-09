@@ -87,7 +87,7 @@
       transition-timing-function: cubic-bezier(.35,.0,.35,1.29);
     }
 
-    :host(.initial:hover) #contentZoom {
+    :host(.initial:hover) #contentZoom, :host(.initial:focus) #contentZoom {
       transform-origin: center;
       transform: scale(1.05);
     }
@@ -101,7 +101,7 @@
       transition-timing-function: cubic-bezier(.35,.0,.35,1.29);
     }
 
-    :host(.initial:hover) #arrow {
+    :host(.initial:hover) #arrow, :host(.initial:focus) #arrow {
       transform: translateY(-24px);
       background-image: linear-gradient(-180deg, #4E5251 4%, #3F4A48 98%);
     }
