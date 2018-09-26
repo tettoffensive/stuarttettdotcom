@@ -5,6 +5,7 @@ function scrollAnimationListener(e) {
 
   requestAnimationFrame( () => {
     document.querySelector('.progress-container').classList.remove('fade-in');
+    document.querySelector('.footer').classList.remove('fade-in');
   });
 
   forEach(children, (index, item) => {

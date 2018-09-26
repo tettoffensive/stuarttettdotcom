@@ -125,7 +125,7 @@ $break-desktop-large: 1200px;
   @media screen and (min-width: $break-mobile) {
     max-width: 1482px;
     width: calc(100% - 160px);
-    grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
     grid-gap: 80px 40px;
     padding-bottom: 80px;
   }
@@ -191,6 +191,7 @@ $break-desktop-large: 1200px;
 }
 
 .fourSeventyTwo {
+  grid-span: 2;
   min-height: 65vmin;
   width: 100%;
 
