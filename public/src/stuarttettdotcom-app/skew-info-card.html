@@ -104,6 +104,7 @@
     static get is() { return 'skew-info-card'; }
     static get properties() {
       return {
+        detail: {type: String, value: '', reflectToAttribute: true, observer: '_detailChanged' },
         title: {
           type: String,
           reflectToAttribute: true,
@@ -166,6 +167,10 @@
       this.removeEventListener("mouseout");
     }
 
+    _detailChanged(newValue, oldValue) {
+
+    }
+
     _resize(event) {
       if (!this.divFullCard) { return; }
 
@@ -194,7 +199,7 @@
         this.divFullCard = this.$.fullCard.cloneNode(true);
         this.parentElement.parentElement.appendChild(this.divFullCard);
         this.divFullCard.style.visibility = "";
-        this.divFullCard.style.display = "";
+        this.divFullCard.style.display = "none";
         this.divFullCard.querySelector('#closeBtn').addEventListener('click', (event) => {
           this.dispatchEvent(new CustomEvent('close', {}));
         });
@@ -315,6 +320,7 @@
         heightString = "100vh";
       }
 
+      this.divFullCard.style.display = 'none';
       tl.add( TweenLite.to(this.divFullCard, 0, { display: 'block', width: "100%", height: heightString}), 0)
         .add( TweenLite.to(this.animDest, 0, { display: 'block'}), 0);
       // Put the destination pieces in their "First" states
@@ -330,22 +336,6 @@
       tl.addLabel("scaleUpLabel", delay);
       delay += scaleUpLabelDuration;
       tl.addLabel("scaleUpLabelFinish", delay);
-
-      delay = animation ? 0.01 : 0; // reset
-      let fadeOutImageDuration = animation ? 0.25 : 0;
-      tl.addLabel("fadeOutImage", delay);
-      delay += fadeOutImageDuration;
-      tl.addLabel("fadeOutImageFinish", delay);
-
-      let unskewContentDuration = animation ? 0.15 : 0;
-      tl.addLabel("unskewContent", delay);
-      delay += unskewContentDuration;
-      tl.addLabel("unskewContentFinish", delay);
-
-      let scaleUpContentDuration = animation ? 0.25 : 0;
-      tl.addLabel("scaleUpContent", delay);
-      delay += scaleUpContentDuration;
-      tl.addLabel("scaleUpContentFinish", delay);
 
       let fadeInDetailsDuration = 1.0;
       let fadeOutWrapperDuration = animation ? fadeInDetailsDuration : 0;
@@ -396,7 +386,7 @@
 
     tl.add( TweenLite.to(window, 1, { scrollTo: scrollY, ease: Power3.easeInOut}), "scaleUpLabel");
     tl.add( TweenLite.to(this.parentElement.parentElement.querySelector("#wrapper"), fadeOutWrapperDuration, { autoAlpha: 0, display: 'none', ease: Power3.easeInOut
-    }), "scaleUpContent");
+    }), "scaleUpLabel");
   tl.add( TweenLite.fromTo(animDest.querySelector("#cardInfoDescription"), fadeInDetailsDuration, { autoAlpha: 0 }, { autoAlpha: 1, ease: Power3.easeInOut,
   }), "fadeInDetails");
   tl.add( TweenLite.fromTo(animDest.querySelector("#cardInfoImage"), fadeInDetailsDuration, { autoAlpha: 0}, { autoAlpha: 1, ease: Power3.easeInOut,
