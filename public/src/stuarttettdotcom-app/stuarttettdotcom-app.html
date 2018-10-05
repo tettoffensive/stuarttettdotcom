@@ -55,7 +55,13 @@
   <div id="page" class="page">
     <div id="wrapper" class="wrapper">
       <skew-header id="thecards"></skew-header>
-      <skew-info-card description="I design products and user experiences for happy humans."></skew-info-card>
+      <skew-info-card id="info"
+        title="about"
+        on-click="_onClickInfo"
+        on-close="_onClickCloseInfo"
+        on-scroll="_onClickScrollInfo"
+        on-keydown="_onEnterInfo"
+        description="I design products and user experiences for happy humans."></skew-info-card>
       <template is="dom-repeat" id="thecards" items="{{cards}}" on-dom-change="_cardsDomChange">
         <skew-card id=[[item.link]] link=[[item.link]] title=[[item.title]] tabindex=0 autofocus=true
         description=[[item.description]]
@@ -73,6 +79,11 @@
 
 <script>
 "use strict"
+
+function removeFromParent(el) {
+    el.parentNode.removeChild(el);
+}
+
 /**
 * @customElement
 * @polymer
@@ -269,6 +280,12 @@ class StuarttettdotcomApp extends Polymer.Element {
       }
     }
 
+    _onEnterInfo(event) {
+      if (event.keyCode === 13) {
+        this._onClickInfo(event);
+      }
+    }
+
     _onClick(event) {
 
       if (this._lastClickElement != null) {
@@ -289,6 +306,24 @@ class StuarttettdotcomApp extends Polymer.Element {
 
     }
 
+    _onClickInfo(event) {
+
+      if (this._lastClickElement != null) {
+        return;
+      }
+
+      let el = event.target;
+      this._lastClickElement = el;
+      this._lastWindowPosition = window.scrollY;
+      el.openCard(event, (card) => {
+        this._loadPageData("about");
+        // Page history
+        document.title = "About";
+        history.pushState(null, `Stuart Tett - About`, "about");
+      });
+
+    }
+
     _detailChanged(newValue, oldValue) {
 
     }
@@ -300,7 +335,11 @@ class StuarttettdotcomApp extends Polymer.Element {
         let el = this.shadowRoot.querySelector('skew-card[link="' + newValue + '"]');
         let model = this.$.thecards.modelForElement(el);
         if (!model) {
-          return;
+          if (newValue === "about") {
+            el = this.$.info;
+          } else {
+            return;
+          }
         }
         el.transitioning = true; // transition to open
         el._openCallback = () => {
@@ -331,6 +370,10 @@ class StuarttettdotcomApp extends Polymer.Element {
     return details;
   }
 
+  _onClickScrollInfo(event) {
+    this._onClickScroll(event);
+  }
+
   _onClickScroll(event) {
 
     if (this._lastClickElement == null) {
@@ -350,13 +393,35 @@ class StuarttettdotcomApp extends Polymer.Element {
     // tl.add( TweenLite.to(button, 0.5, { transform: 'rotate(180deg)', position: 'fixed', right: '80px' }));
   }
 
+  _onClickCloseInfo(event) {
+    if (this._lastClickElement == null) {
+      return;
+    }
+    let el = this._lastClickElement;
+    this._lastClickElement = null;
+    el.detail = "false";
+    window.scrollTo(0,this._lastWindowPosition);
+    let details = document.querySelector("#contentDetails");
+    if (details != null) {
+      var tl = new TimelineLite({ paused: false });
+      tl.add( TweenLite.to(details, 0.5, { autoAlpha: 0, display: 'none'}), 0);
+    }
+
+    el.closeCard(event, (content) => {
+      // Page history
+      document.title = "Stuart Tett | Interaction Designer";
+      history.pushState(null, document.title, "/");
+      content.style.visibility = "hidden";
+      this._removePageData();
+    });
+  }
+
   _onClickClose(event) {
     if (this._lastClickElement == null) {
       return;
     }
     let el = this._lastClickElement;
     this._lastClickElement = null;
-    // let model = this.$.thecards.modelForElement(el);
     el.detail = "false";
     window.scrollTo(0,this._lastWindowPosition);
     let details = document.querySelector("#contentDetails");
@@ -373,8 +438,8 @@ class StuarttettdotcomApp extends Polymer.Element {
       content.style.visibility = "hidden";
       this._removePageData();
     });
-
   }
+
 }
 
 window.customElements.define(StuarttettdotcomApp.is, StuarttettdotcomApp);

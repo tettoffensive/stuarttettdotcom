@@ -141,16 +141,6 @@
   // otherwise GSAP skewY != css skewY https://greensock.com/docs/Plugins/CSSPlugin
   CSSPlugin.defaultSkewType = "simple";
 
-  // Used for interpotalion in the animation for closing the card
-  function remap(x, inMin, inMax, outMin, outMax) {
-    let remap = (x - inMin) * (outMax - outMin) / (inMax - inMin) + outMin;
-    return Math.min(Math.max(remap, outMin), outMax);
-  }
-
-  function removeFromParent(el) {
-    el.parentNode.removeChild(el);
-  }
-
   class SkewCard extends Polymer.Element {
     static get is() { return 'skew-card'; }
     static get properties() {
@@ -212,9 +202,6 @@
       this._tl = null;
       this.animLabelDest = null;
       this.animLabelSource = null;
-      // for history back and forward buttons
-      // this._popState = this._popState.bind(this);
-      this._tl = null;
       this._openCallback = this._closeCallback = null;
     }
 
@@ -246,7 +233,6 @@
       this.addEventListener("mouseout", (event) => {
         ga('send', 'timing', 'Hover', 'hover', Math.round(performance.now() - startPerformance), this.title);
       });
-
     }
 
     disconnectedCallback() {
