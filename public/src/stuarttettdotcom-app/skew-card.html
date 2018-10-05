@@ -29,12 +29,17 @@
     }
 
 
-    @media screen and (min-width: 800px) {
+    @media screen and (min-width: 660px) {
       :host {
         flex-direction: row;
       }
 
+      :host(.initial) #label, #content {
+        transform: skewY(3deg);
+      }
+
       :host(.initial) {
+        transform: skewY(-3deg);
         height: var(--card-closed-height);
         width: 100%;
       }
@@ -64,7 +69,7 @@
 
     /*  Initial Skewed State */
     :host(.initial) {
-      transform: skewY(-3deg);
+
       width: 100%;
     }
 
@@ -75,7 +80,7 @@
 
     /* Counter host skewY with an equal and opposite skew */
     :host(.initial) #label, #content {
-      transform: skewY(3deg);
+      /* transform: skewY(3deg); */
     }
 
     :host(.hundred-pct) {
@@ -256,7 +261,9 @@
         height += 30;
         btn.style.top = height + "px";
         this.divFullCard.style.height = '110vh';
+        this.animLabelDest.style.transform = '';
       }
+      this.$.label.style.transform = '';
     }
 
     _tryCloneNodesForDetail() {
@@ -434,7 +441,7 @@
 
       // Unskew Label
       tl.add( TweenLite.fromTo(this.$.label, unskewDuration, { autoAlpha: 1 }, { autoAlpha: 0 }), "unskewLabel");
-      tl.add( TweenLite.fromTo(this.$.labelShadow, unskewDuration, { skewY: 0, skewType: "simple", transformOrigin: "left top" }, {skewY: 3, skewType: "simple", transformOrigin: "left top",
+      tl.add( TweenLite.fromTo(this.$.labelShadow, unskewDuration, { skewY: 0, skewType: "simple", transformOrigin: "left top" }, {skewY: this.isDesktop() ? 3 : 0, skewType: "simple", transformOrigin: "left top",
       force3D: true, // fixes glitch in Safari
       onUpdateParams:["{self}"],
       onUpdate: (tween) => {

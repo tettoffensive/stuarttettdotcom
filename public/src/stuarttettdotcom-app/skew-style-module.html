@@ -19,9 +19,11 @@
       color: #ffffff;
     }
 
-    .lbl-initial p.tags, .info-initial p.tags {
-      transform-origin: right top;
-      transform: skewY(-3deg);
+    @media screen and (min-width: 660px) {
+      .lbl-initial p.tags, .info-initial p.tags {
+        transform-origin: right top;
+        transform: skewY(-3deg);
+      }
     }
 
     .ct-initial {
@@ -30,7 +32,7 @@
     }
 
     .ct-onclick {
-        height: 65min;
+      height: 65min;
     }
 
     :not(.ct-initial) .hidden {
@@ -140,7 +142,7 @@
 
     /* Background color on the label-clip (so no extra gap at the bottom) */
     .dark-background {
-       background-image: linear-gradient(-180deg, #4E5251 4%, #3F4A48 98%);
+      background-image: linear-gradient(-180deg, #4E5251 4%, #3F4A48 98%);
     }
 
     .z3 {
@@ -249,7 +251,7 @@
     }
 
     /* @media screen and (min-width: 660px) {
-      min-height: 515px;
+    min-height: 515px;
     } */
 
     .label .text {
@@ -312,8 +314,14 @@
 
     .btn-tr {
       position: absolute;
-      top: 20px;
-      right: 20px;
+      top: 230px;
+      right: 0px;
+    }
+
+    .btn-tr2 {
+      position: absolute;
+      top: 90px;
+      right: 0px;
     }
 
     .btn-bc {
@@ -322,14 +330,25 @@
       left: calc(50% - 30px);
     }
 
+    .btn-bc2 {
+      position: absolute;
+      top: 145px;
+      left: calc(50% -30px);
+      visibility: hidden;
+    }
+
     @media screen and (min-width: 660px) {
-      .btn-tr {
+      .btn-tr, .btn-tr2 {
         position: absolute;
         top: 85px;
         right: calc(80px - 30px);
       }
 
-      .btn-bc {
+      .btn-bc2 {
+        visibility: visible;
+      }
+
+      .btn-bc, .btn-bc2 {
         position: absolute;
         top: 1054px;
         left: 50%;
@@ -355,6 +374,10 @@
     .info_card_wrapper {
       display: flex;
       /* position: relative; */
+    }
+
+    #info {
+      position: relative;
     }
 
     .info-initial {
@@ -385,12 +408,13 @@
       position: relative;
     }
 
-    .initial .unskew {
-      transform: skewY(3deg) translateY(-10px);
+    @media screen and (min-width: 660px) {
+      .initial .unskew {
+        transform: skewY(3deg) translateY(-10px);
+      }
     }
 
     .info_card_description {
-      max-width: 500px;
       margin: auto;
       margin-left: 50px;
       font-family: 'DecimaMonoRound-BoldItalic',monospace;
@@ -405,23 +429,23 @@
       padding: 20px;
       z-index: 1;
     }
+    
+    @media screen and (min-width: 375px) {
+      .info_card_description {
+        /* font-size: calc([minimum size] + ([maximum size] - [minimum size]) * ((100vw - [minimum viewport width]) / ([maximum viewport width] - [minimum viewport width]))); */
+        font-size: calc(24px + 12 * ((100vw - 375px) / 425));
+      }
+    }
 
+    @media screen and (min-width: 660px) {
 
-        @media screen and (min-width: 375px) {
-          .info_card_description {
-            /* font-size: calc([minimum size] + ([maximum size] - [minimum size]) * ((100vw - [minimum viewport width]) / ([maximum viewport width] - [minimum viewport width]))); */
-            font-size: calc(24px + 12 * ((100vw - 375px) / 425));
-          }
-        }
-
-        @media screen and (min-width: 800px) {
-
-          .info_card_description {
-            margin: auto;
-            margin-left: 50px;
-            font-size: 36px;
-          }
-        }
+      .info_card_description {
+        max-width: 500px;
+        margin: auto;
+        margin-left: 50px;
+        font-size: 36px;
+      }
+    }
 
     #cardInfoClip {
       width: 100%;

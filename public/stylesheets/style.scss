@@ -191,21 +191,23 @@ $break-desktop-large: 1200px;
 }
 
 .fourSeventyTwo {
-  grid-column-end: span 2;
+  grid-column-end: span 4;
   min-height: 65vmin;
   width: 100%;
 
   @media screen and (min-width: $break-mobile) {
+    grid-column-end: span 2;
     min-height: 472px;
   }
 }
 
 .fourSeventyTwo1 {
-  grid-column-end: span 1;
+  grid-column-end: span 2;
   min-height: 65vmin;
   width: 100%;
 
   @media screen and (min-width: $break-mobile) {
+    grid-column-end: span 1;
     min-height: 472px;
   }
 }
@@ -262,26 +264,38 @@ $break-desktop-large: 1200px;
 
 .one-col {
   max-width: 650px;
-  grid-column-end: span 2;
+  grid-column-end: span 4;
+  @media screen and (min-width: $break-mobile) {
+    grid-column-end: span 2;
+  }
 }
 
 .one-col-dark {
   max-width: 700px;
-  grid-column-end: span 2;
+  grid-column-end: span 4;
+  @media screen and (min-width: $break-mobile) {
+    grid-column-end: span 2;
+  }
 }
 
 .two-col {
   max-width: 772px;
   grid-column-end: span 4;
+  @media screen and (min-width: $break-mobile) {
+    grid-column-end: span 2;
+  }
 }
 
 .two-col-extra {
   max-width: 972px;
   grid-column-end: span 4;
+  @media screen and (min-width: $break-mobile) {
+    grid-column-end: span 2;
+  }
 }
 
 .grid-span {
-  grid-column: 1 / -1;
+  grid-column: span 4;
 }
 
 .dark-list > li {

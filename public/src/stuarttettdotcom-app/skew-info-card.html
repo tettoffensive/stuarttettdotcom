@@ -13,7 +13,7 @@
 
       transform-origin: left top;
       cursor: pointer;
-      transform: skewY(-3deg);
+      /* transform: skewY(-3deg); */
       background-color: transparent;
       padding: 0px;
 
@@ -39,9 +39,10 @@
       transform: scale(1.025);
     }
 
-    @media screen and (min-width: 800px) {
+    @media screen and (min-width: 660px) {
       :host {
         flex-direction: row;
+        transform: skewY(-3deg);
       }
 
       :host(.initial) {
@@ -78,8 +79,8 @@
     }
     </style>
     <div id="fullCard" style="display: none; visibility: hidden;">
-      <stt-close-btn id="closeBtn" class="btn-tr z3"></stt-close-btn>
-      <stt-scroll-btn id="scrollBtn" class="btn-bc z3"></stt-scroll-btn>
+      <stt-close-btn id="closeBtn" class="btn-tr2 z3"></stt-close-btn>
+      <stt-scroll-btn id="scrollBtn" class="btn-bc2 z3"></stt-scroll-btn>
     </div>
     <div id="cardInfo" class="info_card_wrapper shadow z2">
       <div id="cardInfoClip" class="clip dark-background">
@@ -178,12 +179,14 @@
       if (this.isMobile()) {
         btn.style.top = '';
         this.divFullCard.style.height = '';
-      } else if (this.animLabelDest) {
-        var height = this.animLabelDest.offsetHeight;
+      } else if (this.animDest) {
+        var height = this.animDest.offsetHeight;
         height += 30;
         btn.style.top = height + "px";
         this.divFullCard.style.height = '110vh';
       }
+      this.$.cardInfoImage.style.transform = '';
+      this.$.cardInfoDescription.style.transform = '';
     }
 
     isDesktop() {
@@ -290,8 +293,8 @@
       let btn = this.divFullCard.querySelector('#scrollBtn');
       if (this.isMobile()) {
         btn.style.top = '';
-      } else if (this.animLabelDest) {
-        var height = this.animLabelDest.offsetHeight;
+      } else if (this.animDest) {
+        var height = this.animDest.offsetHeight;
         height += 30;
         btn.style.top = height + "px";
       }
@@ -352,7 +355,7 @@
       // Unskew Label
       tl.add( TweenLite.fromTo(this.$.cardInfoDescription, unskewDuration, { autoAlpha: 1 }, { autoAlpha: 0 }), "unskewLabel");
       tl.add( TweenLite.fromTo(this.$.cardInfoImage, unskewDuration, { autoAlpha: 1 }, { autoAlpha: 0 }), "unskewLabel");
-      tl.add( TweenLite.fromTo(this.$.cardInfoClip, unskewDuration, { skewY: 0, skewType: "simple", transformOrigin: "left top" }, {skewY: 3, skewType: "simple", transformOrigin: "left top",
+      tl.add( TweenLite.fromTo(this.$.cardInfoClip, unskewDuration, { skewY: 0, skewType: "simple", transformOrigin: "left top" }, {skewY: this.isDesktop() ? 3: 0, skewType: "simple", transformOrigin: "left top",
       force3D: true, // fixes glitch in Safari
       onUpdateParams:["{self}"],
       onUpdate: (tween) => {

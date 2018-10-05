@@ -82,9 +82,11 @@
       max-height: 600px;
     }
 
-    .straighten {
-      transform-origin: left top;
-      transform: skewY(3deg);
+    @media screen and (min-width: 660px) {
+      .straighten {
+        transform-origin: left top;
+        transform: skewY(3deg);
+      }
     }
 
     </style>
