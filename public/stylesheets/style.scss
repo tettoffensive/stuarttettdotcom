@@ -38,6 +38,7 @@
 }
 
 $header-font: 'BioRhyme', serif;
+$subheader-font: 'DecimaMonoRound-Italic', monospace;
 $body-font: DecimaMonoRound, monospace;
 $system-font: -apple-system, BlinkMacSystemFont,"Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
 $black: #100100;
@@ -141,7 +142,7 @@ $break-desktop-large: 1200px;
 //   }
 // }
 
-#contentDetails > div:not(.overlap) {
+#contentDetails > div:not(.overlap,.align-left) {
   place-self: center;
 }
 
@@ -419,4 +420,22 @@ figcaption {
     position: absolute;
   }
 
+}
+
+h1 {
+  text-transform: uppercase;
+  font-size: 48pt;
+  line-height: 1.25em;
+}
+
+h2 {
+  font-family: $subheader-font;
+  font-size: 24pt;
+  line-height: 1.25em;
+}
+
+.align-left {
+  justify-self: start;
+  place-self: start;
+  align-self: start;
 }

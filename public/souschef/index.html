@@ -1,208 +1,161 @@
-<!DOCTYPE html>
-<html lang="en">
+<html lang='en'>
 <head>
-  <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes" />
-  <meta name="description" content="Stuart Tett | Interaction Designer" />
-  <link rel="stylesheet" type="text/css" href="../fonts/fonts.css" />
-  <link rel="stylesheet" type="text/css" href="../stylesheets/reset.css" />
-  <link href="https://fonts.googleapis.com/css?family=BioRhyme:800" rel="stylesheet" />
-  <link rel="manifest" href="/manifest.json" />
-  <script src="../bower_components/webcomponentsjs/webcomponents-loader.js"></script>
-  <link rel="import" href="../src/stuarttettdotcom-app/stuarttettdotcom-app.html" />
-  <title>Stuart Tett | Interaction Designer</title>
-  <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-  <link rel="stylesheet" type="text/css" href="/stylesheets/style.css?v=1" />
-  <script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-42078109-2"></script>
-  <script>
+<meta content='width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes' name='viewport'>
+<meta content='Stuart Tett | Interaction Designer' name='description'>
+<link href='../fonts/fonts.css' rel='stylesheet' type='text/css'>
+<link href='../stylesheets/reset.css' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=BioRhyme:800' rel='stylesheet'>
+<link href='/manifest.json' rel='manifest'>
+<script src='../bower_components/webcomponentsjs/webcomponents-loader.js'></script>
+<link href='../src/stuarttettdotcom-app/stuarttettdotcom-app.html' rel='import'>
+<title>Stuart Tett | Interaction Designer</title>
+<meta content='text/html; charset=UTF-8' http-equiv='content-type'>
+<link href='/stylesheets/style.css?v=1' rel='stylesheet' type='text/css'>
+<script async='' src='https://www.googletagmanager.com/gtag/js?id=UA-42078109-2'></script>
+<script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments)};
   gtag('js', new Date());
-
+  
   gtag('config', 'UA-42078109-2');
-  </script>
-  <script>
+</script>
+<script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
     (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
     m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
   })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
+  
   ga('create', 'UA-42078109-2', 'auto');
   ga('set', 'page', '/souschef');
   ga('send', 'pageview');
-
-  </script>
+</script>
 </head>
-<body xmlns="http://www.w3.org/1999/xhtml">
-  <stuarttettdotcom-app id="app" detail="souschef"></stuarttettdotcom-app>
-  <section id="contentDetails" class="z1" style="display: none; visibility: hidden; min-height: 100vh;">
-  <div id="bar" class="progress-container fade-in"><div class="progress-bar" id="progress-bar"></div></div>
-    <!-- Intro -->
-    <figure class="image contain fourSeventyTwo" role="img" aria-label="" style="background-image: url('/images/souschef-views.png')">
-    </figure>
-    <div class="one-col">
-      <p>Cooking weeknight dinners is a challenge for working professionals. Often people don't think about it until their commute home. They look in their fridge paralyzed. They often end up ordering delivery.</p>
-      <p>This gets expensive. Often times, they overlook ingredients on hand and don't use them before they spoil.</p>
-    </div>
-    <div class="two-col-extra grid-span">
-      <p>My co-founder and I wanted to see if digital technology could improve this experience. He led the development, while I led the interface and experience design.</p>
-    </div>
-    <div class="two-col-extra dark-on-light grid-span">
-      <p><span class="emphasis bold-italic">How could technology help busy people with their weeknight meals?</span></p>
-    </div>
-    <div id="caption2" class="one-col">
-      <p>The core problem is meal-plannin<span class="kern">g.</span></p>
-      <p>Our target users have busy lives. Users need help making the time to plan and cook meals.</p>
-      <p>I began by sketching out ways a mobile app could achieve thi<span class="kern">s.</span></p>
-    </div>
-    <figure class="image contain fourSeventyTwo" role="img" aria-label="" style="background-image: url('/images/souschef-problem.jpg')">
-    </figure>
-    <figure class="image contain fourSeventyTwo" role="img" aria-label="" style="background-image: url('/images/souschef-planning-sketch.png')">
-    </figure>
-    <div class="one-col">
-      <p>If an app kept track of ingredients on hand, it could suggest more appropriate recipes.</p>
-      <p>This app could use strategic notifications to help remind busy people so everything is ready to go when they get home.</p>
-    </div>
-
-    <!-- Personas -->
-    <div id="caption2b" class="grid-span two-col dark-on-light">
-      <p><span class="bold-italic emphasis">How might different users explore recipes in the app?</span></p>
-    </div>
-    <div class="one-col">
-      <p>I talked to friends and family about their experiences with cooking recipes and recipe apps and created personas based on that research.</p>
-    </div>
-    <div class="overlap one-col">
-      <figure class="box1">
-        <img src="/images/souschef-persona1.png" alt="Retired Schoolteacher Persona"/>
-      </figure>
-      <figure class="box2">
-        <img src="/images/souschef-persona2.png" alt="Food Nerd Persona"/>
-      </figure>
-      <figure class="box3">
-        <img src="/images/souschef-persona3.png" alt="Working Mom Personal"/>
-      </figure>
-    </div>
-    <div class="overlap one-col">
-      <figure class="box1">
-        <img src="/images/souschef-foodnerd-recipe-selection.png" alt="Food Nerd Recipe Selection"/>
-      </figure>
-      <figure class="box2">
-        <img src="/images/souschef-retired-recipe-selection.png" alt="Retired Schoolteacher Recipe Selection"/>
-      </figure>
-      <figure class="box3">
-        <img src="/images/souschef-mom-recipe-selection.png" alt="Working Mom Recipe Selection"/>
-      </figure>
-    </div>
-    <div class="one-col">
-      <p>The biggest difference between the personas is how they prioritize time, quality, and cost.</p>
-      <p>For the Retired Schoolteacher, the most important is cost. For the Food Nerd, it's quality. And for the Working Mom, time.</p>
-    </div>
-
-    <!-- Recipe Iteration -->
-    <div class="two-col-extra dark-on-light grid-span">
-      <p><span class="emphasis bold-italic">How might we organize recipe details to help users to select a dish to cook?</span></p>
-    </div>
-    <figure class="one-col">
-      <img src="/images/souschef-Recipes-Variations.png" alt="Recipe View Variations"/>
-    </figure>
-    <div id="caption4" class="one-col">
-      <p>I believe the carousel is a good balance between seeing multiple recipes at the same time and having detailed information about each recip<span class="kern">e.</span></p>
-      <p>Seeing more than a photo and a title helps users make a decision quickly.</p>
-    </div>
-    <figure class="image contain grid-span fourSeventyTwo" role="img" aria-label="" style="background-image: url('/images/souschef-recipe-iterations.png')">
-    </figure>
-    <div class="grid-span two-col">
-      <p>Based on user feedback from mocks, I settled on "Yuck" and "Yum" icons for influencing recipe suggestions. I removed the "Save for Later" because users thought it was redundant and confusing.</p>
-    </div>
-    <div class="one-col">
-      <p>Rather than having grocery orders automatically scheduled, users felt more comfortable clicking a button to add to their shopping cart. Users can also choose to make the meal now or schedule it for another time or day.</p>
-    </div>
-    <figure class="image contain fourSeventyTwo" role="img" aria-label="" style="background-image: url('/images/souschef-recipe-final.png')">
-    </figure>
-
-    <!-- Variations -->
-    <div class="grid-span two-col dark-on-light">
-      <p><span class="bold-italic emphasis">How might we let the user explore the recipes with their own criteria?</span></p>
-    </div>
-    <div class="one-col">
-      <p>While less discoverabl<span class="kern">e,</span> a pull&#8211;down for recipe filtering options is a great because it doesn't require taking up visual real estate with a button and other apps have set precedent for user<span class="kern">s.</span></p>
-    </div>
-    <figure class="one-col">
-      <img src="/images/souschef-Filter-Variations.png" alt="Filter View Variations"/>
-    </figure>
-    <figure class="image contain fourSeventyTwo" role="img" aria-label="" style="background-image: url('/images/souschef-filter-flow.png')">
-    </figure>
-    <div class="one-col">
-      <p>I thought deeply about how filters and sorts could be applied. I came up with an interaction based on a '+' and 'x' button to toggle the effect of each option.</p>
-    </div>
-    <div class="one-col">
-      <p>By simplifying down to the three factors from the personas (rating, cost, and time), I eliminated the need for filtering. Sorting by these factors meant no results are excluded.</p>
-      <p>Users felt it wasn't clear that there was a particular order to the sorts until I put everything in a vertical list and added arrows (instead of drag and drop).</p>
-    </div>
-    <figure class="image contain fourSeventyTwo" role="img" aria-label="" style="background-image: url('/images/souschef-filter-iterations.png')">
-    </figure>
-    <figure class="image contain fourSeventyTwo" role="img" aria-label="" style="background-image: url('/images/souschef-filter-final.png')">
-    </figure>
-    <div class="one-col">
-      <p>Enabling and disabling sorting didn't turn out to matter so much. It's more about the order of the sorts. This simplified the interface even more and just left me with three sorts and two arrows to reorder.</p>
-    </div>
-    <div class="dark-on-light grid-span two-col">
-      <p><span class="bold-italic emphasis">How can we make entering ingredients easier?</span></p>
-    </div>
-    <figure class="image contain fourSeventyTwo" role="img" aria-label="" style="background-image: url('/images/souschef-scan-foods.png')">
-    </figure>
-    <div class="one-col">
-      <p>Typing each item individually on a mobile keyboard is tedious. I wondered if there was a better way.</p>
-      <p>Using image recognition to identify a variety of foods is tough implement and error prone. But as the technology improves this could prove a convenient way to enter the data.</p>
-      <p>Unfortunately, it's not reliable enough to be the primary method of input at this time.</p>
-    </div>
-    <div class="one-col">
-      <p>Another powerful data entry method would be using computer vision to read the text on receipts to identify items. This is less error prone and quite convenient when doing grocery shopping in-person.</p>
-    </div>
-    <figure class="image contain fourSeventyTwo" role="img" aria-label="" style="background-image: url('/images/souschef-scan-receipt.png')">
-    </figure>
-    <figure class="image contain fourSeventyTwo" role="img" aria-label="" style="background-image: url('/images/souschef-voice-entry.png')">
-    </figure>
-    <div class="one-col">
-      <p>A voice interface could be a great way to quickly enter ingredients. Items are entered one at a time, but it's faster than typing as you look around your kitchen.</p>
-    </div>
-    <div class="one-col">
-    <p>Eventually smart fridges will have cameras to keep track without needing any human involved.</p>
-    <p>And since more and more shopping is done online, the app can talk directly with the online grocers to manage inventory.</p>
-  </div>
-  <figure class="image contain fourSeventyTwo" role="img" aria-label="" style="background-image: url('/images/souschef-smart-fridge.jpg')">
-  </figure>
-    <figure class="image contain grid-span fourSeventyTwo" role="img" aria-label="" style="background-image: url('/images/souschef-pantry-views.png')">
-    </figure>
-    <div class="two-col grid-span">
-      <p>After I spent some time with the Pantry as a list on a separate tab, I decided that it might be better to unify the recipes and ingredients in one screen and lose the tab bar.</p>
-    </div>
-    <figure class="image contain fourSeventyTwo1" style="background-image: url('/images/souschef-unify-recipes-ingredients.png')">
-    </figure>
-    <figure class="image contain fourSeventyTwo1" style="background-image: url('/images/souschef-quick-add-condensed.png')">
-    </figure>
-    <figure class="image contain fourSeventyTwo1" style="background-image: url('/images/souschef-quick-add-expanded.png')">
-    </figure>
-    <figure class="image contain fourSeventyTwo1" style="background-image: url('/images/souschef-quick-add-search.png')">
-    </figure>
-    <!-- Conclusion -->
-    <div class="two-col-extra grid-span">
-      <p class="bold-italic">In my exploration, I've learned that current technology limits what we can do to give the best experience to people. Automatic tracking just isn't there yet. It's more of an experimental features for curious users.</p>
-      <p class="bold-italic">I'm now continuing to solve the problem by looking at how recipes can be presented to improve the cooking experience. I believe there are many improvements over existing recipe apps and books.</p>
-    </div>
-    <!-- Footer -->
-    <div class="grid-span dark-on-light">
-      <p>Additional Credits: Shane Vitarana&#8212;Developer/Co-Founder</p>
-    </div>
-  </section>
-
-  <footer id="footer" class="footer fade-in">
-    <stt-scroll-btn  class="btn-bc z3" style="transform: scaleY(-1)" onclick="TweenLite.to(window, 1, {scrollTo:0});"></stt-scroll-btn>
-  </footer>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.5/ScrollMagic.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.4/TweenLite.min.js"></script>
-  <script src="/scripts/animation.gsap.min.js"></script>
-  <script src="/scripts/utils.js?v=1"></script>
-<script src="/scripts/main.js?v=1"></script>
-  <script id="detailsScript">loadCaseAnimation();</script>
+<body xmlns='http://www.w3.org/1999/xhtml'>
+<stuarttettdotcom-app detail='souschef' id='app'></stuarttettdotcom-app>
+<section class='z1' id='contentDetails' style='display: none; visibility: hidden; min-height: 100vh;'>
+<div class='progress-container fade-in' id='bar'>
+<div class='progress-bar' id='progress-bar'></div>
+</div>
+<!-- Intro -->
+<h1 class='grid-span align-left'>Problem</h1>
+<div class='one-col'>
+<p>For working professionals, weeknight dinners are an afterthought.</p>
+</div>
+<figure class='image contain fourSeventyTwo' style='background-image: url(&#39;/images/souschef-fridge.png&#39;)'></figure>
+<figure class='image contain fourSeventyTwo' style='background-image: url(&#39;/images/souschef-caviar.jpg&#39;)'></figure>
+<div class='one-col'>
+<p>Which leads to ordering $40 pizzas from Caviar.</p>
+</div>
+<div class='two-col-extra grid-span'>
+<p>My co-founder and I wanted to see if digital technology could improve this experience. He led the development, while I led the interface and experience design.</p>
+</div>
+<div class='two-col-extra dark-on-light grid-span'>
+<p>
+<span class='emphasis bold-italic'>How could technology help busy people with their weeknight meals?</span>
+</p>
+</div>
+<div class='one-col' id='caption2'>
+<p>We decided to create a platform around delivering convenient recipes suggested based on the ingredients you have on hand.</p>
+</div>
+<figure aria-label='' class='image contain fourSeventyTwo' role='img' style='background-image: url(&#39;/images/souschef-problem.jpg&#39;)'></figure>
+<!-- Personas -->
+<h1 class='grid-span align-left'>Research</h1>
+<div class='one-col'>
+<p>I interviewed and observed to learn more about people's experiences with meal-planning and cooking.</p>
+</div>
+<div class='overlap one-col'>
+<figure class='box1'>
+<img alt='Schoolteacher Persona' src='/images/souschef-persona1.png'>
+</figure>
+<figure class='box2'>
+<img alt='Food Nerd Persona' src='/images/souschef-persona2.png'>
+</figure>
+<figure class='box3'>
+<img alt='Working Mom Personal' src='/images/souschef-persona3.png'>
+</figure>
+</div>
+<div class='overlap one-col'>
+<figure class='box1'>
+<img alt='Food Nerd Recipe Selection' src='/images/souschef-foodnerd-recipe-selection.png'>
+</figure>
+<figure class='box2'>
+<img alt='Retired Schoolteacher Recipe Selection' src='/images/souschef-retired-recipe-selection.png'>
+</figure>
+<figure class='box3'>
+<img alt='Working Mom Recipe Selection' src='/images/souschef-mom-recipe-selection.png'>
+</figure>
+</div>
+<div class='one-col'>
+<p>The biggest difference between the personas is how they prioritize time, quality, and cost. Each places one as the highest priority.</p>
+</div>
+<!-- Interaction -->
+<div class='grid-span align-left' style='display: flex; flex-direction: column;'>
+<h1 class='grid-span align-left'>Interaction</h1>
+<!-- -- Filter Interaction -->
+<h2 class='grid-span align-left'>Recipes for Time, Quality, and Cost</h2>
+</div>
+<figure class='one-col'>
+<img alt='Filter Flow' src='/images/souschef-filter-flow.png'>
+</figure>
+<figure class='one-col'>
+<img alt='Filter View Variations' src='/images/souschef-Filter-Variations.png'>
+</figure>
+<figure aria-label='' class='image contain fourSeventyTwo' role='img' style='background-image: url(&#39;/images/souschef-filter-iterations.png&#39;)'></figure>
+<figure aria-label='' class='image contain fourSeventyTwo' role='img' style='background-image: url(&#39;/images/souschef-filter-final.png&#39;)'></figure>
+<!-- -- Recipe Interaction -->
+<h2 class='grid-span align-left'>Iterating on recipe presentation</h2>
+<figure class='one-col'>
+<img alt='Recipe View Variations' src='/images/souschef-Recipes-Variations.png'>
+</figure>
+<figure aria-label='' class='image contain fourSeventyTwo' role='img' style='background-image: url(&#39;/images/souschef-recipe-iterations.png&#39;)'></figure>
+<figure aria-label='' class='image contain fourSeventyTwo' role='img' style='background-image: url(&#39;/images/souschef-recipe-final.png&#39;)'></figure>
+<!-- -- Ingredient Interaction -->
+<h2 class='grid-span align-left'>Ingredient Inventory</h2>
+<figure aria-label='' class='image contain grid-span fourSeventyTwo' role='img' style='background-image: url(&#39;/images/souschef-pantry-views.png&#39;)'></figure>
+<h2 class='grid-span align-left'>How can we make entering ingredients easier?</h2>
+<figure aria-label='' class='image contain fourSeventyTwo' role='img' style='background-image: url(&#39;/images/souschef-scan-foods.png&#39;)'></figure>
+<div class='one-col'>
+<p>We explored using camera vision to identify objects and scan receipts.</p>
+<p>Unfortunately, it's not reliable enough to be the primary method of input at this time.</p>
+</div>
+<figure aria-label='' class='image contain fourSeventyTwo' role='img' style='background-image: url(&#39;/images/souschef-scan-receipt.png&#39;)'></figure>
+<figure aria-label='' class='image contain fourSeventyTwo' role='img' style='background-image: url(&#39;/images/souschef-voice-entry.png&#39;)'></figure>
+<figure aria-label='' class='image contain fourSeventyTwo' role='img' style='background-image: url(&#39;/images/souschef-smart-fridge.jpg&#39;)'></figure>
+<h2 class='grid-span align-left'>Quickly add common ingredients</h2>
+<figure aria-label='' class='image contain fourSeventyTwo1' role='img' style='background-image: url(&#39;/images/souschef-quick-add-condensed.png&#39;)'></figure>
+<figure aria-label='' class='image contain fourSeventyTwo1' role='img' style='background-image: url(&#39;/images/souschef-quick-add-expanded.png&#39;)'></figure>
+<figure aria-label='' class='image contain fourSeventyTwo1' role='img' style='background-image: url(&#39;/images/souschef-quick-add-search.png&#39;)'></figure>
+<h1 class='grid-span align-left'>Visual Design</h1>
+<figure aria-label='' class='image contain fourSeventyTwo1' role='img' style='background-image: url(&#39;/images/souschef-lucky-peach-logo.png&#39;)'></figure>
+<figure aria-label='' class='image contain fourSeventyTwo1' role='img' style='background-image: url(&#39;/images/souschef-lucky-peach-bread.png&#39;)'></figure>
+<figure aria-label='' class='image contain fourSeventyTwo1' role='img' style='background-image: url(&#39;/images/souschef-bg-pattern.png&#39;)'></figure>
+<figure aria-label='' class='image contain fourSeventyTwo grid-span' role='img' style='background-image: url(&#39;/images/souschef-fonts-colors-elements.png&#39;)'></figure>
+<!-- Conclusion -->
+<h1 class='grid-span align-left'>Learnings</h1>
+<div class='two-col-extra grid-span'>
+<ul class='dark-list'>
+<li>The tech of computer vision isn’t production ready for this problem.</li>
+<li>Look beyond the bottom tab bar for navigation.</li>
+<li>Matching users with the right recipes is just one facet of getting busy people to cook.</li>
+</ul>
+</div>
+<!-- Footer -->
+<div class='grid-span dark-on-light'>
+<p>Additional Credits: Shane Vitarana—Developer/Co-Founder</p>
+</div>
+</section>
+<footer class='footer fade-in' id='footer'>
+<stt-scroll-btn class='btn-bc z3' onclick='TweenLite.to(window, 1, {scrollTo:0});' style='transform: scaleY(-1)'></stt-scroll-btn>
+</footer>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.5/ScrollMagic.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.4/TweenLite.min.js'></script>
+<script src='/scripts/animation.gsap.min.js'></script>
+<script src='/scripts/utils.js?v=1'></script>
+<script src='/scripts/main.js?v=1'></script>
+<script id='detailsScript'>
+<![CDATA[
+    loadCaseAnimation();
+]]>
+</script>
 </body>
 </html>
