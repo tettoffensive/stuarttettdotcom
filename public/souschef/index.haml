@@ -1,3 +1,4 @@
+!!! Strict
 %html{:lang => "en"}
   %head
     %meta{:content => "width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes", :name => "viewport"}/
@@ -29,28 +30,41 @@
       ga('send', 'pageview');
   %body{:xmlns => "http://www.w3.org/1999/xhtml"}
     %stuarttettdotcom-app#app{:detail => "souschef"}
-    %section#contentDetails.z1{:style => "display: none; visibility: hidden; min-height: 100vh;"}
+    %section#contentDetails{:style => "display: none; visibility: hidden; min-height: 100vh;"}
       #bar.progress-container.fade-in
         #progress-bar.progress-bar
-      / Intro
-      %h1.grid-span.align-left Problem
+
+      / Problem
+      .div.special
+      .one-col.col-reset.align-left
+        %h1.grid-span.align-left.special
+          Prob
+        %h1.grid-span.align-left.special
+          lem
+      %img.squiggle{:src => "/images/wave.svg"}/
+      .one-col.col-reset
+        %h3 For working professionals, weeknight dinners are an afterthought.
+        %p Often people don't think about it until their commute home. They look in their fridge paralyzed. They often end up ordering delivery.
+      %figure.image.contain.fourSeventyTwo{:style => "background-image: url(#{"/images/souschef-fridge.png"})"}
+      %figure.image.contain.fourSeventyTwo.row-span-2{:style => "background-image: url(#{"/images/souschef-caviar.jpg"})"}
       .one-col
-        %p For working professionals, weeknight dinners are an afterthought.
-      %figure.image.contain.fourSeventyTwo{:style => "background-image: url('/images/souschef-fridge.png')"}
-      %figure.image.contain.fourSeventyTwo{:style => "background-image: url('/images/souschef-caviar.jpg')"}
-      .one-col
-        %p Which leads to ordering $40 pizzas from Caviar.
-      .two-col-extra.grid-span
+        %h3 Which leads to ordering $40 pizzas from Caviar.
         %p My co-founder and I wanted to see if digital technology could improve this experience. He led the development, while I led the interface and experience design.
-      .two-col-extra.dark-on-light.grid-span
-        %p
-          %span.emphasis.bold-italic How could technology help busy people with their weeknight meals?
-      #caption2.one-col
-        %p We decided to create a platform around delivering convenient recipes suggested based on the ingredients you have on hand.
-      %figure.image.contain.fourSeventyTwo{"aria-label" => "", :role => "img", :style => "background-image: url('/images/souschef-problem.jpg')"}
-      / Personas
-      %h1.grid-span.align-left Research
+      %figure.image.contain.fourSeventyTwo.row-span-2{"aria-label" => "", :style => "background-image: url(#{"/images/souschef-problem.jpg"})"}
       .one-col
+        %h3 How could technology help busy people with their weeknight meals?
+        %p We decided to create a platform around delivering convenient recipes suggested based on the ingredients you have on hand.
+
+      / Personas
+      .div.special
+      .one-col.col-reset.align-left
+        %h1.grid-span.align-left.special
+          Rese
+        %h1.grid-span.align-left.special
+          arch
+      %img.squiggle{:src => "/images/wave.svg"}/
+      .one-col.col-reset
+        %h3 I created personas from user interviews.
         %p I interviewed and observed to learn more about people's experiences with meal-planning and cooking.
       .overlap.one-col
         %figure.box1
@@ -67,46 +81,97 @@
         %figure.box3
           %img{:alt => "Working Mom Recipe Selection", :src => "/images/souschef-mom-recipe-selection.png"}/
       .one-col
-        %p The biggest difference between the personas is how they prioritize time, quality, and cost. Each places one as the highest priority.
+        %h3 I identified time, quality, and cost as important factors.
+        %p Each persona balances time, quality, and cost differently. The Food Nerd prioritizes quality, the Working Mom&#8212;time, and the schoolteacher&#8212;cost.
+
       / Interaction
-      .grid-span.align-left{:style => "display: flex; flex-direction: column;"}
-        %h1.grid-span.align-left Interaction
-        / -- Filter Interaction
-        %h2.grid-span.align-left Recipes for Time, Quality, and Cost
-      %figure.one-col
-        %img{:alt => "Filter Flow", :src => "/images/souschef-filter-flow.png"}/
-      %figure.one-col
-        %img{:alt => "Filter View Variations", :src => "/images/souschef-Filter-Variations.png"}/
-      %figure.image.contain.fourSeventyTwo{"aria-label" => "", :role => "img", :style => "background-image: url('/images/souschef-filter-iterations.png')"}
-      %figure.image.contain.fourSeventyTwo{"aria-label" => "", :role => "img", :style => "background-image: url('/images/souschef-filter-final.png')"}
-      / -- Recipe Interaction
-      %h2.grid-span.align-left Iterating on recipe presentation
+      .special
+      .one-col.col-reset.align-left
+        %h1.grid-span.align-left.special
+          Inter
+        %h1.grid-span.align-left.special
+          action
+      %img.squiggle{:src => "/images/wave.svg"}/
+      / > Filter Interaction
+      .one-col.col-reset
+        %h3.grid-span.align-left I explored how to use time, quality, and cost to organize the recipes.
+        %p By simplifying down to the three factors from the personas, I eliminated the need for filtering. Sorting by these factors meant no results are excluded.
+      .overlap.one-col.row-span-2
+        %figure.box1
+          %img{:alt => "Filter Flow", :src => "/images/souschef-filter-flow.png"}/
+        %figure.box2
+          %img{:alt => "Filter View Variations", :src => "/images/souschef-Filter-Variations.png"}
+      %figure.image.contain.fourSeventyTwo1.one-blank-column.row-span-2{"aria-label" => "", :style => "background-image: url(#{"/images/souschef-filter-final.png"})"}
+      .one-col
+        %h3 This led me to give the user control over which recipes they saw first.
+        %p I simplified the interface down to two simple arrow buttons to reorder the sorting priority.
+        %p The option can be accessed by a pull-down gesture from the top of the screen
+
+      / > Recipe Interaction
+      .div.special
+      %img.squiggle{:src => "/images/wave-dull.svg"}/
+      .one-col.col-reset
+        %h3.grid-span.align-left To explore recipes, I decided on a horizontal carousel.
+        %p Most recipe apps I researched used a vertical collection of recipe cards. But they don't have much beyond a photo and a title.
+        %p I opted for a carousel to help the user make an informed decision more quickly.
       %figure.one-col
         %img{:alt => "Recipe View Variations", :src => "/images/souschef-Recipes-Variations.png"}/
-      %figure.image.contain.fourSeventyTwo{"aria-label" => "", :role => "img", :style => "background-image: url('/images/souschef-recipe-iterations.png')"}
-      %figure.image.contain.fourSeventyTwo{"aria-label" => "", :role => "img", :style => "background-image: url('/images/souschef-recipe-final.png')"}
-      / -- Ingredient Interaction
-      %h2.grid-span.align-left Ingredient Inventory
-      %figure.image.contain.grid-span.fourSeventyTwo{"aria-label" => "", :role => "img", :style => "background-image: url('/images/souschef-pantry-views.png')"}
-      %h2.grid-span.align-left How can we make entering ingredients easier?
-      %figure.image.contain.fourSeventyTwo{"aria-label" => "", :role => "img", :style => "background-image: url('/images/souschef-scan-foods.png')"}
       .one-col
-        %p We explored using camera vision to identify objects and scan receipts.
+        %h3 The recipe view went through many iterations.
+        %p I iterated on the recipe view, periodically getting user feedback. This led me to separate out "Prep" time, and simplify the interface.
+      %figure.image.contain.fourSeventyTwo.grid-span{"aria-label" => "", :style => "background-image: url(#{"/images/souschef-recipe-iterations.png"})"}
+      .one-col{:style => "max-width: 73%;"}
+        %h3 With the final recipe card having prep and cook time, rating, and cost.
+        %p Based on user feedback, I settled on "Yuck" and "Yum" icons for rating recipes. This will help determine which recipes to suggest based on user tastes.
+      %figure.image.contain.fourSeventyTwo{"aria-label" => "", :style => "background-image: url(#{"/images/souschef-recipe-final.png"})"}
+
+      / > Ingredient Interaction
+      .div.special
+      %img.squiggle{:src => "/images/wave-dull.svg"}/
+      .two-col.grid-span.align-left
+        %h3 I designed the pantry to keep track of ingredients, but is a lot of work for the user.
+        %p My first iterations involved typing to search and add ingredients. So I wondered, how might we make entering ingredients easier?
+      %figure.image.contain.grid-span.fourSeventyTwo{"aria-label" => "", :style => "background-image: url(#{"/images/souschef-pantry-views.png"})"}
+      .one-col
+        %h3 I explored camera vision to recognize foods.
+        %p We explored using camera vision to identify raw ingredients and scan receipts.
         %p Unfortunately, it's not reliable enough to be the primary method of input at this time.
-      %figure.image.contain.fourSeventyTwo{"aria-label" => "", :role => "img", :style => "background-image: url('/images/souschef-scan-receipt.png')"}
-      %figure.image.contain.fourSeventyTwo{"aria-label" => "", :role => "img", :style => "background-image: url('/images/souschef-voice-entry.png')"}
-      %figure.image.contain.fourSeventyTwo{"aria-label" => "", :role => "img", :style => "background-image: url('/images/souschef-smart-fridge.jpg')"}
-      %h2.grid-span.align-left Quickly add common ingredients
-      %figure.image.contain.fourSeventyTwo1{"aria-label" => "", :role => "img", :style => "background-image: url('/images/souschef-quick-add-condensed.png')"}
-      %figure.image.contain.fourSeventyTwo1{"aria-label" => "", :role => "img", :style => "background-image: url('/images/souschef-quick-add-expanded.png')"}
-      %figure.image.contain.fourSeventyTwo1{"aria-label" => "", :role => "img", :style => "background-image: url('/images/souschef-quick-add-search.png')"}
-      %h1.grid-span.align-left Visual Design
-      %figure.image.contain.fourSeventyTwo1{"aria-label" => "", :role => "img", :style => "background-image: url('/images/souschef-lucky-peach-logo.png')"}
-      %figure.image.contain.fourSeventyTwo1{"aria-label" => "", :role => "img", :style => "background-image: url('/images/souschef-lucky-peach-bread.png')"}
-      %figure.image.contain.fourSeventyTwo1{"aria-label" => "", :role => "img", :style => "background-image: url('/images/souschef-bg-pattern.png')"}
-      %figure.image.contain.fourSeventyTwo.grid-span{"aria-label" => "", :role => "img", :style => "background-image: url('/images/souschef-fonts-colors-elements.png')"}
+      %figure.image.contain.fourSeventyTwo1{"aria-label" => "", :style => "background-image: url(#{"/images/souschef-scan-receipt.png"})"}
+      %figure.image.contain.fourSeventyTwo1{"aria-label" => "", :style => "background-image: url(#{"/images/souschef-scan-foods.png"})"}
+      .two-col.grid-span.align-left
+        %h3 But settled on a tap gesture to quickly add common ingredients.
+        %p In exploring more realistic methods of simple ingredient entry, I designed a "Quick Add" feature to simply tap the most common ingredients.
+        %p An expanded version shows more foods by category.
+      %figure.image.contain.fourSeventyTwo1{"aria-label" => "", :style => "background-image: url(#{"/images/souschef-quick-add-condensed.png"})"}
+      %figure.image.contain.fourSeventyTwo1{"aria-label" => "", :style => "background-image: url(#{"/images/souschef-quick-add-expanded.png"})"}
+      %figure.image.contain.fourSeventyTwo1{"aria-label" => "", :style => "background-image: url(#{"/images/souschef-quick-add-search.png"})"}
+
+      / Visual Design
+      .special
+      .one-col.col-reset.align-left
+        %h1.grid-span.align-left.special
+          Visual
+        %h1.grid-span.align-left.special
+          Design
+      %img.squiggle{:src => "/images/wave.svg"}/
+      .one-col.col-reset
+        %h3 Lucky Peach magazine served as an initial inspiration.
+        %p I love the attitude around Lucky Peach and initially started with a grungier look. But I felt that a much cleaner look was better suited for a mobile app.
+        %p I did adopt the "splats" to maintain a little bit of that personality.
+      .one-col.stackedImages
+        %figure.image.contain{"aria-label" => "", :style => "min-height: 100px; background-image: url(#{"/images/souschef-lucky-peach-logo.png"})"}
+        %figure.image.contain{"aria-label" => "", :style => "min-height: 200px; background-image: url(#{"/images/souschef-lucky-peach-bread.png"})"}
+      %figure.image.contain.fourSeventyTwo1{"aria-label" => "", :style => "background-image: url(#{"/images/souschef-bg-pattern.png"})"}
+      %figure.image.contain.fourSeventyTwo3{"aria-label" => "", :style => "background-image: url(#{"/images/souschef-fonts-colors-elements.png"})"}
+
       / Conclusion
-      %h1.grid-span.align-left Learnings
+      .div.special
+      .one-col.col-reset.align-left
+        %h1.grid-span.align-left.special
+          Learn
+        %h1.grid-span.align-left.special
+          ings
+      %img.squiggle{:src => "/images/wave.svg"}/
       .two-col-extra.grid-span
         %ul.dark-list
           %li The tech of computer vision isn’t production ready for this problem.
@@ -115,13 +180,12 @@
       / Footer
       .grid-span.dark-on-light
         %p Additional Credits: Shane Vitarana—Developer/Co-Founder
-    %footer#footer.footer.fade-in
-      %stt-scroll-btn.btn-bc.z3{:onclick => "TweenLite.to(window, 1, {scrollTo:0});", :style => "transform: scaleY(-1)"}
+    %footer#footer.footer.fade-in.z3
+      %stt-scroll-btn.btn-bc.z3{:onclick => "TweenLite.to(window, 1, {scrollTo:0});", :style => ""}
     %script{:src => "https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.5/ScrollMagic.min.js"}
     %script{:src => "https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.4/TweenLite.min.js"}
     %script{:src => "/scripts/animation.gsap.min.js"}
     %script{:src => "/scripts/utils.js?v=1"}
     %script{:src => "/scripts/main.js?v=1"}
     %script#detailsScript
-      :cdata
-        loadCaseAnimation();
+      loadCaseAnimation();

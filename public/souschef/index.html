@@ -1,137 +1,220 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html lang='en'>
 <head>
-<meta content='width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes' name='viewport'>
-<meta content='Stuart Tett | Interaction Designer' name='description'>
-<link href='../fonts/fonts.css' rel='stylesheet' type='text/css'>
-<link href='../stylesheets/reset.css' rel='stylesheet' type='text/css'>
-<link href='https://fonts.googleapis.com/css?family=BioRhyme:800' rel='stylesheet'>
-<link href='/manifest.json' rel='manifest'>
+<meta content='width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes' name='viewport' />
+<meta content='Stuart Tett | Interaction Designer' name='description' />
+<link href='../fonts/fonts.css' rel='stylesheet' type='text/css' />
+<link href='../stylesheets/reset.css' rel='stylesheet' type='text/css' />
+<link href='https://fonts.googleapis.com/css?family=BioRhyme:800' rel='stylesheet' />
+<link href='/manifest.json' rel='manifest' />
 <script src='../bower_components/webcomponentsjs/webcomponents-loader.js'></script>
-<link href='../src/stuarttettdotcom-app/stuarttettdotcom-app.html' rel='import'>
+<link href='../src/stuarttettdotcom-app/stuarttettdotcom-app.html' rel='import' />
 <title>Stuart Tett | Interaction Designer</title>
-<meta content='text/html; charset=UTF-8' http-equiv='content-type'>
-<link href='/stylesheets/style.css?v=1' rel='stylesheet' type='text/css'>
+<meta content='text/html; charset=UTF-8' http-equiv='content-type' />
+<link href='/stylesheets/style.css?v=1' rel='stylesheet' type='text/css' />
 <script async='' src='https://www.googletagmanager.com/gtag/js?id=UA-42078109-2'></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments)};
-  gtag('js', new Date());
-  
-  gtag('config', 'UA-42078109-2');
+<script type='text/javascript'>
+  //<![CDATA[
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments)};
+    gtag('js', new Date());
+    
+    gtag('config', 'UA-42078109-2');
+  //]]>
 </script>
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-  
-  ga('create', 'UA-42078109-2', 'auto');
-  ga('set', 'page', '/souschef');
-  ga('send', 'pageview');
+<script type='text/javascript'>
+  //<![CDATA[
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+    
+    ga('create', 'UA-42078109-2', 'auto');
+    ga('set', 'page', '/souschef');
+    ga('send', 'pageview');
+  //]]>
 </script>
 </head>
 <body xmlns='http://www.w3.org/1999/xhtml'>
 <stuarttettdotcom-app detail='souschef' id='app'></stuarttettdotcom-app>
-<section class='z1' id='contentDetails' style='display: none; visibility: hidden; min-height: 100vh;'>
+<section id='contentDetails' style='display: none; visibility: hidden; min-height: 100vh;'>
 <div class='progress-container fade-in' id='bar'>
 <div class='progress-bar' id='progress-bar'></div>
 </div>
-<!-- Intro -->
-<h1 class='grid-span align-left'>Problem</h1>
-<div class='one-col'>
-<p>For working professionals, weeknight dinners are an afterthought.</p>
+<!-- Problem -->
+<div class='div special'></div>
+<div class='one-col col-reset align-left'>
+<h1 class='grid-span align-left special'>
+Prob
+</h1>
+<h1 class='grid-span align-left special'>
+lem
+</h1>
 </div>
-<figure class='image contain fourSeventyTwo' style='background-image: url(&#39;/images/souschef-fridge.png&#39;)'></figure>
-<figure class='image contain fourSeventyTwo' style='background-image: url(&#39;/images/souschef-caviar.jpg&#39;)'></figure>
-<div class='one-col'>
-<p>Which leads to ordering $40 pizzas from Caviar.</p>
+<img class='squiggle' src='/images/wave.svg' />
+<div class='one-col col-reset'>
+<h3>For working professionals, weeknight dinners are an afterthought.</h3>
+<p>Often people don't think about it until their commute home. They look in their fridge paralyzed. They often end up ordering delivery.</p>
 </div>
-<div class='two-col-extra grid-span'>
+<figure class='image contain fourSeventyTwo' style='background-image: url(/images/souschef-fridge.png)'></figure>
+<figure class='image contain fourSeventyTwo row-span-2' style='background-image: url(/images/souschef-caviar.jpg)'></figure>
+<div class='one-col'>
+<h3>Which leads to ordering $40 pizzas from Caviar.</h3>
 <p>My co-founder and I wanted to see if digital technology could improve this experience. He led the development, while I led the interface and experience design.</p>
 </div>
-<div class='two-col-extra dark-on-light grid-span'>
-<p>
-<span class='emphasis bold-italic'>How could technology help busy people with their weeknight meals?</span>
-</p>
-</div>
-<div class='one-col' id='caption2'>
+<figure aria-label='' class='image contain fourSeventyTwo row-span-2' style='background-image: url(/images/souschef-problem.jpg)'></figure>
+<div class='one-col'>
+<h3>How could technology help busy people with their weeknight meals?</h3>
 <p>We decided to create a platform around delivering convenient recipes suggested based on the ingredients you have on hand.</p>
 </div>
-<figure aria-label='' class='image contain fourSeventyTwo' role='img' style='background-image: url(&#39;/images/souschef-problem.jpg&#39;)'></figure>
 <!-- Personas -->
-<h1 class='grid-span align-left'>Research</h1>
-<div class='one-col'>
+<div class='div special'></div>
+<div class='one-col col-reset align-left'>
+<h1 class='grid-span align-left special'>
+Rese
+</h1>
+<h1 class='grid-span align-left special'>
+arch
+</h1>
+</div>
+<img class='squiggle' src='/images/wave.svg' />
+<div class='one-col col-reset'>
+<h3>I created personas from user interviews.</h3>
 <p>I interviewed and observed to learn more about people's experiences with meal-planning and cooking.</p>
 </div>
 <div class='overlap one-col'>
 <figure class='box1'>
-<img alt='Schoolteacher Persona' src='/images/souschef-persona1.png'>
+<img alt='Schoolteacher Persona' src='/images/souschef-persona1.png' />
 </figure>
 <figure class='box2'>
-<img alt='Food Nerd Persona' src='/images/souschef-persona2.png'>
+<img alt='Food Nerd Persona' src='/images/souschef-persona2.png' />
 </figure>
 <figure class='box3'>
-<img alt='Working Mom Personal' src='/images/souschef-persona3.png'>
+<img alt='Working Mom Personal' src='/images/souschef-persona3.png' />
 </figure>
 </div>
 <div class='overlap one-col'>
 <figure class='box1'>
-<img alt='Food Nerd Recipe Selection' src='/images/souschef-foodnerd-recipe-selection.png'>
+<img alt='Food Nerd Recipe Selection' src='/images/souschef-foodnerd-recipe-selection.png' />
 </figure>
 <figure class='box2'>
-<img alt='Retired Schoolteacher Recipe Selection' src='/images/souschef-retired-recipe-selection.png'>
+<img alt='Retired Schoolteacher Recipe Selection' src='/images/souschef-retired-recipe-selection.png' />
 </figure>
 <figure class='box3'>
-<img alt='Working Mom Recipe Selection' src='/images/souschef-mom-recipe-selection.png'>
+<img alt='Working Mom Recipe Selection' src='/images/souschef-mom-recipe-selection.png' />
 </figure>
 </div>
 <div class='one-col'>
-<p>The biggest difference between the personas is how they prioritize time, quality, and cost. Each places one as the highest priority.</p>
+<h3>I identified time, quality, and cost as important factors.</h3>
+<p>Each persona balances time, quality, and cost differently. The Food Nerd prioritizes quality, the Working Mom&#8212;time, and the schoolteacher&#8212;cost.</p>
 </div>
 <!-- Interaction -->
-<div class='grid-span align-left' style='display: flex; flex-direction: column;'>
-<h1 class='grid-span align-left'>Interaction</h1>
-<!-- -- Filter Interaction -->
-<h2 class='grid-span align-left'>Recipes for Time, Quality, and Cost</h2>
+<div class='special'></div>
+<div class='one-col col-reset align-left'>
+<h1 class='grid-span align-left special'>
+Inter
+</h1>
+<h1 class='grid-span align-left special'>
+action
+</h1>
+</div>
+<img class='squiggle' src='/images/wave.svg' />
+<!-- > Filter Interaction -->
+<div class='one-col col-reset'>
+<h3 class='grid-span align-left'>I explored how to use time, quality, and cost to organize the recipes.</h3>
+<p>By simplifying down to the three factors from the personas, I eliminated the need for filtering. Sorting by these factors meant no results are excluded.</p>
+</div>
+<div class='overlap one-col row-span-2'>
+<figure class='box1'>
+<img alt='Filter Flow' src='/images/souschef-filter-flow.png' />
+</figure>
+<figure class='box2'>
+<img alt='Filter View Variations' src='/images/souschef-Filter-Variations.png' />
+</figure>
+</div>
+<figure aria-label='' class='image contain fourSeventyTwo1 one-blank-column row-span-2' style='background-image: url(/images/souschef-filter-final.png)'></figure>
+<div class='one-col'>
+<h3>This led me to give the user control over which recipes they saw first.</h3>
+<p>I simplified the interface down to two simple arrow buttons to reorder the sorting priority.</p>
+<p>The option can be accessed by a pull-down gesture from the top of the screen</p>
+</div>
+<!-- > Recipe Interaction -->
+<div class='div special'></div>
+<img class='squiggle' src='/images/wave-dull.svg' />
+<div class='one-col col-reset'>
+<h3 class='grid-span align-left'>To explore recipes, I decided on a horizontal carousel.</h3>
+<p>Most recipe apps I researched used a vertical collection of recipe cards. But they don't have much beyond a photo and a title.</p>
+<p>I opted for a carousel to help the user make an informed decision more quickly.</p>
 </div>
 <figure class='one-col'>
-<img alt='Filter Flow' src='/images/souschef-filter-flow.png'>
+<img alt='Recipe View Variations' src='/images/souschef-Recipes-Variations.png' />
 </figure>
-<figure class='one-col'>
-<img alt='Filter View Variations' src='/images/souschef-Filter-Variations.png'>
-</figure>
-<figure aria-label='' class='image contain fourSeventyTwo' role='img' style='background-image: url(&#39;/images/souschef-filter-iterations.png&#39;)'></figure>
-<figure aria-label='' class='image contain fourSeventyTwo' role='img' style='background-image: url(&#39;/images/souschef-filter-final.png&#39;)'></figure>
-<!-- -- Recipe Interaction -->
-<h2 class='grid-span align-left'>Iterating on recipe presentation</h2>
-<figure class='one-col'>
-<img alt='Recipe View Variations' src='/images/souschef-Recipes-Variations.png'>
-</figure>
-<figure aria-label='' class='image contain fourSeventyTwo' role='img' style='background-image: url(&#39;/images/souschef-recipe-iterations.png&#39;)'></figure>
-<figure aria-label='' class='image contain fourSeventyTwo' role='img' style='background-image: url(&#39;/images/souschef-recipe-final.png&#39;)'></figure>
-<!-- -- Ingredient Interaction -->
-<h2 class='grid-span align-left'>Ingredient Inventory</h2>
-<figure aria-label='' class='image contain grid-span fourSeventyTwo' role='img' style='background-image: url(&#39;/images/souschef-pantry-views.png&#39;)'></figure>
-<h2 class='grid-span align-left'>How can we make entering ingredients easier?</h2>
-<figure aria-label='' class='image contain fourSeventyTwo' role='img' style='background-image: url(&#39;/images/souschef-scan-foods.png&#39;)'></figure>
 <div class='one-col'>
-<p>We explored using camera vision to identify objects and scan receipts.</p>
+<h3>The recipe view went through many iterations.</h3>
+<p>I iterated on the recipe view, periodically getting user feedback. This led me to separate out "Prep" time, and simplify the interface.</p>
+</div>
+<figure aria-label='' class='image contain fourSeventyTwo grid-span' style='background-image: url(/images/souschef-recipe-iterations.png)'></figure>
+<div class='one-col' style='max-width: 73%;'>
+<h3>With the final recipe card having prep and cook time, rating, and cost.</h3>
+<p>Based on user feedback, I settled on "Yuck" and "Yum" icons for rating recipes. This will help determine which recipes to suggest based on user tastes.</p>
+</div>
+<figure aria-label='' class='image contain fourSeventyTwo' style='background-image: url(/images/souschef-recipe-final.png)'></figure>
+<!-- > Ingredient Interaction -->
+<div class='div special'></div>
+<img class='squiggle' src='/images/wave-dull.svg' />
+<div class='two-col grid-span align-left'>
+<h3>I designed the pantry to keep track of ingredients, but is a lot of work for the user.</h3>
+<p>My first iterations involved typing to search and add ingredients. So I wondered, how might we make entering ingredients easier?</p>
+</div>
+<figure aria-label='' class='image contain grid-span fourSeventyTwo' style='background-image: url(/images/souschef-pantry-views.png)'></figure>
+<div class='one-col'>
+<h3>I explored camera vision to recognize foods.</h3>
+<p>We explored using camera vision to identify raw ingredients and scan receipts.</p>
 <p>Unfortunately, it's not reliable enough to be the primary method of input at this time.</p>
 </div>
-<figure aria-label='' class='image contain fourSeventyTwo' role='img' style='background-image: url(&#39;/images/souschef-scan-receipt.png&#39;)'></figure>
-<figure aria-label='' class='image contain fourSeventyTwo' role='img' style='background-image: url(&#39;/images/souschef-voice-entry.png&#39;)'></figure>
-<figure aria-label='' class='image contain fourSeventyTwo' role='img' style='background-image: url(&#39;/images/souschef-smart-fridge.jpg&#39;)'></figure>
-<h2 class='grid-span align-left'>Quickly add common ingredients</h2>
-<figure aria-label='' class='image contain fourSeventyTwo1' role='img' style='background-image: url(&#39;/images/souschef-quick-add-condensed.png&#39;)'></figure>
-<figure aria-label='' class='image contain fourSeventyTwo1' role='img' style='background-image: url(&#39;/images/souschef-quick-add-expanded.png&#39;)'></figure>
-<figure aria-label='' class='image contain fourSeventyTwo1' role='img' style='background-image: url(&#39;/images/souschef-quick-add-search.png&#39;)'></figure>
-<h1 class='grid-span align-left'>Visual Design</h1>
-<figure aria-label='' class='image contain fourSeventyTwo1' role='img' style='background-image: url(&#39;/images/souschef-lucky-peach-logo.png&#39;)'></figure>
-<figure aria-label='' class='image contain fourSeventyTwo1' role='img' style='background-image: url(&#39;/images/souschef-lucky-peach-bread.png&#39;)'></figure>
-<figure aria-label='' class='image contain fourSeventyTwo1' role='img' style='background-image: url(&#39;/images/souschef-bg-pattern.png&#39;)'></figure>
-<figure aria-label='' class='image contain fourSeventyTwo grid-span' role='img' style='background-image: url(&#39;/images/souschef-fonts-colors-elements.png&#39;)'></figure>
+<figure aria-label='' class='image contain fourSeventyTwo1' style='background-image: url(/images/souschef-scan-receipt.png)'></figure>
+<figure aria-label='' class='image contain fourSeventyTwo1' style='background-image: url(/images/souschef-scan-foods.png)'></figure>
+<div class='two-col grid-span align-left'>
+<h3>But settled on a tap gesture to quickly add common ingredients.</h3>
+<p>In exploring more realistic methods of simple ingredient entry, I designed a "Quick Add" feature to simply tap the most common ingredients.</p>
+<p>An expanded version shows more foods by category.</p>
+</div>
+<figure aria-label='' class='image contain fourSeventyTwo1' style='background-image: url(/images/souschef-quick-add-condensed.png)'></figure>
+<figure aria-label='' class='image contain fourSeventyTwo1' style='background-image: url(/images/souschef-quick-add-expanded.png)'></figure>
+<figure aria-label='' class='image contain fourSeventyTwo1' style='background-image: url(/images/souschef-quick-add-search.png)'></figure>
+<!-- Visual Design -->
+<div class='special'></div>
+<div class='one-col col-reset align-left'>
+<h1 class='grid-span align-left special'>
+Visual
+</h1>
+<h1 class='grid-span align-left special'>
+Design
+</h1>
+</div>
+<img class='squiggle' src='/images/wave.svg' />
+<div class='one-col col-reset'>
+<h3>Lucky Peach magazine served as an initial inspiration.</h3>
+<p>I love the attitude around Lucky Peach and initially started with a grungier look. But I felt that a much cleaner look was better suited for a mobile app.</p>
+<p>I did adopt the "splats" to maintain a little bit of that personality.</p>
+</div>
+<div class='one-col stackedImages'>
+<figure aria-label='' class='image contain' style='min-height: 100px; background-image: url(/images/souschef-lucky-peach-logo.png)'></figure>
+<figure aria-label='' class='image contain' style='min-height: 200px; background-image: url(/images/souschef-lucky-peach-bread.png)'></figure>
+</div>
+<figure aria-label='' class='image contain fourSeventyTwo1' style='background-image: url(/images/souschef-bg-pattern.png)'></figure>
+<figure aria-label='' class='image contain fourSeventyTwo3' style='background-image: url(/images/souschef-fonts-colors-elements.png)'></figure>
 <!-- Conclusion -->
-<h1 class='grid-span align-left'>Learnings</h1>
+<div class='div special'></div>
+<div class='one-col col-reset align-left'>
+<h1 class='grid-span align-left special'>
+Learn
+</h1>
+<h1 class='grid-span align-left special'>
+ings
+</h1>
+</div>
+<img class='squiggle' src='/images/wave.svg' />
 <div class='two-col-extra grid-span'>
 <ul class='dark-list'>
 <li>The tech of computer vision isn’t production ready for this problem.</li>
@@ -144,8 +227,8 @@
 <p>Additional Credits: Shane Vitarana—Developer/Co-Founder</p>
 </div>
 </section>
-<footer class='footer fade-in' id='footer'>
-<stt-scroll-btn class='btn-bc z3' onclick='TweenLite.to(window, 1, {scrollTo:0});' style='transform: scaleY(-1)'></stt-scroll-btn>
+<footer class='footer fade-in z3' id='footer'>
+<stt-scroll-btn class='btn-bc z3' onclick='TweenLite.to(window, 1, {scrollTo:0});' style=''></stt-scroll-btn>
 </footer>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.5/ScrollMagic.min.js'></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.4/TweenLite.min.js'></script>
@@ -153,9 +236,7 @@
 <script src='/scripts/utils.js?v=1'></script>
 <script src='/scripts/main.js?v=1'></script>
 <script id='detailsScript'>
-<![CDATA[
-    loadCaseAnimation();
-]]>
+loadCaseAnimation();
 </script>
 </body>
 </html>

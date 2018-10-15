@@ -79,12 +79,39 @@ h1, h2, h3, h4, h5, h6, .header1, .header2 {
   margin: 0;
 }
 
+.z3 {
+  z-index: 3;
+}
+
+/* For label shadow to be on top of content shadow */
+.z2 {
+  z-index: 2;
+}
+
+.z1 {
+  z-index: 1;
+}
+
+.z0 {
+  z-index: 0;
+}
+
+.footer .btn {
+  background: linear-gradient(-180deg, #8CF9E9 0%, #54F0CE 100%);;
+  & svg {
+    & > g {
+      transform-origin: 50% 50%;
+      transform: scaleY(-1);
+    }
+  }
+}
+
 .image {
   background-repeat: no-repeat;
   background-position: center;
 
-  -webkit-filter: drop-shadow(0px 10px 20px rgba(0,0,0,0.10));
-  filter: drop-shadow(0px 10px 20px rgba(0,0,0,0.10));
+  -webkit-filter: drop-shadow(0px 5px 20px rgba(0,0,0,0.10));
+  filter: drop-shadow(0px 5px 20px rgba(0,0,0,0.10));
 }
 
 .scatter-shapes:hover {
@@ -111,7 +138,9 @@ h1, h2, h3, h4, h5, h6, .header1, .header2 {
   background-size: contain;
 }
 
+$break-small: 375px;
 $break-mobile: 660px;
+$break-tablet: 968px;
 $break-desktop-large: 1200px;
 
 #contentDetails {
@@ -122,12 +151,14 @@ $break-desktop-large: 1200px;
   padding-bottom: 30px;
   overflow: visible;
   justify-items: center;
+  position: relative;
 
-  @media screen and (min-width: $break-mobile) {
+  @media screen and (min-width: $break-tablet) {
     max-width: 1482px;
     width: calc(100% - 160px);
-    grid-template-columns: repeat(4, minmax(230px, 1fr));
-    grid-gap: 80px 40px;
+    grid-template-columns: repeat(4, minmax(150px, 1fr));
+    grid-gap: 40px 40px;
+    grid-auto-rows: minmax(50px, auto);
     padding-bottom: 80px;
   }
 
@@ -196,10 +227,22 @@ $break-desktop-large: 1200px;
   min-height: 65vmin;
   width: 100%;
 
-  @media screen and (min-width: $break-mobile) {
+  @media screen and (min-width: $break-tablet) {
     grid-column-end: span 2;
     min-height: 472px;
   }
+}
+
+.row-span-2 {
+  @media screen and (min-width: $break-tablet) {
+    grid-row-end: span 2;
+  }
+}
+
+.col-reset {
+  // @media screen and (min-width: $break-mobile) {
+    grid-column-start: 1;
+  // }
 }
 
 .fourSeventyTwo1 {
@@ -207,9 +250,26 @@ $break-desktop-large: 1200px;
   min-height: 65vmin;
   width: 100%;
 
-  @media screen and (min-width: $break-mobile) {
+  @media screen and (min-width: $break-tablet) {
     grid-column-end: span 1;
     min-height: 472px;
+  }
+}
+
+.fourSeventyTwo3 {
+  grid-column-end: span 2;
+  min-height: 65vmin;
+  width: 100%;
+
+  @media screen and (min-width: $break-tablet) {
+    grid-column-end: span 3;
+    min-height: 472px;
+  }
+}
+
+.one-blank-column {
+  @media screen and (min-width: $break-mobile) {
+    grid-column-start: 2;
   }
 }
 
@@ -231,7 +291,7 @@ $break-desktop-large: 1200px;
   box-shadow: 0 0px 50px 50px $light;
 
   @media screen and (min-width: $break-mobile) {
-    font-size: 26px;
+    font-size: 18px;
   }
 }
 
@@ -266,15 +326,16 @@ $break-desktop-large: 1200px;
 .one-col {
   max-width: 650px;
   grid-column-end: span 4;
-  @media screen and (min-width: $break-mobile) {
+  @media screen and (min-width: $break-tablet) {
     grid-column-end: span 2;
+    align-self: center;
   }
 }
 
 .one-col-dark {
   max-width: 700px;
   grid-column-end: span 4;
-  @media screen and (min-width: $break-mobile) {
+  @media screen and (min-width: $break-tablet) {
     grid-column-end: span 2;
   }
 }
@@ -282,7 +343,7 @@ $break-desktop-large: 1200px;
 .two-col {
   max-width: 772px;
   grid-column-end: span 4;
-  @media screen and (min-width: $break-mobile) {
+  @media screen and (min-width: $break-tablet) {
     grid-column-end: span 2;
   }
 }
@@ -290,7 +351,7 @@ $break-desktop-large: 1200px;
 .two-col-extra {
   max-width: 972px;
   grid-column-end: span 4;
-  @media screen and (min-width: $break-mobile) {
+  @media screen and (min-width: $break-tablet) {
     grid-column-end: span 2;
   }
 }
@@ -302,6 +363,16 @@ $break-desktop-large: 1200px;
 .dark-list > li {
   list-style: disc;
   margin: 10px 40px;
+  font-size: 1.333em;
+  line-height: 1.25em;
+  font-family: 'DecimaMonoRound-Italic', monospace;
+}
+
+.stackedImages {
+  min-height: 10px;
+  display: flex;
+  flex-direction: column;
+  width: 50%;
 }
 
 .dark-list {
@@ -328,7 +399,7 @@ figcaption {
   padding: 10px;
   font-size: 14px;
   @media screen and (min-width: $break-mobile) {
-    font-size: 24px;
+    font-size: 18px;
     padding: 40px;
   }
 }
@@ -369,8 +440,13 @@ figcaption {
     transform-origin: left top;
     transition: all 0.5s ease;
     width: 100%;
-    height: 8px;
     background: $white;
+    height: 2px;
+
+    @media screen and (min-width: $break-mobile) {
+      height: 8px;
+    }
+
     position: fixed;
     top: 0;
     left: 0;
@@ -379,7 +455,7 @@ figcaption {
 
   /* The progress bar (scroll indicator) */
   .progress-bar {
-    height: 8px;
+    height: 100%;
     background: $accent;
     width: 0%;
   }
@@ -402,6 +478,10 @@ figcaption {
     transition: z-index 1s ease;
   }
 
+  & > .still2 {
+    position: absolute;
+  }
+
   & > .box1 {
 
   }
@@ -422,20 +502,121 @@ figcaption {
 
 }
 
+img.squiggle {
+  grid-column-start: 1;
+  grid-column-end: -1;
+  align-self: start;
+  place-self: start;
+  width: 38vw;
+  max-width: 800px;
+  transform: translateX(-40px);
+  opacity: 0.9;
+}
+
+@function strip-unit($value) {
+  @return $value / ($value * 0 + 1);
+}
+
+@mixin fluid-type($min-vw, $max-vw, $min-font-size, $max-font-size) {
+  $u1: unit($min-vw);
+  $u2: unit($max-vw);
+  $u3: unit($min-font-size);
+  $u4: unit($max-font-size);
+
+  @if $u1 == $u2 and $u1 == $u3 and $u1 == $u4 {
+    & {
+      font-size: $min-font-size;
+      @media screen and (min-width: $min-vw) {
+        font-size: calc(#{$min-font-size} + #{strip-unit($max-font-size - $min-font-size)} * ((100vw - #{$min-vw}) / #{strip-unit($max-vw - $min-vw)}));
+      }
+      @media screen and (min-width: $max-vw) {
+        font-size: $max-font-size;
+      }
+    }
+  }
+}
+
+h1.special {
+  -webkit-user-select: none;
+  user-select: none;
+  font-size: 4em;
+  opacity: 0.1;
+  mix-blend-mode: multiply;
+  line-height: 0.6;
+  padding: 0;
+  margin: 0;
+
+  @media screen and (min-width: $break-small) {
+    font-size: calc(4em + 6 * ((100vw - $break-small) / 825));
+  }
+
+  @media screen and (min-width: $break-desktop-large) {
+    font-size: 10em;
+  }
+
+  &:first-child {
+    color: #5cefce;
+    opacity: 0.9;
+  }
+}
+
+div.special {
+  min-width: 1px;
+  grid-column-end: span 4;
+
+  @media screen and (min-width: $break-mobile) {
+      min-height: 80px;
+  }
+}
+
+h1.special + h3 {
+  padding-top: 1em;
+}
+
+h1 + p, h2 + p, h3 + p, h4 + p {
+  padding-right: 5em;
+}
+
+h1, h2, h3, h4 {
+  margin-bottom: 0.75em;
+}
+
 h1 {
   text-transform: uppercase;
-  font-size: 48pt;
+  font-size: 3.157em;
   line-height: 1.25em;
 }
 
 h2 {
-  font-family: $subheader-font;
-  font-size: 24pt;
+  font-size: 2.369em;
   line-height: 1.25em;
+  font-family: $subheader-font;
 }
+
+h3 {
+  font-size: 1.777em;
+  line-height: 1.4em;
+  font-family: $subheader-font;
+}
+
+h4 {
+  font-size: 1.333em;
+  line-height: 1.5em;
+  font-family: $subheader-font;
+}
+
+small, .font_small {font-size: 0.75em;}
 
 .align-left {
   justify-self: start;
   place-self: start;
   align-self: start;
+}
+
+.holder {
+  /* Clip edges, as some of the lines don't terminate nicely. */
+    overflow: hidden;
+    position: relative;
+    width: 200px;
+    height: 50px;
 }
