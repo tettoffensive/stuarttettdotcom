@@ -1,0 +1,28 @@
+{
+  "name": "stuarttettdotcom",
+  "version": "1.0.0",
+  "description": "My personal website @ www.stuarttett.com",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-ruby-haml": "0.0.9",
+    "gulp-sass": "^4.0.2"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tettoffensive/stuarttettdotcom.git"
+  },
+  "keywords": [
+    "portfolio"
+  ],
+  "author": "Stuart Tett",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tettoffensive/stuarttettdotcom/issues"
+  },
+  "homepage": "https://github.com/tettoffensive/stuarttettdotcom#readme"
+}
