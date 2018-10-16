@@ -45,8 +45,8 @@
         top: calc(30px + 80px);
         left: calc(280px + 80px);
         width: calc(100% - 280px - 160px);
-        height: calc(100vh - 150px);
-        max-height: 964px;
+        height: calc(100vh - 220px);
+        /* max-height: 964px; */
         min-height: 337px;
       }
     }
@@ -64,9 +64,9 @@
         position: absolute;
         top: 80px;
         left: 80px;
-        height: calc(100vh - 80px);
+        height: calc(100vh - 160px);
         min-height: 375px;
-        max-height: 1024px;
+        /* max-height: 1024px; */
       }
 
       .info-onclick {
@@ -186,6 +186,11 @@
     .clip {
       overflow: hidden;
       height: 100%;
+      border-radius: 2px;
+    }
+
+    #labelShadow {
+      border-radius: 2px;
     }
 
     /* This way the label is larger in Y than the content, so it looks like overlapping */
@@ -195,6 +200,7 @@
       margin: auto 0px auto 0px;
       /* background-color: #858C8B; */
       background-image: linear-gradient(-180deg, #4E5251 4%, #3F4A48 98%);
+      border-radius: 2px;
     }
 
     /* Contains the image */
@@ -274,7 +280,7 @@
     }
 
     .description {
-      font-family: 'DecimaMonoRound-Italic',monospace;
+      font-family: 'DecimaMonoRound',monospace;
       font-weight: normal;
       font-style: normal;
       font-variant-ligatures: none;
@@ -304,12 +310,15 @@
       color: #ffffff;
       width: 57px;
       height: 50px;
+      border-radius: 1px;
     }
 
     .btn svg {
       margin: auto;
       position: relative;
       left: 1px;
+      filter: drop-shadow(-1px 1px 1px rgba(0,0,0,0.1));
+      -webkit-filter: drop-shadow(-1px 1px 1px rgba(0,0,0,0.1));
     }
 
     .btn-tr {
