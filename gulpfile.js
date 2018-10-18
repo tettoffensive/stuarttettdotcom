@@ -36,7 +36,7 @@ gulp.task('watch', function(){
 });
 
 gulp.task('_useref', function(){
-  return gulp.src('public/index.html')
+  return gulp.src('public/*.html')
     .pipe(useref())
     // Minifies only if it's a JavaScript file
     .pipe(gulpIf('*.js', babel({presets: ['minify']})))
