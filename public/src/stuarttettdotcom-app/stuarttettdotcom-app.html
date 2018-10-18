@@ -249,7 +249,8 @@ class StuarttettdotcomApp extends Polymer.Element {
     _removePageData() {
       removeFromParent(document.querySelector("#contentDetails"));
       removeFromParent(document.querySelector("#footer"));
-      removeFromParent(document.querySelector("#detailsScript"));
+      // removeFromParent(document.querySelector("#detailsScript"));
+      removeCaseAnimation();
     }
 
     _replaceQueryWithTag(docBody, selector, node) {
@@ -279,6 +280,7 @@ class StuarttettdotcomApp extends Polymer.Element {
           this._replaceQueryWithTag(docBody, "#contentDetails", div.getElementsByTagName("section")[0]);
           this._replaceQueryWithTag(docBody, "#footer", div.getElementsByTagName("footer")[0]);
           // this._replaceQueryWithTag(docBody, "#detailsScript", div.getElementById("detailsScript"));
+          loadCaseAnimation();
 
           setTimeout(() => {
             this._tryShowDetailsSection();
