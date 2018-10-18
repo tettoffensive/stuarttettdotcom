@@ -1,0 +1,119 @@
+!!!
+%html{:lang => "en"}
+  %head
+    %meta{:content => "width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes", :name => "viewport"}/
+    %meta{:content => "Stuart Tett | Product Designer", :name => "description"}/
+    / build:css /stylesheets/main.min.css
+    %link{:href => "../stylesheets/fonts.css", :rel => "stylesheet", :type => "text/css"}/
+    %link{:href => "../stylesheets/style.css", :rel => "stylesheet", :type => "text/css"}/
+    %link{:href => "../stylesheets/reset.css", :rel => "stylesheet", :type => "text/css"}/
+    / endbuild
+    %link{:href => "https://fonts.googleapis.com/css?family=BioRhyme:800", :rel => "stylesheet"}/
+    %link{:href => "/manifest.json", :rel => "manifest"}/
+    %script{:src => "../bower_components/webcomponentsjs/webcomponents-loader.js"}
+    %link{:href => "../src/stuarttettdotcom-app/stuarttettdotcom-app.html", :rel => "import"}/
+    %title Stuart Tett | Product Designer
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "content-type"}/
+    %script{:async => "", :src => "https://www.googletagmanager.com/gtag/js?id=UA-42078109-2"}
+    :javascript
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments)};
+      gtag('js', new Date());
+
+      gtag('config', 'UA-42078109-2');
+    :javascript
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-42078109-2', 'auto');
+      ga('set', 'page', '/arshoe');
+      ga('send', 'pageview');
+  %body{:xmlns => "http://www.w3.org/1999/xhtml"}
+    %stuarttettdotcom-app#app{:detail => "arshoe"}
+    %section#contentDetails.z1{:style => "display: none; visibility: hidden; min-height: 100vh;"}
+      .progress-container.fade-in
+        #progress-bar.progress-bar
+      %figure.image.contain.fourSeventyTwo{"aria-label" => "ARKicks splash screen mock", :role => "img", :style => "background-image: url(#{"/images/arshoe-splash.jpg"})"}
+      .one-col
+        %p What if you could try on shoes without going into the store or waiting day(s) for a delivery?
+        %p For online shoe shopping the customer must be convinced to order the shoes before they've worn them and wait for them to ship. This may prevent them from making the purchase.
+      .grid-span.two-col.dark-on-light
+        %p
+          %span.emphasis.bold-italic Can we give customers a better glimpse of what wearing the shoes will be like?
+      .grid-span.two-col-extra
+        %p With the latest technologies around augmented reality in mobile devices, we might be able to show the user what the shoes will look like on their feet.
+        %p
+          %span.bold-italic.emphasis So How might we detect the feet?
+      .one-col
+        %p Automatically recognizing and tracking objects is complicated. So I wondered, if a simple user interface could be designed for the user to tell the camera where the feet are without difficulty.
+      %figure.image.contain.fourSeventyTwo{"aria-label" => "Ideation sketches", :role => "img", :style => "background-image: url(#{"/images/arshoe-sketch-all.jpg"})"}
+      %figure.image.contain.fourSeventyTwo{"aria-label" => "Sketches for different foot finding options", :role => "img", :style => "background-image: url(#{"/images/arshoe-sketch-feet.jpg"})"}
+      .one-col
+        %p I sketched out a few different options for finding the feet. Most of which involved tapping or drawing on the screen.
+      .one-col
+        %p One idea of placing virtual placeholders to “step into” seemed less burdensome on the user and a more engaging experience since the action is done in the real world and not the screen.
+      %figure.image.contain.fourSeventyTwo{"aria-label" => "Step inside AR shoes flow", :role => "img", :style => "background-image: url(#{"/images/arshoe-step-inside.png"})"}
+      / Explore
+      .two-col.grid-span.dark-on-light
+        %p
+          %span.emphasis.bold-italic How might a user explore different shoes in the catalog?
+      %figure.image.contain.fourSeventyTwo{"aria-label" => "Different shoes flow", :role => "img", :style => "background-image: url(#{"/images/arshoe-shoes.png"})"}
+      .one-col
+        %p My early sketches had a collection of images to for shoe selection at the bottom, but decided to simplify and keep the screen clear.
+        %p If the whole screen is a paged view that can be swiped, the shoes and feet aren't obscured and it's easy to go back an forth between options.
+      .one-col
+        %p Once a user has found a shoe they like the two main things they might want to do is order it to be shipped to their home or share it on social media to ask the opinions of others.
+        %p So I began with buttons for those functions, but I saw the need for a settings button, a reset button and a shopping cart button.
+      %figure.image.contain.fourSeventyTwo{"aria-label" => "Two buttons vs. Five buttons", :role => "img", :style => "background-image: url('/images/arshoe-twobuttons.png');"}
+      / Virtual Interactions
+      .two-col.grid-span.dark-on-light
+        %p
+          %span.emphasis.bold-italic What interactions could be moved from the screen into the physical environment?
+      .one-col
+        %p Another thing I did to avoid obscuring the camera view was make the Nike logo an AR projection on the floor between the shoes.
+        %p This made me question all the buttons I had on the screen. What if those were projections as well?
+      %figure.image.contain.fourSeventyTwo{"aria-label" => "Nike logo projection in AR", :role => "img", :style => "background-image: url(#{"/images/arshoe-projection.png"})"}
+      %figure.image.contain.fourSeventyTwo{"aria-label" => "Buttons projected in AR", :role => "img", :style => "background-image: url(#{"/images/arshoe-button-ground.png"})"}
+      .one-col
+        %p Could there be buttons on the floor that the user could step on with the shoes? This would keep the users eye in the environment where the shoes are rather than focused on the screen plane.
+        %p This would also cause the user to move their feet more and see the augmented reality in action.
+      / Purchasing
+      .two-col.grid-span.dark-on-light
+        %p
+          %span.emphasis.bold-italic How might users easily buy the shoes in app?
+      .one-col
+        %p For the purchasing feature I wanted to keep it as close to one-click ordering as possible. So the shopping cart has just the shoe model, size, price, and total. More detailed information (and editing and deleting capabilities) are hidden behind a simple tap.
+      %figure.image.contain.fourSeventyTwo{"aria-label" => "Purchasing flow", :role => "img", :style => "background-image: url(#{"/images/arshoe-purchasing.png"})"}
+      %figure.image.contain.fourSeventyTwo{"aria-label" => "Settings flow", :role => "img", :style => "background-image: url(#{"/images/arshoe-settings.png"})"}
+      .one-col
+        %p Required information for payment and shipping is in the settings menu—the first thing the user sees when opening the app in the onboarding experience. They can access this at any time, and only have to fill it out before purchase.
+      / In Store
+      .two-col.grid-span.dark-on-light
+        %p
+          %span.emphasis.bold-italic What if the app was a tool for pre-selecting shoes to try on in store?
+      .one-col
+        %p I visited an athletic shoe store at the mall to observe the customers and sales people. And while my initial problem was about online ordering, I came to the conclusion that this might work for an in-store experience as well.
+        %p It’s difficult to get the attention of the sales staff to get shoes to try on.
+      %figure.image.contain.fourSeventyTwo{"aria-label" => "Shoe store photo", :role => "img", :style => "background-image: url(#{"/images/arshoe-store.jpg"})"}
+      %figure.image.contain.fourSeventyTwo{"aria-label" => "App notification flow", :role => "img", :style => "background-image: url(#{"/images/arshoe-notification.png"})"}
+      .one-col
+        %p The user can pick their store via location permission if given. Then instead of clicking purchase, they can click “Try On” button. When the shoes are ready, the user will get a push notification.
+      .one-col
+        %p The shoes in the store will have a print out sticker with their name and photo if given.
+      %figure.image.contain.fourSeventyTwo{"aria-label" => "Shoebox mockup", :role => "img", :style => "background-image: url(#{"/images/arshoe-box.jpg"})"}
+      .two-col-extra.grid-span
+        %p.bold-italic Augmented reality is in it's infancy, but it's going to change the way we shop for apparel. But in designing this app, I've learned there are some hurdles to overcome.
+        %p.bold-italic Finding the ground plane is an unfamiliar action that needs to be taught to users. In addition, being able to see the shoes from different vantage points is an important aspect that I want to explore next.
+    %footer#footer.footer.fade-in
+      %stt-scroll-btn.btn-bc.z3.invert{:onclick => "TweenLite.to(window, 1, {scrollTo:0});", :style => ""}
+    %script{:src => "https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.5/ScrollMagic.min.js"}
+    %script{:src => "https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.4/TweenLite.min.js"}
+    / build:js /scripts/main.min.js
+    %script{:src => "../scripts/animation.gsap.min.js"}
+    %script{:src => "../scripts/utils.js"}
+    %script{:src => "../scripts/main.js"}
+    / endbuild
+    %script#detailsScript
+      loadCaseAnimation();

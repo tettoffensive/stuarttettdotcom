@@ -44,7 +44,7 @@ gulp.task('_useref', function(){
     .pipe(gulp.dest('dist'))
 });
 
-gulp.task('useref', ['_useref'], function(){
+gulp.task('useref', ['haml','sass','_useref'], function(){
   return gulp.src('public/*/index.html')
     .pipe(useref({noAssets: true}))
     // Minifies only if it's a JavaScript file
@@ -62,6 +62,11 @@ gulp.task('useref', ['_useref'], function(){
 //     })))
 //   .pipe(gulp.dest('dist/images'))
 // });
+
+gulp.task('polymer', function() {
+  return gulp.src('public/src/**/*')
+  .pipe(gulp.dest('dist/src'))
+})
 
 gulp.task('images', function() {
   return gulp.src('public/images/**/*')
@@ -88,5 +93,6 @@ gulp.task('build', [
  'useref',
  'webfonts',
  'images',
+ 'polymer',
  'bower'
 ]);

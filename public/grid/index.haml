@@ -1,0 +1,115 @@
+!!!
+%html{:lang => "en"}
+  %head
+    %link{:href => "../stylesheets/fonts.css", :rel => "stylesheet", :type => "text/css"}/
+    / build:css /stylesheets/main.min.css
+    %link{:href => "../stylesheets/fonts.css", :rel => "stylesheet", :type => "text/css"}/
+    %link{:href => "../stylesheets/style.css", :rel => "stylesheet", :type => "text/css"}/
+    %link{:href => "../stylesheets/reset.css", :rel => "stylesheet", :type => "text/css"}/
+    / endbuild
+    %link{:href => "https://fonts.googleapis.com/css?family=BioRhyme:800", :rel => "stylesheet"}/
+    %meta{:content => "width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes", :name => "viewport"}/
+    %meta{:content => "Stuart Tett | Product Designer", :name => "description"}/
+    %link{:href => "/manifest.json", :rel => "manifest"}/
+    %script{:src => "../bower_components/webcomponentsjs/webcomponents-loader.js"}
+    %link{:href => "../src/stuarttettdotcom-app/stuarttettdotcom-app.html", :rel => "import"}/
+    %title Stuart Tett | Product Designer
+    %meta{:content => "text/html; charset=US-ASCII", "http-equiv" => "content-type"}/
+    %script{:async => "", :src => "https://www.googletagmanager.com/gtag/js?id=UA-42078109-2"}
+    :javascript
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments)};
+      gtag('js', new Date());
+
+      gtag('config', 'UA-42078109-2');
+    :javascript
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-42078109-2', 'auto');
+      ga('set', 'page', '/grid');
+      ga('send', 'pageview');
+  %body{:xmlns => "http://www.w3.org/1999/xhtml"}
+    %stuarttettdotcom-app#app{:detail => "grid"}
+    %section#contentDetails.z1{:style => "display: none; visibility: hidden; min-height: 100vh;"}
+      .progress-container.fade-in
+        #progress-bar.progress-bar
+      %figure.image.contain.fourSeventyTwo{"aria-label" => "", :role => "img", :style => "background-image: url(#{"/images/grid-home.jpg"})"}
+      #caption1.one-col
+        %p
+          When I joined Binary Thum
+          %span.kern b,
+          the Grid app had released its first version into the App Stor
+          %span.kern e.
+          The app allowed users to collaborate on spreadsheets full of video, images, and text in real-tim
+          %span.kern e.
+          It was a solid MV
+          %span.kern P,
+          but their were some much needed improvements in the overall experienc
+          %span.kern e.
+      #caption2.one-col
+        %p
+          The spreadsheet was an infinite canvas of tile
+          %span.kern s.
+          There were no limitations on the number of images, and how many tiles each images takes u
+          %span.kern p.
+        %p This was causing the scrolling and other animation to slow way down. The extreme case is a single image per tile (row and column).
+        %p
+          Grid may be a spreadsheet, but it is meant to showcase multimedia in a beautiful wa
+          %span.kern y.
+      %figure.image.contain{"aria-label" => "", :role => "img", :style => "background-image: url(#{"/images/grid-blank-canvas.jpg"})"}
+      #caption3.grid-span.two-col.dark-on-light
+        %p
+          %span.emphasis.bold-italic How might we allow users to add as much rich media as they want while maintaining buttery smooth animation?
+      #caption4.one-col
+        %p We looked to the world of mobile gaming, where the rendering wasn't done with Apple's UIKit, but the lower-level OpenGL.
+        %p
+          I made a prototype of the home view in OpenGL, and the performance looked promisin
+          %span.kern g.
+        %p
+          We decided to convert the spreadsheet canvas to OpenGL and stress tested i
+          %span.kern t.
+          We were now getting a consistent 60fp
+          %span.kern s.
+          It felt so much more responsive in the hands of the use
+          %span.kern r.
+        %p
+          While the new user experience was superio
+          %span.kern r,
+          the conversion had some major engineering challenge
+          %span.kern s.
+          It was costly to rebuild standard UI component
+          %span.kern s.
+      %figure.image.contain{"aria-label" => "", :role => "img", :style => "background-image: url(#{"/images/grid-image-tiles.jpg"})"}
+      .grid-span.two-col.dark-on-light
+        %p
+          %span.emphasis.bold-italic How might we keep the canvas clear when placing items in the Backpack?
+      %figure.image.contain.fourSeventyTwo{"aria-label" => "", :role => "img", :style => "background-image: url(#{"/images/grid-backpack.gif"})"}
+      .one-col
+        %p
+          Another experience issue came with the introduction of Backpac
+          %span.kern k.
+          This let the user pick photos and videos to add to the Gri
+          %span.kern d.
+          But it took up so much screen real estat
+          %span.kern e.
+        %p In the design specs it animated upward across the screen. But to move it out of the way quickly would be either slow or too distracting if sped up.
+        %p
+          I came up with a solution of quickly fading out the Backpack when the user dragged an element out to be placed on the gri
+          %span.kern d.
+      .grid-span.two-col-extra
+        %p.bold-italic When we tried it out ourselves and in our user testing sessions, this proved effective. The user could easily grab images from the backpack and place it anywhere on the screen without being distracted by the disappearing Backpack.
+      #caption11.grid-span.dark-on-light
+        %h4 Additional Credits: Josh Leong&#8212;Lead Designer
+    %footer#footer.footer.fade-in
+      %stt-scroll-btn.btn-bc.z3.invert{:onclick => "TweenLite.to(window, 1, {scrollTo:0});", :style => ""}
+    %script{:src => "https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.5/ScrollMagic.min.js"}
+    / build:js /scripts/main.min.js
+    %script{:src => "../scripts/animation.gsap.min.js"}
+    %script{:src => "../scripts/utils.js"}
+    %script{:src => "../scripts/main.js"}
+    / endbuild
+    %script#detailsScript
+      loadCaseAnimation();
