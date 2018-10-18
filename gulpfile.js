@@ -53,19 +53,24 @@ gulp.task('useref', ['_useref'], function(){
     .pipe(gulp.dest('dist'))
 });
 
-gulp.task('images', function(){
-  return gulp.src('public/images/**/*.+(png|jpg|gif|svg)')
-  .pipe(imagemin())
-  // Caching images that ran through imagemin
-  .pipe(cache(imagemin({
-      interlaced: true
-    })))
+// gulp.task('images', function(){
+//   return gulp.src('public/images/**/*.+(png|jpg|gif|svg)')
+//   .pipe(imagemin())
+//   // Caching images that ran through imagemin
+//   .pipe(cache(imagemin({
+//       interlaced: true
+//     })))
+//   .pipe(gulp.dest('dist/images'))
+// });
+
+gulp.task('images', function() {
+  return gulp.src('public/images/**/*')
   .pipe(gulp.dest('dist/images'))
-});
+})
 
 gulp.task('webfonts', function() {
-  return gulp.src('public/stylesheets/webfonts')
-  .pipe(gulp.dest('dist/stylesheets'))
+  return gulp.src('public/stylesheets/webfonts/**/*')
+  .pipe(gulp.dest('dist/stylesheets/webfonts'))
 })
 
 gulp.task('bower', function() {
@@ -81,6 +86,7 @@ gulp.task('build', [
  'sass',
  'haml',
  'useref',
- 'fonts',
+ 'webfonts',
+ 'images',
  'bower'
 ]);
