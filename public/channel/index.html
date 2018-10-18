@@ -1,8 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <link rel="stylesheet" type="text/css" href="../fonts/fonts.css" />
+  <!--build:css /stylesheets/main.min.css -->
+  <link rel="stylesheet" type="text/css" href="../stylesheets/fonts.css" />
+  <link rel="stylesheet" type="text/css" href="../stylesheets/style.css" />
   <link rel="stylesheet" type="text/css" href="../stylesheets/reset.css" />
+  <!-- endbuild -->
   <link href="https://fonts.googleapis.com/css?family=BioRhyme:800" rel="stylesheet" />
 
   <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes" />
@@ -12,7 +15,6 @@
   <link rel="import" href="../src/stuarttettdotcom-app/stuarttettdotcom-app.html" />
   <title>Stuart Tett | Interaction Designer</title>
   <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-  <link rel="stylesheet" type="text/css" href="/stylesheets/style.css?v=2" />
   <script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-42078109-2"></script>
   <script>
   window.dataLayer = window.dataLayer || [];
@@ -72,9 +74,11 @@
   <stt-scroll-btn class="btn-bc z3 invert" style="" onclick="TweenLite.to(window, 1, {scrollTo:0});"></stt-scroll-btn>
 </footer>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.5/ScrollMagic.min.js"></script>
-  <script src="/scripts/animation.gsap.min.js"></script>
-  <script src="/scripts/utils.js?v=1"></script>
-<script src="/scripts/main.js?v=1"></script>
+  <!--build:js /scripts/main.min.js -->
+  <script src="../scripts/animation.gsap.min.js"></script>
+  <script src="../scripts/utils.js"></script>
+  <script src="../scripts/main.js"></script>
+  <!-- endbuild -->
   <script id="detailsScript">loadCaseAnimation();</script>
 </body>
 </html>

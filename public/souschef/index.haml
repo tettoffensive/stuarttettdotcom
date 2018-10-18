@@ -3,15 +3,17 @@
   %head
     %meta{:content => "width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes", :name => "viewport"}/
     %meta{:content => "Stuart Tett | Interaction Designer", :name => "description"}/
-    %link{:href => "../fonts/fonts.css", :rel => "stylesheet", :type => "text/css"}/
+    /build:css /stylesheets/main.min.css
+    %link{:href => "../stylesheets/fonts.css", :rel => "stylesheet", :type => "text/css"}/
+    %link{:href => "../stylesheets/style.css", :rel => "stylesheet", :type => "text/css"}/
     %link{:href => "../stylesheets/reset.css", :rel => "stylesheet", :type => "text/css"}/
+    /endbuild
     %link{:href => "https://fonts.googleapis.com/css?family=BioRhyme:800", :rel => "stylesheet"}/
     %link{:href => "/manifest.json", :rel => "manifest"}/
     %script{:src => "../bower_components/webcomponentsjs/webcomponents-loader.js"}
     %link{:href => "../src/stuarttettdotcom-app/stuarttettdotcom-app.html", :rel => "import"}/
     %title Stuart Tett | Interaction Designer
     %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "content-type"}/
-    %link{:href => "/stylesheets/style.css?v=2", :rel => "stylesheet", :type => "text/css"}/
     %script{:async => "", :src => "https://www.googletagmanager.com/gtag/js?id=UA-42078109-2"}
     :javascript
       window.dataLayer = window.dataLayer || [];
@@ -185,8 +187,10 @@
       %stt-scroll-btn.btn-bc.z3.invert{:onclick => "TweenLite.to(window, 1, {scrollTo:0});", :style => ""}
     %script{:src => "https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.5/ScrollMagic.min.js"}
     %script{:src => "https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.4/TweenLite.min.js"}
-    %script{:src => "/scripts/animation.gsap.min.js"}
-    %script{:src => "/scripts/utils.js?v=1"}
-    %script{:src => "/scripts/main.js?v=1"}
+    /build:js /scripts/main.min.js
+    %script{:src => "../scripts/animation.gsap.min.js"}
+    %script{:src => "../scripts/utils.js"}
+    %script{:src => "../scripts/main.js"}
+    / endbuild
     %script#detailsScript
       loadCaseAnimation();

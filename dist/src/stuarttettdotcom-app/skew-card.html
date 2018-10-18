@@ -1,0 +1,591 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.4/TweenLite.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.4/TimelineLite.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.4/plugins/CSSPlugin.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.4/plugins/ScrollToPlugin.min.js"></script>
+<!-- cubic-bezier(0.15, 0.005, 0.155, 1) -->
+<dom-module id="skew-card">
+  <template>
+    <style include="skew-style-module">
+    /* In different browsers figure,p margin/padding is different */
+    :host {
+      --card-closed-height: 500px;
+
+      transform-origin: left top;
+      cursor: pointer;
+      background-color: transparent;
+      padding: 0px;
+      /* Different browsers alias skewY differently - chrome kinda sucks */
+      -webkit-backface-visibility:hidden;
+      backface-visibility:hidden;
+      -webkit-background-clip:content-box;
+      background-clip:content-box;
+      outline: 1px solid transparent;
+
+      display: flex;
+      flex-direction: column;
+      flex-wrap: nowrap;
+      align-items: stretch;
+    }
+
+
+    @media screen and (min-width: 660px) {
+      :host {
+        flex-direction: row;
+      }
+
+      :host(.initial) #label, #content {
+        transform: skewY(3deg);
+      }
+
+      :host(.initial) {
+        transform: skewY(-3deg);
+        height: var(--card-closed-height);
+        width: 100%;
+      }
+
+      :host(.returning) {
+        height: var(--card-closed-height);
+        width: 100%;
+      }
+
+      :host(.onclick) {
+        height: 80%;
+        width: 80%;
+        position: absolute;
+        left: 10%;
+        top: 10%;
+      }
+    }
+
+    /*  When animating open, put host in front */
+    :host(.front) {
+      z-index: 1;
+    }
+    /*  When animating closed, put host back */
+    :host(.back) {
+      z-index: 0;
+    }
+
+    /*  Initial Skewed State */
+    :host(.initial) {
+
+      width: 100%;
+    }
+
+    /*  When animating closed. Everything in initial but the skew */
+    :host(.returning) {
+      width: 100%;
+    }
+
+    /* Counter host skewY with an equal and opposite skew */
+    :host(.initial) #label, #content {
+      /* transform: skewY(3deg); */
+    }
+
+    :host(.hundred-pct) {
+      height: 100%;
+    }
+
+    :host(.initial) #contentZoom {
+      transition: all 0.5s;
+      transition-timing-function: cubic-bezier(.35,.0,.35,1.29);
+    }
+
+    :host(.initial:hover) #contentZoom, :host(.initial:focus) #contentZoom {
+      transform-origin: center;
+      transform: scale(1.05);
+    }
+
+    :host(.initial) #arrow {
+      position: absolute;
+      right: 0px;
+      bottom: 0px;
+      z-index: 100;
+      transition: all 0.5s;
+      transition-timing-function: cubic-bezier(.35,.0,.35,1.29);
+    }
+
+    :host(.initial:hover) #arrow, :host(.initial:focus) #arrow {
+      transform: translateY(-24px);
+      background-image: linear-gradient(-180deg, #4E5251 4%, #3F4A48 98%);
+    }
+
+    </style>
+    <div id="fullCard" style="display: none; visibility: hidden;">
+      <stt-close-btn id="closeBtn" class="btn-tr z3"></stt-close-btn>
+      <stt-scroll-btn id="scrollBtn" class="btn-bc z3"></stt-scroll-btn>
+    </div>
+    <div id="labelShadow" class="shadow z2">
+      <div id="labelClip" class="clip dark-background">
+        <div id="label" class="label" style="height: 100%;">
+          <div id="text" class="text clip">
+            <p class="title agent-1">[[title]]</p>
+            <p class="description agent-2">[[description]]</p>
+            <p class="tags"><span class="agent-3">[[tags]]</span></p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="contentShrink" class="content-shrink shadow z1">
+      <div id="contentClip" class="clip">
+        <div id="contentZoom" style="height: 100%;">
+        <figure id="content" class="content image cover" role="img" aria-label="" style="background-image: url([[img]])">
+        </figure>
+      </div>
+      </div>
+      <svg id="arrow" class="hidden" width="112px" height="75px" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+        <g id="arrow-draw" transform="translate(30, 25)" width="64px" height="27px" fill="#54F0CE" fill-rule="nonzero">
+          <path d="M56.0553834,13.5 L45.0553834,7 L45.0553834,20 L56.0553834,13.5 Z M40.9446166,15.5 L0,15.5 L0,11.5 L40.9446166,11.5 L40.9446166,7.0417191e-16 L63.9446166,13.5 L40.9446166,27 L40.9446166,15.5 Z" id="Combined-Shape"></path>
+        </g>
+      </svg>
+    </div>
+  </template>
+
+  <script>
+  // otherwise GSAP skewY != css skewY https://greensock.com/docs/Plugins/CSSPlugin
+  CSSPlugin.defaultSkewType = "simple";
+
+  class SkewCard extends Polymer.Element {
+    static get is() { return 'skew-card'; }
+    static get properties() {
+      return {
+        detail: {type: String, value: '', reflectToAttribute: true, observer: '_detailChanged' },
+        title: {
+          type: String,
+          reflectToAttribute: true,
+        },
+        description: {
+          type: String,
+          reflectToAttribute: true,
+        },
+        img: {
+          type: String,
+          reflectToAttribute: true,
+        },
+        link: {
+          type: String,
+          reflectToAttribute: true,
+        },
+        tags: {
+          type: String,
+          reflectToAttribute: true,
+        }
+      }
+    }
+
+    _detailChanged(newValue, oldValue) {
+      if (newValue) {
+        this._tryCloneNodesForDetail();
+        this.animLabelDest.style.display = "";
+        this.animImageDest.style.display = "";
+        this.animImageDest.style.visibility = "";
+        this.animLabelDest.style.visibility = "";
+      } else if (this.divFullCard != null) {
+          this.divFullCard.style.display = "none";
+      }
+    }
+
+    ready() {
+      super.ready();
+      // keep track of default title
+      this._defaultTitle = document.title;
+      this.domReady = true;
+
+      // add default classes
+      this.classList.add('initial');
+      this.classList.add('back');
+      this.$.labelShadow.classList.add('lbl-initial');
+      this.$.contentShrink.classList.add('ct-initial');
+    }
+
+    constructor() {
+      super();
+      this.desktopThreshold = 660; // 660 pixels is the min width for desktop mode vs. mobile
+      // closed state = false
+      this._transitioning = false;
+      this._tl = null;
+      this.animLabelDest = null;
+      this.animLabelSource = null;
+      this._openCallback = this._closeCallback = null;
+    }
+
+    get defaultTitle() {
+      return this._defaultTitle;
+    }
+
+    get state() {
+      return this._transitioning;
+    }
+
+    set transitioning(value) {
+      if (this._transitioning == value) {
+        throw "Trying to transition to an unsupported state";
+      }
+      this._transitioning = value;
+    }
+
+    connectedCallback() {
+      super.connectedCallback();
+      // for history back and forward buttons
+      // window.addEventListener('popstate', this._popState);
+      window.addEventListener("resize", this._resize.bind(this));
+      var startPerformance = Math.round(performance.now());
+      this.addEventListener("mouseover", (event) => {
+        startPerformance = Math.round(performance.now());
+        ga('send', 'event', 'Hover', 'page', this.title);
+      });
+      this.addEventListener("mouseout", (event) => {
+        ga('send', 'timing', 'Hover', 'hover', Math.round(performance.now() - startPerformance), this.title);
+      });
+    }
+
+    disconnectedCallback() {
+      super.disconnectedCallback();
+      // for history back and forward buttons
+      // window.removeEventListener('popstate', this._popState);
+      window.removeEventListener("resize", this._resize.bind(this));
+      this.removeEventListener("mouseover");
+      this.removeEventListener("mouseout");
+    }
+
+    _resize(event) {
+      if (!this.divFullCard) { return; }
+
+      let btn = this.divFullCard.querySelector('#scrollBtn');
+      if (this.isMobile()) {
+        btn.style.top = '';
+        this.divFullCard.style.height = '';
+      } else if (this.animLabelDest) {
+        var height = this.animLabelDest.offsetHeight;
+        height += 30;
+        btn.style.top = height + "px";
+        this.divFullCard.style.height = '110vh';
+        this.animLabelDest.style.transform = '';
+      }
+      this.$.label.style.transform = '';
+    }
+
+    _tryCloneNodesForDetail() {
+
+      if (this.divFullCard == null) {
+        this.divFullCard = this.$.fullCard.cloneNode(true);
+        this.parentElement.parentElement.appendChild(this.divFullCard);
+        this.divFullCard.style.visibility = "";
+        this.divFullCard.style.display = "";
+        this.divFullCard.querySelector('#closeBtn').addEventListener('click', (event) => {
+          this.dispatchEvent(new CustomEvent('close', {}));
+        });
+        this.divFullCard.querySelector('#scrollBtn').addEventListener('click', (event) => {
+          this.dispatchEvent(new CustomEvent('scroll', { detail: { button: event.target }}));
+        });
+      }
+
+      if (this.animImageDest == null) {
+        this.animImageDest = this.$.contentShrink.cloneNode(true);
+        this.animImageDest.classList.replace('ct-initial','ct-onclick');
+        this.divFullCard.appendChild(this.animImageDest, this.divFullCard.firstChild);
+        this.animImageDest.style.visibility = "hidden";
+        this.animImageDest.style.display = "none";
+      }
+
+      if (this.animLabelDest == null) {
+        // let's move the element out of the dom
+        this.animLabelDest = this.$.labelShadow.cloneNode(true);
+        this.animLabelDest.classList.replace('lbl-initial','lbl-onclick');
+        this.divFullCard.insertBefore(this.animLabelDest, this.divFullCard.firstChild);
+        this.animLabelDest.style.visibility = "hidden";
+        this.animLabelDest.style.display = "none";
+      }
+
+    }
+
+    isDesktop() {
+      return (window.innerWidth >= this.desktopThreshold);
+    }
+
+    isMobile() {
+      return (window.innerWidth < this.desktopThreshold);
+    }
+
+    tryCardAnimation(animation) {
+
+      if (this._tl != null) {
+        return this._tl;
+      }
+
+      // FLIP animation
+      let animLabelSource = this.$.labelShadow;
+      let animImageSource = this.$.contentShrink;
+      // First
+      let transform = this.style.transform;
+      this.style.transform = "none"; // without skew
+      let first = animLabelSource.getBoundingClientRect();
+      let imageFirst = animImageSource.getBoundingClientRect();
+      this.style.transform = transform; // restore skew
+
+      this._tryCloneNodesForDetail();
+      this.divFullCard.style.display = "";
+      this.animLabelDest.style.display = "";
+      this.animImageDest.style.display = "";
+
+      let animLabelDest = this.animLabelDest;
+      let animImageDest = this.animImageDest;
+
+      // Last
+      if (this.isDesktop()) {
+        this.animLabelDest.style.position = 'fixed';
+        this.animImageDest.style.position = 'fixed';
+      } else {
+        this.divFullCard.style.position = 'fixed';
+        this.divFullCard.style.top = '0px';
+      }
+      let last = this.animLabelDest.getBoundingClientRect();
+      let imageLast = this.animImageDest.getBoundingClientRect();
+
+      let btn = this.divFullCard.querySelector('#scrollBtn');
+      if (this.isMobile()) {
+        btn.style.top = '';
+      } else if (this.animLabelDest) {
+        var height = this.animLabelDest.offsetHeight;
+        height += 30;
+        btn.style.top = height + "px";
+      }
+
+      // Invert
+      let deltaX = first.left - last.left;
+      let deltaY = first.top - last.top;
+      let deltaW = first.width / last.width;
+      let deltaH = first.height / last.height;
+      // Invert
+      let ideltaX = imageFirst.left - imageLast.left;
+      let ideltaY = imageFirst.top - imageLast.top;
+      let ideltaW = imageFirst.width / imageLast.width;
+      let ideltaH = imageFirst.height / imageLast.height;
+      // Create transforms
+      let fromTransform = `
+      translate(${deltaX}px, ${deltaY}px)
+      scale(${deltaW}, ${deltaH})
+      `;
+      let imageFromTransform = `
+      translate(${ideltaX}px, ${ideltaY}px)
+      scale(${ideltaW}, ${ideltaH})
+      `
+      let toTransform = `
+      translate(0,0)
+      scale(1,1)
+      `;
+      this._toTransform = toTransform
+      // Animate
+      var tl = new TimelineLite({ paused: true });
+
+      var heightString = "";
+      if (this.isDesktop()) {
+        heightString = "100vh";
+      }
+
+      // this.divFullCard.style.display = 'block';
+      // this.divFullCard.style.width = '100%';
+      // this.animLabelDest.style.display = 'block';
+      // this.animImageDest.style.display = 'block';
+      // this.animLabelDest.style.visibility = '';
+      // this.animImageDest.style.visibility = '';
+      // return;
+
+      tl.add( TweenLite.to(this.divFullCard, 0, { display: 'block', width: "100%", height: heightString}), 0)
+        .add( TweenLite.to(this.animLabelDest, 0, { display: 'block'}), 0)
+        .add( TweenLite.to(this.animImageDest, 0, { display: 'block'}), 0);
+      // Put the destination pieces in their "First" states
+      TweenLite.set(animLabelDest, {transform: fromTransform, transformOrigin: "left top"});
+      TweenLite.set(animImageDest, {transform: imageFromTransform, transformOrigin: "right top"});
+
+      let unskewDuration = animation ? 0.15 : 0;
+      var delay = 0;
+      tl.addLabel("unskewLabel", delay);
+      delay += unskewDuration;
+      // "Finish" is for anything on completion and on start of reverse
+      tl.addLabel("unskewLabelFinish", delay);
+
+      let scaleUpLabelDuration = animation ? 0.25 : 0;
+      tl.addLabel("scaleUpLabel", delay);
+      delay += scaleUpLabelDuration;
+      tl.addLabel("scaleUpLabelFinish", delay);
+
+      delay = animation ? 0.01 : 0; // reset
+      let fadeOutImageDuration = animation ? 0.25 : 0;
+      tl.addLabel("fadeOutImage", delay);
+      delay += fadeOutImageDuration;
+      tl.addLabel("fadeOutImageFinish", delay);
+
+      let unskewContentDuration = animation ? 0.15 : 0;
+      tl.addLabel("unskewContent", delay);
+      delay += unskewContentDuration;
+      tl.addLabel("unskewContentFinish", delay);
+
+      let scaleUpContentDuration = animation ? 0.25 : 0;
+      tl.addLabel("scaleUpContent", delay);
+      delay += scaleUpContentDuration;
+      tl.addLabel("scaleUpContentFinish", delay);
+
+      let fadeInDetailsDuration = 1.0;
+      let fadeOutWrapperDuration = animation ? fadeInDetailsDuration : 0;
+      let fadeInDetails = tl.addLabel("fadeInDetails", delay);
+      delay += fadeInDetailsDuration;
+      tl.addLabel("fadeInDetailsFinish", delay);
+      tl.addLabel("end", delay); // end of animation
+
+      let scrollY = window.scrollY;
+
+      this.divFullCard.querySelector('#closeBtn').style.position = 'fixed';
+      this.divFullCard.querySelector('#scrollBtn').style.position = 'fixed';
+
+      // Unskew Label
+      tl.add( TweenLite.fromTo(this.$.label, unskewDuration, { autoAlpha: 1 }, { autoAlpha: 0 }), "unskewLabel");
+      tl.add( TweenLite.fromTo(this.$.labelShadow, unskewDuration, { skewY: 0, skewType: "simple", transformOrigin: "left top" }, {skewY: this.isDesktop() ? 3 : 0, skewType: "simple", transformOrigin: "left top",
+      force3D: true, // fixes glitch in Safari
+      onUpdateParams:["{self}"],
+      onUpdate: (tween) => {
+        if (!tween.isActive() && tween.progress() == 1) { return; }
+        let skewY = -this.$.labelShadow._gsTransform.skewY;
+        TweenLite.set(this.$.label, {skewY: skewY, skewType: "simple", transformOrigin: "left top"});
+      },
+      onReverseComplete: () => {
+        setTimeout(() => {
+          this.detail = false;
+          this._closeCallback(animLabelDest,animImageDest);
+          this.transitioning = false;
+        },1);
+      },
+      ease: Power3.easeIn,
+    }), "unskewLabel");
+    // Now that we've unskewed the label, swap it out with the clone that will scale up
+    tl.add( TweenLite.to(animLabelDest, 0, { visibility: 'visible', immediateRender: animation ? true : false, display: 'block' }), "unskewLabelFinish")
+      .add( TweenLite.fromTo(animLabelSource, 0, { autoAlpha: 1, immediateRender: animation ? true : false }, { autoAlpha: 0 }), "unskewLabelFinish")
+      .add( TweenLite.to(animLabelDest.querySelector(".label"), 0, { visibility: 'hidden', immediateRender: animation ? true : false }), "unskewLabelFinish");
+    // Scale Up Label clone
+    tl.add( TweenLite.fromTo(animLabelDest, scaleUpLabelDuration, { transform: fromTransform }, { transform: toTransform,
+      transformOrigin: "left top",
+      force3D: true,
+      ease: Power3.easeOut,
+    }), "scaleUpLabel");
+    tl.add( TweenLite.to(window, 1, { scrollTo: scrollY, ease: Power3.easeInOut}), "scaleUpLabel");
+    // Fade Out the content Image
+    tl.add( TweenLite.fromTo(this.$.content, fadeOutImageDuration, { autoAlpha: 1}, { autoAlpha: 0,
+      ease: Power3.easeInOut,
+    }), "fadeOutImage");
+    // Unskew Image container
+    tl.add( TweenLite.fromTo(this.$.content, unskewContentDuration, { skewY: 0 }, { skewY: 3,
+      skewType: "simple",
+      transformOrigin: "right top",
+      ease: Power3.easeIn,
+    }), "unskewContent");
+    // Now that we've unskewed the image, swap it out with the clone that'll scale up
+    tl.add( TweenLite.to(animImageDest, 0, { visibility: 'visible', immediateRender: animation ? true : false, display: 'block' }), "unskewContentFinish")
+    .add( TweenLite.fromTo(animImageSource, 0, { autoAlpha: 1 }, { autoAlpha: 0 }), "unskewContentFinish")
+    // Scale Up the clone
+    tl.add( TweenLite.fromTo(animImageDest, scaleUpContentDuration, { transform: imageFromTransform, transformOrigin: "left top" }, { transform: toTransform, transformOrigin: "left top",
+    force3D: true, // fixes glitch in Safari
+    onUpdateParams:["{self}"],
+    onUpdate: (tween) => {
+      if (!tween.isActive() && tween.progress() == 1) { return; }
+      let sx = 1.0/animImageDest._gsTransform.scaleX;
+      let sy = 1.0/animImageDest._gsTransform.scaleY;
+      let content = animImageDest.children[0];
+      // let content = animImageDest.querySelector(".content");
+      // TweenLite.set(content, { scaleX: sx, scaleY: sy, transformOrigin: "right top"});
+    },
+    ease: Power3.easeOut,
+  }), "unskewContentFinish");
+  tl.add( TweenLite.to(this.parentElement.parentElement.querySelector("#wrapper"), fadeOutWrapperDuration, { autoAlpha: 0, display: 'none', ease: Power3.easeInOut
+  }), "scaleUpContent");
+  tl.add( TweenLite.fromTo(animLabelDest.querySelector("#label"), fadeInDetailsDuration, { autoAlpha: 0 }, { autoAlpha: 1, ease: Power3.easeInOut,
+  }), "fadeInDetails");
+  tl.add( TweenLite.fromTo(animImageDest.querySelector("#content"), fadeInDetailsDuration, { autoAlpha: 0}, { autoAlpha: 1, ease: Power3.easeInOut,
+  }), "fadeInDetails");
+  tl.add( TweenLite.from(this.divFullCard.querySelector('#closeBtn').$.close, fadeInDetailsDuration, { x: window.innerWidth + 100, ease: Power3.easeInOut,
+  }), "fadeInDetails");
+  tl.add( TweenLite.from(this.divFullCard.querySelector('#scrollBtn').$.scroll, fadeInDetailsDuration, { y: window.innerHeight + 100, ease: Power3.easeInOut,
+    onComplete: () => {
+      setTimeout(() => {
+        this.detail = true;
+        if (this._openCallback) {
+          this._openCallback(animLabelDest,animImageDest);
+        }
+          this.transitioning = false;
+        },1);
+      },
+      ease: Power3.easeOut,
+      immediateRender: true,
+    }), "fadeInDetails");
+    if (this.isMobile()) {
+      tl.add( TweenLite.to(this.divFullCard, 0, { ease: Power3.easeInOut, position: '', immediateRender: false,
+      }), "end");
+    }
+    tl.add( TweenLite.to(animLabelDest, 0, { ease: Power3.easeInOut, position: '', immediateRender: false,
+    }), "end");
+    tl.add( TweenLite.to(animImageDest, 0, { ease: Power3.easeInOut, position: '', immediateRender: false,
+    }), "end");
+    tl.add( TweenLite.to(this.divFullCard.querySelector('#closeBtn'), 0, { ease: Power3.easeInOut, position: '', immediateRender: false,
+    }), "end");
+    tl.add( TweenLite.to(this.divFullCard.querySelector('#scrollBtn'), 0, { ease: Power3.easeInOut, position: '', immediateRender: false,
+    }), "end");
+
+    this._tl = tl;
+    return this._tl;
+  }
+
+  // Called when you click on a closed card
+  _openCard(callback) {
+    this.transitioning = true; // transition to open
+    // Load the data for the opening page async - don't wait for the data to animate
+    this._openCallback = callback;
+    this._tryCloneNodesForDetail();
+    this.tryCardAnimation(true).restart();
+  }
+
+  // Called when you click on a closed card
+  _closeCard(callback) {
+    this.transitioning = true; // transition to open
+    this._closeCallback = callback;
+    this.tryCardAnimation(true).reverse();
+  }
+
+  openCard(event, callback) {
+    if (event.target != event.currentTarget) {
+      return;
+    }
+    if (!this.domReady) {
+      return;
+    }
+    event.preventDefault();
+    this._openCard(callback);
+  }
+
+  closeCard(event, callback) {
+    // if (event.target != event.currentTarget) {
+    //   return;
+    // }
+    if (!this.domReady) {
+      return;
+    }
+    // event.preventDefault();
+    this._closeCard(callback);
+  }
+
+  // _popState(event) {
+  //   if (event.target != event.currentTarget || !this.state) {
+  //     return; // event is window so this probably isn't necessary
+  //   }
+  //   event.preventDefault();
+  //   this._openCard();
+  // }
+
+  _loadImage(img) {
+    if (img && !img.src) {
+      img.src = img.getAttribute('data-src');
+    }
+  }
+}
+window.customElements.define(SkewCard.is, SkewCard);
+</script>
+</dom-module>

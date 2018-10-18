@@ -1,0 +1,81 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/polymer/lib/elements/dom-repeat.html">
+<link rel="import" href="../../bower_components/polymer/lib/elements/dom-if.html">
+<link rel="import" href="../../bower_components/polymer/lib/elements/array-selector.html">
+<link rel="import" href="shape-parallelogram.html">
+<link rel="import" href="shape-triangle.html">
+<link rel="import" href="shape-circle.html">
+
+<dom-module id="scatter-shapes">
+  <template>
+    <style>
+
+    :host {
+      position: absolute;
+      z-index: -1;
+    }
+
+    svg {
+      fill: currentColor;
+      stroke: currentColor;
+    }
+    </style>
+    <template is="dom-repeat" items="{{shapes}}">
+      <template is="dom-if" if="{{_isEqualTo(item.shape,'triangle')}}">
+        <shape-triangle style="position: absolute; left:[[item.posx]]; top:[[item.posy]]; transform: rotate([[item.rotate]]deg);"></shape-triangle>
+      </template>
+      <template is="dom-if" if="{{_isEqualTo(item.shape,'circle')}}">
+        <shape-circle style="position: absolute; left:[[item.posx]]; top:[[item.posy]]"></shape-circle>
+      </template>
+      <template is="dom-if" if="{{_isEqualTo(item.shape,'parallelogram')}}">
+        <shape-parallelogram style="position: absolute; left:[[item.posx]]; top:[[item.posy]]; transform: rotate([[item.rotate]]deg);"></shape-parallelogram>
+      </template>
+    </template>
+  </template>
+
+  <script>
+  class ScatterShapes extends Polymer.Element {
+
+    static get is() { return 'scatter-shapes'; }
+
+    static get properties() {
+      return {
+        shapes: {
+          type: Array,
+          value() {
+            return [
+              /* col 1 */
+              {shape: 'parallelogram', posx: '88%', posy: '952px', rotate: '10'},
+              {shape: 'circle',        posx: '92%', posy: '691px', rotate: '90'},
+              {shape: 'parallelogram', posx: '82%', posy: '500px', rotate: '0'},
+              {shape: 'triangle',      posx: '89%', posy: '263px', rotate: '-51'},
+              {shape: 'parallelogram', posx: '99%', posy: '54px', rotate: '-20'},
+              /* col 2 */
+              {shape: 'triangle',      posx: '56%', posy: '906px', rotate: '-10'},
+              {shape: 'circle',        posx: '63%', posy: '661px', rotate: '0'},
+              {shape: 'triangle',      posx: '69%', posy: '240px', rotate: '0'},
+              {shape: 'parallelogram', posx: '52%', posy: '502px', rotate: '-30'},
+              {shape: 'circle',        posx: '32%', posy: '795px', rotate: '0'},
+              {shape: 'parallelogram', posx: '33%', posy: '506px', rotate: '45'},
+              {shape: 'circle',        posx: '50%', posy: '-16px',  rotate: '0'},
+              /* col 3 */
+              {shape: 'triangle',      posx: '7%', posy: '990px', rotate: '-45'},
+              {shape: 'parallelogram', posx: '1%', posy: '773px', rotate: '0'},
+              {shape: 'triangle',      posx: '8%', posy: '547px', rotate: '0'},
+              {shape: 'circle',        posx: '2%', posy: '189px', rotate: '0'},
+              {shape: 'parallelogram', posx: '9%', posy: '1px', rotate: '-50'},
+            ];
+          }
+        }
+      }
+    }
+
+    _isEqualTo(title, string) {
+      return title == string;
+    }
+  }
+
+  customElements.define(ScatterShapes.is, ScatterShapes);
+  </script>
+
+</dom-module>

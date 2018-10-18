@@ -272,9 +272,13 @@ class StuarttettdotcomApp extends Polymer.Element {
           ga('send', 'pageview');
 
           let docBody = document.getElementsByTagName("body")[0];
-          this._replaceQueryWithTag(docBody, "#contentDetails", xhr.responseXML.getElementsByTagName("section")[0]);
-          this._replaceQueryWithTag(docBody, "#footer", xhr.responseXML.getElementsByTagName("footer")[0]);
-          this._replaceQueryWithTag(docBody, "#detailsScript",xhr.responseXML.getElementById("detailsScript"));
+
+          var div = document.createElement("code"); //DIV is also OK
+          div.innerHTML = xhr.responseText;
+
+          this._replaceQueryWithTag(docBody, "#contentDetails", div.getElementsByTagName("section")[0]);
+          this._replaceQueryWithTag(docBody, "#footer", div.getElementsByTagName("footer")[0]);
+          // this._replaceQueryWithTag(docBody, "#detailsScript", div.getElementById("detailsScript"));
 
           setTimeout(() => {
             this._tryShowDetailsSection();
