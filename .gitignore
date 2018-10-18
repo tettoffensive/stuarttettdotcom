@@ -1,7 +1,4 @@
 .sass-cache/
 *.css.map
-*.css
 .DS_Store
 *.log
-index.html
-404.html
