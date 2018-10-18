@@ -3,3 +3,6 @@
 *.css
 .DS_Store
 *.log
+dist/
+index.html
+404.html

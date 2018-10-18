@@ -1,0 +1,70 @@
+!!!
+%html{:lang => "en"}
+  %head
+    %meta{:content => "width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes", :name => "viewport"}/
+    %meta{:content => "Stuart Tett | Product Designer", :name => "description"}/
+    / build:css /stylesheets/main.min.css
+    %link{:href => "../stylesheets/fonts.css", :rel => "stylesheet", :type => "text/css"}/
+    %link{:href => "../stylesheets/style.css", :rel => "stylesheet", :type => "text/css"}/
+    %link{:href => "../stylesheets/reset.css", :rel => "stylesheet", :type => "text/css"}/
+    / endbuild
+    %link{:href => "https://fonts.googleapis.com/css?family=BioRhyme:800", :rel => "stylesheet"}/
+    %link{:href => "/manifest.json", :rel => "manifest"}/
+    %script{:src => "../bower_components/webcomponentsjs/webcomponents-loader.js"}
+    %link{:href => "../src/stuarttettdotcom-app/stuarttettdotcom-app.html", :rel => "import"}/
+    %title Stuart Tett | Product Designer
+    %meta{:content => "text/html; charset=US-ASCII", "http-equiv" => "content-type"}/
+    %script{:async => "", :src => "https://www.googletagmanager.com/gtag/js?id=UA-42078109-2"}
+    :javascript
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments)};
+      gtag('js', new Date());
+
+      gtag('config', 'UA-42078109-2');
+    :javascript
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-42078109-2', 'auto');
+      ga('set', 'page', '/about');
+      ga('send', 'pageview');
+  %body{:xmlns => "http://www.w3.org/1999/xhtml"}
+    %stuarttettdotcom-app#app{:detail => "about"}
+    %section#contentDetails{:style => "display: none; visibility: hidden; min-height: 100vh;"}
+      .progress-container.fade-in
+        #progress-bar.progress-bar
+      .two-col-extra
+        %h3 Hello! My name is Stuart. I have a mixed background in design and development.
+        %p From an early age, I was always creating art. I began coding in middle school back in the 90s. I got into making websites and even into 3d animation.
+      %figure.image.contain.fourSeventyTwo{:role => "img", :style => "background-image: url(#{"/images/stuart-draws.jpg"})"}
+      %figure.image.contain.fourSeventyTwo{:role => "img", :style => "background-image: url(#{"/images/stuart-codes.jpg"})"}
+      .two-col-extra
+        %h3 I ended up doing a double major in Art &amp; Design and Computer Science.
+        %p Then I got my Master's in a combo of those two disciplines called Visualization Science.
+      .two-col-extra.grid-span
+        %h3 I've gone from creating visual effects for film to developing digital products on the mobile and web.
+        %p
+          I loved using my visual creativity to craft fire on films like
+          = succeed "," do
+            %span.italic How To Train Your Dragon
+        %h3 Since then, I've been working at early-stage startups working on mobile and web products.
+        %p I've had the opportunity to wear many hats on these small teams. I've found that my strengths are around:
+      .two-col.grid-span.short
+        %h3 Building a great experience for people using digital interfaces.
+      .two-col.grid-span.short
+        %h3 Matching the user's needs with business needs to create lasting growth.
+      .two-col.grid-span.short
+        %h3 Crafting interfaces that are functional and aesthetically pleasing.
+    %footer#footer.footer.fade-in
+      %stt-scroll-btn.btn-bc.z3.invert{:onclick => "TweenLite.to(window, 1, {scrollTo:0});", :style => ""}
+    %script{:src => "https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.5/ScrollMagic.min.js"}
+    %script{:src => "https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.4/TweenLite.min.js"}
+    / build:js /scripts/main.min.js
+    %script{:src => "../scripts/animation.gsap.min.js"}
+    %script{:src => "../scripts/utils.js"}
+    %script{:src => "../scripts/main.js"}
+    / endbuild
+    %script#detailsScript
+      loadCaseAnimation();
