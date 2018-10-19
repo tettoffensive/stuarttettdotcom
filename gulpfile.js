@@ -1,6 +1,6 @@
-var gulp = require('gulp'),
-    babel = require('gulp-babel');
-    // debug = require('gulp-debug');
+var gulp = require('gulp');
+var babel = require('gulp-babel');
+var debug = require('gulp-debug');
 
 var sass = require('gulp-sass');
 var haml = require('gulp-ruby-haml');
@@ -42,18 +42,20 @@ gulp.task('_useref', function(){
     // Minifies only if it's a JavaScript file
     .pipe(gulpIf('*.js', babel({presets: ['minify']})))
     .pipe(gulpIf('*.css', cssnano()))
-    // .pipe(debug({title: 'index.html:'}))
+    .pipe(debug({title: '_useref PROCESS:'}))
     .pipe(gulp.dest('dist'))
+    .pipe(debug({title: '_useref OUTPUT->dist:'}))
 });
 
 gulp.task('useref', ['haml','sass','_useref'], function(){
   return gulp.src('public/*/index.html')
     .pipe(useref({noAssets: true}))
-    // .pipe(debug({title: 'cases html:'}))
+    .pipe(debug({title: 'useref PROCESS:'}))
     // Minifies only if it's a JavaScript file
     // .pipe(gulpIf('*.html', htmltidy({outputXhtml: true})))
     // .pipe(gulpIf('*.css', cssnano()))
     .pipe(gulp.dest('dist'))
+    .pipe(debug({title: 'useref OUTPUT->dist:'}))
 });
 
 // gulp.task('images', function(){
