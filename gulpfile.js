@@ -1,5 +1,6 @@
-var gulp = require('gulp'),
-    babel = require('gulp-babel');
+var gulp = require('gulp');
+var babel = require('gulp-babel');
+var debug = require('gulp-debug');
 
 var sass = require('gulp-sass');
 var haml = require('gulp-ruby-haml');
@@ -21,12 +22,14 @@ gulp.task('sass', function(){
   return gulp.src('public/**/*.scss')
     .pipe(sass()) // Using gulp-sass
     .pipe(gulp.dest('public'))
+    .pipe(debug({title: 'haml OUTPUT:'}));
 });
 
 gulp.task('haml', function () {
-  gulp.src('public/**/*.haml')
+  return gulp.src('public/**/*.haml')
     .pipe(haml())
-    .pipe(gulp.dest('public'));
+    .pipe(gulp.dest('public'))
+    .pipe(debug({title: 'haml OUTPUT:'}));
 });
 
 gulp.task('watch', function(){
@@ -35,22 +38,26 @@ gulp.task('watch', function(){
   gulp.watch('public/**/*.haml', ['haml']);
 });
 
-gulp.task('_useref', function(){
-  return gulp.src('public/index.html')
+gulp.task('_useref', ['haml','sass'], function(){
+  return gulp.src('public/*.html')
     .pipe(useref())
     // Minifies only if it's a JavaScript file
     .pipe(gulpIf('*.js', babel({presets: ['minify']})))
     .pipe(gulpIf('*.css', cssnano()))
+    .pipe(debug({title: '_useref PROCESS:'}))
     .pipe(gulp.dest('dist'))
+    .pipe(debug({title: '_useref OUTPUT->dist:'}))
 });
 
 gulp.task('useref', ['haml','sass','_useref'], function(){
   return gulp.src('public/*/index.html')
     .pipe(useref({noAssets: true}))
+    .pipe(debug({title: 'useref PROCESS:'}))
     // Minifies only if it's a JavaScript file
     // .pipe(gulpIf('*.html', htmltidy({outputXhtml: true})))
     // .pipe(gulpIf('*.css', cssnano()))
     .pipe(gulp.dest('dist'))
+    .pipe(debug({title: 'useref OUTPUT->dist:'}))
 });
 
 // gulp.task('images', function(){
@@ -84,12 +91,30 @@ gulp.task('bower', function() {
 })
 
 gulp.task('clean:dist', function() {
-  return del.sync('dist');
+  return del.sync('dist')
 })
 
-gulp.task('build', [
- 'sass',
- 'haml',
+gulp.task('clean:html', function() {
+  return del.sync('public/*/index.html')
+})
+
+gulp.task('clean:html2', function() {
+  return del.sync('public/*.html')
+})
+
+gulp.task('clean:css', function() {
+  return del.sync('public/**/*.css')
+})
+
+gulp.task('clean', [
+  'clean:dist',
+  'clean:html',
+  'clean:html2',
+  'clean:css'
+])
+
+
+gulp.task('default', [
  'useref',
  'webfonts',
  'images',
