@@ -1,5 +1,6 @@
 var gulp = require('gulp'),
     babel = require('gulp-babel');
+    // debug = require('gulp-debug');
 
 var sass = require('gulp-sass');
 var haml = require('gulp-ruby-haml');
@@ -41,12 +42,14 @@ gulp.task('_useref', function(){
     // Minifies only if it's a JavaScript file
     .pipe(gulpIf('*.js', babel({presets: ['minify']})))
     .pipe(gulpIf('*.css', cssnano()))
+    // .pipe(debug({title: 'index.html:'}))
     .pipe(gulp.dest('dist'))
 });
 
 gulp.task('useref', ['haml','sass','_useref'], function(){
   return gulp.src('public/*/index.html')
     .pipe(useref({noAssets: true}))
+    // .pipe(debug({title: 'cases html:'}))
     // Minifies only if it's a JavaScript file
     // .pipe(gulpIf('*.html', htmltidy({outputXhtml: true})))
     // .pipe(gulpIf('*.css', cssnano()))
@@ -87,9 +90,7 @@ gulp.task('clean:dist', function() {
   return del.sync('dist');
 })
 
-gulp.task('build', [
- 'sass',
- 'haml',
+gulp.task('default', [
  'useref',
  'webfonts',
  'images',
