@@ -33,9 +33,9 @@ gulp.task('haml', function () {
 });
 
 gulp.task('watch', function(){
-  gulp.watch('public/stylesheets/*.scss', ['sass']);
-  gulp.watch('public/fonts/*.scss', ['sass']);
-  gulp.watch('public/**/*.haml', ['haml']);
+  gulp.watch('public/stylesheets/*.scss', ['useref']);
+  gulp.watch('public/fonts/*.scss', ['useref']);
+  gulp.watch('public/**/*.haml', ['useref']);
 });
 
 gulp.task('_useref', ['haml','sass'], function(){
@@ -85,6 +85,11 @@ gulp.task('webfonts', function() {
   .pipe(gulp.dest('dist/stylesheets/webfonts'))
 })
 
+gulp.task('fonts', function() {
+  return gulp.src('public/fonts/**/*')
+  .pipe(gulp.dest('dist/fonts'))
+})
+
 gulp.task('bower', function() {
   return gulp.src('public/bower_components/**/*')
   .pipe(gulp.dest('dist/bower_components'))
@@ -116,6 +121,7 @@ gulp.task('clean', [
 
 gulp.task('default', [
  'useref',
+ 'fonts',
  'webfonts',
  'images',
  'polymer',

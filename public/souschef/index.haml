@@ -5,6 +5,7 @@
     %meta{:content => "Stuart Tett | Interaction Designer", :name => "description"}/
     /build:css /stylesheets/main.min.css
     %link{:href => "../stylesheets/fonts.css", :rel => "stylesheet", :type => "text/css"}/
+    %link{:href => "../stylesheets/geomanist.css", :rel => "stylesheet", :type => "text/css"}/
     %link{:href => "../stylesheets/style.css", :rel => "stylesheet", :type => "text/css"}/
     %link{:href => "../stylesheets/reset.css", :rel => "stylesheet", :type => "text/css"}/
     /endbuild
@@ -43,7 +44,7 @@
           Prob-
         %h1.grid-span.align-left.special
           lem
-      %img.squiggle{:src => "/images/wave.svg"}/
+        %img.squiggle{:src => "/images/wave.svg"}/
       .one-col.col-reset
         %h3 For working professionals, weeknight dinners are an afterthought.
         %p Often people don't think about it until their commute home. They look in their fridge paralyzed. They often end up ordering delivery.
@@ -64,7 +65,7 @@
           Rese-
         %h1.grid-span.align-left.special
           arch
-      %img.squiggle{:src => "/images/wave.svg"}/
+        %img.squiggle{:src => "/images/wave.svg"}/
       .one-col.col-reset
         %h3 I created personas from user interviews.
         %p I interviewed and observed to learn more about people's experiences with meal-planning and cooking.
@@ -93,7 +94,7 @@
           Inter-
         %h1.grid-span.align-left.special
           action
-      %img.squiggle{:src => "/images/wave.svg"}/
+        %img.squiggle{:src => "/images/wave.svg"}/
       / > Filter Interaction
       .one-col.col-reset
         %h3.grid-span.align-left I explored how to use time, quality, and cost to organize the recipes.
@@ -156,7 +157,7 @@
           Visual
         %h1.grid-span.align-left.special
           Design
-      %img.squiggle{:src => "/images/wave.svg"}/
+        %img.squiggle{:src => "/images/wave.svg"}/
       .one-col.col-reset
         %h3 Lucky Peach magazine served as an initial inspiration.
         %p I love the attitude around Lucky Peach and initially started with a grungier look. But I felt that a much cleaner look was better suited for a mobile app.
@@ -174,15 +175,20 @@
           Learn-
         %h1.grid-span.align-left.special
           ings
-      %img.squiggle{:src => "/images/wave.svg"}/
-      .two-col-extra.grid-span
+        %img.squiggle{:src => "/images/wave.svg"}/
+      .grid-span.two-col
         %ul.dark-list
-          %li The tech of computer vision isn’t production ready for this problem.
-          %li Look beyond the bottom tab bar for navigation.
-          %li Matching users with the right recipes is just one facet of getting busy people to cook.
+          %li.one
+            The tech of computer vision isn’t production ready for this problem.
+        %ul.dark-list
+          %li.two
+            Look beyond the bottom tab bar for navigation.
+        %ul.dark-list
+          %li.three
+            Matching users with the right recipes is just one facet of getting busy people to cook.
       / Footer
-      .grid-span.dark-on-light
-        %h4 Additional Credits: Shane Vitarana—Developer/Co-Founder
+      %blockquote.grid-span.dark-on-light
+        %h4 Additional Credits: Shane Vitarana&#8212;Developer/Co&#x2011;Founder
     %footer#footer.footer.fade-in.z3
       %stt-scroll-btn.btn-bc.z3.invert{:onclick => "TweenLite.to(window, 1, {scrollTo:0});", :style => ""}
     %script{:src => "https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.5/ScrollMagic.min.js"}
