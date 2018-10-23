@@ -79,8 +79,8 @@
     }
 
     /* Counter host skewY with an equal and opposite skew */
-    :host(.initial) #label, #content {
-      /* transform: skewY(3deg); */
+    :host(.initial) #content {
+      transform: skewY(3deg);
     }
 
     :host(.hundred-pct) {
@@ -130,9 +130,9 @@
     <div id="contentShrink" class="content-shrink shadow z1">
       <div id="contentClip" class="clip">
         <div id="contentZoom" style="height: 100%;">
-        <figure id="content" class="content image contain" role="img" aria-label="" style="background-image: url([[img]])">
-        </figure>
-      </div>
+          <img id="content" class="content image contain" role="img" aria-label="" src="[[img]]">
+          </img>
+        </div>
       </div>
       <svg id="arrow" class="hidden" width="112px" height="75px" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
         <g id="arrow-draw" transform="translate(30, 25)" width="64px" height="27px" fill="#54F0CE" fill-rule="nonzero">
@@ -580,11 +580,11 @@
   //   this._openCard();
   // }
 
-  _loadImage(img) {
-    if (img && !img.src) {
-      img.src = img.getAttribute('data-src');
-    }
-  }
+  // _loadImage(img) {
+  //   if (img && !img.src) {
+  //     img.src = img.getAttribute('data-src');
+  //   }
+  // }
 }
 window.customElements.define(SkewCard.is, SkewCard);
 </script>
