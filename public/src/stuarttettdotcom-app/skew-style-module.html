@@ -190,7 +190,10 @@
       left: 0;
       right: 0;
       z-index: -1;
-      @media screen and (min-width: 660px) {
+    }
+
+    @media screen and (min-width: 660px) {
+      .shadow:before {
         box-shadow: 0 5px 20px 0px rgba(0,0,0,0.1);
       }
     }
@@ -203,13 +206,16 @@
     .clip {
       overflow: hidden;
       height: 100%;
-      @media screen and (min-width: 660px) {
+    }
+
+    @media screen and (min-width: 660px) {
+      .clip {
         border-radius: 2px;
       }
     }
 
-    #labelShadow {
-      @media screen and (min-width: 660px) {
+    @media screen and (min-width: 660px) {
+      #labelShadow {
         border-radius: 2px;
       }
     }
