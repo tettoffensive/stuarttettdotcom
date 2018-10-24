@@ -1,7 +1,7 @@
-$header-font: 'geomanistmedium', sans-serif;
-$subheader-font: 'geomanistmedium', sans-serif;
-$quote-font: 'DecimaMonoRound-BoldItalic', monospace;
-$body-font: DecimaMonoRound, monospace;
+$header-font: 'BioRhyme', sans-serif;
+$subheader-font: 'DecimaMonoRound', monospace;
+$quote-font: 'DecimaMonoRound-Italic', monospace;
+$body-font: 'DecimaMonoRound', monospace;
 $system-font: -apple-system, BlinkMacSystemFont,"Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
 $black: #121212;
 $white: #f1f1f1;
@@ -418,6 +418,7 @@ blockquote before, blockquote after, q before, q after {
       mix-blend-mode: screen;
       opacity: 0.55;
 
+      font-family: 'DecimaMonoRound-BoldItalic', monospace;
       font-size: 1.777em;
       transform: translate(-22px, 6px);
 
@@ -642,7 +643,7 @@ img.squiggle {
 }
 
 h1.special {
-  font-family: 'geomanistblack';
+  font-family: $header-font;
   -webkit-user-select: none;
   user-select: none;
   font-size: 4em;

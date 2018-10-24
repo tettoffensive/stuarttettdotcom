@@ -157,7 +157,7 @@
 
     /* Background color on the label-clip (so no extra gap at the bottom) */
     .dark-background {
-      background-image: linear-gradient(-180deg, #4E5251 4%, #3F4A48 98%);
+      background-image: linear-gradient(-180deg, #4E5251 0%, #3F4A48 100%);
     }
 
     .z3 {
@@ -190,7 +190,9 @@
       left: 0;
       right: 0;
       z-index: -1;
-      box-shadow: 0 5px 20px 0px rgba(0,0,0,0.1);
+      @media screen and (min-width: 660px) {
+        box-shadow: 0 5px 20px 0px rgba(0,0,0,0.1);
+      }
     }
 
     .btn-shadow {
@@ -201,11 +203,15 @@
     .clip {
       overflow: hidden;
       height: 100%;
-      border-radius: 2px;
+      @media screen and (min-width: 660px) {
+        border-radius: 2px;
+      }
     }
 
     #labelShadow {
-      border-radius: 2px;
+      @media screen and (min-width: 660px) {
+        border-radius: 2px;
+      }
     }
 
     #contentZoom {
@@ -214,12 +220,22 @@
 
     /* This way the label is larger in Y than the content, so it looks like overlapping */
     .content-shrink {
+      max-height: 400px;
+      overflow: hidden;
       flex-grow: 1;
       flex-shrink: 1;
       margin: auto 0px auto 0px;
       /* background-image: linear-gradient(-180deg, #fafafa 4%, #f1f1f1 98%); */
-      background-image: linear-gradient(-180deg, #3F4A48 4%, #121212 98%);
-      border-radius: 2px;
+      background-image: linear-gradient(-180deg, #3F4A48 0%, #121212 100%);
+      border-radius: 0px 0px 2px 2px;
+    }
+
+    @media screen and (min-width: 660px) {
+      .content-shrink {
+        border-radius: 2px;
+        max-height: initial;
+        overflow: visible;
+      }
     }
 
     /* Contains the image */
@@ -309,7 +325,7 @@
 
     .title {
       margin-top: 24px;
-      font-family: 'geomanistmedium';
+      font-family: 'BioRhyme';
       font-weight: 700;
       font-style: normal;
       font-size: 36px;
