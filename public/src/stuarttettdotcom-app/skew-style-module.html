@@ -271,20 +271,35 @@
       box-shadow: 0px 0px 50px 10px rgba(0,0,0,1);
     } */
 
+    .ct-initial .content-auto-margin-false {
+      margin-bottom: auto;
+    }
+
+    .content-auto-margin-true {
+      margin: auto;
+    }
+
     .image {
       padding: 40px;
       margin: auto;
       background-repeat: no-repeat;
       background-position: 50% 50%;
-      min-height: 400px;
       background-size: cover;
+    }
+
+    .ct-initial .image {
+      min-height: 400px;
+    }
+
+    .ct-onclick .image {
+      min-height: 100%;
     }
 
     @media screen and (min-width: 660px) {
       .content {
         min-height: 540px;
       }
-      .image {
+      .ct-initial .image {
         min-height: 540px;
       }
     }
