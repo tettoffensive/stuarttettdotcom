@@ -131,12 +131,12 @@
     <div id="contentShrink" class="content-shrink shadow z1">
       <div id="contentClip" class="clip">
         <div id="contentZoom" style="height: 100%;"><div id="content" style="margin: auto; width: 100%; display: flex; overflow: hidden;">
-            <template is="dom-if" if="{{_isEqualTo(type,'img')}}">
-              <img style="margin: auto; max-width: 100%; place-self: start;" class="content image contain drop-shadow" role="img" aria-label="" src="[[img]]">
+            <template is="dom-if" if="{{_isEqualTo(type,'img')}}"> <!-- 77% from firefox handle svg differently -->
+              <img style="margin: auto; max-width: 77%; place-self: start;" class="content image contain drop-shadow" role="img" aria-label="" src="[[img]]">
               </img>
             </template>
             <template is="dom-if" if="{{!_isEqualTo(type,'img')}}">
-              <figure id="" class="content image contain" role="img" aria-label="" style="background-image: url([[img]])">
+              <figure id="" class="content image cover" role="img" aria-label="" style="background-image: url([[img]])">
               </figure>
             </template>
           </div>
