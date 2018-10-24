@@ -2,6 +2,8 @@ var gulp = require('gulp');
 var babel = require('gulp-babel');
 var debug = require('gulp-debug');
 
+var spawn = require('child_process').spawn;
+
 var sass = require('gulp-sass');
 var haml = require('gulp-ruby-haml');
 
@@ -72,7 +74,12 @@ gulp.task('useref', ['haml','sass','_useref'], function(){
 // });
 
 gulp.task('polymer', function() {
-  return gulp.src('public/src/**/*')
+  return spawn('polymer', ['build'], { cwd: 'public', stdio: 'inherit' })
+  .on('close', done)
+})
+
+gulp.task('copy-polymer', ['polymer'], function() {
+  return gulp.src('public/build/default/src/**/*')
   .pipe(gulp.dest('dist/src'))
 })
 
@@ -92,8 +99,8 @@ gulp.task('fonts', function() {
   .pipe(gulp.dest('dist/fonts'))
 })
 
-gulp.task('bower', function() {
-  return gulp.src('public/bower_components/**/*')
+gulp.task('bower', ['polymer'], function() {
+  return gulp.src('public/build/default/bower_components/**/*')
   .pipe(gulp.dest('dist/bower_components'))
 })
 
@@ -113,11 +120,16 @@ gulp.task('clean:css', function() {
   return del.sync('public/**/*.css')
 })
 
+gulp.task('clean:polymer', function() {
+  return del.sync('public/build')
+})
+
 gulp.task('clean', [
   'clean:dist',
   'clean:html',
   'clean:html2',
-  'clean:css'
+  'clean:css',
+  'clean:polymer'
 ])
 
 
@@ -126,6 +138,6 @@ gulp.task('default', [
  'fonts',
  'webfonts',
  'images',
- 'polymer',
+ 'copy-polymer',
  'bower'
 ]);
