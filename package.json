@@ -20,6 +20,7 @@
     "gulp-htmltidy": "^0.2.4",
     "gulp-if": "^2.0.2",
     "gulp-imagemin": "^4.1.0",
+    "gulp-polymer-build-utils": "^1.6.0",
     "gulp-ruby-haml": "0.0.9",
     "gulp-sass": "^4.0.2",
     "gulp-svgo": "^1.5.4",
