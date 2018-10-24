@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="422px" height="860px" viewBox="0 0 422 860" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.2 (67145) - http://www.bohemiancoding.com/sketch -->
+    <title>arshoes-cover</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <rect id="path-1" x="8" y="16" width="404" height="834" rx="47"></rect>
+        <radialGradient cx="50%" cy="50%" fx="50%" fy="50%" r="155.78391%" gradientTransform="translate(0.500000,0.500000),scale(1.000000,0.473684),rotate(91.580932),translate(-0.500000,-0.500000)" id="radialGradient-3">
+            <stop stop-color="#EEEEEE" offset="0%"></stop>
+            <stop stop-color="#D5D5D5" offset="100%"></stop>
+        </radialGradient>
+        <linearGradient x1="50%" y1="100%" x2="50%" y2="3.05274566%" id="linearGradient-4">
+            <stop stop-color="#000000" stop-opacity="0" offset="0%"></stop>
+            <stop stop-color="#000000" offset="100%"></stop>
+        </linearGradient>
+        <filter x="-52.3%" y="-52.3%" width="204.5%" height="204.5%" filterUnits="objectBoundingBox" id="filter-5">
+            <feOffset dx="0" dy="2" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="5" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.25 0" type="matrix" in="shadowBlurOuter1" result="shadowMatrixOuter1"></feColorMatrix>
+            <feMerge>
+                <feMergeNode in="shadowMatrixOuter1"></feMergeNode>
+                <feMergeNode in="SourceGraphic"></feMergeNode>
+            </feMerge>
+        </filter>
+        <linearGradient x1="50%" y1="4.96748555%" x2="50%" y2="100%" id="linearGradient-6">
+            <stop stop-color="#AE0DFF" offset="0%"></stop>
+            <stop stop-color="#9013FE" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="97.4869039%" id="linearGradient-7">
+            <stop stop-color="#C32BFF" offset="0%"></stop>
+            <stop stop-color="#9013FE" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="96.1045481%" id="linearGradient-8">
+            <stop stop-color="#43FDAD" offset="0%"></stop>
+            <stop stop-color="#59E4EC" offset="100%"></stop>
+        </linearGradient>
+        <circle id="path-9" cx="54" cy="54" r="54"></circle>
+        <path d="M21,122.813 L85.3226708,122.813 L85.3226708,102.640119 C85.3226708,97.0691767 83.9061887,91.8292997 81.4144345,87.2607763 C77.6592816,80.3775589 71.4594061,75.0307081 63.9841435,72.3628158 C62.2624169,71.748638 61.7957894,69.5206298 63.1587845,68.3024184 C67.6387778,64.2936635 70.5676495,57.664048 70.5676495,50.1620419 C70.5676495,37.9218296 62.7742317,28 53.1613354,28 C43.548439,28 35.7550213,37.9218296 35.7550213,50.1620419 C35.7550213,57.6612815 38.6811264,64.2872082 43.1583532,68.2968852 C44.5231926,69.5187854 44.046421,71.7440271 42.3210057,72.3609714 C29.8935891,76.8086881 21,88.6827915 21,102.640119 L21,122.813 Z" id="path-11"></path>
+        <filter x="-31.9%" y="-19.5%" width="163.7%" height="143.2%" filterUnits="objectBoundingBox" id="filter-12">
+            <feOffset dx="0" dy="2" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="6.5" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.255887681 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+        <filter x="-9.2%" y="-12.5%" width="118.4%" height="125.0%" filterUnits="objectBoundingBox" id="filter-13">
+            <feOffset dx="0" dy="2" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="5" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.25 0" type="matrix" in="shadowBlurOuter1" result="shadowMatrixOuter1"></feColorMatrix>
+            <feMerge>
+                <feMergeNode in="shadowMatrixOuter1"></feMergeNode>
+                <feMergeNode in="SourceGraphic"></feMergeNode>
+            </feMerge>
+        </filter>
+        <linearGradient x1="-21.5256374%" y1="14.8348886%" x2="121.525637%" y2="85.1651114%" id="linearGradient-14">
+            <stop stop-color="#E9E9E9" offset="0%"></stop>
+            <stop stop-color="#000000" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="-23.1308284%" y1="14.8389474%" x2="123.130828%" y2="85.1610526%" id="linearGradient-15">
+            <stop stop-color="#666666" offset="0%"></stop>
+            <stop stop-color="#000000" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="arshoes-cover" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <mask id="mask-2" fill="white">
+            <use xlink:href="#path-1"></use>
+        </mask>
+        <use id="Mask" fill="#D8D8D8" fill-rule="nonzero" xlink:href="#path-1"></use>
+        <rect id="Gradient-Bg" fill="url(#radialGradient-3)" mask="url(#mask-2)" x="19" y="21" width="387" height="817"></rect>
+        <rect id="gradient-shadow" fill="url(#linearGradient-4)" opacity="0.0843191964" mask="url(#mask-2)" x="25" y="16" width="375" height="198"></rect>
+        <g id="Group-3" mask="url(#mask-2)">
+            <g transform="translate(44.000000, 97.000000)">
+                <g id="Back" fill="none" transform="translate(323.000000, 22.000000) scale(-1, 1) translate(-323.000000, -22.000000) translate(301.000000, 0.000000)" fill-rule="evenodd" stroke-width="1">
+                    <g filter="url(#filter-5)">
+                        <path d="M22,0 L22,0 C34.1502645,-2.23196738e-15 44,9.8497355 44,22 L44,22 C44,34.1502645 34.1502645,44 22,44 L22,44 C9.8497355,44 1.48797825e-15,34.1502645 0,22 L0,22 C-1.48797825e-15,9.8497355 9.8497355,2.23196738e-15 22,0 Z" id="Rectangle-2" fill="url(#linearGradient-6)"></path>
+                        <polygon id="Fill-1" stroke="#FFFFFF" stroke-width="0.5" fill="#FFFFFF" points="20.1266835 15 13 21.6244051 20.1266835 28.2512405 21.2308861 27.0644051 16.2526582 22.436962 30 22.436962 30 20.8167089 16.2494177 20.8167089 21.2308861 16.1868354"></polygon>
+                    </g>
+                </g>
+                <path d="M21.6202997,69.825 C15.7802997,69.593 11.0022997,67.995 7.26629969,65.027 C6.55329969,64.46 4.85429969,62.76 4.28429969,62.043 C2.76929969,60.138 1.73929969,58.284 1.05229969,56.227 C-1.06170031,49.895 0.0262996928,41.586 4.16429969,32.467 C7.70729969,24.66 13.1742997,16.917 22.7122997,6.193 C24.1172997,4.615 28.3012997,0 28.3282997,0 C28.3382997,0 28.1102997,0.395 27.8232997,0.876 C25.3432997,5.03 23.2212997,9.923 22.0652997,14.159 C20.2082997,20.956 20.4322997,26.789 22.7212997,31.312 C24.3002997,34.428 27.0072997,37.127 30.0512997,38.619 C35.3802997,41.23 43.1822997,41.446 52.7102997,39.251 C53.3662997,39.099 85.8722997,30.47 124.9463,20.075 C164.0203,9.679 195.9953,1.18 196.0003,1.187 C196.0113,1.196 105.2203,40.046 58.0892997,60.201 C50.6252997,63.392 48.6292997,64.198 45.1202997,65.43 C36.1502997,68.58 28.1152997,70.083 21.6202997,69.825 Z" id="Large-Swoosh" fill="url(#linearGradient-7)" fill-rule="nonzero"></path>
+                <g id="Group-2" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(30.000000, 40.000000)">
+                    <mask id="mask-10" fill="white">
+                        <use xlink:href="#path-9"></use>
+                    </mask>
+                    <use id="Profile-Photo" fill="url(#linearGradient-8)" xlink:href="#path-9"></use>
+                    <g id="Stroke-1" opacity="0.202901786" style="mix-blend-mode: multiply;" mask="url(#mask-10)">
+                        <use fill="black" fill-opacity="1" filter="url(#filter-12)" xlink:href="#path-11"></use>
+                        <use fill="#4A4A4A" fill-rule="evenodd" xlink:href="#path-11"></use>
+                    </g>
+                </g>
+            </g>
+        </g>
+        <g id="Options" filter="url(#filter-13)" mask="url(#mask-2)">
+            <g transform="translate(98.000000, 553.000000)">
+                <g id="Chooser">
+                    <g id="Women's-Plain" transform="translate(72.000000, 0.000000)">
+                        <rect id="Woman-Background" fill="#FFFFFF" fill-rule="evenodd" x="0" y="0" width="95" height="37"></rect>
+                        <text id="Women’s" font-family="ArchivoNarrow-Bold, Archivo Narrow" font-size="14" font-style="condensed" font-weight="bold" line-spacing="10" letter-spacing="1" fill="#4A4A4A">
+                            <tspan x="13.368" y="22.6019897">WOMEN'S</tspan>
+                        </text>
+                    </g>
+                    <g id="Women's/Selected">
+                        <rect id="Woman-Background" fill="url(#linearGradient-7)" fill-rule="evenodd" x="0" y="0" width="72" height="37"></rect>
+                        <text id="Women’s" font-family="ArchivoNarrow-Bold, Archivo Narrow" font-size="14" font-style="condensed" font-weight="bold" line-spacing="10" letter-spacing="1" fill="#FFFFFF">
+                            <tspan x="12.752" y="21.6019897">MEN'S</tspan>
+                        </text>
+                    </g>
+                    <g id="Women's-Plain" transform="translate(167.000000, 0.000000)">
+                        <rect id="Woman-Background" fill="#FFFFFF" fill-rule="evenodd" x="0" y="0" width="61" height="37"></rect>
+                        <text id="Women’s" font-family="ArchivoNarrow-Bold, Archivo Narrow" font-size="14" font-style="condensed" font-weight="bold" line-spacing="10" letter-spacing="1" fill="#4A4A4A">
+                            <tspan x="10.122" y="22.6019897">KID'S</tspan>
+                        </text>
+                    </g>
+                </g>
+                <g id="Group" stroke-width="1" fill-rule="evenodd" transform="translate(0.000000, 60.000000)">
+                    <g id="Half-Marker/Selected" transform="translate(209.000000, 40.000000)">
+                        <g id="Half-Marker">
+                            <polygon id="Rectangle-Copy-4" fill="url(#linearGradient-7)" points="0 0 41 0 41 40 0 40"></polygon>
+                            <text id="1/2" font-family="ArchivoNarrow-Bold, Archivo Narrow" font-size="20" font-style="condensed" font-weight="bold" line-spacing="15" letter-spacing="1.428571" fill="#FFFFFF">
+                                <tspan x="8.9457145" y="25.8599854">1/2</tspan>
+                            </text>
+                        </g>
+                    </g>
+                    <g id="Sizer">
+                        <rect id="Rectangle-3" fill="#FFFFFF" fill-rule="evenodd" x="0" y="0" width="166" height="124"></rect>
+                        <g id="Size/Plain" transform="translate(83.000000, 41.333333)">
+                            <rect id="Background" x="0" y="0" width="42" height="41"></rect>
+                            <text id="1" font-family="ArchivoNarrow-Bold, Archivo Narrow" font-size="14" font-style="condensed" font-weight="bold" line-spacing="10" letter-spacing="1" fill="#4A4A4A">
+                                <tspan x="10.816" y="24.1019897">12</tspan>
+                            </text>
+                        </g>
+                        <g id="Size/Plain">
+                            <rect id="Background" x="0" y="0" width="42" height="41"></rect>
+                            <text id="1" font-family="ArchivoNarrow-Bold, Archivo Narrow" font-size="14" font-style="condensed" font-weight="bold" line-spacing="10" letter-spacing="1" fill="#4A4A4A">
+                                <tspan x="14.508" y="24.1019897">6</tspan>
+                            </text>
+                        </g>
+                        <g id="Size/Selected" transform="translate(124.500000, 0.000000)">
+                            <rect id="Background" fill="url(#linearGradient-7)" fill-rule="evenodd" x="0" y="0" width="42" height="41"></rect>
+                            <text id="1" font-family="ArchivoNarrow-Bold, Archivo Narrow" font-size="14" font-style="condensed" font-weight="bold" line-spacing="10" letter-spacing="1" fill="#FFFFFF">
+                                <tspan x="14.508" y="24.1019897">9</tspan>
+                            </text>
+                        </g>
+                        <g id="Size/Plain" transform="translate(0.000000, 41.333333)">
+                            <rect id="Background" x="0" y="0" width="42" height="41"></rect>
+                            <text id="1" font-family="ArchivoNarrow-Bold, Archivo Narrow" font-size="14" font-style="condensed" font-weight="bold" line-spacing="10" letter-spacing="1" fill="#4A4A4A">
+                                <tspan x="10.816" y="24.1019897">10</tspan>
+                            </text>
+                        </g>
+                        <g id="Size/Plain" transform="translate(41.500000, 41.333333)">
+                            <rect id="Background" x="0" y="0" width="42" height="41"></rect>
+                            <text id="1" font-family="ArchivoNarrow-Bold, Archivo Narrow" font-size="14" font-style="condensed" font-weight="bold" line-spacing="10" letter-spacing="1" fill="#4A4A4A">
+                                <tspan x="11.131" y="24.1019897">11</tspan>
+                            </text>
+                        </g>
+                        <g id="Size/Plain" transform="translate(0.000000, 82.666667)">
+                            <rect id="Background" x="0" y="0" width="42" height="41"></rect>
+                            <text id="1" font-family="ArchivoNarrow-Bold, Archivo Narrow" font-size="14" font-style="condensed" font-weight="bold" line-spacing="10" letter-spacing="1" fill="#4A4A4A">
+                                <tspan x="10.816" y="24.1019897">14</tspan>
+                            </text>
+                        </g>
+                        <g id="Size/Plain" transform="translate(41.500000, 82.666667)">
+                            <rect id="Background" x="0" y="0" width="42" height="41"></rect>
+                            <text id="1" font-family="ArchivoNarrow-Bold, Archivo Narrow" font-size="14" font-style="condensed" font-weight="bold" line-spacing="10" letter-spacing="1" fill="#4A4A4A">
+                                <tspan x="10.816" y="24.1019897">15</tspan>
+                            </text>
+                        </g>
+                        <g id="Size/Plain" transform="translate(41.500000, 0.000000)">
+                            <rect id="Background" x="0" y="0" width="42" height="41"></rect>
+                            <text id="1" font-family="ArchivoNarrow-Bold, Archivo Narrow" font-size="14" font-style="condensed" font-weight="bold" line-spacing="10" letter-spacing="1" fill="#4A4A4A">
+                                <tspan x="14.508" y="24.1019897">7</tspan>
+                            </text>
+                        </g>
+                        <g id="Size/Plain" transform="translate(83.000000, 0.000000)">
+                            <rect id="Background" x="0" y="0" width="42" height="41"></rect>
+                            <text id="1" font-family="ArchivoNarrow-Bold, Archivo Narrow" font-size="14" font-style="condensed" font-weight="bold" line-spacing="10" letter-spacing="1" fill="#4A4A4A">
+                                <tspan x="14.508" y="24.1019897">8</tspan>
+                            </text>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+        <g id="Textfield/Blank" mask="url(#mask-2)">
+            <g transform="translate(67.000000, 360.000000)">
+                <rect id="Background" fill="#FFFFFF" fill-rule="evenodd" x="0" y="0" width="292" height="37"></rect>
+                <text id="Name" fill="none" font-family="ArchivoNarrow-Bold, Archivo Narrow" font-size="14" font-style="condensed" font-weight="bold" line-spacing="10" letter-spacing="0.9999997">
+                    <tspan x="15.3684211" y="25" fill="#D9D9D9">Name</tspan>
+                </text>
+            </g>
+        </g>
+        <g id="Textfield/Blank" mask="url(#mask-2)">
+            <g transform="translate(67.000000, 397.000000)">
+                <rect id="Background" fill="#FFFFFF" fill-rule="evenodd" x="0" y="0" width="292" height="37"></rect>
+                <text id="Name" fill="none" font-family="ArchivoNarrow-Bold, Archivo Narrow" font-size="14" font-style="condensed" font-weight="bold" line-spacing="10" letter-spacing="0.9999997">
+                    <tspan x="15.3684211" y="25" fill="#D9D9D9">Store</tspan>
+                </text>
+            </g>
+        </g>
+        <g id="Textfield/Blank" mask="url(#mask-2)">
+            <g transform="translate(67.000000, 434.000000)">
+                <rect id="Background" fill="#FFFFFF" fill-rule="evenodd" x="0" y="0" width="292" height="37"></rect>
+                <text id="Name" fill="none" font-family="ArchivoNarrow-Bold, Archivo Narrow" font-size="14" font-style="condensed" font-weight="bold" line-spacing="10" letter-spacing="0.9999997">
+                    <tspan x="15.3684211" y="25" fill="#D9D9D9">Payment Method</tspan>
+                </text>
+            </g>
+        </g>
+        <g id="Textfield/Blank" mask="url(#mask-2)">
+            <g transform="translate(67.000000, 471.000000)">
+                <rect id="Background" fill="#FFFFFF" fill-rule="evenodd" x="0" y="0" width="292" height="37"></rect>
+                <text id="Name" fill="none" font-family="ArchivoNarrow-Bold, Archivo Narrow" font-size="14" font-style="condensed" font-weight="bold" line-spacing="10" letter-spacing="0.9999997">
+                    <tspan x="15.3684211" y="25" fill="#D9D9D9">Shipping Address</tspan>
+                </text>
+            </g>
+        </g>
+        <polygon id="›-copy-2" fill="#D9D9D9" mask="url(#mask-2)" points="339.592 489.8 337 485 339.184 485 342.448 489.8 339.184 494.6 337 494.6"></polygon>
+        <polygon id="›-copy-3" fill="#D9D9D9" mask="url(#mask-2)" points="339.592 452.8 337 448 339.184 448 342.448 452.8 339.184 457.6 337 457.6"></polygon>
+        <polygon id="›-copy-4" fill="#D9D9D9" mask="url(#mask-2)" points="339.592 415.8 337 411 339.184 411 342.448 415.8 339.184 420.6 337 420.6"></polygon>
+        <g id="Header" mask="url(#mask-2)" font-style="condensed">
+            <g transform="translate(67.000000, 259.000000)">
+                <text id="Description" font-family="ArchivoNarrow-Regular, Archivo Narrow" font-size="14" font-weight="normal" letter-spacing="1">
+                    <tspan x="1" y="52" fill="#4A4A4A">You can always come back to </tspan>
+                    <tspan x="1" y="67" fill="#4A4A4A">this page before purchasing.</tspan>
+                </text>
+                <text id="Title" font-family="ArchivoNarrow-SemiBold, Archivo Narrow" font-size="24" font-weight="500">
+                    <tspan x="0" y="21" fill="#4A4A4A">Let's get set up</tspan>
+                </text>
+            </g>
+        </g>
+        <g id="iphone-x">
+            <path d="M422,62.4038997 C422,27.908078 394.145609,0 359.716147,0 L62.2838527,0 C27.8543909,8.51067901e-15 0,27.908078 0,62.4038997 L0,797.5961 C0,832.091922 27.8543909,860 62.2838527,860 L359.716147,860 C394.145609,860 422,832.091922 422,797.5961 L422,62.4038997 Z M412.436261,796.997214 C412.436261,826.462396 388.526912,850.417827 359.118414,850.417827 L61.686119,850.417827 C32.2776204,850.417827 8.36827195,826.462396 8.36827195,796.997214 L8.36827195,61.8050139 C8.36827195,32.3398329 32.2776204,8.38440111 61.686119,8.38440111 L359.118414,8.38440111 C388.526912,8.38440111 412.436261,32.3398329 412.436261,61.8050139 L412.436261,796.997214 Z" id="XMLID_487_" fill="url(#linearGradient-14)" fill-rule="nonzero"></path>
+            <path d="M362.525916,23.1634702 L328.485848,23.1634702 C321.20008,23.1634702 318.572425,22.9239297 318.09467,32.1462383 C317.616915,41.7278576 311.047779,47.1175185 302.209305,49.8722341 C299.223334,50.830396 295.879047,50.7106258 292.654198,50.7106258 L286.204501,50.7106258 L141.922388,50.7106258 L135.472691,50.7106258 C132.247843,50.7106258 128.903555,50.9501663 125.917585,49.9920043 C117.079111,47.2372888 110.390536,41.6080874 110.03222,32.0264681 C109.554464,22.8041594 106.92681,23.1634702 99.6410409,23.1634702 L65.2426565,23.1634702 C44.3408604,23.1634702 26.1861575,39.931304 26.1861575,60.7713261 L26.1861575,795.322219 C26.1861575,816.282011 44.3408604,832.810304 65.1232177,832.810304 L362.525916,832.810304 C383.427713,832.810304 398.835322,816.282011 398.835322,795.322219 L398.835322,60.7713261 C398.835322,39.931304 383.427713,23.1634702 362.525916,23.1634702 Z" id="XMLID_136_"></path>
+            <path d="M412.928401,61.4666751 C412.928401,32.0070891 388.030701,8.05620609 358.636531,8.05620609 L61.3491491,8.05620609 C31.9549787,8.05620609 8.05727924,32.0070891 8.05727924,61.4666751 L8.05727924,796.519273 C8.05727924,825.978859 31.9549787,851.929742 61.3491491,851.929742 L358.636531,851.929742 C388.030701,851.929742 412.928401,826.978859 412.928401,797.519273 L412.928401,61.4666751 Z M261.850848,28.534211 C261.850848,31.408317 259.461078,33.8034053 256.593354,33.8034053 C253.72563,33.8034053 251.33586,31.408317 251.33586,28.534211 C251.33586,25.6601051 253.72563,23.2650168 256.593354,23.2650168 C259.580567,23.2650168 261.850848,25.5403507 261.850848,28.534211 Z M190.755192,26.0193683 L237.355706,26.0193683 C239.38701,26.0193683 240.940361,27.2169125 240.940361,29.0132287 C240.940361,30.8095449 239.38701,32.0070891 237.355706,32.0070891 L190.755192,32.0070891 C188.723888,32.0070891 187.170537,30.8095449 187.170537,29.0132287 C187.170537,27.2169125 188.843376,26.0193683 190.755192,26.0193683 Z M398.784666,794.483448 C398.784666,815.440471 383.37065,831.96658 362.460163,831.96658 L64.9338041,831.96658 C44.1428055,831.96658 25.9805539,815.440471 25.9805539,794.483448 L25.9805539,60.0296221 C25.9805539,39.1923539 44.1428055,22.4267359 64.9338041,22.4267359 L99.3464914,22.4267359 C106.63529,22.4267359 109.264037,22.187227 109.741991,31.408317 C110.219945,40.9886702 116.791812,46.3776188 125.633961,49.1319704 C128.621173,50.0900057 131.966851,49.9702513 135.193041,49.9702513 L141.645419,49.9702513 L285.868036,49.9702513 L292.320415,49.9702513 C295.546604,49.9702513 298.892282,50.2097601 301.879495,49.2517248 C310.721644,46.4973733 317.412999,40.8689158 317.771465,31.2885626 C318.249419,22.0674726 320.878166,22.4267359 328.166964,22.4267359 L362.221186,22.4267359 C383.131673,22.4267359 398.545689,39.1923539 398.545689,60.0296221 L398.545689,794.483448 L398.784666,794.483448 Z" id="XMLID_131_" fill="url(#linearGradient-15)" fill-rule="nonzero"></path>
+            <ellipse id="XMLID_130_" fill="#333333" cx="256.825776" cy="29.2037471" rx="5.03579952" ry="5.03512881"></ellipse>
+            <path d="M190.890374,32.2248244 L237.152586,32.2248244 C239.169143,32.2248244 240.711217,31.0163934 240.711217,29.2037471 C240.711217,27.3911007 239.169143,26.1826698 237.152586,26.1826698 L190.890374,26.1826698 C188.873816,26.1826698 187.331742,27.3911007 187.331742,29.2037471 C187.331742,31.0163934 188.992437,32.2248244 190.890374,32.2248244 Z" id="XMLID_129_" fill="#333333"></path>
+        </g>
+        <g id="Bars-/-Status-Bar-/-iPhone-X-/-x-/-On-Dark" transform="translate(24.000000, 21.000000)">
+            <g id="Battery" stroke-width="1" fill-rule="evenodd" transform="translate(336.000000, 17.000000)">
+                <path d="M3.4185137,0.833333333 C2.41024052,0.833333333 2.01153914,0.910326123 1.6000052,1.13041688 C1.25257152,1.31622645 0.982893112,1.58590485 0.797083548,1.93333853 C0.576992789,2.34487247 0.5,2.74357386 0.5,3.75184704 L0.5,8.24815296 C0.5,9.25642614 0.576992789,9.65512753 0.797083548,10.0666615 C0.982893112,10.4140951 1.25257152,10.6837736 1.6000052,10.8695831 C2.01153914,11.0896739 2.41024052,11.1666667 3.4185137,11.1666667 L18.5814863,11.1666667 C19.5897595,11.1666667 19.9884609,11.0896739 20.3999948,10.8695831 C20.7474285,10.6837736 21.0171069,10.4140951 21.2029165,10.0666615 C21.4230072,9.65512753 21.5,9.25642614 21.5,8.24815296 L21.5,3.75184704 C21.5,2.74357386 21.4230072,2.34487247 21.2029165,1.93333853 C21.0171069,1.58590485 20.7474285,1.31622645 20.3999948,1.13041688 C19.9884609,0.910326123 19.5897595,0.833333333 18.5814863,0.833333333 L3.4185137,0.833333333 Z" id="Border" stroke="#FFFFFF" opacity="0.35"></path>
+                <path d="M23,4 L23,8 C23.8047311,7.66122348 24.328038,6.87313328 24.328038,6 C24.328038,5.12686672 23.8047311,4.33877652 23,4" id="Cap" fill="#FFFFFF" fill-rule="nonzero" opacity="0.4"></path>
+                <path d="M3.70925685,2.33333333 L18.2907431,2.33333333 C18.885089,2.33333333 19.1006132,2.39521708 19.3178971,2.51142181 C19.5351811,2.62762654 19.7057068,2.79815226 19.8219115,3.01543622 C19.9381163,3.23272018 20,3.44824434 20,4.04259018 L20,7.95740982 C20,8.55175566 19.9381163,8.76727982 19.8219115,8.98456378 C19.7057068,9.20184774 19.5351811,9.37237346 19.3178971,9.48857819 C19.1006132,9.60478292 18.885089,9.66666667 18.2907431,9.66666667 L3.70925685,9.66666667 C3.11491101,9.66666667 2.89938684,9.60478292 2.68210288,9.48857819 C2.46481893,9.37237346 2.29429321,9.20184774 2.17808847,8.98456378 C2.06188374,8.76727982 2,8.55175566 2,7.95740982 L2,4.04259018 C2,3.44824434 2.06188374,3.23272018 2.17808847,3.01543622 C2.29429321,2.79815226 2.46481893,2.62762654 2.68210288,2.51142181 C2.89938684,2.39521708 3.11491101,2.33333333 3.70925685,2.33333333 Z" id="Capacity" fill="#FFFFFF" fill-rule="nonzero"></path>
+            </g>
+            <path d="M323.330333,19.608 C325.546226,19.6080971 327.677386,20.4595347 329.283333,21.9863333 C329.404265,22.1042079 329.597562,22.102721 329.716667,21.983 L330.872667,20.8163333 C330.932975,20.7556112 330.966599,20.6733595 330.966098,20.5877792 C330.965598,20.5021988 330.931014,20.420346 330.87,20.3603333 C326.654902,16.3207858 320.005098,16.3207858 315.79,20.3603333 C315.728941,20.4203015 315.694297,20.5021294 315.693734,20.5877099 C315.693171,20.6732903 315.726736,20.755567 315.787,20.8163333 L316.943333,21.983 C317.062362,22.1029017 317.255808,22.1043897 317.376667,21.9863333 C318.982819,20.4594344 321.114223,19.6079944 323.330333,19.608 Z M323.330333,23.4036667 C324.547823,23.4035921 325.721865,23.8561245 326.624333,24.6733333 C326.746397,24.7893139 326.938678,24.7867994 327.057667,24.6676667 L328.212333,23.501 C328.273141,23.439805 328.30688,23.3567887 328.306003,23.2705239 C328.305126,23.1842592 328.269706,23.101946 328.207667,23.042 C325.459468,20.4856177 321.203532,20.4856177 318.455333,23.042 C318.393256,23.1019453 318.357837,23.1842997 318.357023,23.2705923 C318.356208,23.356885 318.390065,23.4398934 318.451,23.501 L319.605333,24.6676667 C319.724322,24.7867994 319.916603,24.7893139 320.038667,24.6733333 C320.940539,23.8566645 322.113649,23.4041708 323.330333,23.4036667 Z M325.549333,26.188 C325.611087,26.127394 325.645095,26.0439919 325.643328,25.957485 C325.641561,25.8709782 325.604176,25.7890342 325.54,25.731 C324.264428,24.6521162 322.396238,24.6521162 321.120667,25.731 C321.056446,25.7889875 321.019,25.8709057 321.01717,25.957413 C321.01534,26.0439203 321.049289,26.1273487 321.111,26.188 L323.108667,28.2036667 C323.167217,28.2629057 323.247042,28.2962443 323.330333,28.2962443 C323.413624,28.2962443 323.49345,28.2629057 323.552,28.2036667 L325.549333,26.188 Z" id="Wifi" fill="#FFFFFF" fill-rule="nonzero"></path>
+            <path d="M294.666667,24.3333333 L295.666667,24.3333333 C296.218951,24.3333333 296.666667,24.7810486 296.666667,25.3333333 L296.666667,27.3333333 C296.666667,27.8856181 296.218951,28.3333333 295.666667,28.3333333 L294.666667,28.3333333 C294.114382,28.3333333 293.666667,27.8856181 293.666667,27.3333333 L293.666667,25.3333333 C293.666667,24.7810486 294.114382,24.3333333 294.666667,24.3333333 Z M299.333333,22.3333333 L300.333333,22.3333333 C300.885618,22.3333333 301.333333,22.7810486 301.333333,23.3333333 L301.333333,27.3333333 C301.333333,27.8856181 300.885618,28.3333333 300.333333,28.3333333 L299.333333,28.3333333 C298.781049,28.3333333 298.333333,27.8856181 298.333333,27.3333333 L298.333333,23.3333333 C298.333333,22.7810486 298.781049,22.3333333 299.333333,22.3333333 Z M304,20 L305,20 C305.552285,20 306,20.4477153 306,21 L306,27.3333333 C306,27.8856181 305.552285,28.3333333 305,28.3333333 L304,28.3333333 C303.447715,28.3333333 303,27.8856181 303,27.3333333 L303,21 C303,20.4477153 303.447715,20 304,20 Z M308.666667,17.6666667 L309.666667,17.6666667 C310.218951,17.6666667 310.666667,18.1143819 310.666667,18.6666667 L310.666667,27.3333333 C310.666667,27.8856181 310.218951,28.3333333 309.666667,28.3333333 L308.666667,28.3333333 C308.114382,28.3333333 307.666667,27.8856181 307.666667,27.3333333 L307.666667,18.6666667 C307.666667,18.1143819 308.114382,17.6666667 308.666667,17.6666667 Z" id="Cellular-Connection" fill="#FFFFFF" fill-rule="nonzero"></path>
+            <g id="Bars-/-Status-Bar-/-iPhone-X-/-x-/-Time---On-Dark" transform="translate(21.000000, 9.000000)" fill="#FFFFFF" font-family="SFProText-Semibold, SF Pro Text" font-size="15" font-weight="500" letter-spacing="-0.3">
+                <text id="↳-Time">
+                    <tspan x="11.4867188" y="19.3299999">9:41</tspan>
+                </text>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -14,6 +14,7 @@ var cssnano = require('gulp-cssnano');
 
 var imagemin = require('gulp-imagemin');
 var cache = require('gulp-cache');
+var svgo = require('gulp-svgo');
 
 
 var del = require('del');
@@ -77,6 +78,7 @@ gulp.task('polymer', function() {
 
 gulp.task('images', function() {
   return gulp.src('public/images/**/*')
+  .pipe(svgo({plugins:[{removeViewBox:false}]}))
   .pipe(gulp.dest('dist/images'))
 })
 
