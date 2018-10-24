@@ -3,6 +3,7 @@ var babel = require('gulp-babel');
 var debug = require('gulp-debug');
 
 var spawn = require('child_process').spawn;
+var run = require('gulp-run-command').default;
 
 var sass = require('gulp-sass');
 var haml = require('gulp-ruby-haml');
@@ -73,13 +74,10 @@ gulp.task('useref', ['haml','sass','_useref'], function(){
 //   .pipe(gulp.dest('dist/images'))
 // });
 
-gulp.task('polymer', function() {
-  return spawn('polymer', ['build'], { cwd: 'public', stdio: 'inherit' })
-  .on('close', done)
-})
+gulp.task('polymer', ['haml','sass'], run('polymer build'))
 
 gulp.task('copy-polymer', ['polymer'], function() {
-  return gulp.src('public/build/default/src/**/*')
+  return gulp.src('build/default/public/src/**/*')
   .pipe(gulp.dest('dist/src'))
 })
 
@@ -100,7 +98,7 @@ gulp.task('fonts', function() {
 })
 
 gulp.task('bower', ['polymer'], function() {
-  return gulp.src('public/build/default/bower_components/**/*')
+  return gulp.src('build/default/public/bower_components/**/*')
   .pipe(gulp.dest('dist/bower_components'))
 })
 

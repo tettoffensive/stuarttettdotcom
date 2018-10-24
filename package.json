@@ -4,6 +4,7 @@
   "description": "My personal website @ www.stuarttett.com",
   "main": "index.js",
   "dependencies": {
+    "gulp-run-command": "0.0.9",
     "npm": "^6.4.1"
   },
   "devDependencies": {

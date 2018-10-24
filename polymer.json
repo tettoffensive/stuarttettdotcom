@@ -1,0 +1,14 @@
+{
+  "root": "public",
+  "lint": {
+    "rules": [
+      "polymer-2"
+    ],
+    "ignoreWarnings": ["multiple-global-declarations"]
+  },
+  "builds": [{
+  "js": {"minify": true},
+  "css": {"minify": true},
+  "html": {"minify": true}
+}]
+}
