@@ -181,6 +181,9 @@ $break-desktop-large: 1200px;
 
 .italic {
   font-family: 'DecimaMonoRound-Italic',monospace;
+  & h4 {
+    font-family: 'DecimaMonoRound-Italic',monospace;
+  }
 }
 
 .bold {
