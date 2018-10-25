@@ -448,8 +448,8 @@ class StuarttettdotcomApp extends Polymer.Element {
     }
     let el = this._lastClickElement;
     this._lastClickElement = null;
-    el.detail = "false";
-    window.scrollTo(0,this._lastWindowPosition);
+    //el.detail = "false";
+    //window.scrollTo(0,this._lastWindowPosition);
     let details = document.querySelector("#contentDetails");
     if (details != null) {
       var tl = new TimelineLite({ paused: false });
