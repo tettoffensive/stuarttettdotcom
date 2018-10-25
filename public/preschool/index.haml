@@ -182,11 +182,15 @@
         %h1.grid-span.align-left.special
           ings
       %img.squiggle{:src => "/images/wave.svg"}/
-      .two-col-extra.grid-span
+      .grid-span.two-col
         %ul.dark-list
-          %li Preschools in cities like San Francisco are so in demand that they have little need for visibility.
-          %li There is a user need for a unified application platform.
-          %li Backgrounds with hard-edged contrasting colors can confuse users (yellow squiggle).
+          %li.one Preschools in cities like San Francisco are so in demand that they have little need for visibility.
+      .grid-span.two-col
+        %ul.dark-list
+          %li.two There is a user need for a unified application platform.
+      .grid-span.two-col
+        %ul.dark-list
+          %li.three Backgrounds with hard-edged contrasting colors can confuse users (yellow squiggle).
 
     %footer#footer.footer.fade-in.z3
       %stt-scroll-btn.btn-bc.z3.invert{:onclick => "TweenLite.to(window, 1, {scrollTo:0});", :style => ""}
