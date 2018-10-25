@@ -2,6 +2,9 @@ var gulp = require('gulp');
 var babel = require('gulp-babel');
 var debug = require('gulp-debug');
 
+var spawn = require('child_process').spawn;
+var run = require('gulp-run-command').default;
+
 var sass = require('gulp-sass');
 var haml = require('gulp-ruby-haml');
 
@@ -14,6 +17,7 @@ var cssnano = require('gulp-cssnano');
 
 var imagemin = require('gulp-imagemin');
 var cache = require('gulp-cache');
+var svgo = require('gulp-svgo');
 
 
 var del = require('del');
@@ -33,9 +37,9 @@ gulp.task('haml', function () {
 });
 
 gulp.task('watch', function(){
-  gulp.watch('public/stylesheets/*.scss', ['sass']);
-  gulp.watch('public/fonts/*.scss', ['sass']);
-  gulp.watch('public/**/*.haml', ['haml']);
+  gulp.watch('public/stylesheets/*.scss', ['useref']);
+  gulp.watch('public/fonts/*.scss', ['useref']);
+  gulp.watch('public/**/*.haml', ['useref']);
 });
 
 gulp.task('_useref', ['haml','sass'], function(){
@@ -70,13 +74,16 @@ gulp.task('useref', ['haml','sass','_useref'], function(){
 //   .pipe(gulp.dest('dist/images'))
 // });
 
-gulp.task('polymer', function() {
-  return gulp.src('public/src/**/*')
+gulp.task('polymer', ['haml','sass'], run('polymer build'))
+
+gulp.task('copy-polymer', ['polymer'], function() {
+  return gulp.src('build/default/public/src/**/*')
   .pipe(gulp.dest('dist/src'))
 })
 
 gulp.task('images', function() {
   return gulp.src('public/images/**/*')
+  .pipe(svgo({plugins:[{removeViewBox:false}]}))
   .pipe(gulp.dest('dist/images'))
 })
 
@@ -85,8 +92,13 @@ gulp.task('webfonts', function() {
   .pipe(gulp.dest('dist/stylesheets/webfonts'))
 })
 
-gulp.task('bower', function() {
-  return gulp.src('public/bower_components/**/*')
+gulp.task('fonts', function() {
+  return gulp.src('public/fonts/**/*')
+  .pipe(gulp.dest('dist/fonts'))
+})
+
+gulp.task('bower', ['polymer'], function() {
+  return gulp.src('build/default/public/bower_components/**/*')
   .pipe(gulp.dest('dist/bower_components'))
 })
 
@@ -106,18 +118,24 @@ gulp.task('clean:css', function() {
   return del.sync('public/**/*.css')
 })
 
+gulp.task('clean:polymer', function() {
+  return del.sync('public/build')
+})
+
 gulp.task('clean', [
   'clean:dist',
   'clean:html',
   'clean:html2',
-  'clean:css'
+  'clean:css',
+  'clean:polymer'
 ])
 
 
 gulp.task('default', [
  'useref',
+ 'fonts',
  'webfonts',
  'images',
- 'polymer',
+ 'copy-polymer',
  'bower'
 ]);

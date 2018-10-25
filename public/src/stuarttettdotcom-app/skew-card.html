@@ -1,4 +1,5 @@
 <link rel="import" href="../../bower_components/polymer/polymer-element.html" />
+<link rel="import" href="../../bower_components/polymer/lib/elements/dom-if.html">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.4/TweenLite.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.4/TimelineLite.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.4/plugins/CSSPlugin.min.js"></script>
@@ -10,7 +11,6 @@
     /* In different browsers figure,p margin/padding is different */
     :host {
       --card-closed-height: 500px;
-
       transform-origin: left top;
       cursor: pointer;
       background-color: transparent;
@@ -36,6 +36,7 @@
 
       :host(.initial) #label, #content {
         transform: skewY(3deg);
+        transform-origin: right top;
       }
 
       :host(.initial) {
@@ -69,7 +70,6 @@
 
     /*  Initial Skewed State */
     :host(.initial) {
-
       width: 100%;
     }
 
@@ -79,8 +79,9 @@
     }
 
     /* Counter host skewY with an equal and opposite skew */
-    :host(.initial) #label, #content {
+    :host(.initial) #content {
       /* transform: skewY(3deg); */
+      transform-origin: right top;
     }
 
     :host(.hundred-pct) {
@@ -130,9 +131,17 @@
     <div id="contentShrink" class="content-shrink shadow z1">
       <div id="contentClip" class="clip">
         <div id="contentZoom" style="height: 100%;">
-        <figure id="content" class="content image cover" role="img" aria-label="" style="background-image: url([[img]])">
-        </figure>
-      </div>
+          <div id="content" class$="content-auto-margin-{{_isEqualTo(type,'img')}}" style="width: 100%; display: flex; overflow: hidden;">
+            <template is="dom-if" if="{{_isEqualTo(type,'img')}}"> <!-- 77% from firefox handle svg differently -->
+              <img style="margin: auto; max-width: 77%; place-self: start;" class="content image contain drop-shadow" role="img" aria-label="" src="[[img]]">
+              </img>
+            </template>
+            <template is="dom-if" if="{{!_isEqualTo(type,'img')}}">
+              <figure id="" class="content image cover" role="img" aria-label="" style="background-image: url([[img]])">
+              </figure>
+            </template>
+          </div>
+        </div>
       </div>
       <svg id="arrow" class="hidden" width="112px" height="75px" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
         <g id="arrow-draw" transform="translate(30, 25)" width="64px" height="27px" fill="#54F0CE" fill-rule="nonzero">
@@ -159,6 +168,11 @@
           type: String,
           reflectToAttribute: true,
         },
+        type: {
+          type: String,
+          reflectToAttribute: true,
+          value: 'figure',
+        },
         img: {
           type: String,
           reflectToAttribute: true,
@@ -172,6 +186,10 @@
           reflectToAttribute: true,
         }
       }
+    }
+
+    _isEqualTo(title, string) {
+      return title == string;
     }
 
     _detailChanged(newValue, oldValue) {
@@ -340,16 +358,20 @@
         this.divFullCard.style.position = 'fixed';
         this.divFullCard.style.top = '0px';
       }
+      let body = document.getElementsByTagName("body")[0];
+
       let last = this.animLabelDest.getBoundingClientRect();
       let imageLast = this.animImageDest.getBoundingClientRect();
 
-      let btn = this.divFullCard.querySelector('#scrollBtn');
+      let scrollBtn = this.divFullCard.querySelector('#scrollBtn');
+      let closeBtn = this.divFullCard.querySelector('#closeBtn');
+
       if (this.isMobile()) {
-        btn.style.top = '';
+        scrollBtn.style.top = '';
       } else if (this.animLabelDest) {
         var height = this.animLabelDest.offsetHeight;
         height += 30;
-        btn.style.top = height + "px";
+        scrollBtn.style.top = height + "px";
       }
 
       // Invert
@@ -394,7 +416,9 @@
 
       tl.add( TweenLite.to(this.divFullCard, 0, { display: 'block', width: "100%", height: heightString}), 0)
         .add( TweenLite.to(this.animLabelDest, 0, { display: 'block'}), 0)
-        .add( TweenLite.to(this.animImageDest, 0, { display: 'block'}), 0);
+        .add( TweenLite.to(this.animImageDest, 0, { display: 'block'}), 0)
+        .add( TweenLite.to(body, 0, { overflow: 'hidden'}), 0);
+
       // Put the destination pieces in their "First" states
       TweenLite.set(animLabelDest, {transform: fromTransform, transformOrigin: "left top"});
       TweenLite.set(animImageDest, {transform: imageFromTransform, transformOrigin: "right top"});
@@ -432,12 +456,12 @@
       let fadeInDetails = tl.addLabel("fadeInDetails", delay);
       delay += fadeInDetailsDuration;
       tl.addLabel("fadeInDetailsFinish", delay);
-      tl.addLabel("end", delay); // end of animation
+      tl.addLabel("end", delay+0.1); // end of animation
 
       let scrollY = window.scrollY;
 
-      this.divFullCard.querySelector('#closeBtn').style.position = 'fixed';
-      this.divFullCard.querySelector('#scrollBtn').style.position = 'fixed';
+      closeBtn.style.position = 'fixed';
+      scrollBtn.style.position = 'fixed';
 
       // Unskew Label
       tl.add( TweenLite.fromTo(this.$.label, unskewDuration, { autoAlpha: 1 }, { autoAlpha: 0 }), "unskewLabel");
@@ -451,8 +475,6 @@
       },
       onReverseComplete: () => {
         setTimeout(() => {
-          this.detail = false;
-          this._closeCallback(animLabelDest,animImageDest);
           this.transitioning = false;
         },1);
       },
@@ -468,7 +490,6 @@
       force3D: true,
       ease: Power3.easeOut,
     }), "scaleUpLabel");
-    tl.add( TweenLite.to(window, 1, { scrollTo: scrollY, ease: Power3.easeInOut}), "scaleUpLabel");
     // Fade Out the content Image
     tl.add( TweenLite.fromTo(this.$.content, fadeOutImageDuration, { autoAlpha: 1}, { autoAlpha: 0,
       ease: Power3.easeInOut,
@@ -491,43 +512,51 @@
       let sx = 1.0/animImageDest._gsTransform.scaleX;
       let sy = 1.0/animImageDest._gsTransform.scaleY;
       let content = animImageDest.children[0];
-      // let content = animImageDest.querySelector(".content");
-      // TweenLite.set(content, { scaleX: sx, scaleY: sy, transformOrigin: "right top"});
     },
     ease: Power3.easeOut,
   }), "unskewContentFinish");
-  tl.add( TweenLite.to(this.parentElement.parentElement.querySelector("#wrapper"), fadeOutWrapperDuration, { autoAlpha: 0, display: 'none', ease: Power3.easeInOut
-  }), "scaleUpContent");
+
+  let oldScrollY = window.scrollY;
+  let wrapper = this.parentElement.parentElement.querySelector("#wrapper");
+
+  tl.add( TweenLite.to(wrapper, fadeOutWrapperDuration, { autoAlpha: 0, ease: Power3.easeInOut }), "scaleUpContent");
   tl.add( TweenLite.fromTo(animLabelDest.querySelector("#label"), fadeInDetailsDuration, { autoAlpha: 0 }, { autoAlpha: 1, ease: Power3.easeInOut,
   }), "fadeInDetails");
   tl.add( TweenLite.fromTo(animImageDest.querySelector("#content"), fadeInDetailsDuration, { autoAlpha: 0}, { autoAlpha: 1, ease: Power3.easeInOut,
   }), "fadeInDetails");
-  tl.add( TweenLite.from(this.divFullCard.querySelector('#closeBtn').$.close, fadeInDetailsDuration, { x: window.innerWidth + 100, ease: Power3.easeInOut,
+  tl.add( TweenLite.from(closeBtn.$.close, fadeInDetailsDuration, { x: window.innerWidth + 100, ease: Power3.easeInOut,
   }), "fadeInDetails");
-  tl.add( TweenLite.from(this.divFullCard.querySelector('#scrollBtn').$.scroll, fadeInDetailsDuration, { y: window.innerHeight + 100, ease: Power3.easeInOut,
+  tl.add( TweenLite.from(scrollBtn.$.scroll, fadeInDetailsDuration, { y: window.innerHeight + 100, ease: Power3.easeInOut,
+    onReverseComplete: () => {
+      wrapper.style.display = '';
+      window.scroll(0,oldScrollY);
+      this.detail = false;
+      this._closeCallback(animLabelDest,animImageDest);
+    },
     onComplete: () => {
-      setTimeout(() => {
-        this.detail = true;
-        if (this._openCallback) {
-          this._openCallback(animLabelDest,animImageDest);
-        }
-          this.transitioning = false;
-        },1);
+      wrapper.style.display = 'none';
+      this.detail = true;
+      if (this._openCallback) {
+        this._openCallback(animLabelDest,animImageDest);
+      }
+      this.transitioning = false;
       },
       ease: Power3.easeOut,
       immediateRender: true,
     }), "fadeInDetails");
+
     if (this.isMobile()) {
       tl.add( TweenLite.to(this.divFullCard, 0, { ease: Power3.easeInOut, position: '', immediateRender: false,
       }), "end");
     }
-    tl.add( TweenLite.to(animLabelDest, 0, { ease: Power3.easeInOut, position: '', immediateRender: false,
+    tl.add( TweenLite.to(animLabelDest, 0, { ease: Power3.easeInOut, position: '', immediateRender: false, onComplete: () => { window.scroll(0,0); }
     }), "end");
-    tl.add( TweenLite.to(animImageDest, 0, { ease: Power3.easeInOut, position: '', immediateRender: false,
+    tl.add( TweenLite.to(animImageDest, 0, { ease: Power3.easeInOut, position: '', immediateRender: false, onComplete: () => { window.scroll(0,0); }
     }), "end");
-    tl.add( TweenLite.to(this.divFullCard.querySelector('#closeBtn'), 0, { ease: Power3.easeInOut, position: '', immediateRender: false,
+    tl.add( TweenLite.to(body, 0, { ease: Power3.easeInOut, overflow: '', immediateRender: false, onComplete: () => { window.scroll(0,0); }}), "end");
+    tl.add( TweenLite.to(closeBtn, 0, { ease: Power3.easeInOut, position: '', immediateRender: false,
     }), "end");
-    tl.add( TweenLite.to(this.divFullCard.querySelector('#scrollBtn'), 0, { ease: Power3.easeInOut, position: '', immediateRender: false,
+    tl.add( TweenLite.to(scrollBtn, 0, { ease: Power3.easeInOut, position: '', immediateRender: false,
     }), "end");
 
     this._tl = tl;
@@ -580,11 +609,11 @@
   //   this._openCard();
   // }
 
-  _loadImage(img) {
-    if (img && !img.src) {
-      img.src = img.getAttribute('data-src');
-    }
-  }
+  // _loadImage(img) {
+  //   if (img && !img.src) {
+  //     img.src = img.getAttribute('data-src');
+  //   }
+  // }
 }
 window.customElements.define(SkewCard.is, SkewCard);
 </script>

@@ -1,6 +1,8 @@
 !!!
 %html{:lang => "en"}
   %head
+    %meta{:content => "width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes", :name => "viewport"}/
+    %meta{:content => "Stuart Tett | Product Designer", :name => "description"}/
     / build:css /stylesheets/main.min.css
     %link{:href => "../stylesheets/fonts.css", :rel => "stylesheet", :type => "text/css"}/
     %link{:href => "../stylesheets/style.css", :rel => "stylesheet", :type => "text/css"}/
@@ -38,22 +40,17 @@
       %figure#content1.image.cover.fourSeventyTwo{"aria-label" => "", :role => "img", :style => "background-image: url('/images/swipe-pass.png')"}
       #caption1.one-col
         %p
-          When I joined Swipe Labs, the Swipe app was already gaining tractio
-          %span.kern n.
-          It let people easily share their photos and videos publicly with a simple swipe to the righ
-          %span.kern t.
-          It occasionally asked you to swipe right to invite a contact to the ap
-          %span.kern p.
+          When I joined Swipe Labs, the Swipe app was already gaining traction.
+          It let people easily share their photos and videos publicly with a simple swipe to the right.
+          It occasionally asked you to swipe right to invite a contact to the app.
       #caption2.one-col
         %p
-          One of the growth strategies was to bring social media influencers onto the platform to post higher quality conten
-          %span.kern t.
+          One of the growth strategies was to bring social media influencers onto the platform to post higher quality content.
       %figure.image.cover.fourSeventyTwo{"aria-label" => "", :role => "img", :style => "background-image: url('/images/swipe-post.png')"}
       %figure.image.contain.fourSeventyTwo{"aria-label" => "", :role => "img", :style => "background-image: url('/images/swipe-cutoff.png')"}
       .one-col
         %p
-          Many of those influencers had professional level photographs that often didn't fit the vertical format of Swipe and users couldn't see portions of the photograph
-          %span.kern s.
+          Many of those influencers had professional level photographs that often didn't fit the vertical format of Swipe and users couldn't see portions of the photographs.
       .grid-span.two-col.dark-on-light
         %p
           %span.bold-italic.emphasis How could we show every photo in it's entirety in a full screen vertical format?
@@ -66,13 +63,11 @@
         %p A tap gesture might work, since other gestures are in use or hard to discover.
       .one-col
         %p
-          I decided to try an idea where the user could tilt the phone from side to side to pan across the imag
-          %span.kern e.
+          I decided to try an idea where the user could tilt the phone from side to side to pan across the image.
         %p
-          I put together a prototype and showed it to the team. We ended up shipping it to production and it was a hit! It solved the problem and was a fun feature for user
-          %span.kern s.
+          I put together a prototype and showed it to the team. We ended up shipping it to production and it was a hit! It solved the problem and was a fun feature for users.
       %figure.image.contain.fourSeventyTwo{"aria-label" => "", :role => "img", :style => "background-image: url('/images/swipe-parallax.gif')"}
-      #caption11.grid-span.dark-on-light
+      %blockquote.grid-span.italic
         %h4 Additional Credits: Edwin de Jongh&#8212;Lead Designer, Product Manager&#8212;Marwan Roushdy
     %footer#footer.footer.fade-in
       %stt-scroll-btn.btn-bc.z3.invert{:onclick => "TweenLite.to(window, 1, {scrollTo:0});", :style => ""}

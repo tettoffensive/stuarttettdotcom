@@ -1,6 +1,8 @@
 !!!
 %html{:lang => "en"}
   %head
+    %meta{:content => "width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes", :name => "viewport"}/
+    %meta{:content => "Stuart Tett | Product Designer", :name => "description"}/
     / build:css /stylesheets/main.min.css
     %link{:href => "../stylesheets/fonts.css", :rel => "stylesheet", :type => "text/css"}/
     %link{:href => "../stylesheets/style.css", :rel => "stylesheet", :type => "text/css"}/
@@ -39,40 +41,32 @@
         %img{:alt => "Post Channel", :src => "/images/channel-post.png"}/
       .one-col
         %p
-          Channel began as an app that allowed any user to edit videos together on their phone and post them into "channels" with other related video
-          %span.kern s.
+          Channel began as an app that allowed any user to edit videos together on their phone and post them into "channels" with other related videos.
         %p
-          When a user posts a video, it is processed on the device, and uploaded to the server for encoding before it streams in the channe
-          %span.kern l.
+          When a user posts a video, it is processed on the device, and uploaded to the server for encoding before it streams in the channel.
       .grid-span.two-col
         %p
-          When we pushed out the alpha build to the company, most found it confusing when they went from the posting flow to the channel and their video wasn't ther
-          %span.kern e.
+          When we pushed out the alpha build to the company, most found it confusing when they went from the posting flow to the channel and their video wasn't there.
       .grid-span.dark-on-light.two-col
         %p
           %span.emphasis.bold-italic How might we improve the experience for users after posting a new video?
       .grid-span.two-col
         %p One possibility was to just simply tell the user, "Success! Your video will stream momentarily".
         %p
-          But we felt it would have a greater impact if the user could just see the video in the stream someho
-          %span.kern w.
+          But we felt it would have a greater impact if the user could just see the video in the stream somehow.
       %figure.one-col
         %img{:alt => "Post Channel", :src => "/images/channel-posting-flow.png"}/
       #caption1.one-col
         %p
-          Part of my role as developer was to solve user experience issues like this that involved technical solution
-          %span.kern s.
+          Part of my role as developer was to solve user experience issues like this that involved technical solutions.
         %p
-          I came up with a solution of keeping a cached copy of the video and inserting it at the start of the channel fee
-          %span.kern d.
+          I came up with a solution of keeping a cached copy of the video and inserting it at the start of the channel feed.
         %p
-          The video would then be removed once it came down from the server after encodin
-          %span.kern g.
+          The video would then be removed once it came down from the server after encoding.
       .two-col-extra.grid-span
         %p.bold-italic
-          On our next alpha release, the app went seamlessly from posting to playing the video at the head of the channel. There was no more confusion and it just felt norma
-          %span.kern l.
-      #caption11.grid-span.dark-on-light
+          On our next alpha release, the app went seamlessly from posting to playing the video at the head of the channel. There was no more confusion and it just felt normal.
+      %blockquote.grid-span.italic
         %h4 Additional Credits: Edwin de Jongh&#8212;Lead Designer, Product Manager&#8212;Marwan Roushdy
     %footer#footer.footer.fade-in
       %stt-scroll-btn.btn-bc.z3.invert{:onclick => "TweenLite.to(window, 1, {scrollTo:0});", :style => ""}

@@ -81,6 +81,7 @@
         <skew-card id=[[item.link]] link=[[item.link]] title=[[item.title]] tabindex=0 autofocus=true
         description=[[item.description]]
         tags=[[item.tags]]
+        type=[[item.type]]
         img=[[item.image]]
         on-click="_onClick"
         on-close="_onClickClose"
@@ -115,22 +116,25 @@ class StuarttettdotcomApp extends Polymer.Element {
           return [
             {type: 'skew-card',
             description: 'Learn how a mobile app helps busy working professionals figure out what to make for dinner.',
+            type: 'img',
             title: 'SousChef',
-            image:'/images/souschef-cover.jpg',
+            image:'/images/souschef-cover.svg',
             link: 'souschef',
             tags: 'UX, UI, Graphic Design'},
 
             {type: 'skew-card',
             description: 'Learn how a website helps new parents find preschools that work with their commute.',
+            type: 'img',
             title: 'Find a Preschool',
-            image:'/images/preschool-cover.jpg',
+            image:'/images/preschool-cover.svg',
             link: 'preschool',
             tags: 'UX, UI'},
 
             {type: 'skew-card',
             description: 'Learn how a mobile app helps sneaker-heads decide what shoes to order online through augmented reality.',
+            type: 'img',
             title: 'Augmented Reality Shoes',
-            image:'/images/ar-shoe.jpg',
+            image:'/images/arshoes-cover.svg',
             link: 'arshoe',
             tags: 'UX, UI'},
 
@@ -444,8 +448,8 @@ class StuarttettdotcomApp extends Polymer.Element {
     }
     let el = this._lastClickElement;
     this._lastClickElement = null;
-    el.detail = "false";
-    window.scrollTo(0,this._lastWindowPosition);
+    //el.detail = "false";
+    //window.scrollTo(0,this._lastWindowPosition);
     let details = document.querySelector("#contentDetails");
     if (details != null) {
       var tl = new TimelineLite({ paused: false });
