@@ -363,13 +363,15 @@
       let last = this.animLabelDest.getBoundingClientRect();
       let imageLast = this.animImageDest.getBoundingClientRect();
 
-      let btn = this.divFullCard.querySelector('#scrollBtn');
+      let scrollBtn = this.divFullCard.querySelector('#scrollBtn');
+      let closeBtn = this.divFullCard.querySelector('#closeBtn');
+
       if (this.isMobile()) {
-        btn.style.top = '';
+        scrollBtn.style.top = '';
       } else if (this.animLabelDest) {
         var height = this.animLabelDest.offsetHeight;
         height += 30;
-        btn.style.top = height + "px";
+        scrollBtn.style.top = height + "px";
       }
 
       // Invert
@@ -458,8 +460,8 @@
 
       let scrollY = window.scrollY;
 
-      this.divFullCard.querySelector('#closeBtn').style.position = 'fixed';
-      this.divFullCard.querySelector('#scrollBtn').style.position = 'fixed';
+      closeBtn.style.position = 'fixed';
+      scrollBtn.style.position = 'fixed';
 
       // Unskew Label
       tl.add( TweenLite.fromTo(this.$.label, unskewDuration, { autoAlpha: 1 }, { autoAlpha: 0 }), "unskewLabel");
@@ -473,8 +475,6 @@
       },
       onReverseComplete: () => {
         setTimeout(() => {
-          //this.detail = false;
-          //this._closeCallback(animLabelDest,animImageDest);
           this.transitioning = false;
         },1);
       },
@@ -512,37 +512,21 @@
       let sx = 1.0/animImageDest._gsTransform.scaleX;
       let sy = 1.0/animImageDest._gsTransform.scaleY;
       let content = animImageDest.children[0];
-      // let content = animImageDest.querySelector(".content");
-      // TweenLite.set(content, { scaleX: sx, scaleY: sy, transformOrigin: "right top"});
     },
     ease: Power3.easeOut,
   }), "unskewContentFinish");
 
   let oldScrollY = window.scrollY;
   let wrapper = this.parentElement.parentElement.querySelector("#wrapper");
-  tl.add( TweenLite.to(wrapper, fadeOutWrapperDuration, { autoAlpha: 0, ease: Power3.easeInOut,
-  onUpdateParams:["{self}"],
-  onUpdate: (tween) => {
-      console.log(!tween.isActive() && tween.progress() == 1);
-  },
-  onComplete: () => {
-    console.log(window.scrollY);
-  },
-  onReverseComplete: () => {
-    console.log(window.scrollY);
-  }}), "scaleUpContent");
 
+  tl.add( TweenLite.to(wrapper, fadeOutWrapperDuration, { autoAlpha: 0, ease: Power3.easeInOut }), "scaleUpContent");
   tl.add( TweenLite.fromTo(animLabelDest.querySelector("#label"), fadeInDetailsDuration, { autoAlpha: 0 }, { autoAlpha: 1, ease: Power3.easeInOut,
   }), "fadeInDetails");
   tl.add( TweenLite.fromTo(animImageDest.querySelector("#content"), fadeInDetailsDuration, { autoAlpha: 0}, { autoAlpha: 1, ease: Power3.easeInOut,
   }), "fadeInDetails");
-  tl.add( TweenLite.from(this.divFullCard.querySelector('#closeBtn').$.close, fadeInDetailsDuration, { x: window.innerWidth + 100, ease: Power3.easeInOut,
+  tl.add( TweenLite.from(closeBtn.$.close, fadeInDetailsDuration, { x: window.innerWidth + 100, ease: Power3.easeInOut,
   }), "fadeInDetails");
-  tl.add( TweenLite.from(this.divFullCard.querySelector('#scrollBtn').$.scroll, fadeInDetailsDuration, { y: window.innerHeight + 100, ease: Power3.easeInOut,
-    onUpdateParams:["{self}"],
-    onUpdate: (tween) => {
-      console.log(!tween.isActive() && tween.progress() == 1);
-    },
+  tl.add( TweenLite.from(scrollBtn.$.scroll, fadeInDetailsDuration, { y: window.innerHeight + 100, ease: Power3.easeInOut,
     onReverseComplete: () => {
       wrapper.style.display = '';
       window.scroll(0,oldScrollY);
@@ -569,11 +553,10 @@
     }), "end");
     tl.add( TweenLite.to(animImageDest, 0, { ease: Power3.easeInOut, position: '', immediateRender: false, onComplete: () => { window.scroll(0,0); }
     }), "end");
-    console.log(window.scrollY);
     tl.add( TweenLite.to(body, 0, { ease: Power3.easeInOut, overflow: '', immediateRender: false, onComplete: () => { window.scroll(0,0); }}), "end");
-    tl.add( TweenLite.to(this.divFullCard.querySelector('#closeBtn'), 0, { ease: Power3.easeInOut, position: '', immediateRender: false,
+    tl.add( TweenLite.to(closeBtn, 0, { ease: Power3.easeInOut, position: '', immediateRender: false,
     }), "end");
-    tl.add( TweenLite.to(this.divFullCard.querySelector('#scrollBtn'), 0, { ease: Power3.easeInOut, position: '', immediateRender: false,
+    tl.add( TweenLite.to(scrollBtn, 0, { ease: Power3.easeInOut, position: '', immediateRender: false,
     }), "end");
 
     this._tl = tl;
