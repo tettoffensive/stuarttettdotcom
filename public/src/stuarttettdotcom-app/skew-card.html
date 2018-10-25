@@ -358,6 +358,8 @@
         this.divFullCard.style.position = 'fixed';
         this.divFullCard.style.top = '0px';
       }
+      let body = document.getElementsByTagName("body")[0];
+
       let last = this.animLabelDest.getBoundingClientRect();
       let imageLast = this.animImageDest.getBoundingClientRect();
 
@@ -412,7 +414,9 @@
 
       tl.add( TweenLite.to(this.divFullCard, 0, { display: 'block', width: "100%", height: heightString}), 0)
         .add( TweenLite.to(this.animLabelDest, 0, { display: 'block'}), 0)
-        .add( TweenLite.to(this.animImageDest, 0, { display: 'block'}), 0);
+        .add( TweenLite.to(this.animImageDest, 0, { display: 'block'}), 0)
+        .add( TweenLite.to(body, 0, { overflow: 'hidden'}), 0);
+
       // Put the destination pieces in their "First" states
       TweenLite.set(animLabelDest, {transform: fromTransform, transformOrigin: "left top"});
       TweenLite.set(animImageDest, {transform: imageFromTransform, transformOrigin: "right top"});
@@ -486,7 +490,6 @@
       force3D: true,
       ease: Power3.easeOut,
     }), "scaleUpLabel");
-    tl.add( TweenLite.to(window, 1, { scrollTo: scrollY, ease: Power3.easeInOut}), "scaleUpLabel");
     // Fade Out the content Image
     tl.add( TweenLite.fromTo(this.$.content, fadeOutImageDuration, { autoAlpha: 1}, { autoAlpha: 0,
       ease: Power3.easeInOut,
@@ -516,6 +519,7 @@
   }), "unskewContentFinish");
   tl.add( TweenLite.to(this.parentElement.parentElement.querySelector("#wrapper"), fadeOutWrapperDuration, { autoAlpha: 0, display: 'none', ease: Power3.easeInOut
   }), "scaleUpContent");
+  //tl.add( TweenLite.to(window, 0, { scrollTo: 0, ease: Power3.easeInOut}), "scaleUpContentFinish");
   tl.add( TweenLite.fromTo(animLabelDest.querySelector("#label"), fadeInDetailsDuration, { autoAlpha: 0 }, { autoAlpha: 1, ease: Power3.easeInOut,
   }), "fadeInDetails");
   tl.add( TweenLite.fromTo(animImageDest.querySelector("#content"), fadeInDetailsDuration, { autoAlpha: 0}, { autoAlpha: 1, ease: Power3.easeInOut,
@@ -543,6 +547,8 @@
     }), "end");
     tl.add( TweenLite.to(animImageDest, 0, { ease: Power3.easeInOut, position: '', immediateRender: false,
     }), "end");
+    tl.add( TweenLite.to(window, 0, { scrollTo: 0, ease: Power3.easeInOut}), "end");
+    tl.add( TweenLite.to(body, 0, { ease: Power3.easeInOut, overflow: '', immediateRender: false}), "end");
     tl.add( TweenLite.to(this.divFullCard.querySelector('#closeBtn'), 0, { ease: Power3.easeInOut, position: '', immediateRender: false,
     }), "end");
     tl.add( TweenLite.to(this.divFullCard.querySelector('#scrollBtn'), 0, { ease: Power3.easeInOut, position: '', immediateRender: false,
