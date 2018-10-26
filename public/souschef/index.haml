@@ -8,7 +8,7 @@
     %link{:href => "../stylesheets/style.css", :rel => "stylesheet", :type => "text/css"}/
     %link{:href => "../stylesheets/reset.css", :rel => "stylesheet", :type => "text/css"}/
     /endbuild
-    %link{:href => "https://fonts.googleapis.com/css?family=BioRhyme:800", :rel => "stylesheet"}/
+    %link{:href => "https://fonts.googleapis.com/css?family=BioRhyme:400,800", :rel => "stylesheet"}/
     %link{:href => "/manifest.json", :rel => "manifest"}/
     %script{:src => "../bower_components/webcomponentsjs/webcomponents-loader.js"}
     %link{:href => "../src/stuarttettdotcom-app/stuarttettdotcom-app.html", :rel => "import"}/
@@ -47,15 +47,15 @@
       .one-col.col-reset
         %h3 For working professionals, weeknight dinners are an afterthought.
         %p Often people don't think about it until their commute home. They look in their fridge paralyzed. They often end up ordering delivery.
-      %figure.image.contain.fourSeventyTwo{:style => "background-image: url(#{"/images/souschef-fridge.png"})"}
+      %figure.image.cover.fourSeventyTwo.row-span-2{:style => "background-image: url(#{"/images/souschef-fridge.png"})"}
       %figure.image.contain.fourSeventyTwo.row-span-2{:style => "background-image: url(#{"/images/souschef-caviar.jpg"})"}
       .one-col
         %h3 Which leads to ordering $40 pizzas from Caviar.
         %p My co-founder and I wanted to see if digital technology could improve this experience. He led the development, while I led the interface and experience design.
-      %figure.image.contain.fourSeventyTwo.row-span-2{"aria-label" => "", :style => "background-image: url(#{"/images/souschef-problem.jpg"})"}
       .one-col
         %h3 How might technology help busy people with their weeknight meals?
         %p We decided to create a platform around delivering convenient recipes suggested based on the ingredients you have on hand.
+      %figure.image.cover.fourSeventyTwo.row-span-2{"aria-label" => "", :style => "background-image: url(#{"/images/souschef-problem.jpg"})"}
 
       / Research
       .special

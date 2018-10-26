@@ -34,9 +34,14 @@
         flex-direction: row;
       }
 
-      :host(.initial) #label, #content {
+      :host(.initial) #content {
         transform: skewY(3deg);
         transform-origin: right top;
+      }
+
+      :host(.initial) #label {
+        transform: skewY(3deg);
+        transform-origin: left top;
       }
 
       :host(.initial) {
