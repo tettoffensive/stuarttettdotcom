@@ -281,7 +281,7 @@
         this.divFullCard.style.height = '';
       } else if (this.animLabelDest) {
         var height = this.animLabelDest.offsetHeight;
-        height += 30;
+        height += 30 - 50;
         btn.style.top = height + "px";
         this.divFullCard.style.height = '110vh';
         this.animLabelDest.style.transform = '';
@@ -375,7 +375,7 @@
         scrollBtn.style.top = '';
       } else if (this.animLabelDest) {
         var height = this.animLabelDest.offsetHeight;
-        height += 30;
+        height += 30 - 50;
         scrollBtn.style.top = height + "px";
       }
 

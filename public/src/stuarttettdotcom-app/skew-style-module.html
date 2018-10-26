@@ -58,11 +58,10 @@
     @media screen and (min-width: 660px) {
       .ct-onclick {
         position: absolute;
-        top: calc(30px + 80px);
-        left: calc(280px + 80px);
-        width: calc(100% - 280px - 160px);
+        top: calc(30px + 30px);
+        left: calc(280px + 30px);
+        width: calc(100% - 280px - 60px);
         height: calc(100vh - 220px);
-        /* max-height: 964px; */
         min-height: 337px;
       }
     }
@@ -78,18 +77,17 @@
     @media screen and (min-width: 660px) {
       .lbl-onclick {
         position: absolute;
-        top: 80px;
-        left: 80px;
+        top: 30px;
+        left: 30px;
         height: calc(100vh - 160px);
         min-height: 375px;
-        /* max-height: 1024px; */
       }
 
       .info-onclick {
         position: absolute;
-        top: 80px;
-        left: 80px;
-        width: calc(100% - 160px);
+        top: 30px;
+        left: 30px;
+        width: calc(100% - 60px);
         height: calc(100vh - 150px);
         max-height: 994px;
         min-height: 375px;
@@ -428,10 +426,16 @@
     }
 
     @media screen and (min-width: 660px) {
-      .btn-tr, .btn-tr2 {
+      .btn-tr {
         position: absolute;
-        top: 85px;
-        right: calc(80px - 30px);
+        top: 50px;
+        right: calc(50px - 30px);
+      }
+
+      .btn-tr2 {
+        position: absolute;
+        top: 20px;
+        right: calc(50px - 30px);
       }
 
       .btn-bc2 {
@@ -459,6 +463,12 @@
     #fullCard {
       padding-bottom: 40px;
       max-height: 1245px;
+    }
+
+    @media screen and (min-width: 660px) {
+      #fullCard {
+        padding-bottom: 0px;
+      }
     }
 
     .info_card_wrapper {
