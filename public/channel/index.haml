@@ -40,32 +40,26 @@
       %figure.one-col
         %img{:alt => "Post Channel", :src => "/images/channel-post.png"}/
       .one-col
-        %p
-          Channel began as an app that allowed any user to edit videos together on their phone and post them into "channels" with other related videos.
-        %p
-          When a user posts a video, it is processed on the device, and uploaded to the server for encoding before it streams in the channel.
-      .grid-span.two-col
-        %p
-          When we pushed out the alpha build to the company, most found it confusing when they went from the posting flow to the channel and their video wasn't there.
-      .grid-span.dark-on-light.two-col
-        %p
-          %span.emphasis.bold-italic How might we improve the experience for users after posting a new video?
-      .grid-span.two-col
+        %h3 Channel began as an app for people to share video stories from their phones.
+        %p When someone posts a video, it is first processed on the device, and uploaded to the server for encoding before it streams in the channel.
+      .one-col
+        %h3 But they wanted to see their videos streaming right away.
+        %p When we pushed out the alpha build to the company, people were confused as to why they didn't see their video right away. The encoding going on under the hood wasn't visible to them.
+      .one-col
+      .one-col.col3
+        %h3 How might we improve the experience for users after posting a new video?
         %p One possibility was to just simply tell the user, "Success! Your video will stream momentarily".
-        %p
-          But we felt it would have a greater impact if the user could just see the video in the stream somehow.
+        %p But we felt it would have a greater impact if the user could just see the video in the stream somehow.
+      .one-col.row-span-2
+        %h3 We decided to rely on the locally cached copy of the video.
+        %p Part of my role was to solve user experience issues like this that involved technical solutions.
+        %p I came up with a solution of keeping a cached copy of the video and inserting it at the start of the channel feed.
+        %p The video would then be removed once it came down from the server after encoding.
       %figure.one-col
         %img{:alt => "Post Channel", :src => "/images/channel-posting-flow.png"}/
-      #caption1.one-col
-        %p
-          Part of my role as developer was to solve user experience issues like this that involved technical solutions.
-        %p
-          I came up with a solution of keeping a cached copy of the video and inserting it at the start of the channel feed.
-        %p
-          The video would then be removed once it came down from the server after encoding.
-      .two-col-extra.grid-span
-        %p.bold-italic
-          On our next alpha release, the app went seamlessly from posting to playing the video at the head of the channel. There was no more confusion and it just felt normal.
+      .one-col.col3
+        %h3 We tested out the new experience with success.
+        %p On our next release candidate, the app went seamlessly from posting to playing the video at the head of the channel. The experience was just what users expected to happen.
       %blockquote.grid-span.italic
         %h4 Additional Credits: Edwin de Jongh&#8212;Lead Designer, Product Manager&#8212;Marwan Roushdy
     %footer#footer.footer.fade-in

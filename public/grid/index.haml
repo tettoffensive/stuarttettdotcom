@@ -38,51 +38,47 @@
       .progress-container.fade-in
         #progress-bar.progress-bar
       %figure.image.contain.fourSeventyTwo{"aria-label" => "", :role => "img", :style => "background-image: url(#{"/images/grid-home.jpg"})"}
-      #caption1.one-col
-        %p
-          When I joined Binary Thumb,
-          the Grid app had released its first version into the App Store.
-          The app allowed users to collaborate on spreadsheets full of video, images, and text in real-time.
-          It was a solid MVP,
-          but their were some much needed improvements in the overall experience.
-      #caption2.one-col
-        %p
-          The spreadsheet was an infinite canvas of tiles.
-          There were no limitations on the number of images, and how many tiles each images takes up.
-        %p This was causing the scrolling and other animation to slow way down. The extreme case is a single image per tile (row and column).
-        %p
-          Grid may be a spreadsheet, but it is meant to showcase multimedia in a beautiful way.
+      .one-col
+        %h3 Grid allowed users to collaborate on spreadsheets full of video, images, and text in real-time.
+        %p When I joined, the team had just released the first version of the app.
+        %p It was a solid MVP, but their were some much needed improvements in the overall experience.
+      .one-col
+        %h3 There were some performance issues hindering the experience.
+        %p The spreadsheet was an infinite canvas of tiles with no limitations on tiles, and images.
+        %p Scrolling across the canvas wasn't buttery smooth and other animations were slow.
       %figure.image.contain{"aria-label" => "", :role => "img", :style => "background-image: url(#{"/images/grid-blank-canvas.jpg"})"}
-      #caption3.grid-span.two-col.dark-on-light
-        %p
-          %span.emphasis.bold-italic How might we allow users to add as much rich media as they want while maintaining buttery smooth animation?
-      #caption4.one-col
+      .one-col.col3
+        %h3 Grid may be a spreadsheet, but it is meant to showcase multimedia in a beautiful way.
         %p We looked to the world of mobile gaming, where the rendering wasn't done with Apple's UIKit, but the lower-level OpenGL.
-        %p
-          I made a prototype of the home view in OpenGL, and the performance looked promising.
-        %p
-          We decided to convert the spreadsheet canvas to OpenGL and stress tested it.
-          We were now getting a consistent 60fps.
-          It felt so much more responsive in the hands of the user.
-        %p
-          While the new user experience was superior,
-          the conversion had some major engineering challenges.
-          It was costly to rebuild standard UI components.
+      .one-col
+        %h3 I made a prototype in OpenGL, and the performance looked promising.
+        %p We played around with the prototype and stress-tested it to see how it would operate under load.
+      .one-col
+      .one-col.col3
+        %h3 We decided to convert the entire app to our new OpenGL engine.
+        %p We were now getting a consistent 60fps. It felt so much more responsive in the hands of the user.
+      .one-col
+        %h3 But using OpenGL slowed down development.
+        %p While the new user experience was superior, the conversion had some major engineering challenges. It was costly to rebuild standard UI components.
       %figure.image.contain{"aria-label" => "", :role => "img", :style => "background-image: url(#{"/images/grid-image-tiles.jpg"})"}
-      .grid-span.two-col.dark-on-light
-        %p
-          %span.emphasis.bold-italic How might we keep the canvas clear when placing items in the Backpack?
+
+      / Backpack
+      %img.squiggle{:src => "/images/wave-dull.svg"}/
       %figure.image.contain.fourSeventyTwo{"aria-label" => "", :role => "img", :style => "background-image: url(#{"/images/grid-backpack.gif"})"}
       .one-col
-        %p
-          Another experience issue came with the introduction of Backpack.
-          This let the user pick photos and videos to add to the Grid.
-          But it took up so much screen real estate.
-        %p In the design specs it animated upward across the screen. But to move it out of the way quickly would be either slow or too distracting if sped up.
-        %p
-          I came up with a solution of quickly fading out the Backpack when the user dragged an element out to be placed on the grid.
-      .grid-span.two-col-extra
-        %p.bold-italic When we tried it out ourselves and in our user testing sessions, this proved effective. The user could easily grab images from the backpack and place it anywhere on the screen without being distracted by the disappearing Backpack.
+        %h3 The introduction of Backpack gave users a convenient way to drop content into the Grid.
+        %p It connected with Photos, Dropbox, and Evernote. A simple drag and drop interface made it easy to create.
+      .one-col
+        %h3 But it took up so much screen real estate.
+        %p It opens and closes by sliding in and out from the bottom.
+      .one-col
+      .one-col.col3
+        %h3 We needed a fast, distraction-free way to remove it for object placement.
+        %p I experimented with different animations, but landed on a quick fade out when a user drags an item out of Backpack.
+        %p When they release their finger, it fades back in gently.
+      .one-col
+        %h3 When we tried it out in user testing, it proved effective.
+        %p The user could easily grab images from the backpack and place it anywhere on the screen without being distracted by the disappearing Backpack.
       %blockquote.grid-span.italic
         %h4 Additional Credits: Josh Leong&#8212;Lead Designer
     %footer#footer.footer.fade-in

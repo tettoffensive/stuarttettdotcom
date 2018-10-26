@@ -208,7 +208,7 @@ class StuarttettdotcomApp extends Polymer.Element {
 
     connectedCallback() {
       super.connectedCallback();
-      window.addEventListener("scroll", this._scroll.bind(this));
+      //window.addEventListener("scroll", this._scroll.bind(this));
       window.onpopstate = (event) => {
         event.preventDefault();
         if (this._lastClickElement != null) {
@@ -221,7 +221,7 @@ class StuarttettdotcomApp extends Polymer.Element {
 
     disconnectedCallback() {
       super.disconnectedCallback();
-      window.removeEventListener("scroll", this._scroll.bind(this));
+      //window.removeEventListener("scroll", this._scroll.bind(this));
     }
 
     _scroll(event) {
