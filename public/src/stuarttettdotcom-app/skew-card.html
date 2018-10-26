@@ -265,8 +265,6 @@
 
     disconnectedCallback() {
       super.disconnectedCallback();
-      // for history back and forward buttons
-      // window.removeEventListener('popstate', this._popState);
       window.removeEventListener("resize", this._resize.bind(this));
       this.removeEventListener("mouseover");
       this.removeEventListener("mouseout");
@@ -411,14 +409,6 @@
         heightString = "100vh";
       }
 
-      // this.divFullCard.style.display = 'block';
-      // this.divFullCard.style.width = '100%';
-      // this.animLabelDest.style.display = 'block';
-      // this.animImageDest.style.display = 'block';
-      // this.animLabelDest.style.visibility = '';
-      // this.animImageDest.style.visibility = '';
-      // return;
-
       tl.add( TweenLite.to(this.divFullCard, 0, { display: 'block', width: "100%", height: heightString}), 0)
         .add( TweenLite.to(this.animLabelDest, 0, { display: 'block'}), 0)
         .add( TweenLite.to(this.animImageDest, 0, { display: 'block'}), 0)
@@ -481,6 +471,7 @@
       onReverseComplete: () => {
         setTimeout(() => {
           this.transitioning = false;
+          this.divFullCard.parentElement.removeChild(this.divFullCard);
         },1);
       },
       ease: Power3.easeIn,
