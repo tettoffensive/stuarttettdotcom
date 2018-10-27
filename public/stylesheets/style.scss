@@ -255,7 +255,7 @@ blockquote h4 {
     padding-bottom: 26px;
   }
 
-  & > div:not(.overlap,.align-left) {
+  & > div:not(.overlap):not(.align-left) {
     align-self: start;
     justify-self: center;
   }
