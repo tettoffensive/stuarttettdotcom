@@ -34,9 +34,14 @@
         flex-direction: row;
       }
 
-      :host(.initial) #label, #content {
+      :host(.initial) #content {
         transform: skewY(3deg);
         transform-origin: right top;
+      }
+
+      :host(.initial) #label {
+        transform: skewY(3deg);
+        transform-origin: left top;
       }
 
       :host(.initial) {
@@ -260,8 +265,6 @@
 
     disconnectedCallback() {
       super.disconnectedCallback();
-      // for history back and forward buttons
-      // window.removeEventListener('popstate', this._popState);
       window.removeEventListener("resize", this._resize.bind(this));
       this.removeEventListener("mouseover");
       this.removeEventListener("mouseout");
@@ -276,7 +279,7 @@
         this.divFullCard.style.height = '';
       } else if (this.animLabelDest) {
         var height = this.animLabelDest.offsetHeight;
-        height += 30;
+        height += 30 - 50;
         btn.style.top = height + "px";
         this.divFullCard.style.height = '110vh';
         this.animLabelDest.style.transform = '';
@@ -370,7 +373,7 @@
         scrollBtn.style.top = '';
       } else if (this.animLabelDest) {
         var height = this.animLabelDest.offsetHeight;
-        height += 30;
+        height += 30 - 50;
         scrollBtn.style.top = height + "px";
       }
 
@@ -405,14 +408,6 @@
       if (this.isDesktop()) {
         heightString = "100vh";
       }
-
-      // this.divFullCard.style.display = 'block';
-      // this.divFullCard.style.width = '100%';
-      // this.animLabelDest.style.display = 'block';
-      // this.animImageDest.style.display = 'block';
-      // this.animLabelDest.style.visibility = '';
-      // this.animImageDest.style.visibility = '';
-      // return;
 
       tl.add( TweenLite.to(this.divFullCard, 0, { display: 'block', width: "100%", height: heightString}), 0)
         .add( TweenLite.to(this.animLabelDest, 0, { display: 'block'}), 0)
@@ -476,6 +471,7 @@
       onReverseComplete: () => {
         setTimeout(() => {
           this.transitioning = false;
+          this.divFullCard.parentElement.removeChild(this.divFullCard);
         },1);
       },
       ease: Power3.easeIn,

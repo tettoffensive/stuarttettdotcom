@@ -181,7 +181,7 @@
         this.divFullCard.style.height = '';
       } else if (this.animDest) {
         var height = this.animDest.offsetHeight;
-        height += 30;
+        height += 30 - 50 + 25;
         btn.style.top = height + "px";
         this.divFullCard.style.height = '110vh';
       }
@@ -287,15 +287,19 @@
         this.divFullCard.style.position = 'fixed';
         this.divFullCard.style.top = '0px';
       }
+      let body = document.getElementsByTagName("body")[0];
 
       let last = this.animDest.getBoundingClientRect();
+
+      let scrollBtn = this.divFullCard.querySelector('#scrollBtn');
+      let closeBtn = this.divFullCard.querySelector('#closeBtn');
 
       let btn = this.divFullCard.querySelector('#scrollBtn');
       if (this.isMobile()) {
         btn.style.top = '';
       } else if (this.animDest) {
         var height = this.animDest.offsetHeight;
-        height += 30;
+        height += 30 - 50 + 25;
         btn.style.top = height + "px";
       }
 
@@ -325,7 +329,8 @@
 
       this.divFullCard.style.display = 'none';
       tl.add( TweenLite.to(this.divFullCard, 0, { display: 'block', width: "100%", height: heightString}), 0)
-        .add( TweenLite.to(this.animDest, 0, { display: 'block'}), 0);
+        .add( TweenLite.to(this.animDest, 0, { display: 'block'}), 0)
+        .add( TweenLite.to(body, 0, { overflow: 'hidden'}), 0);
       // Put the destination pieces in their "First" states
       TweenLite.set(animDest, {transform: fromTransform, transformOrigin: "left top"});
 
@@ -349,8 +354,8 @@
 
       let scrollY = window.scrollY;
 
-      this.divFullCard.querySelector('#closeBtn').style.position = 'fixed';
-      this.divFullCard.querySelector('#scrollBtn').style.position = 'fixed';
+      closeBtn.style.position = 'fixed';
+      scrollBtn.style.position = 'fixed';
 
       // Unskew Label
       tl.add( TweenLite.fromTo(this.$.cardInfoDescription, unskewDuration, { autoAlpha: 1 }, { autoAlpha: 0 }), "unskewLabel");
@@ -369,6 +374,7 @@
           this.detail = false;
           this._closeCallback(animDest);
           this.transitioning = false;
+          this.divFullCard.parentElement.removeChild(this.divFullCard);
         },1);
       },
       ease: Power3.easeIn,
@@ -417,9 +423,10 @@
     }), "end");
     tl.add( TweenLite.to(animDest, 0, { ease: Power3.easeInOut, position: '', immediateRender: false,
     }), "end");
-    tl.add( TweenLite.to(this.divFullCard.querySelector('#closeBtn'), 0, { ease: Power3.easeInOut, position: '', immediateRender: false,
+    tl.add( TweenLite.to(body, 0, { ease: Power3.easeInOut, overflow: '', immediateRender: false, onComplete: () => { window.scroll(0,0); }}), "end");
+    tl.add( TweenLite.to(closeBtn, 0, { ease: Power3.easeInOut, position: '', immediateRender: false,
     }), "end");
-    tl.add( TweenLite.to(this.divFullCard.querySelector('#scrollBtn'), 0, { ease: Power3.easeInOut, position: '', immediateRender: false,
+    tl.add( TweenLite.to(scrollBtn, 0, { ease: Power3.easeInOut, position: '', immediateRender: false,
     }), "end");
 
     this._tl = tl;

@@ -8,7 +8,7 @@
     %link{:href => "../stylesheets/style.css", :rel => "stylesheet", :type => "text/css"}/
     %link{:href => "../stylesheets/reset.css", :rel => "stylesheet", :type => "text/css"}/
     / endbuild
-    %link{:href => "https://fonts.googleapis.com/css?family=BioRhyme:800", :rel => "stylesheet"}/
+    %link{:href => "https://fonts.googleapis.com/css?family=BioRhyme:400,800", :rel => "stylesheet"}/
     %link{:href => "/manifest.json", :rel => "manifest"}/
     %script{:src => "../bower_components/webcomponentsjs/webcomponents-loader.js"}
     %link{:href => "../src/stuarttettdotcom-app/stuarttettdotcom-app.html", :rel => "import"}/
@@ -35,74 +35,108 @@
     %section#contentDetails{:style => "display: none; visibility: hidden; min-height: 100vh;"}
       .progress-container.fade-in
         #progress-bar.progress-bar
+
+      / Problem
+      .special
+      .one-col.col-reset.align-left
+        %h1.grid-span.align-left.special
+          Prob-
+        %h1.grid-span.align-left.special
+          lem
+        %img.squiggle{:src => "/images/wave.svg"}/
+      .one-col.col-reset
+        %h3 For consumers, online shoe shopping involves guess work and returns.
+        %p Online shopping has become the norm, but for shoes the customer must be convinced to order the shoes before they've worn them and wait for them to ship. This may prevent them from making the purchase.
       %figure.image.contain.fourSeventyTwo{"aria-label" => "ARKicks splash screen mock", :role => "img", :style => "background-image: url(#{"/images/arshoe-splash.jpg"})"}
-      .one-col
-        %p What if you could try on shoes without going into the store or waiting day(s) for a delivery?
-        %p For online shoe shopping the customer must be convinced to order the shoes before they've worn them and wait for them to ship. This may prevent them from making the purchase.
-      .grid-span.two-col.dark-on-light
-        %p
-          %span.emphasis.bold-italic Can we give customers a better glimpse of what wearing the shoes will be like?
-      .grid-span.two-col-extra
+      .one-col.col3
+        %h3 Can we give customers a better glimpse of what wearing the shoes will be like?
         %p With the latest technologies around augmented reality in mobile devices, we might be able to show the user what the shoes will look like on their feet.
-        %p
-          %span.bold-italic.emphasis So How might we detect the feet?
-      .one-col
+
+      / Interaction
+      .special
+      .one-col.col-reset.align-left
+        %h1.grid-span.align-left.special
+          Inter-
+        %h1.grid-span.align-left.special
+          action
+        %img.squiggle{:src => "/images/wave.svg"}/
+      .one-col.col-reset
+        %h3 How might an interface look for trying on virtual shoes?
         %p Automatically recognizing and tracking objects is complicated. So I wondered, if a simple user interface could be designed for the user to tell the camera where the feet are without difficulty.
       %figure.image.contain.fourSeventyTwo{"aria-label" => "Ideation sketches", :role => "img", :style => "background-image: url(#{"/images/arshoe-sketch-all.jpg"})"}
       %figure.image.contain.fourSeventyTwo{"aria-label" => "Sketches for different foot finding options", :role => "img", :style => "background-image: url(#{"/images/arshoe-sketch-feet.jpg"})"}
       .one-col
-        %p I sketched out a few different options for finding the feet. Most of which involved tapping or drawing on the screen.
+        %h3 I explored various methods for finding the feet.
+        %p  Most of which involved the user tapping or drawing on the screen to tell the app where the feet are.
       .one-col
-        %p One idea of placing virtual placeholders to “step into” seemed less burdensome on the user and a more engaging experience since the action is done in the real world and not the screen.
+        %h3 And the idea of using virtual placeholders to “step into” seemed like a more engaging experience.
+        %p Since the action is done in the real world and not on the screen, it keeps the user immersed without breaking the illusion.
       %figure.image.contain.fourSeventyTwo{"aria-label" => "Step inside AR shoes flow", :role => "img", :style => "background-image: url(#{"/images/arshoe-step-inside.png"})"}
-      / Explore
-      .two-col.grid-span.dark-on-light
-        %p
-          %span.emphasis.bold-italic How might a user explore different shoes in the catalog?
+
+      / > Explore Interaction
+      .special
+      %img.squiggle{:src => "/images/wave-dull.svg"}/
+      .one-col
+        %h3 Initially, I used collection of images to for shoe selection at the bottom.
+        %p While a fairly common interface, again it drew attention to the screen and out of the environment.
+      %figure.image.contain.fourSeventyTwo{"aria-label" => "Different shoes flow", :role => "img", :style => "background-image: url(#{"/images/arshoe-carousel.png"})"}
       %figure.image.contain.fourSeventyTwo{"aria-label" => "Different shoes flow", :role => "img", :style => "background-image: url(#{"/images/arshoe-shoes.png"})"}
       .one-col
-        %p My early sketches had a collection of images to for shoe selection at the bottom, but decided to simplify and keep the screen clear.
-        %p If the whole screen is a paged view that can be swiped, the shoes and feet aren't obscured and it's easy to go back an forth between options.
+        %h3 Instead, I made the whole screen a paged view to swipe through the shoes.
+        %p This way the feet aren't obscured and it's easy to go back and forth between options.
       .one-col
-        %p Once a user has found a shoe they like the two main things they might want to do is order it to be shipped to their home or share it on social media to ask the opinions of others.
-        %p So I began with buttons for those functions, but I saw the need for a settings button, a reset button and a shopping cart button.
+        %h3 For necessary functionality, I found myself adding more buttons to the screen.
+        %p I saw the need for buttons for settings, reset, shopping cart, and sharing. As well as shoe options like changing color.
       %figure.image.contain.fourSeventyTwo{"aria-label" => "Two buttons vs. Five buttons", :role => "img", :style => "background-image: url('/images/arshoe-twobuttons.png');"}
-      / Virtual Interactions
-      .two-col.grid-span.dark-on-light
-        %p
-          %span.emphasis.bold-italic What interactions could be moved from the screen into the physical environment?
-      .one-col
-        %p Another thing I did to avoid obscuring the camera view was make the Nike logo an AR projection on the floor between the shoes.
-        %p This made me question all the buttons I had on the screen. What if those were projections as well?
-      %figure.image.contain.fourSeventyTwo{"aria-label" => "Nike logo projection in AR", :role => "img", :style => "background-image: url(#{"/images/arshoe-projection.png"})"}
       %figure.image.contain.fourSeventyTwo{"aria-label" => "Buttons projected in AR", :role => "img", :style => "background-image: url(#{"/images/arshoe-button-ground.png"})"}
       .one-col
-        %p Could there be buttons on the floor that the user could step on with the shoes? This would keep the users eye in the environment where the shoes are rather than focused on the screen plane.
-        %p This would also cause the user to move their feet more and see the augmented reality in action.
+        %h3 What interactions could be moved from the screen into the physical environment?
+        %p Back to my theme of keeping the user immersed in the environment, I wanted to find a way to move functionality off of the screen.
+        %p This keeps the user's eye on the shoes, and also forces them to move their feet.
+
       / Purchasing
-      .two-col.grid-span.dark-on-light
-        %p
-          %span.emphasis.bold-italic How might users easily buy the shoes in app?
+      .special
+      %img.squiggle{:src => "/images/wave-dull.svg"}/
       .one-col
-        %p For the purchasing feature I wanted to keep it as close to one-click ordering as possible. So the shopping cart has just the shoe model, size, price, and total. More detailed information (and editing and deleting capabilities) are hidden behind a simple tap.
+        %h3 I wanted to keep purchasing as close to one-click ordering as possible
+        %p The shopping cart has just the shoe model, size, price, and total. More detailed information, editing, and deleting are hidden behind a simple tap.
       %figure.image.contain.fourSeventyTwo{"aria-label" => "Purchasing flow", :role => "img", :style => "background-image: url(#{"/images/arshoe-purchasing.png"})"}
       %figure.image.contain.fourSeventyTwo{"aria-label" => "Settings flow", :role => "img", :style => "background-image: url(#{"/images/arshoe-settings.png"})"}
       .one-col
-        %p Required information for payment and shipping is in the settings menu—the first thing the user sees when opening the app in the onboarding experience. They can access this at any time, and only have to fill it out before purchase.
+        %h3 It was important for the user to get to the AR experience as fast as possible.
+        %p Required information for payment and shipping is in the settings menu—the first thing the user sees when opening the app in the onboarding experience.
+        %p This gives them a quick intro to the app, but they can skip right by and come back when they're ready to purchase.
+
       / In Store
-      .two-col.grid-span.dark-on-light
-        %p
-          %span.emphasis.bold-italic What if the app was a tool for pre-selecting shoes to try on in store?
-      .one-col
-        %p I visited an athletic shoe store at the mall to observe the customers and sales people. And while my initial problem was about online ordering, I came to the conclusion that this might work for an in-store experience as well.
-        %p It’s difficult to get the attention of the sales staff to get shoes to try on.
+      .special
+      .one-col.col-reset.align-left
+        %h1.grid-span.align-left.special
+          Obser-
+        %h1.grid-span.align-left.special
+          vation
+      .one-col.col-reset
+        %h3 I visited an athletic shoe store at the mall to observe the customers and sales people.
+        %p I noticed how busy it was and very difficult to get the attention of the sales staff to get shoes to try on.
+        %p I came to the conclusion that this might be useful for an in-store experience as well.
       %figure.image.contain.fourSeventyTwo{"aria-label" => "Shoe store photo", :role => "img", :style => "background-image: url(#{"/images/arshoe-store.jpg"})"}
       %figure.image.contain.fourSeventyTwo{"aria-label" => "App notification flow", :role => "img", :style => "background-image: url(#{"/images/arshoe-notification.png"})"}
       .one-col
+        %h3 I adapted the interface to accomodate for this new use case.
         %p The user can pick their store via location permission if given. Then instead of clicking purchase, they can click “Try On” button. When the shoes are ready, the user will get a push notification.
       .one-col
-        %p The shoes in the store will have a print out sticker with their name and photo if given.
+        %h3 When the customer gets to the store, they're shoes are waiting for them.
+        %p The shoes in the store have a temporary label with their name and photo if given.
+        %p There's no need to wait, they can grab the shoes and try on the real thing or checkout.
       %figure.image.contain.fourSeventyTwo{"aria-label" => "Shoebox mockup", :role => "img", :style => "background-image: url(#{"/images/arshoe-box.jpg"})"}
+
+      / Learnings
+      .special
+      .one-col.col-reset.align-left
+        %h1.grid-span.align-left.special
+          Learn-
+        %h1.grid-span.align-left.special
+          ings
+        %img.squiggle{:src => "/images/wave.svg"}/
       .grid-span.two-col
         %ul.dark-list
           %li.one Augmented reality is in it's infancy, but it's going to change the way we shop for apparel. But in designing this app, I've learned there are some hurdles to overcome.

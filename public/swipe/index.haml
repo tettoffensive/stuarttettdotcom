@@ -8,7 +8,7 @@
     %link{:href => "../stylesheets/style.css", :rel => "stylesheet", :type => "text/css"}/
     %link{:href => "../stylesheets/reset.css", :rel => "stylesheet", :type => "text/css"}/
     / endbuild
-    %link{:href => "https://fonts.googleapis.com/css?family=BioRhyme:800", :rel => "stylesheet"}/
+    %link{:href => "https://fonts.googleapis.com/css?family=BioRhyme:400,800", :rel => "stylesheet"}/
     %meta{:content => "width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes", :name => "viewport"}/
     %meta{:content => "Stuart Tett | Interaction Designer", :name => "description"}/
     %link{:href => "/manifest.json", :rel => "manifest"}/
@@ -38,34 +38,30 @@
       .progress-container.fade-in
         #progress-bar.progress-bar
       %figure#content1.image.cover.fourSeventyTwo{"aria-label" => "", :role => "img", :style => "background-image: url('/images/swipe-pass.png')"}
-      #caption1.one-col
-        %p
-          When I joined Swipe Labs, the Swipe app was already gaining traction.
-          It let people easily share their photos and videos publicly with a simple swipe to the right.
-          It occasionally asked you to swipe right to invite a contact to the app.
-      #caption2.one-col
-        %p
-          One of the growth strategies was to bring social media influencers onto the platform to post higher quality content.
+      .one-col
+        %h3 Swipe provided a frictionless way to share their photos and videos publicly.
+        %p When I joined Swipe Labs, the Swipe app was already gaining traction.
+        %p It had an easy swipe to share feature as well as an invitation system that lead to a lot of growth.
+      .one-col
+        %h3 But it's growth had slowed and retention was down.
+        %p One of the growth strategies was to bring social media influencers onto the platform to post higher quality content.
       %figure.image.cover.fourSeventyTwo{"aria-label" => "", :role => "img", :style => "background-image: url('/images/swipe-post.png')"}
       %figure.image.contain.fourSeventyTwo{"aria-label" => "", :role => "img", :style => "background-image: url('/images/swipe-cutoff.png')"}
       .one-col
-        %p
-          Many of those influencers had professional level photographs that often didn't fit the vertical format of Swipe and users couldn't see portions of the photographs.
-      .grid-span.two-col.dark-on-light
-        %p
-          %span.bold-italic.emphasis How could we show every photo in it's entirety in a full screen vertical format?
-      .grid-span.two-col-extra
+        %h3 These influx of a new type of user presented a new problem.
+        %p Many of the influencers had professional level photographs that often didn't fit the vertical format of Swipe and users couldn't see portions of the photographs.
+      .grid-span.two-col
+        %h3 How could we show every photo in it's entirety in a full screen vertical format?
         %p Several of our influencers had given us feedback when they began posting on the platform that they were not happy about their photographs being cut off.
       %figure.image.contain.fourSeventyTwo{"aria-label" => "", :role => "img", :style => "background-image: url('/images/swipe-zoom.jpg')"}
-      #caption4.one-col
+      .one-col
+        %h3 I explored ways in which the user could look at the whole image.
         %p One solution was to add a gesture or a button to zoom out of the photo so it all fits in the screen.
         %p But a button covers up more of the screen and we already had a few buttons.
         %p A tap gesture might work, since other gestures are in use or hard to discover.
       .one-col
-        %p
-          I decided to try an idea where the user could tilt the phone from side to side to pan across the image.
-        %p
-          I put together a prototype and showed it to the team. We ended up shipping it to production and it was a hit! It solved the problem and was a fun feature for users.
+        %h3 I decided to try an idea where the user could tilt the phone from side to side to pan across the image.
+        %p I put together a prototype and showed it to the team. We ended up shipping it to production and it was a hit! It solved the problem and was a fun feature for users.
       %figure.image.contain.fourSeventyTwo{"aria-label" => "", :role => "img", :style => "background-image: url('/images/swipe-parallax.gif')"}
       %blockquote.grid-span.italic
         %h4 Additional Credits: Edwin de Jongh&#8212;Lead Designer, Product Manager&#8212;Marwan Roushdy
