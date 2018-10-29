@@ -637,3 +637,31 @@ h4 {
 }
 
 small, .font_small {font-size: 0.75em;}
+
+#message {
+  width: 50%;
+  max-width: 800px;
+  margin: auto;
+  margin-top: 8vmax;
+  padding-top: 24px;
+
+  & h3 {
+    @media screen and (min-width: $break-tablet) {
+      padding-top: 40px;
+    }
+  }
+}
+
+a {
+  color: $accent;
+  font-weight: 700;
+  text-decoration: none;
+  font-family: 'DecimaMonoRound-Bold', monospace;
+
+  &:visited {
+    color: $accent;
+    font-weight: 700;
+    font-family: 'DecimaMonoRound-Bold', monospace;
+  }
+
+}
