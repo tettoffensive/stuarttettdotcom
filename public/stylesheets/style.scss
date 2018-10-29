@@ -146,22 +146,28 @@ h1, h2, h3, h4, h5, h6, .header1, .header2 {
 
 .bold-italic {
   font-family: 'DecimaMonoRound-BoldItalic',monospace;
+  font-style: italic;
+  font-weight: 700;
 }
 
 .italic {
   font-family: 'DecimaMonoRound-Italic',monospace;
+  font-style: italic;
 
   & h4 {
     font-family: 'DecimaMonoRound-Italic',monospace;
+    font-style: italic;
   }
 }
 
 .bold {
   font-family: 'DecimaMonoRound-Bold',monospace;
+  font-weight: 700;
 }
 
 .normal {
   font-family: 'DecimaMonoRound',monospace;
+  font-weight: 400;
 }
 
 blockquote before, blockquote after, q before, q after {
@@ -328,6 +334,7 @@ blockquote h4 {
     font-size: 1.333em;
     line-height: 1.7em;
     font-family: $quote-font;
+    font-style: italic;
     color: white;
     list-style-position: outside;
     box-shadow: 0.5em 0 0 $dark,-0.5em 0 0 $dark;
