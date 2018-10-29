@@ -97,6 +97,11 @@ gulp.task('fonts', function() {
   .pipe(gulp.dest('dist/fonts'))
 })
 
+gulp.task('resume', function() {
+  return gulp.src('public/resume.pdf')
+  .pipe(gulp.dest('dist/'))
+})
+
 gulp.task('bower', ['polymer'], function() {
   return gulp.src('build/default/public/bower_components/**/*')
   .pipe(gulp.dest('dist/bower_components'))
@@ -137,5 +142,6 @@ gulp.task('default', [
  'webfonts',
  'images',
  'copy-polymer',
- 'bower'
+ 'bower',
+ 'resume'
 ]);
