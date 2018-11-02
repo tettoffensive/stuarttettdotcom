@@ -9,13 +9,11 @@
       display: grid;
       color: #000;
       padding: 0px;
-      /* transform: skewY(-3deg); */
       padding: 1px;
-      -webkit-backface-visibility:hidden;
-      backface-visibility:hidden;
+
       -webkit-background-clip:content-box;
       background-clip:content-box;
-      outline: 1px solid transparent;
+
       transform-origin: left top;
       z-index: 1;
       margin: auto;
@@ -25,12 +23,10 @@
     @media screen and (min-width: 660px) {
       :host {
         width: 100%;
-        transform: skewY(-3deg);
         padding-bottom: 0px;
       }
       .straighten {
         transform-origin: left top;
-        transform: skewY(3deg);
       }
     }
 
@@ -44,7 +40,6 @@
 
     .straighten {
       transform-origin: left top;
-      /* transform: skewY(3deg); */
     }
 
     .nudge-left {

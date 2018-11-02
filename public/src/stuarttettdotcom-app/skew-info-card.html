@@ -13,15 +13,11 @@
 
       transform-origin: left top;
       cursor: pointer;
-      /* transform: skewY(-3deg); */
       background-color: transparent;
       padding: 0px;
 
-      -webkit-backface-visibility:hidden;
-      backface-visibility:hidden;
       -webkit-background-clip:content-box;
       background-clip:content-box;
-      outline: 1px solid transparent;
 
       display: flex;
       flex-direction: column;
@@ -42,7 +38,6 @@
     @media screen and (min-width: 660px) {
       :host {
         flex-direction: row;
-        transform: skewY(-3deg);
       }
 
       :host(.initial) {
@@ -359,26 +354,17 @@
 
       // Unskew Label
       tl.add( TweenLite.fromTo(this.$.cardInfoDescription, unskewDuration, { autoAlpha: 1 }, { autoAlpha: 0 }), "unskewLabel");
-      tl.add( TweenLite.fromTo(this.$.cardInfoImage, unskewDuration, { autoAlpha: 1 }, { autoAlpha: 0 }), "unskewLabel");
-      tl.add( TweenLite.fromTo(this.$.cardInfoClip, unskewDuration, { skewY: 0, skewType: "simple", transformOrigin: "left top" }, {skewY: this.isDesktop() ? 3: 0, skewType: "simple", transformOrigin: "left top",
-      force3D: true, // fixes glitch in Safari
-      onUpdateParams:["{self}"],
-      onUpdate: (tween) => {
-        if (!tween.isActive() && tween.progress() == 1) { return; }
-        let skewY = -this.$.cardInfoClip._gsTransform.skewY;
-        TweenLite.set(this.$.cardInfoDescription, {skewY: skewY, skewType: "simple", transformOrigin: "left top"});
-        TweenLite.set(this.$.cardInfoImage, {skewY: skewY, skewType: "simple", transformOrigin: "left top"});
-      },
-      onReverseComplete: () => {
-        setTimeout(() => {
-          this.detail = false;
-          this._closeCallback(animDest);
-          this.transitioning = false;
-          this.divFullCard.parentElement.removeChild(this.divFullCard);
-        },1);
-      },
-      ease: Power3.easeIn,
-    }), "unskewLabel");
+      tl.add( TweenLite.fromTo(this.$.cardInfoImage, unskewDuration, { autoAlpha: 1 }, { autoAlpha: 0,
+        onReverseComplete: () => {
+          setTimeout(() => {
+            this.detail = false;
+            this._closeCallback(animDest);
+            this.transitioning = false;
+            this.divFullCard.parentElement.removeChild(this.divFullCard);
+          },1);
+        },
+        ease: Power3.easeIn,
+      }), "unskewLabel");
 
     // Now that we've unskewed the label, swap it out with the clone that will scale up
     tl.add( TweenLite.to(animDest, 0, { visibility: 'visible', immediateRender: animation ? true : false, display: 'block' }), "unskewLabelFinish")

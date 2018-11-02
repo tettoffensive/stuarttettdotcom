@@ -15,12 +15,8 @@
       cursor: pointer;
       background-color: transparent;
       padding: 0px;
-      /* Different browsers alias skewY differently - chrome kinda sucks */
-      -webkit-backface-visibility:hidden;
-      backface-visibility:hidden;
       -webkit-background-clip:content-box;
       background-clip:content-box;
-      outline: 1px solid transparent;
 
       display: flex;
       flex-direction: column;
@@ -35,17 +31,14 @@
       }
 
       :host(.initial) #content {
-        transform: skewY(3deg);
         transform-origin: right top;
       }
 
       :host(.initial) #label {
-        transform: skewY(3deg);
         transform-origin: left top;
       }
 
       :host(.initial) {
-        transform: skewY(-3deg);
         height: var(--card-closed-height);
         width: 100%;
       }
@@ -85,7 +78,6 @@
 
     /* Counter host skewY with an equal and opposite skew */
     :host(.initial) #content {
-      /* transform: skewY(3deg); */
       transform-origin: right top;
     }
 
@@ -459,15 +451,7 @@
       scrollBtn.style.position = 'fixed';
 
       // Unskew Label
-      tl.add( TweenLite.fromTo(this.$.label, unskewDuration, { autoAlpha: 1 }, { autoAlpha: 0 }), "unskewLabel");
-      tl.add( TweenLite.fromTo(this.$.labelShadow, unskewDuration, { skewY: 0, skewType: "simple", transformOrigin: "left top" }, {skewY: this.isDesktop() ? 3 : 0, skewType: "simple", transformOrigin: "left top",
-      force3D: true, // fixes glitch in Safari
-      onUpdateParams:["{self}"],
-      onUpdate: (tween) => {
-        if (!tween.isActive() && tween.progress() == 1) { return; }
-        let skewY = -this.$.labelShadow._gsTransform.skewY;
-        TweenLite.set(this.$.label, {skewY: skewY, skewType: "simple", transformOrigin: "left top"});
-      },
+      tl.add( TweenLite.fromTo(this.$.label, unskewDuration, { autoAlpha: 1 }, { autoAlpha: 0,
       onReverseComplete: () => {
         setTimeout(() => {
           this.transitioning = false;
@@ -490,12 +474,6 @@
     tl.add( TweenLite.fromTo(this.$.content, fadeOutImageDuration, { autoAlpha: 1}, { autoAlpha: 0,
       ease: Power3.easeInOut,
     }), "fadeOutImage");
-    // Unskew Image container
-    tl.add( TweenLite.fromTo(this.$.content, unskewContentDuration, { skewY: 0 }, { skewY: 3,
-      skewType: "simple",
-      transformOrigin: "right top",
-      ease: Power3.easeIn,
-    }), "unskewContent");
     // Now that we've unskewed the image, swap it out with the clone that'll scale up
     tl.add( TweenLite.to(animImageDest, 0, { visibility: 'visible', immediateRender: animation ? true : false, display: 'block' }), "unskewContentFinish")
     .add( TweenLite.fromTo(animImageSource, 0, { autoAlpha: 1 }, { autoAlpha: 0 }), "unskewContentFinish")
