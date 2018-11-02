@@ -13,7 +13,7 @@
       // margin: 0;
       padding: 0;
       border: 0;
-      font-family: 'DecimaMonoRound', monospace;
+      font-family: 'Open Sans', sans-serif;
       vertical-align: baseline;
       font-variant-ligatures: none;
     }
@@ -29,16 +29,14 @@
 
     /* Padding everywhere but the top so no extra gap in between */
     .label p.title { padding: 0px 24px 24px 24px; letter-spacing: 0.075em; }
-    .label p.description { padding: 0px 24px 24px 26px; }
+    .label p.description { padding: 0px 24px 24px 24px; }
     .label p.tags {
-      padding: 0px 24px 48px 26px;
-      color: #ffffff;
+      padding: 0px 24px 24px 24px;
     }
 
     @media screen and (min-width: 660px) {
       .lbl-initial p.tags, .info-initial p.tags {
         transform-origin: right top;
-        transform: skewY(-3deg);
       }
     }
 
@@ -310,7 +308,6 @@
     /* Image explanation with title/description */
     .label {
       overflow: hidden;
-      color: #ffffff;
       min-height: 300px;
       max-height: 300px;
       height: 100%;
@@ -345,17 +342,17 @@
 
     .title {
       margin-top: 24px;
-      font-family: 'BioRhyme';
+      font-family: 'Open Sans';
       font-weight: 400;
       font-style: normal;
       font-size: 36px;
-      color: #ffffff;
       letter-spacing: 0px;
       text-align: left;
+      color: #121212;
     }
 
     .description {
-      font-family: 'DecimaMonoRound',monospace;
+      font-family: 'Open Sans', sans-serif;
       font-style: normal;
       font-variant-ligatures: none;
       font-size: 18px;
@@ -365,17 +362,18 @@
       margin: 0px;
       padding: 0px;
       flex-grow: 1;
-      color: #fafafa;
+      color: #4a4a4a;
     }
 
     .tags {
-      font-family: 'DecimaMonoRound',monospace;
+      font-family: 'Open Sans', sans-serif;
       font-style: normal;
       font-variant-ligatures: none;
       font-size: 18px;
       font-weight: 400;
       line-height: 1.25em;
       letter-spacing: 0px;
+      color: #4a4a4a;
     }
 
     .grid-8-1-auto {
@@ -527,11 +525,10 @@
     .info_card_description {
       margin: auto;
       margin-left: 50px;
-      font-family: 'DecimaMonoRound-Italic',monospace;
+      font-family: 'Open Sans', sans-serif;
       font-weight: normal;
       font-style: italic;
       font-size: 24px;
-      color: #FFFFFF;
       letter-spacing: 0.6px;
       line-height: 1.25em;
       text-align: left;

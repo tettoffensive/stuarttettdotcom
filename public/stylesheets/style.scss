@@ -1,13 +1,13 @@
-$header-font: 'BioRhyme', sans-serif;
-$subheader-font: 'BioRhyme', monospace;
-$quote-font: 'DecimaMonoRound-Italic', monospace;
-$body-font: 'DecimaMonoRound', monospace;
+$header-font: 'Arimo', sans-serif;
+$subheader-font: 'Arimo', sans-serif;
+$quote-font: 'Arimo', sans-serif;
+$body-font: 'Open Sans', sans-serif;
 $system-font: -apple-system, BlinkMacSystemFont,"Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
 
 $black: #121212;
 $white: #f1f1f1;
 $dark: #3F4A48;
-$light: #E6E8EB;
+$light: #f1f1f1;
 $accent: #54F0CE;
 $text-light: #525252;
 
@@ -115,7 +115,7 @@ h1, h2, h3, h4, h5, h6, .header1, .header2 {
 }
 
 .scatter-shapes {
-  display: block;
+  display: none;
   position: absolute;
   color: $white;
 }
@@ -145,28 +145,28 @@ h1, h2, h3, h4, h5, h6, .header1, .header2 {
 }
 
 .bold-italic {
-  font-family: 'DecimaMonoRound-BoldItalic',monospace;
+  font-family: 'Open Sans', sans-serif;
   font-style: italic;
   font-weight: 700;
 }
 
 .italic {
-  font-family: 'DecimaMonoRound-Italic',monospace;
+  font-family: 'Open Sans', sans-serif;
   font-style: italic;
 
   & h4 {
-    font-family: 'DecimaMonoRound-Italic',monospace;
+    font-family: 'Open Sans', sans-serif;
     font-style: italic;
   }
 }
 
 .bold {
-  font-family: 'DecimaMonoRound-Bold',monospace;
+  font-family: 'Open Sans', sans-serif;
   font-weight: 700;
 }
 
 .normal {
-  font-family: 'DecimaMonoRound',monospace;
+  font-family: 'Open Sans', sans-serif;
   font-weight: 400;
 }
 
@@ -241,7 +241,7 @@ blockquote h4 {
   justify-items: center;
   position: relative;
 
-  font-family: 'DecimaMonoRound',monospace;
+  font-family: 'Open Sans', sans-serif;
   font-weight: normal;
   font-style: normal;
   font-variant-ligatures: none;
@@ -656,12 +656,12 @@ a {
   color: $accent;
   font-weight: 700;
   text-decoration: none;
-  font-family: 'DecimaMonoRound-Bold', monospace;
+  font-family: 'Open Sans', sans-serif;
 
   &:visited {
     color: $accent;
     font-weight: 700;
-    font-family: 'DecimaMonoRound-Bold', monospace;
+    font-family: 'Open Sans', sans-serif;
   }
 
 }
