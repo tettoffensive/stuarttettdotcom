@@ -24,7 +24,7 @@ var del = require('del');
 
 gulp.task('sass', function(){
   return gulp.src('public/**/*.scss')
-    .pipe(sass()) // Using gulp-sass
+    .pipe(sass({includePaths: ['public/fonts/basier-square']}))
     .pipe(gulp.dest('public'))
     .pipe(debug({title: 'haml OUTPUT:'}));
 });
