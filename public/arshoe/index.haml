@@ -8,7 +8,7 @@
     %link{:href => "../stylesheets/style.css", :rel => "stylesheet", :type => "text/css"}/
     %link{:href => "../stylesheets/reset.css", :rel => "stylesheet", :type => "text/css"}/
     / endbuild
-    %link{:href => "https://fonts.googleapis.com/css?family=BioRhyme:400,800", :rel => "stylesheet"}/
+
     %link{:href => "/manifest.json", :rel => "manifest"}/
     %script{:src => "../bower_components/webcomponentsjs/webcomponents-loader.js"}
     %link{:href => "../src/stuarttettdotcom-app/stuarttettdotcom-app.html", :rel => "import"}/
@@ -37,11 +37,9 @@
         #progress-bar.progress-bar
 
       / Problem
-      .special
       .one-col.col-reset.align-left
         %h1.grid-span.align-left.special
           Problem
-        %img.squiggle{:src => "/images/wave.svg"}/
       .one-col.col-reset
         %h3 For consumers, online shoe shopping involves guess work and returns.
         %p Online shopping has become the norm, but for shoes the customer must be convinced to order the shoes before they've worn them and wait for them to ship. This may prevent them from making the purchase.
@@ -51,11 +49,10 @@
         %p With the latest technologies around augmented reality in mobile devices, we might be able to show the user what the shoes will look like on their feet.
 
       / Interaction
-      .special
+      %img.squiggle{:src => "/images/wave-dull.svg"}/
       .one-col.col-reset.align-left
         %h1.grid-span.align-left.special
           Interaction
-        %img.squiggle{:src => "/images/wave.svg"}/
       .one-col.col-reset
         %h3 How might an interface look for trying on virtual shoes?
         %p Automatically recognizing and tracking objects is complicated. So I wondered, if a simple user interface could be designed for the user to tell the camera where the feet are without difficulty.
@@ -70,7 +67,6 @@
       %figure.image.contain.fourSeventyTwo{"aria-label" => "Step inside AR shoes flow", :role => "img", :style => "background-image: url(#{"/images/arshoe-step-inside.png"})"}
 
       / > Explore Interaction
-      .special
       %img.squiggle{:src => "/images/wave-dull.svg"}/
       .one-col
         %h3 Initially, I used collection of images to for shoe selection at the bottom.
@@ -91,7 +87,6 @@
         %p This keeps the user's eye on the shoes, and also forces them to move their feet.
 
       / Purchasing
-      .special
       %img.squiggle{:src => "/images/wave-dull.svg"}/
       .one-col
         %h3 I wanted to keep purchasing as close to one-click ordering as possible
@@ -104,11 +99,10 @@
         %p This gives them a quick intro to the app, but they can skip right by and come back when they're ready to purchase.
 
       / In Store
-      .special
+      %img.squiggle{:src => "/images/wave-dull.svg"}/
       .one-col.col-reset.align-left
         %h1.grid-span.align-left.special
           Observation
-        %img.squiggle{:src => "/images/wave.svg"}/
       .one-col.col-reset
         %h3 I visited an athletic shoe store at the mall to observe the customers and sales people.
         %p I noticed how busy it was and very difficult to get the attention of the sales staff to get shoes to try on.
@@ -125,16 +119,13 @@
       %figure.image.contain.fourSeventyTwo{"aria-label" => "Shoebox mockup", :role => "img", :style => "background-image: url(#{"/images/arshoe-box.jpg"})"}
 
       / Learnings
-      .special
+      %img.squiggle{:src => "/images/wave.svg"}/
       .one-col.col-reset.align-left
         %h1.grid-span.align-left.special
           Learnings
-        %img.squiggle{:src => "/images/wave.svg"}/
       .grid-span.two-col
         %ul.dark-list
           %li.one Augmented reality is in it's infancy, but it's going to change the way we shop for apparel. But in designing this app, I've learned there are some hurdles to overcome.
-      .grid-span.two-col
-        %ul.dark-list
           %li.two Finding the ground plane is an unfamiliar action that needs to be taught to users. In addition, being able to see the shoes from different vantage points is an important aspect that I want to explore next.
     %footer#footer.footer.fade-in
       %stt-scroll-btn.btn-bc.z3.invert{:onclick => "TweenLite.to(window, 1, {scrollTo:0});", :style => ""}

@@ -8,7 +8,7 @@
     %link{:href => "../stylesheets/style.css", :rel => "stylesheet", :type => "text/css"}/
     %link{:href => "../stylesheets/reset.css", :rel => "stylesheet", :type => "text/css"}/
     /endbuild
-    %link{:href => "https://fonts.googleapis.com/css?family=BioRhyme:400,800", :rel => "stylesheet"}/
+
     %link{:href => "/manifest.json", :rel => "manifest"}/
     %script{:src => "../bower_components/webcomponentsjs/webcomponents-loader.js"}
     %link{:href => "../src/stuarttettdotcom-app/stuarttettdotcom-app.html", :rel => "import"}/
@@ -37,11 +37,9 @@
         #progress-bar.progress-bar
 
       / Problem
-      .special
       .one-col.col-reset.align-left
         %h1.grid-span.align-left.special
           Problem
-        %img.squiggle{:src => "/images/wave.svg"}/
       .one-col.col-reset
         %h3 For working professionals, weeknight dinners are an afterthought.
         %p Often people don't think about it until their commute home. They look in their fridge paralyzed. They often end up ordering delivery.
@@ -56,11 +54,10 @@
       %figure.image.cover.fourSeventyTwo.row-span-2{"aria-label" => "", :style => "background-image: url(#{"/images/souschef-problem.jpg"})"}
 
       / Research
-      .special
+      %img.squiggle{:src => "/images/wave-dull.svg"}/
       .one-col.col-reset.align-left
         %h1.grid-span.align-left.special
           Research
-        %img.squiggle{:src => "/images/wave.svg"}/
       .one-col.col-reset
         %h3 I created personas from user interviews.
         %p I interviewed and observed to learn more about people's experiences with meal-planning and cooking.
@@ -83,11 +80,10 @@
         %p Each persona balances time, quality, and cost differently. The Food Nerd prioritizes quality, the Working Mom&#8212;time, and the schoolteacher&#8212;cost.
 
       / Interaction
-      .special
+      %img.squiggle{:src => "/images/wave-dull.svg"}/
       .one-col.col-reset.align-left
         %h1.grid-span.align-left.special
           Interaction
-        %img.squiggle{:src => "/images/wave.svg"}/
       / > Filter Interaction
       .one-col.col-reset
         %h3.grid-span.align-left I explored how to use time, quality, and cost to organize the recipes.
@@ -104,7 +100,6 @@
         %p The option can be accessed by a pull-down gesture from the top of the screen
 
       / > Recipe Interaction
-      .special
       %img.squiggle{:src => "/images/wave-dull.svg"}/
       .one-col.col-reset
         %h3.grid-span.align-left To explore recipes, I decided on a horizontal carousel.
@@ -116,13 +111,12 @@
         %h3 The recipe view went through many iterations.
         %p I iterated on the recipe view, periodically getting user feedback. This led me to separate out "Prep" time, and simplify the interface.
       %figure.image.contain.fourSeventyTwo.grid-span{"aria-label" => "", :style => "background-image: url(#{"/images/souschef-recipe-iterations.png"})"}
-      .one-col{:style => "max-width: 73%;"}
+      .one-col
         %h3 With the final recipe card having prep and cook time, rating, and cost.
         %p Based on user feedback, I settled on "Yuck" and "Yum" icons for rating recipes. This will help determine which recipes to suggest based on user tastes.
       %figure.image.contain.fourSeventyTwo{"aria-label" => "", :style => "background-image: url(#{"/images/souschef-recipe-final.png"})"}
 
       / > Ingredient Interaction
-      .special
       %img.squiggle{:src => "/images/wave-dull.svg"}/
       .two-col.grid-span.align-left
         %h3 I designed the pantry to keep track of ingredients, but is a lot of work for the user.
@@ -144,13 +138,10 @@
       %figure.image.contain.fourSeventyTwo1{"aria-label" => "", :style => "background-image: url(#{"/images/souschef-new-recipes.gif"})"}
 
       / Visual Design
-      .special
+      %img.squiggle{:src => "/images/wave-dull.svg"}/
       .one-col.col-reset.align-left
         %h1.grid-span.align-left.special
-          Visual
-        %h1.grid-span.align-left.special
-          Design
-        %img.squiggle{:src => "/images/wave.svg"}/
+          Visual Design
       .one-col.col-reset
         %h3 Lucky Peach magazine served as an initial inspiration.
         %p I love the attitude around Lucky Peach and initially started with a grungier look. But I felt that a much cleaner look was better suited for a mobile app.
@@ -162,23 +153,20 @@
       %figure.image.contain.fourSeventyTwo{"aria-label" => "", :style => "background-image: url(#{"/images/souschef-fonts-colors-elements.png"})"}
 
       / Learnings
-      .special
+      %img.squiggle{:src => "/images/wave-dull.svg"}/
       .one-col.col-reset.align-left
         %h1.grid-span.align-left.special
           Learnings
-        %img.squiggle{:src => "/images/wave.svg"}/
       .grid-span.two-col
-        %ul.dark-list
+        %ol.dark-list
           %li.one
             The tech of computer vision isn’t production ready for this problem.
-        %ul.dark-list
           %li.two
             Look beyond the bottom tab bar for navigation.
-        %ul.dark-list
           %li.three
             Matching users with the right recipes is just one facet of getting busy people to cook.
       / Footer
-      %blockquote.grid-span.italic
+      %blockquote.credits
         %h4 Additional Credits: Shane Vitarana&#8212;Developer/Co&#x2011;Founder
     %footer#footer.footer.fade-in.z3
       %stt-scroll-btn.btn-bc.z3.invert{:onclick => "TweenLite.to(window, 1, {scrollTo:0});", :style => ""}

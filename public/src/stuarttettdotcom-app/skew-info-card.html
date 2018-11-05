@@ -8,20 +8,15 @@
     <style include="skew-style-module">
     :host {
       --card-closed-height: 300px;
-      /* background: linear-gradient(-180deg, #4E5251 4%, #3F4A48 98%); */
       color: #ffffff;
 
       transform-origin: left top;
       cursor: pointer;
-      /* transform: skewY(-3deg); */
       background-color: transparent;
       padding: 0px;
 
-      -webkit-backface-visibility:hidden;
-      backface-visibility:hidden;
       -webkit-background-clip:content-box;
       background-clip:content-box;
-      outline: 1px solid transparent;
 
       display: flex;
       flex-direction: column;
@@ -42,7 +37,6 @@
     @media screen and (min-width: 660px) {
       :host {
         flex-direction: row;
-        transform: skewY(-3deg);
       }
 
       :host(.initial) {
@@ -64,6 +58,15 @@
       }
     }
 
+    /*  When animating open, put host in front */
+    :host(.front) {
+      z-index: 1;
+    }
+    /*  When animating closed, put host back */
+    :host(.back) {
+      z-index: 0;
+    }
+
     :host(.initial) #arrow {
       position: absolute;
       right: 0px;
@@ -75,7 +78,6 @@
 
     :host(.initial:hover) #arrow, :host(.initial:focus) #arrow {
       transform: translateY(-24px);
-      /* background-image: linear-gradient(-180deg, #4E5251 4%, #3F4A48 98%); */
     }
     </style>
     <div id="fullCard" style="display: none; visibility: hidden;">
@@ -198,11 +200,13 @@
     }
 
     _tryCloneNodesForDetail() {
+
+      if (this.wrapper == null) {
+        this.wrapper = this.parentElement.parentElement.querySelector("#wrapper");
+      }
+
       if (this.divFullCard == null) {
         this.divFullCard = this.$.fullCard.cloneNode(true);
-        this.parentElement.parentElement.appendChild(this.divFullCard);
-        this.divFullCard.style.visibility = "";
-        this.divFullCard.style.display = "none";
         this.divFullCard.querySelector('#closeBtn').addEventListener('click', (event) => {
           this.dispatchEvent(new CustomEvent('close', {}));
         });
@@ -210,14 +214,23 @@
           this.dispatchEvent(new CustomEvent('scroll', { detail: { button: event.target }}));
         });
       }
+
+      this.divFullCard.style.visibility = "";
+      this.divFullCard.style.display = "none";
+
+      if (this.divFullCard.parentElement == null) {
+        this.parentElement.parentElement.appendChild(this.divFullCard);
+      }
+
       if (this.animDest == null) {
         // let's move the element out of the dom
         this.animDest = this.$.cardInfo.cloneNode(true);
-        this.animDest.classList.replace('info-initial','info-onclick');
         this.divFullCard.insertBefore(this.animDest, this.divFullCard.firstChild);
-        this.animDest.style.visibility = "hidden";
-        this.animDest.style.display = "none";
       }
+
+      this.animDest.classList.replace('info-initial','info-onclick');
+      this.animDest.style.visibility = "hidden";
+      this.animDest.style.display = "none";
 
     }
 
@@ -277,7 +290,6 @@
       this.divFullCard.style.display = "";
       this.animDest.style.display = "";
 
-
       let animDest = this.animDest;
 
       // Last
@@ -299,7 +311,7 @@
         btn.style.top = '';
       } else if (this.animDest) {
         var height = this.animDest.offsetHeight;
-        height += 30 - 50 + 25;
+        height += 64;
         btn.style.top = height + "px";
       }
 
@@ -344,41 +356,41 @@
       tl.addLabel("scaleUpLabel", delay);
       delay += scaleUpLabelDuration;
       tl.addLabel("scaleUpLabelFinish", delay);
+      delay += 0.001;
 
-      let fadeInDetailsDuration = 1.0;
+      let fadeInDetailsDuration = 0.5;
       let fadeOutWrapperDuration = animation ? fadeInDetailsDuration : 0;
       let fadeInDetails = tl.addLabel("fadeInDetails", delay);
       delay += fadeInDetailsDuration;
       tl.addLabel("fadeInDetailsFinish", delay);
-      tl.addLabel("end", delay); // end of animation
+      tl.addLabel("end", delay+0.001); // end of animation
 
       let scrollY = window.scrollY;
 
       closeBtn.style.position = 'fixed';
       scrollBtn.style.position = 'fixed';
 
-      // Unskew Label
+      // Fade out Label
       tl.add( TweenLite.fromTo(this.$.cardInfoDescription, unskewDuration, { autoAlpha: 1 }, { autoAlpha: 0 }), "unskewLabel");
-      tl.add( TweenLite.fromTo(this.$.cardInfoImage, unskewDuration, { autoAlpha: 1 }, { autoAlpha: 0 }), "unskewLabel");
-      tl.add( TweenLite.fromTo(this.$.cardInfoClip, unskewDuration, { skewY: 0, skewType: "simple", transformOrigin: "left top" }, {skewY: this.isDesktop() ? 3: 0, skewType: "simple", transformOrigin: "left top",
-      force3D: true, // fixes glitch in Safari
-      onUpdateParams:["{self}"],
-      onUpdate: (tween) => {
-        if (!tween.isActive() && tween.progress() == 1) { return; }
-        let skewY = -this.$.cardInfoClip._gsTransform.skewY;
-        TweenLite.set(this.$.cardInfoDescription, {skewY: skewY, skewType: "simple", transformOrigin: "left top"});
-        TweenLite.set(this.$.cardInfoImage, {skewY: skewY, skewType: "simple", transformOrigin: "left top"});
-      },
-      onReverseComplete: () => {
-        setTimeout(() => {
+      tl.add( TweenLite.fromTo(this.$.cardInfoImage, unskewDuration, { autoAlpha: 1 }, { autoAlpha: 0,
+        onReverseComplete: () => {
+          // unset all properties with a "from" animation
+          closeBtn.$.close.style.cssText = "";
+          scrollBtn.$.scroll.style.cssText = "";
+
+          animSource.style.cssText = "";
+          animDest.style.cssText = "";
+
           this.detail = false;
           this._closeCallback(animDest);
-          this.transitioning = false;
+
           this.divFullCard.parentElement.removeChild(this.divFullCard);
-        },1);
-      },
-      ease: Power3.easeIn,
-    }), "unskewLabel");
+          this.transitioning = false;
+
+          this._tl = null;
+        },
+        ease: Power3.easeIn,
+      }), "unskewLabel");
 
     // Now that we've unskewed the label, swap it out with the clone that will scale up
     tl.add( TweenLite.to(animDest, 0, { visibility: 'visible', immediateRender: animation ? true : false, display: 'block' }), "unskewLabelFinish")
@@ -394,23 +406,26 @@
     }), "scaleUpLabel");
 
     tl.add( TweenLite.to(window, 1, { scrollTo: scrollY, ease: Power3.easeInOut}), "scaleUpLabel");
-    tl.add( TweenLite.to(this.parentElement.parentElement.querySelector("#wrapper"), fadeOutWrapperDuration, { autoAlpha: 0, display: 'none', ease: Power3.easeInOut
+    tl.add( TweenLite.to(this.wrapper, fadeOutWrapperDuration, { autoAlpha: 0, display: 'none', ease: Power3.easeInOut
     }), "scaleUpLabel");
   tl.add( TweenLite.fromTo(animDest.querySelector("#cardInfoDescription"), fadeInDetailsDuration, { autoAlpha: 0 }, { autoAlpha: 1, ease: Power3.easeInOut,
   }), "fadeInDetails");
   tl.add( TweenLite.fromTo(animDest.querySelector("#cardInfoImage"), fadeInDetailsDuration, { autoAlpha: 0}, { autoAlpha: 1, ease: Power3.easeInOut,
   }), "fadeInDetails");
-  tl.add( TweenLite.from(this.divFullCard.querySelector('#closeBtn').$.close, fadeInDetailsDuration, { x: window.innerWidth + 100, ease: Power3.easeInOut,
+  tl.add( TweenLite.fromTo(closeBtn.$.close, fadeInDetailsDuration, { x: window.innerWidth + 100, ease: Power3.easeInOut}, { x: 0
   }), "fadeInDetails");
-  tl.add( TweenLite.from(this.divFullCard.querySelector('#scrollBtn').$.scroll, fadeInDetailsDuration, { y: window.innerHeight + 100, ease: Power3.easeInOut,
+  tl.add( TweenLite.fromTo(scrollBtn.$.scroll, fadeInDetailsDuration, { y: window.innerHeight + 100, ease: Power3.easeInOut}, { y: 0,
+    onReverseComplete: () => {
+      this.wrapper.style.display = '';
+      window.scroll(0,oldScrollY);
+    },
     onComplete: () => {
-      setTimeout(() => {
+      this.wrapper.style.display = 'none';
         this.detail = true;
         if (this._openCallback) {
           this._openCallback(animDest);
         }
-          this.transitioning = false;
-        },1);
+        this.transitioning = false;
       },
       ease: Power3.easeOut,
       immediateRender: true,

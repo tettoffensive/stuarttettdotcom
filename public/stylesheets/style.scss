@@ -1,13 +1,15 @@
-$header-font: 'BioRhyme', sans-serif;
-$subheader-font: 'BioRhyme', monospace;
-$quote-font: 'DecimaMonoRound-Italic', monospace;
-$body-font: 'DecimaMonoRound', monospace;
+@import "basier-square";
+
 $system-font: -apple-system, BlinkMacSystemFont,"Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+$header-font: 'Basier Square', $system-font;
+$subheader-font: 'Basier Square', $system-font;
+$quote-font: 'Basier Square Italic', $system-font;
+$body-font: 'Basier Square', $system-font;
 
 $black: #121212;
 $white: #f1f1f1;
 $dark: #3F4A48;
-$light: #E6E8EB;
+$light: #f1f1f1;
 $accent: #54F0CE;
 $text-light: #525252;
 
@@ -31,27 +33,28 @@ $progress-height: 4px;
     -moz-osx-font-smoothing: grayscale !important;
     text-rendering: optimizeLegibility !important;
   }
-  @else {.dropdown-content a {
-    color: $black;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-  }
+  @else {
+    .dropdown-content a {
+      color: $black;
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+    }
 
-  .dropdown-content a:focus {background-color: #f1f1f1}
-  .dropdown-content a:hover {background-color: #f1f1f1}
-  .dropdown-content a {
-    color: $black;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-  }
+    .dropdown-content a:focus {background-color: $white}
+    .dropdown-content a:hover {background-color: $white}
+    .dropdown-content a {
+      color: $black;
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+    }
 
-  .dropdown-content a:focus {background-color: #f1f1f1}
-  .dropdown-content a:hover {background-color: #f1f1f1}
-  -webkit-font-smoothing: subpixel-antialiased;
-  -moz-osx-font-smoothing: auto;
-}
+    .dropdown-content a:focus {background-color: $white}
+    .dropdown-content a:hover {background-color: $white}
+    -webkit-font-smoothing: subpixel-antialiased;
+    -moz-osx-font-smoothing: auto;
+  }
 }
 
 body {
@@ -63,7 +66,12 @@ body {
   font-size: 16px;
 
   @media screen and (min-width: $break-mobile) {
-    font-size: calc(.00485*100vw + 14.18182px);
+    /* font-size: calc([minimum size] + ([maximum size] - [minimum size]) * ((100vw - [minimum viewport width]) / ([maximum viewport width] - [minimum viewport width]))); */
+    font-size: calc(16px + 2 * ((100vw - $break-mobile) / 308));
+  }
+
+  @media screen and (min-width: $break-tablet) {
+    font-size: 18px;
   }
 }
 
@@ -85,8 +93,9 @@ tr, tt, u, ul, var, video {
 h1, h2, h3, h4, h5, h6, .header1, .header2 {
   font-family: $header-font;
   font-style: normal;
-  font-weight: 400;
+  font-weight: normal;
   margin: 0;
+  color: $black;
 }
 
 .z3 {
@@ -115,7 +124,7 @@ h1, h2, h3, h4, h5, h6, .header1, .header2 {
 }
 
 .scatter-shapes {
-  display: block;
+  display: none;
   position: absolute;
   color: $white;
 }
@@ -145,29 +154,24 @@ h1, h2, h3, h4, h5, h6, .header1, .header2 {
 }
 
 .bold-italic {
-  font-family: 'DecimaMonoRound-BoldItalic',monospace;
   font-style: italic;
   font-weight: 700;
 }
 
 .italic {
-  font-family: 'DecimaMonoRound-Italic',monospace;
   font-style: italic;
 
   & h4 {
-    font-family: 'DecimaMonoRound-Italic',monospace;
     font-style: italic;
   }
 }
 
 .bold {
-  font-family: 'DecimaMonoRound-Bold',monospace;
   font-weight: 700;
 }
 
 .normal {
-  font-family: 'DecimaMonoRound',monospace;
-  font-weight: 400;
+  font-weight: normal;
 }
 
 blockquote before, blockquote after, q before, q after {
@@ -176,6 +180,7 @@ blockquote before, blockquote after, q before, q after {
 
 blockquote h4 {
   color: $text-light;
+  font-family: $quote-font;
 }
 
 .fourSeventyTwo {
@@ -241,11 +246,10 @@ blockquote h4 {
   justify-items: center;
   position: relative;
 
-  font-family: 'DecimaMonoRound',monospace;
   font-weight: normal;
   font-style: normal;
   font-variant-ligatures: none;
-  font-size: 16px;
+
   text-align: left;
   letter-spacing: 0;
   line-height: 1.5em;
@@ -274,12 +278,8 @@ blockquote h4 {
     max-width: 1482px;
     width: calc(100% - 160px);
     grid-template-columns: repeat(4, minmax(150px, 1fr));
-    grid-gap: 60px 40px;
+    grid-gap: 120px;
     grid-auto-rows: minmax(50px, auto);
-  }
-
-  @media screen and (min-width: $break-mobile) {
-    font-size: calc(.00485*100vw + 14.18182px);
   }
 }
 
@@ -322,6 +322,10 @@ blockquote h4 {
   grid-column: span 4;
 }
 
+.credits {
+  grid-column: span 4;
+}
+
 .dark-list {
 
   padding-bottom: 1em;
@@ -329,33 +333,28 @@ blockquote h4 {
   & > li {
     padding: 0.2em 0px;
     display: inline;
-    font-weight: 500;
     background: $dark;
     font-size: 1.333em;
-    line-height: 1.7em;
     font-family: $quote-font;
-    font-style: italic;
     color: white;
     list-style-position: outside;
     box-shadow: 0.5em 0 0 $dark,-0.5em 0 0 $dark;
+    line-height: 1.5em;
+
+    &::after {
+      display: block;
+      content: '';
+      padding: 20px;
+    }
 
     &::before {
       display: block;
-      color: $accent;
-      mix-blend-mode: screen;
-      opacity: 0.75;
-
-      font-family: BioRhyme;
-      font-style: normal;
-      font-weight: 800;
+      color: $dark;
       font-size: 1.777em;
-      transform: translate(-22px, 6px);
-
-      @media screen and (min-width: $break-tablet) {
-        font-size: 2.369em;
-        transform: translate(-60px, 6px);
-
-      }
+      transform: translate(-0.35em);
+      padding: 0;
+      margin: 0;
+      font-family: 'Basier Square Semibold Italic', $system-font;
     }
   }
 
@@ -407,10 +406,8 @@ figcaption {
   display: table-caption;
   caption-side: bottom;
   padding: 10px;
-  font-size: 14px;
 
   @media screen and (min-width: $break-mobile) {
-    font-size: 18px;
     padding: 40px;
   }
 }
@@ -523,8 +520,8 @@ img.squiggle {
   place-self: start;
   width: 38vw;
   max-width: 800px;
-  transform: translateX(-40px);
-  opacity: 0.9;
+  transform: translateX(-20px);
+  opacity: 0.5;
 }
 
 .one-col img.squiggle {
@@ -554,36 +551,6 @@ img.squiggle {
   }
 }
 
-h1.special {
-  font-family: $header-font;
-  font-weight: 800;
-  -webkit-user-select: none;
-  user-select: none;
-  font-size: 3em;
-  opacity: 0.1;
-  mix-blend-mode: multiply;
-  line-height: 0.6;
-  padding: 0;
-  margin: 0;
-
-  @media screen and (min-width: $break-small) {
-    font-size: calc(3em + 1 * ((100vw - $break-small) / 593));
-  }
-
-  @media screen and (min-width: $break-tablet) {
-    font-size: 4em;
-  }
-
-  &:first-child {
-    // color: #5cefce;
-    // opacity: 0.9;
-  }
-
-  &:nth-child(2) {
-    transform: translateX(20px);
-  }
-}
-
 .align-left {
   place-self: start;
 }
@@ -592,18 +559,13 @@ div.special {
   min-width: 1px;
   grid-column-end: span 4;
   height: 1px;
-  //
-  // @media screen and (min-width: $break-mobile) {
-  //   min-height: 0px;
-  // }
 }
 
-h1.special + h3 {
-  padding-top: 1em;
-}
+// h1.special + h3 {
+//   padding-top: 1em;
+// }
 
 h1 ~ p, h2 ~ p, h3 ~ p, h4 ~ p {
-  padding-right: 6.5em;
   margin-bottom: 24px;
 }
 
@@ -612,15 +574,16 @@ h1, h2, h3, h4 {
 }
 
 h1 {
-  text-transform: uppercase;
   font-size: 3.157em;
   line-height: 1.25em;
+  letter-spacing: 0.05em;
 }
 
 h2 {
   font-size: 2.369em;
   line-height: 1.25em;
   font-family: $subheader-font;
+  letter-spacing: 0.05em;
 }
 
 h3 {
@@ -656,12 +619,10 @@ a {
   color: $accent;
   font-weight: 700;
   text-decoration: none;
-  font-family: 'DecimaMonoRound-Bold', monospace;
 
   &:visited {
     color: $accent;
     font-weight: 700;
-    font-family: 'DecimaMonoRound-Bold', monospace;
   }
 
 }
