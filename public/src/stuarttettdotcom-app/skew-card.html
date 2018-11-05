@@ -473,6 +473,8 @@
       closeBtn.style.position = 'fixed';
       scrollBtn.style.position = 'fixed';
 
+      var originalContent = "width: 100%; display: flex; overflow: hidden;";
+
       // Fade Out Label
       tl.add( TweenLite.fromTo(this.$.label, unskewDuration, { autoAlpha: 1 }, { autoAlpha: 0,
       onReverseComplete: () => {
@@ -482,11 +484,11 @@
 
         animLabelSource.style.cssText = "";
         animLabelDest.style.cssText = "";
-        this.$.content.style.cssText = "";
+        this.$.content.style.cssText = originalContent;
         animImageSource.style.cssText = "";
         animImageDest.style.cssText = "";
         animLabelDest.querySelector("#label").style.cssText = "";;
-        animImageDest.querySelector("#content").style.cssText = "";
+        animImageDest.querySelector("#content").style.cssText = originalContent;
 
         this.detail = false;
         this._closeCallback(animLabelDest,animImageDest);

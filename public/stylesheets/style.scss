@@ -3,7 +3,7 @@
 $system-font: -apple-system, BlinkMacSystemFont,"Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
 $header-font: 'Basier Square', $system-font;
 $subheader-font: 'Basier Square', $system-font;
-$quote-font: 'Basier Square', $system-font;
+$quote-font: 'Basier Square Italic', $system-font;
 $body-font: 'Basier Square', $system-font;
 
 $black: #121212;
@@ -180,6 +180,7 @@ blockquote before, blockquote after, q before, q after {
 
 blockquote h4 {
   color: $text-light;
+  font-family: $quote-font;
 }
 
 .fourSeventyTwo {
@@ -348,11 +349,12 @@ blockquote h4 {
 
     &::before {
       display: block;
-      color: $black;
+      color: $dark;
       font-size: 1.777em;
       transform: translate(-0.35em);
       padding: 0;
       margin: 0;
+      font-family: 'Basier Square Semibold Italic', $system-font;
     }
   }
 
