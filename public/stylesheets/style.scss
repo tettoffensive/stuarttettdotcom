@@ -66,6 +66,11 @@ body {
   font-size: 16px;
 
   @media screen and (min-width: $break-mobile) {
+    /* font-size: calc([minimum size] + ([maximum size] - [minimum size]) * ((100vw - [minimum viewport width]) / ([maximum viewport width] - [minimum viewport width]))); */
+    font-size: calc(16px + 2 * ((100vw - $break-mobile) / 308));
+  }
+
+  @media screen and (min-width: $break-tablet) {
     font-size: 18px;
   }
 }
@@ -243,7 +248,7 @@ blockquote h4 {
   font-weight: normal;
   font-style: normal;
   font-variant-ligatures: none;
-  font-size: 16px;
+
   text-align: left;
   letter-spacing: 0;
   line-height: 1.5em;
@@ -272,12 +277,8 @@ blockquote h4 {
     max-width: 1482px;
     width: calc(100% - 160px);
     grid-template-columns: repeat(4, minmax(150px, 1fr));
-    grid-gap: 60px 40px;
+    grid-gap: 120px;
     grid-auto-rows: minmax(50px, auto);
-  }
-
-  @media screen and (min-width: $break-mobile) {
-    font-size: 18px;
   }
 }
 
@@ -398,10 +399,8 @@ figcaption {
   display: table-caption;
   caption-side: bottom;
   padding: 10px;
-  font-size: 14px;
 
   @media screen and (min-width: $break-mobile) {
-    font-size: 18px;
     padding: 40px;
   }
 }
@@ -578,7 +577,6 @@ h1, h2, h3, h4 {
 }
 
 h1 {
-  // text-transform: uppercase;
   font-size: 3.157em;
   line-height: 1.25em;
   letter-spacing: 0.05em;

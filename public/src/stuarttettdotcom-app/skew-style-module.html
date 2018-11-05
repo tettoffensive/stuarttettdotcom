@@ -3,262 +3,274 @@
   <template>
     <style>
 
-    a, abbr, acronym, address, applet, article, aside, audio, b, big, blockquote,
-    body, canvas, caption, center, cite, code, dd, del, details, dfn, div, dl,
-    dt, em, embed, fieldset, figcaption, figure, footer, form, h1, h2, h3, h4,
-    h5, h6, hgroup, html, i, iframe, img, ins, kbd, legend, li, mark,
-    menu, nav, object, ol, output, p, pre, q, ruby, s, samp, section, small, span,
-    strike, strong, sub, summary, sup, table, tbody, td, tfoot, th, thead, time,
-    tr, tt, u, ul, var, video {
-      // margin: 0;
-      padding: 0;
-      border: 0;
-      font-family: "Basier Square", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;, sans-serif;
-      vertical-align: baseline;
-      font-variant-ligatures: none;
-    }
-
-    figure,p {
-      display: block;
-      margin: 0px;
-      padding 0px;
-      -moz-box-sizing: border-box;
-      -webkit-box-sizing: border-box;
-      box-sizing: border-box;
-    }
-
-    /* Padding everywhere but the top so no extra gap in between */
-    .label p.title {
-      padding: 0px 24px 24px 24px;
-      letter-spacing: 0.05em;
-    }
-
-    .label p.description {
-      padding: 0px 24px 24px 24px;
-    }
-
-    .label p.tags {
-      padding: 0px 24px 24px 24px;
-    }
-
-    @media screen and (min-width: 660px) {
-      .lbl-initial p.tags, .info-initial p.tags {
-        transform-origin: right top;
+      a, abbr, acronym, address, applet, article, aside, audio, b, big, blockquote,
+      body, canvas, caption, center, cite, code, dd, del, details, dfn, div, dl,
+      dt, em, embed, fieldset, figcaption, figure, footer, form, h1, h2, h3, h4,
+      h5, h6, hgroup, html, i, iframe, img, ins, kbd, legend, li, mark,
+      menu, nav, object, ol, output, p, pre, q, ruby, s, samp, section, small, span,
+      strike, strong, sub, summary, sup, table, tbody, td, tfoot, th, thead, time,
+      tr, tt, u, ul, var, video {
+        // margin: 0;
+        padding: 0;
+        border: 0;
+        font-family: "Basier Square", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;, sans-serif;
+        vertical-align: baseline;
+        font-variant-ligatures: none;
       }
-    }
 
-    .ct-initial {
-      position: relative; /* important for shadow */
-      height: 90%;
-    }
+      figure,p {
+        display: block;
+        margin: 0px;
+        padding 0px;
+        -moz-box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+      }
 
-    .ct-onclick {
-      height: 65min;
-    }
+      /* Padding everywhere but the top so no extra gap in between */
+      .label p.title {
+        padding: 0px 24px 24px 24px;
+        letter-spacing: 0.05em;
+      }
 
-    :not(.ct-initial) .hidden {
-      display: none;
-    }
+      .label p.description {
+        padding: 0px 24px 24px 24px;
+      }
 
-    @media screen and (min-width: 660px) {
+      .label p.tags {
+        padding: 0px 24px 24px 24px;
+      }
+
+      @media screen and (min-width: 660px) {
+        .lbl-initial p.tags, .info-initial p.tags {
+          transform-origin: right top;
+        }
+      }
+
+      .ct-initial {
+        position: relative; /* important for shadow */
+        height: 90%;
+        margin: 0px 12px 0px 12px;
+      }
+
+      @media screen and (min-width: 660px) {
+        .ct-initial {
+          margin: 0px;
+        }
+      }
+
       .ct-onclick {
-        position: absolute;
-        top: calc(30px + 30px);
-        left: calc(280px + 30px);
-        width: calc(100% - 280px - 60px);
-        height: calc(100vh - 220px);
-        min-height: 337px;
-      }
-    }
-
-    .lbl-initial, .info-initial {
-      position: relative; // important for shadow
-    }
-
-    .lbl-onclick, .info-onclick {
-
-    }
-
-    @media screen and (min-width: 660px) {
-      .lbl-onclick {
-        position: absolute;
-        top: 30px;
-        left: 30px;
-        height: calc(100vh - 160px);
-        min-height: 375px;
+        height: 65min;
       }
 
-      .info-onclick {
-        position: absolute;
-        top: 30px;
-        left: 30px;
-        width: calc(100% - 60px);
-        height: calc(100vh - 150px);
-        max-height: 994px;
-        min-height: 375px;
+      :not(.ct-initial) .hidden {
+        display: none;
       }
-    }
 
-    @keyframes fade-in-right {
-      from {
+      @media screen and (min-width: 660px) {
+        .ct-onclick {
+          position: absolute;
+          top: calc(30px + 24px);
+          left: calc(360px + 30px);
+          width: calc(100% - 360px - 60px);
+          height: calc(100vh - 196px);
+          min-height: 337px;
+        }
+      }
+
+      .lbl-initial, .info-initial {
+        position: relative; // important for shadow
+      }
+
+      .lbl-onclick, .info-onclick {
+
+      }
+
+      @media screen and (min-width: 660px) {
+        .lbl-initial > div {
+          width: 360px;
+        }
+
+        .lbl-onclick {
+          position: absolute;
+          top: 30px;
+          left: 30px;
+          height: calc(100vh - 160px);
+          min-height: 375px;
+          width: 360px;
+        }
+
+        .info-onclick {
+          position: absolute;
+          top: 30px;
+          left: 30px;
+          width: calc(100% - 60px);
+          height: calc(100vh - 150px);
+          max-height: 994px;
+          min-height: 375px;
+        }
+      }
+
+      @keyframes fade-in-right {
+        from {
+          opacity: 0;
+          transform: translateX(-15px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+
+      @keyframes fade-in-top {
+        from {
+          opacity: 0;
+          transform: translateY(-15px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes grow-top {
+        from {
+          transform: scaleY(0);
+        }
+        to {
+          transform: scaleY(1);
+        }
+      }
+
+      .agent-0 {
         opacity: 0;
-        transform: translateX(-15px);
+        animation: fade-in-right ease 0.4s forwards;
       }
-      to {
-        opacity: 1;
-        transform: translateX(0);
-      }
-    }
 
-    @keyframes fade-in-top {
-      from {
-        opacity: 0;
-        transform: translateY(-15px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    @keyframes grow-top {
-      from {
+      .agent-4 {
         transform: scaleY(0);
+        transform-origin: bottom;
+        animation: grow-top ease 0.2s forwards;
+        animation-delay: 2.0s;
       }
-      to {
-        transform: scaleY(1);
+
+      .agent-1, .agent-3 {
+        opacity: 0;
+        animation: fade-in-top ease 0.4s forwards;
+        animation-delay: 1s;
       }
-    }
 
-    .agent-0 {
-      opacity: 0;
-      animation: fade-in-right ease 0.4s forwards;
-    }
+      .agent-2 {
+        transform: scaleY(0);
+        transform-origin: top;
+        animation: grow-top cubic-bezier(0.785, 0.135, 0.15, 0.86) 0.5s forwards;
+        animation-delay: 1.4s;
+      }
 
-    .agent-4 {
-      transform: scaleY(0);
-      transform-origin: bottom;
-      animation: grow-top ease 0.2s forwards;
-      animation-delay: 2.0s;
-    }
+      .agent-3 {
+        animation-delay: 1.8s;
+      }
 
-    .agent-1, .agent-3 {
-      opacity: 0;
-      animation: fade-in-top ease 0.4s forwards;
-      animation-delay: 1s;
-    }
+      /* Background color on the label-clip (so no extra gap at the bottom) */
+      .dark-background {
+        background-image: linear-gradient(-180deg, #4E5251 0%, #3F4A48 100%);
+      }
 
-    .agent-2 {
-      transform: scaleY(0);
-      transform-origin: top;
-      animation: grow-top cubic-bezier(0.785, 0.135, 0.15, 0.86) 0.5s forwards;
-      animation-delay: 1.4s;
-    }
+      .z3 {
+        z-index: 3;
+      }
 
-    .agent-3 {
-      animation-delay: 1.8s;
-    }
+      /* For label shadow to be on top of content shadow */
+      .z2 {
+        z-index: 2;
+      }
 
-    /* Background color on the label-clip (so no extra gap at the bottom) */
-    .dark-background {
-      background-image: linear-gradient(-180deg, #4E5251 0%, #3F4A48 100%);
-    }
+      .z1 {
+        z-index: 1;
+      }
 
-    .z3 {
-      z-index: 3;
-    }
+      .z0 {
+        z-index: 0;
+      }
 
-    /* For label shadow to be on top of content shadow */
-    .z2 {
-      z-index: 2;
-    }
+      /* Shadow is actually in the before */
+      .shadow {
 
-    .z1 {
-      z-index: 1;
-    }
+      }
 
-    .z0 {
-      z-index: 0;
-    }
-
-    /* Shadow is actually in the before */
-    .shadow {
-
-    }
-
-    .shadow:before {
-      content: " ";
-      position: absolute;
-      top: 0.5px; /* Chrome has an ugly white gap at the top */
-      bottom: 0.55px; /* Chrome has an even uglier white gap at the bottom */
-      left: 0;
-      right: 0;
-      z-index: -1;
-    }
-
-    @media screen and (min-width: 660px) {
       .shadow:before {
+        content: " ";
+        position: absolute;
+        top: 0.5px; /* Chrome has an ugly white gap at the top */
+        bottom: 0.55px; /* Chrome has an even uglier white gap at the bottom */
+        left: 0;
+        right: 0;
+        z-index: -1;
+      }
+
+      @media screen and (min-width: 660px) {
+        .shadow:before {
+          box-shadow: 0 5px 20px 0px rgba(0,0,0,0.1);
+        }
+      }
+
+      .btn-shadow {
         box-shadow: 0 5px 20px 0px rgba(0,0,0,0.1);
       }
-    }
 
-    .btn-shadow {
-      box-shadow: 0 5px 20px 0px rgba(0,0,0,0.1);
-    }
-
-    /* Extra div so that the shadow doesn't get clipped */
-    .clip {
-      overflow: hidden;
-      height: 100%;
-    }
-
-    @media screen and (min-width: 660px) {
+      /* Extra div so that the shadow doesn't get clipped */
       .clip {
-        border-radius: 2px;
+        overflow: hidden;
+        height: 100%;
       }
-    }
 
-    @media screen and (min-width: 660px) {
-      #labelShadow {
-        border-radius: 2px;
+      @media screen and (min-width: 660px) {
+        .clip {
+          border-radius: 2px;
+        }
       }
-    }
 
-    #contentZoom {
-      display: flex;
-    }
+      @media screen and (min-width: 660px) {
+        #labelShadow {
+          border-radius: 2px;
+        }
+      }
 
-    /* This way the label is larger in Y than the content, so it looks like overlapping */
-    .content-shrink {
-      max-height: 400px;
-      overflow: hidden;
-      flex-grow: 1;
-      flex-shrink: 1;
-      margin: auto 0px auto 0px;
-      /* background-image: linear-gradient(-180deg, #fafafa 4%, #f1f1f1 98%); */
-      background-image: linear-gradient(-180deg, #3F4A48 0%, #121212 100%);
-      border-radius: 0px 0px 2px 2px;
-    }
+      #contentZoom {
+        display: flex;
+      }
 
-    @media screen and (min-width: 660px) {
+      /* This way the label is larger in Y than the content, so it looks like overlapping */
       .content-shrink {
-        border-radius: 2px;
-        max-height: initial;
-        overflow: visible;
+        max-height: 400px;
+        overflow: hidden;
+        flex-grow: 1;
+        flex-shrink: 1;
+        margin: auto 0px auto 0px;
+        /* background-image: linear-gradient(-180deg, #fafafa 4%, #f1f1f1 98%); */
+        background-image: linear-gradient(-180deg, #3F4A48 0%, #121212 100%);
+        border-radius: 0px 0px 2px 2px;
       }
-    }
 
-    /* Contains the image */
-    .content {
-      transform-origin: right top;
-      flex-grow: 1;
-      flex-shrink: 1;
-      overflow: hidden;
-      /* height: 600px; */
-    }
+      @media screen and (min-width: 660px) {
+        .content-shrink {
+          border-radius: 2px;
+          max-height: initial;
+          overflow: visible;
+        }
+      }
 
-    /*  contact shadow - doesn't work yet */
-    /* .content::before {
+      /* Contains the image */
+      .content {
+        transform-origin: right top;
+        flex-grow: 1;
+        flex-shrink: 1;
+        overflow: hidden;
+        /* height: 600px; */
+      }
+
+      /*  contact shadow - doesn't work yet */
+      /* .content::before {
       content: "";
       display: block;
       width: 100%;
@@ -315,45 +327,36 @@
     /* Image explanation with title/description */
     .label {
       overflow: hidden;
-      min-height: 300px;
-      max-height: 300px;
       height: 100%;
       transform-origin: left top;
       flex-shrink: 0;
     }
 
-    @media screen and (min-width: 660px) {
-      .label {
-        min-height: none;
-        max-height: none;
-        width: 280px;
-      }
+    .label .text {
+      display: flex;
+      flex-direction: column;
+      padding-top: 48px;
+    }
 
+    @media screen and (min-width: 660px) {
       .label .text {
-        width: 280px;
-        min-height: none;
+        padding-top: 0px;
       }
     }
 
-    /* @media screen and (min-width: 660px) {
-    min-height: 515px;
-    } */
-
-    .label .text {
-      transform-origin: 0px 6px;
-      padding-top: 6px;
-      display: flex;
-      flex-direction: column;
-      min-height: 300px;
+    .lbl-onclick .title {
+      font-size: 3.157em;
     }
 
     .title {
+      font-size: 1.777em;
+      line-height: 1.25em;
+      letter-spacing: 0.05em;
+
       margin-top: 24px;
       font-family: "Basier Square", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;;
-      font-weight: 400;
       font-style: normal;
-      font-size: 36px;
-      letter-spacing: 0px;
+
       text-align: left;
       color: #121212;
     }
@@ -362,7 +365,7 @@
       font-family: "Basier Square", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;, sans-serif;
       font-style: normal;
       font-variant-ligatures: none;
-      font-size: 18px;
+      font-size: 1em;
       font-weight: 400;
       line-height: 1.25em;
       letter-spacing: 0px;
@@ -376,7 +379,7 @@
       font-family: "Basier Square", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;, sans-serif;
       font-style: normal;
       font-variant-ligatures: none;
-      font-size: 18px;
+      font-size: 1em;
       font-weight: 400;
       line-height: 1.25em;
       letter-spacing: 0px;
@@ -459,7 +462,7 @@
 
       .btn-bc, .btn-bc2 {
         position: absolute;
-        top: 1054px;
+        top: calc(100vh - 30px - 65px);
         left: 50%;
       }
     }
@@ -476,12 +479,15 @@
     }
 
     #fullCard {
+      display: flex;
+      flex-direction: column-reverse;
       padding-bottom: 40px;
       max-height: 1245px;
     }
 
     @media screen and (min-width: 660px) {
       #fullCard {
+        display: block;
         padding-bottom: 0px;
       }
     }
@@ -543,20 +549,11 @@
       z-index: 1;
     }
 
-    @media screen and (min-width: 375px) {
-      .info_card_description {
-        /* font-size: calc([minimum size] + ([maximum size] - [minimum size]) * ((100vw - [minimum viewport width]) / ([maximum viewport width] - [minimum viewport width]))); */
-        font-size: calc(24px + 12 * ((100vw - 375px) / 425));
-      }
-    }
-
     @media screen and (min-width: 660px) {
-
       .info_card_description {
         max-width: 500px;
         margin: auto;
         margin-left: 50px;
-        font-size: 36px;
       }
     }
 
@@ -564,6 +561,6 @@
       width: 100%;
     }
 
-    </style>
-  </template>
+  </style>
+</template>
 </dom-module>

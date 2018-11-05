@@ -271,12 +271,18 @@
       if (this.isMobile()) {
         btn.style.top = '';
         this.divFullCard.style.height = '';
+        if (this.divFullCard.style.display === 'block') {
+          this.divFullCard.style.display = 'flex';
+        }
       } else if (this.animLabelDest) {
         var height = this.animLabelDest.offsetHeight;
-        height += 30 - 50;
+        height += 64;
         btn.style.top = height + "px";
-        this.divFullCard.style.height = '110vh';
+        this.divFullCard.style.height = '100vh';
         this.animLabelDest.style.transform = '';
+        if (this.divFullCard.style.display === 'flex') {
+          this.divFullCard.style.display = 'block';
+        }
       }
       this.$.label.style.transform = '';
     }
@@ -285,9 +291,6 @@
 
       if (this.divFullCard == null) {
         this.divFullCard = this.$.fullCard.cloneNode(true);
-        this.parentElement.parentElement.appendChild(this.divFullCard);
-        this.divFullCard.style.visibility = "";
-        this.divFullCard.style.display = "";
         this.divFullCard.querySelector('#closeBtn').addEventListener('click', (event) => {
           this.dispatchEvent(new CustomEvent('close', {}));
         });
@@ -296,22 +299,29 @@
         });
       }
 
+      this.divFullCard.style.visibility = "";
+      this.divFullCard.style.display = "";
+
+      if (this.divFullCard.parentElement == null) {
+        this.parentElement.parentElement.appendChild(this.divFullCard);
+      }
+
       if (this.animImageDest == null) {
         this.animImageDest = this.$.contentShrink.cloneNode(true);
-        this.animImageDest.classList.replace('ct-initial','ct-onclick');
         this.divFullCard.appendChild(this.animImageDest, this.divFullCard.firstChild);
-        this.animImageDest.style.visibility = "hidden";
-        this.animImageDest.style.display = "none";
       }
+      this.animImageDest.classList.replace('ct-initial','ct-onclick');
+      this.animImageDest.style.visibility = "hidden";
+      this.animImageDest.style.display = "none";
 
       if (this.animLabelDest == null) {
         // let's move the element out of the dom
         this.animLabelDest = this.$.labelShadow.cloneNode(true);
-        this.animLabelDest.classList.replace('lbl-initial','lbl-onclick');
         this.divFullCard.insertBefore(this.animLabelDest, this.divFullCard.firstChild);
-        this.animLabelDest.style.visibility = "hidden";
-        this.animLabelDest.style.display = "none";
       }
+      this.animLabelDest.classList.replace('lbl-initial','lbl-onclick');
+      this.animLabelDest.style.visibility = "hidden";
+      this.animLabelDest.style.display = "none";
 
     }
 
@@ -367,7 +377,7 @@
         scrollBtn.style.top = '';
       } else if (this.animLabelDest) {
         var height = this.animLabelDest.offsetHeight;
-        height += 30 - 50;
+        height += 64;
         scrollBtn.style.top = height + "px";
       }
 
@@ -399,11 +409,13 @@
       var tl = new TimelineLite({ paused: true });
 
       var heightString = "";
+      var display = 'flex';
       if (this.isDesktop()) {
         heightString = "100vh";
+        display = 'block';
       }
 
-      tl.add( TweenLite.to(this.divFullCard, 0, { display: 'block', width: "100%", height: heightString}), 0)
+      tl.add( TweenLite.to(this.divFullCard, 0, { display: display, width: "100%", height: heightString}), 0)
         .add( TweenLite.to(this.animLabelDest, 0, { display: 'block'}), 0)
         .add( TweenLite.to(this.animImageDest, 0, { display: 'block'}), 0)
         .add( TweenLite.to(body, 0, { overflow: 'hidden'}), 0);
@@ -455,10 +467,22 @@
       // Unskew Label
       tl.add( TweenLite.fromTo(this.$.label, unskewDuration, { autoAlpha: 1 }, { autoAlpha: 0,
       onReverseComplete: () => {
-        setTimeout(() => {
-          this.transitioning = false;
-          this.divFullCard.parentElement.removeChild(this.divFullCard);
-        },1);
+        // unset all properties with a "from" animation
+        closeBtn.$.close.style.cssText = "";
+        scrollBtn.$.scroll.style.cssText = "";
+
+        animLabelSource.style.cssText = "";
+        animLabelDest.style.cssText = "";
+        this.$.content.style.cssText = "";
+        animImageSource.style.cssText = "";
+        animImageDest.style.transform = null;
+        animLabelDest.querySelector("#label").style.cssText = "";;
+        animImageDest.querySelector("#content").style.cssText = "";
+
+        this.divFullCard.parentElement.removeChild(this.divFullCard);
+        this.transitioning = false;
+
+        this._tl = null;
       },
       ease: Power3.easeIn,
     }), "unskewLabel");
@@ -500,9 +524,9 @@
   }), "fadeInDetails");
   tl.add( TweenLite.fromTo(animImageDest.querySelector("#content"), fadeInDetailsDuration, { autoAlpha: 0}, { autoAlpha: 1, ease: Power3.easeInOut,
   }), "fadeInDetails");
-  tl.add( TweenLite.from(closeBtn.$.close, fadeInDetailsDuration, { x: window.innerWidth + 100, ease: Power3.easeInOut,
+  tl.add( TweenLite.fromTo(closeBtn.$.close, fadeInDetailsDuration, { x: window.innerWidth + 100, ease: Power3.easeInOut}, { x: 0
   }), "fadeInDetails");
-  tl.add( TweenLite.from(scrollBtn.$.scroll, fadeInDetailsDuration, { y: window.innerHeight + 100, ease: Power3.easeInOut,
+  tl.add( TweenLite.fromTo(scrollBtn.$.scroll, fadeInDetailsDuration, { y: window.innerHeight + 100, ease: Power3.easeInOut}, { y: 0,
     onReverseComplete: () => {
       wrapper.style.display = '';
       window.scroll(0,oldScrollY);
