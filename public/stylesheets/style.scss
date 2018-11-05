@@ -334,11 +334,17 @@ blockquote h4 {
     display: inline;
     background: $dark;
     font-size: 1.333em;
-    line-height: 1.7em;
     font-family: $quote-font;
     color: white;
     list-style-position: outside;
     box-shadow: 0.5em 0 0 $dark,-0.5em 0 0 $dark;
+    line-height: 1.5em;
+
+    &::after {
+      display: block;
+      content: '';
+      padding: 20px;
+    }
 
     &::before {
       display: block;
@@ -347,7 +353,6 @@ blockquote h4 {
       transform: translate(-0.35em);
       padding: 0;
       margin: 0;
-      line-height: 0.75em;
     }
   }
 
@@ -507,7 +512,6 @@ figcaption {
 }
 
 img.squiggle {
-  display: none;
   grid-column-start: 1;
   grid-column-end: -1;
   align-self: start;
@@ -545,15 +549,6 @@ img.squiggle {
   }
 }
 
-h1.special {
-  -webkit-user-select: none;
-  user-select: none;
-
-  &:last-child {
-    transform: translateX(20px);
-  }
-}
-
 .align-left {
   place-self: start;
 }
@@ -564,9 +559,9 @@ div.special {
   height: 1px;
 }
 
-h1.special + h3 {
-  padding-top: 1em;
-}
+// h1.special + h3 {
+//   padding-top: 1em;
+// }
 
 h1 ~ p, h2 ~ p, h3 ~ p, h4 ~ p {
   margin-bottom: 24px;
