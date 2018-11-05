@@ -118,7 +118,7 @@
     </div>
     <div id="labelShadow" class="z2">
       <div id="labelClip" class="clip">
-        <div id="label" class="label" style="height: 100%;">
+        <div id="label" class="label" style="">
           <div id="text" class="text clip">
             <p class="title agent-1">[[title]]</p>
             <p class="description agent-2">[[description]]</p>
@@ -214,6 +214,7 @@
       this.classList.add('back');
       this.$.labelShadow.classList.add('lbl-initial');
       this.$.contentShrink.classList.add('ct-initial');
+      this.wrapper = null;
     }
 
     constructor() {
@@ -288,6 +289,10 @@
     }
 
     _tryCloneNodesForDetail() {
+
+      if (this.wrapper == null) {
+        this.wrapper = this.parentElement.parentElement.querySelector("#wrapper");
+      }
 
       if (this.divFullCard == null) {
         this.divFullCard = this.$.fullCard.cloneNode(true);
@@ -431,40 +436,44 @@
       // "Finish" is for anything on completion and on start of reverse
       tl.addLabel("unskewLabelFinish", delay);
 
-      let scaleUpLabelDuration = animation ? 0.25 : 0;
+      let scaleUpLabelDuration = animation ? 0.001 : 0;
       tl.addLabel("scaleUpLabel", delay);
       delay += scaleUpLabelDuration;
       tl.addLabel("scaleUpLabelFinish", delay);
+      delay += 0.001;
 
       delay = animation ? 0.01 : 0; // reset
-      let fadeOutImageDuration = animation ? 0.25 : 0;
+      let fadeOutImageDuration = animation ? 0.15 : 0;
       tl.addLabel("fadeOutImage", delay);
       delay += fadeOutImageDuration;
       tl.addLabel("fadeOutImageFinish", delay);
+      delay += 0.001;
 
-      let unskewContentDuration = animation ? 0.15 : 0;
+      let unskewContentDuration = animation ? 0.001 : 0;
       tl.addLabel("unskewContent", delay);
       delay += unskewContentDuration;
       tl.addLabel("unskewContentFinish", delay);
+      delay += 0.001;
 
-      let scaleUpContentDuration = animation ? 0.25 : 0;
+      let scaleUpContentDuration = animation ? 0.15 : 0;
       tl.addLabel("scaleUpContent", delay);
       delay += scaleUpContentDuration;
       tl.addLabel("scaleUpContentFinish", delay);
+      delay += 0.001;
 
-      let fadeInDetailsDuration = 1.0;
+      let fadeInDetailsDuration = 0.5;
       let fadeOutWrapperDuration = animation ? fadeInDetailsDuration : 0;
       let fadeInDetails = tl.addLabel("fadeInDetails", delay);
       delay += fadeInDetailsDuration;
       tl.addLabel("fadeInDetailsFinish", delay);
-      tl.addLabel("end", delay+0.1); // end of animation
+      tl.addLabel("end", delay+0.001); // end of animation
 
       let scrollY = window.scrollY;
 
       closeBtn.style.position = 'fixed';
       scrollBtn.style.position = 'fixed';
 
-      // Unskew Label
+      // Fade Out Label
       tl.add( TweenLite.fromTo(this.$.label, unskewDuration, { autoAlpha: 1 }, { autoAlpha: 0,
       onReverseComplete: () => {
         // unset all properties with a "from" animation
@@ -475,9 +484,12 @@
         animLabelDest.style.cssText = "";
         this.$.content.style.cssText = "";
         animImageSource.style.cssText = "";
-        animImageDest.style.transform = null;
+        animImageDest.style.cssText = "";
         animLabelDest.querySelector("#label").style.cssText = "";;
         animImageDest.querySelector("#content").style.cssText = "";
+
+        this.detail = false;
+        this._closeCallback(animLabelDest,animImageDest);
 
         this.divFullCard.parentElement.removeChild(this.divFullCard);
         this.transitioning = false;
@@ -496,16 +508,25 @@
       force3D: true,
       ease: Power3.easeOut,
     }), "scaleUpLabel");
-    // Fade Out the content Image
+    // Fade Out the background content
     tl.add( TweenLite.fromTo(this.$.content, fadeOutImageDuration, { autoAlpha: 1}, { autoAlpha: 0,
       ease: Power3.easeInOut,
+      onComplete: () => {
+        // Now that we've faded out the image, swap it out with the clone that'll scale up
+        animImageDest.style.visibility = 'visible';
+        animImageDest.style.display = 'block';
+        animImageSource.style.visibility = 'hidden';
+      }
     }), "fadeOutImage");
-    // Now that we've unskewed the image, swap it out with the clone that'll scale up
-    tl.add( TweenLite.to(animImageDest, 0, { visibility: 'visible', immediateRender: animation ? true : false, display: 'block' }), "unskewContentFinish")
-    .add( TweenLite.fromTo(animImageSource, 0, { autoAlpha: 1 }, { autoAlpha: 0 }), "unskewContentFinish")
     // Scale Up the clone
     tl.add( TweenLite.fromTo(animImageDest, scaleUpContentDuration, { transform: imageFromTransform, transformOrigin: "left top" }, { transform: toTransform, transformOrigin: "left top",
     force3D: true, // fixes glitch in Safari
+    onReverseComplete: () => {
+      // Now that we've faded back in the image clone, swap it out with the original
+      animImageDest.style.visibility = 'hidden';
+      animImageDest.style.display = 'none';
+      animImageSource.style.visibility = 'visible';
+    },
     onUpdateParams:["{self}"],
     onUpdate: (tween) => {
       if (!tween.isActive() && tween.progress() == 1) { return; }
@@ -517,24 +538,21 @@
   }), "unskewContentFinish");
 
   let oldScrollY = window.scrollY;
-  let wrapper = this.parentElement.parentElement.querySelector("#wrapper");
 
-  tl.add( TweenLite.to(wrapper, fadeOutWrapperDuration, { autoAlpha: 0, ease: Power3.easeInOut }), "scaleUpContent");
+  tl.add( TweenLite.to(this.wrapper, fadeOutWrapperDuration, { autoAlpha: 0, ease: Power3.easeInOut }), "scaleUpContent");
   tl.add( TweenLite.fromTo(animLabelDest.querySelector("#label"), fadeInDetailsDuration, { autoAlpha: 0 }, { autoAlpha: 1, ease: Power3.easeInOut,
   }), "fadeInDetails");
   tl.add( TweenLite.fromTo(animImageDest.querySelector("#content"), fadeInDetailsDuration, { autoAlpha: 0}, { autoAlpha: 1, ease: Power3.easeInOut,
   }), "fadeInDetails");
-  tl.add( TweenLite.fromTo(closeBtn.$.close, fadeInDetailsDuration, { x: window.innerWidth + 100, ease: Power3.easeInOut}, { x: 0
+  tl.add( TweenLite.fromTo(closeBtn.$.close, fadeInDetailsDuration, { x: window.innerWidth + 100, ease: Power3.easeInOut}, { x: 0,
   }), "fadeInDetails");
   tl.add( TweenLite.fromTo(scrollBtn.$.scroll, fadeInDetailsDuration, { y: window.innerHeight + 100, ease: Power3.easeInOut}, { y: 0,
     onReverseComplete: () => {
-      wrapper.style.display = '';
+      this.wrapper.style.display = '';
       window.scroll(0,oldScrollY);
-      this.detail = false;
-      this._closeCallback(animLabelDest,animImageDest);
     },
     onComplete: () => {
-      wrapper.style.display = 'none';
+      this.wrapper.style.display = 'none';
       this.detail = true;
       if (this._openCallback) {
         this._openCallback(animLabelDest,animImageDest);
