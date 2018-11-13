@@ -23404,7 +23404,7 @@
       return t.indexOf(e) > -1 ? t : (t.push(e), t);
     }
     function o(t) {
-      return document.getElementsByTagName("souschef-prototype")[0].$.viewer.dataset.sharedKey + "/" + t;
+      return document.getElementsByTagName("protopie-prototype")[0].$.viewer.dataset.sharedKey + "/" + t;
     }
     function s(t) {
       return window.localStorage.getItem(o(t));
@@ -23615,8 +23615,8 @@
         function t(t, e) {
           var r = this;
           (this.callbacks = []),
-            (this.elem = document.getElementsByTagName("souschef-prototype")[0].$.viewer),
-            (this.wrapper = document.getElementsByTagName("souschef-prototype")[0].$.viewerWrapper),
+            (this.elem = document.getElementsByTagName("protopie-prototype")[0].$.viewer),
+            (this.wrapper = document.getElementsByTagName("protopie-prototype")[0].$.viewerWrapper),
             (this.model = t),
             (this.engine = new E.PPEngine(this.elem, {
               imageUrlBase: "/images"
@@ -24153,13 +24153,13 @@
           switch (I.label) {
             case 0:
               Object(d.a)(),
-                (t = document.getElementsByTagName("souschef-prototype")[0].$.viewer.dataset),
+                (t = document.getElementsByTagName("protopie-prototype")[0].$.viewer.dataset),
                 (e = t.baseurl),
                 (r = t.revision),
                 (n = t.sharedKey),
                 (i = t.mobileView),
                 (o = !!i),
-                (u = document.getElementsByTagName("souschef-prototype")[0].$.overlay),
+                (u = document.getElementsByTagName("protopie-prototype")[0].$.overlay),
                 (h = u.dataset.pieStatus),
                 (I.label = 1);
             case 1:
@@ -24184,7 +24184,7 @@
                 (v = new T(y, p)),
                 R.setTouchHintEnabled(p),
                 (E = v.run().unsupportedFeatures),
-                (P = new f(document.getElementsByTagName("souschef-prototype")[0].$.popup, E)),
+                (P = new f(document.getElementsByTagName("protopie-prototype")[0].$.popup, E)),
                 v.onStart(function() {
                   (u.style.opacity = "0"),
                     setTimeout(function() {
@@ -24195,7 +24195,7 @@
                     }, 300);
                 }),
                 o ||
-                  ((_ = document.getElementsByTagName("souschef-prototype")[0].$.helpButton),
+                  ((_ = document.getElementsByTagName("protopie-prototype")[0].$.helpButton),
                   E.length
                     ? _.addEventListener("click", function() {
                         return P.toggle();
