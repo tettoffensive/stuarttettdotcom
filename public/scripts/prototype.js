@@ -19496,8 +19496,8 @@
               }),
               (t.prototype.updateCanvasPosition = function() {
                 (this.canvasBoundingRect = this.element.getBoundingClientRect()),
-                (this.canvasBoundingRect.y += window.scrollY),
-                  console.log("Updating canvas rect", this.canvasBoundingRect);
+                (this.canvasBoundingRect.y += window.scrollY);
+                  // console.log("Updating canvas rect", this.canvasBoundingRect);
               }),
               (t.prototype.onTouchSessionEnded = function(t) {
                 if (!t && this.hintEnabled)
