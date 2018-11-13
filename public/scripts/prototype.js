@@ -11322,6 +11322,7 @@
                     (e.stopped = !1),
                       e.startScene(r, n, !0),
                       window.requestAnimationFrame(e.boundStep),
+                      window.dispatchEvent(new Event('protoready')),
                       e._onStart && e._onStart(t);
                   });
               }),
