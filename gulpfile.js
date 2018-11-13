@@ -26,14 +26,12 @@ gulp.task('sass', function(){
   return gulp.src('public/**/*.scss')
     .pipe(sass({includePaths: ['public/fonts/basier-square']}))
     .pipe(gulp.dest('public'))
-    .pipe(debug({title: 'haml OUTPUT:'}));
 });
 
 gulp.task('haml', function () {
   return gulp.src('public/**/*.haml')
     .pipe(haml())
     .pipe(gulp.dest('public'))
-    .pipe(debug({title: 'haml OUTPUT:'}));
 });
 
 gulp.task('watch', function(){
@@ -48,20 +46,19 @@ gulp.task('_useref', ['haml','sass'], function(){
     // Minifies only if it's a JavaScript file
     .pipe(gulpIf('*.js', babel({presets: ['minify']})))
     .pipe(gulpIf('*.css', cssnano()))
-    .pipe(debug({title: '_useref PROCESS:'}))
     .pipe(gulp.dest('dist'))
-    .pipe(debug({title: '_useref OUTPUT->dist:'}))
+});
+
+gulp.task('javascript', function(){
+  return gulp.src('public/scripts/prototype.js')
+    .pipe(babel({presets: ['minify']}))
+    .pipe(gulp.dest('dist/scripts'));
 });
 
 gulp.task('useref', ['haml','sass','_useref'], function(){
   return gulp.src('public/*/index.html')
     .pipe(useref({noAssets: true}))
-    .pipe(debug({title: 'useref PROCESS:'}))
-    // Minifies only if it's a JavaScript file
-    // .pipe(gulpIf('*.html', htmltidy({outputXhtml: true})))
-    // .pipe(gulpIf('*.css', cssnano()))
     .pipe(gulp.dest('dist'))
-    .pipe(debug({title: 'useref OUTPUT->dist:'}))
 });
 
 // gulp.task('images', function(){
@@ -143,5 +140,6 @@ gulp.task('default', [
  'images',
  'copy-polymer',
  'bower',
- 'resume'
+ 'resume',
+ 'javascript'
 ]);
