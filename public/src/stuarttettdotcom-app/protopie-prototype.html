@@ -971,12 +971,13 @@
       }
 
       .Overlay {
+        display: none;
         position: absolute;
         left: 380px;
         right: 0;
         top: 0;
         bottom: 0;
-        background-color: #f4f6f9;
+        /* background-color: #f4f6f9; */
         opacity: 1;
         transition: opacity .3s ease;
         display: -ms-flexbox;
@@ -1123,12 +1124,18 @@
         padding: 19px 48px
       }
 
+      .ViewerWrapper {
+        transition: border-color .3s ease, color .3s ease, background-color .3s ease, opacity .3s ease;
+      }
 
+      .Loading {
+        opacity: 0;
+      }
 
     </style>
-    <main class="ViewerWrapper" id="viewerWrapper">
+    <main class="ViewerWrapper Loading" id="viewerWrapper">
       <div class="ViewerMock ViewerMock--iPhone8" id="viewerMock" style="transform: scale(1);">
-        <div id="viewer" class="Viewer" data-baseurl="https://share-data.protopie.io/016539f2-7081-1241-8370-7e4c54df2ffa/0165ef1d-85d4-140b-9501-77f23b48770e" data-revision="4" data-shared-key="Gc1z2YuVnEy" data-mobile-view="" data-os-name="Mac OS" style="-webkit-user-select: none; overflow: hidden; width: 375px; height: 667px;"></div>
+        <div id="viewer" class="Viewer" data-baseurl$="https://share-data.protopie.io/[[baseurl]]" data-revision$=[[revision]] data-shared-key$=[[key]] data-mobile-view="" data-os-name="Mac OS" style="-webkit-user-select: none; overflow: hidden; width: 375px; height: 667px;"></div>
         <div class="FunctionBar" id="fullScreenFunctionBar" style="display: none; bottom: -49px;">
           <div class="Dropup FunctionBar__item" data-dropup="">
             <button class="Button Button--icon" data-dropup-button="">
@@ -1198,13 +1205,38 @@
       static get is() { return 'protopie-prototype'; }
       static get properties() {
         return {
+          baseurl: {
+            type: String,
+          },
+          revision: {
+            type: String,
+          },
+          key: {
+            type: String,
+          },
         }
       }
+
+      connectedCallback() {
+        super.connectedCallback();
+        window.addEventListener("protoready", this._protoready.bind(this));
+      }
+
+      disconnectedCallback() {
+        super.disconnectedCallback();
+        window.removeEventListener("protoready", this._scroll.bind(this));
+      }
+
+      _protoready(event) {
+        this.$.viewerWrapper.classList.remove("Loading");
+      }
+
       ready() {
         super.ready();
         // force resize event so on subsequent loads, protopie updates the coordinate conversion canvas
         var event = new Event('resize');
         window.dispatchEvent(event);
+
       }
     }
     window.customElements.define(ProtopiePrototype.is, ProtopiePrototype);
