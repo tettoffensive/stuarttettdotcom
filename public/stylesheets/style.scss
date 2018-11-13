@@ -318,6 +318,13 @@ blockquote h4 {
   }
 }
 
+.three-col {
+  grid-column-end: span 4;
+  @media screen and (min-width: $break-tablet) {
+    grid-column-end: span 3;
+  }
+}
+
 .grid-span {
   grid-column: span 4;
 }
