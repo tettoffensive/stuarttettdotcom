@@ -555,6 +555,10 @@ img.squiggle {
   place-self: start;
 }
 
+.vertical-center {
+  align-self: center;
+}
+
 div.special {
   min-width: 1px;
   grid-column-end: span 4;
