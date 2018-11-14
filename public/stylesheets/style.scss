@@ -662,6 +662,14 @@ a {
 
 }
 
+.hidden {
+  visibility: hidden;
+  opacity: 0;
+  max-height: 0px;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
 .wrapper {
   margin: auto;
   margin-top: 40px;

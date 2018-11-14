@@ -54,6 +54,9 @@
           Speak your mind
         %input{:name => "message", :placeholder => "Hello Stuart…", :required => true, :onkeypress => "this.nextElementSibling.style.width = Math.floor(getTextWidth(this) + 24) + 'px';"}
         .underline
+        %label.hidden
+          Don’t fill this out if you're human:
+        %input.hidden{:name => "bot-field"}
         %button.submit{:type => "submit"}
           %svg.T_nc9ESBNvw74eq_{"data-type" => "arrow", :height => "10px", :style => "transform: matrix(1, 0, 0, 1, 0, 0);", :viewbox => "0 0 6 10", :width => "6px"}
             %path{:d => "M5.284,5.000 L1.000,9.285 L0.293,8.578 L3.870,5.000 L0.293,1.423 L1.000,0.716 L4.577,4.293 L4.577,4.293 L5.284,5.000 Z", :fill => "rgb(0, 0, 0)", "fill-rule" => "evenodd", :opacity => "1"}
