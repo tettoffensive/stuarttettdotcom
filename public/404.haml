@@ -33,14 +33,12 @@
       ga('set', 'page', '/souschef');
       ga('send', 'pageview');
   %body{:xmlns => "http://www.w3.org/1999/xhtml"}
-    #message
-      .one-col.col-reset.align-left.special
-        %h1.special Error
-        %h1.special 404
-        %img.squiggle{:src => "/images/wave.svg"}/
-      %h3 We can't find the page you're looking for.
-      %p
-        The specified file was not found on this website. Please check the URL for mistakes and try again or contact
-        %a{:href => 'mailto:hello@stuarttett.com'} hello@stuarttett.com
-      %h4
-        %a{:href => './index.html'} Go Home
+    .wrapper
+      %skew-header
+      #message
+        %h1
+          404
+        %h3 Something's wrong.
+        %p
+          If you're expecting something here please
+          %a{:href => '/contact', :onmouseover => 'this.classList.add("hover");', :onmouseout => 'this.classList.remove("hover");', :onclick => 'this.classList.replace("hover","click");'} contact me
