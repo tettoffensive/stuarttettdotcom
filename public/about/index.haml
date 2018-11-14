@@ -38,36 +38,28 @@
       / Background
       .one-col.col-reset.align-left.special
         %h1.special
-          Background
-      .one-col
-        %h3 Hello! My name is Stuart. I have a mixed background in design and development.
-        %p From an early age, I was always creating art. I began coding in middle school back in the 90s. I got into making websites and even into 3d animation.
+          A little about me
+      .one-col.row-span-2
+        %h4 Hello! My name is Stuart. I began my career using computer animation as a storytelling medium.
+        %p
+          You may have seen some of
+          %a{:href => '/reel'} my work
+          in
+          %span.quote How To Train Your Dragon.
+        %p The skills I developed in animation, creative coding, visual design, and storytelling served as strong assets in my transition to Product Design.
+        %p After teaching myself how to create my own iPhone app, I began working at early-stage startups, where I learned picked up other skills in product strategy, analytics, design, and development.
+        %p I found what really gets me excited is figuring out how to design products that solve a real user need and how to build a growing business around that need.
+        %h4
+          Some of my strengths are
+        %ol.normal-list
+          %li
+            Prototyping interfaces for gaining valuable insights toward a successful product.
+          %li
+            Crafting interfaces that communicate effectively, and are aesthetically pleasing.
+          %li
+            Designing the motion of an interface to enhance the user's experience without being superfluous.
       %figure.image.contain.fourSeventyTwo{:role => "img", :style => "background-image: url(#{"/images/stuart-draws.jpg"})"}
       %figure.image.contain.fourSeventyTwo{:role => "img", :style => "background-image: url(#{"/images/stuart-codes.jpg"})"}
-      .one-col
-        %h3 I ended up doing a double major in Art &amp; Design and Computer Science.
-        %p Then I got my Master's in a combo of those two disciplines called Visualization Science.
-      .one-col
-        %h3 I've gone from creating visual effects for film to developing digital products on the mobile and web.
-        %p
-          I loved using my visual creativity to craft fire on films like
-          %span.italic How To Train Your Dragon
-      .one-col
-      .one-col.col3
-        %h3 Since then, I've been working at early-stage startups working on mobile and web products.
-        %p I've had the opportunity to wear many hats on these small teams. I've found that my strengths are around:
-      / Skills
-      .one-col.col-reset.align-left.special
-        %h1.special
-          Skills
-      .grid-span.two-col
-        %ol.dark-list
-          %li.one
-            Building a great experience for people using digital interfaces.
-          %li.two
-            Matching the user's needs with business needs to create lasting growth.
-          %li.three
-            Crafting interfaces that are functional and aesthetically pleasing.
     %footer#footer.footer.fade-in
       %stt-scroll-btn.btn-bc.z3.invert{:onclick => "TweenLite.to(window, 1, {scrollTo:0});", :style => ""}
     %script{:src => "https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.5/ScrollMagic.min.js"}
