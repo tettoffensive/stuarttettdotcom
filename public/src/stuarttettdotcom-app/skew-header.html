@@ -6,11 +6,13 @@
     <style include="skew-style-module">
     :host {
       width: calc(100% - 40px);
-      display: grid;
+      display: flex;
+      align-items: center;
+      justify-items: center;
       color: #121212;
       padding: 0px;
       padding: 1px;
-
+      justify-content: space-between;
       -webkit-background-clip:content-box;
       background-clip:content-box;
 
@@ -38,6 +40,7 @@
       margin-top: auto;
       user-select: none;
       -webkit-user-select: none;
+      flex-grow: 0;
     }
 
     .straighten {
@@ -150,6 +153,17 @@
       }
     }
 
+    .svgbutton {
+      width: 24px;
+      margin-left: 8px;
+      margin-right: 8px;
+      flex-grow: 0px;
+    }
+
+    .svgbutton:focus, .svgbutton:hover {
+      filter: invert(.5) sepia(1) saturate(5) brightness(1.2) hue-rotate(119deg)
+    }
+
     </style>
     <div class="white-accent grid-8-1-auto">
       <div class="heading-font straighten nudge-left"><span id="st1">STUART&nbsp;TETT</span>
@@ -187,7 +201,14 @@
 
         </div>
       </div>
-      <skew-hmb-menu class="grid-8-end-1"></skew-hmb-menu>
+      <div style="flex-grow: 1;">&nbsp;</div>
+      <a href="/resume.pdf" class="svgbutton"><img src="/images/file-pdf.svg" /></a>
+      <a href="mailto:hello@stuarttett.com" class="svgbutton"><img src="/images/envelope.svg" /></a>
+      <a href="https://www.linkedin.com/in/stuart-tett/" class="svgbutton"><img src="/images/linkedin-in.svg" /></a>
+      <a href="https://www.dribbble.com/tettoffensive" class="svgbutton"><img src="/images/dribbble.svg" /></a>
+      <a href="https://www.github.com/tettoffensive" class="svgbutton"><img src="/images/github.svg" /></a>
+      <a href="https://www.instagram.com/tettoffensive" class="svgbutton"><img src="/images/instagram.svg" /></a>
+      <a href="https://www.twitter.com/tettoffensive" class="svgbutton"><img src="/images/twitter.svg" /></a>
 
     </template>
 
