@@ -641,13 +641,23 @@ small, .font_small {font-size: 0.75em;}
 }
 
 a {
-  color: $accent;
+  color: $dark;
   font-weight: 700;
   text-decoration: none;
+  padding: 8px;
+  outline: none;
 
-  &:visited {
-    color: $accent;
-    font-weight: 700;
+  background: linear-gradient(to right, transparent 25%, white 25%, white 75%, transparent 75%);
+  background-size: 400% 100%;
+  background-position: right bottom;
+  transition: all .2s ease-out;
+
+  &:hover, &:focus {
+    background-position: 50% bottom;
+  }
+
+  &:active {
+    background-position: left bottom;
   }
 
 }
@@ -660,6 +670,11 @@ a {
   display: flex;
   flex-wrap: wrap;
   align-items: flex-start;
+
+  @media screen and (min-width: $break-mobile) {
+    margin-top: 100px;
+    width: calc(100% - 16px);
+  }
 }
 
 section.form {
@@ -781,18 +796,18 @@ form.contact {
     transform-origin: center;
     transform: scale(1);
 
-    background: linear-gradient(to right, white 50%, transparent 50%);
-    background-size: 200% 100%;
+    background: linear-gradient(to right, transparent 25%, white 25%, white 75%, transparent 75%);
+    background-size: 400% 100%;
     background-position: right bottom;
     transition: all .2s ease-out;
 
     &:hover, &:focus {
-      background-position: left bottom;
+      background-position: 50% bottom;
       transform: scale(0.95);
     }
 
     &:active {
-      background: linear-gradient(to right, $accent 50%, transparent 50%);
+      transition: all .1s ease-out;
       background-position: left bottom;
       transform: scale(1.5);
     }
