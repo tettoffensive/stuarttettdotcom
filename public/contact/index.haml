@@ -37,7 +37,7 @@
     .wrapper
       %skew-header
       %section.form
-        %h1 Send me a message
+        %h1 Let's connect!
         %h4 Fill out the form, then send it through the internets.
       %form.contact{:name => "contact", :method => "POST", :netlify => true}
         %label.name{:for => "name"}
@@ -51,7 +51,7 @@
         .requirements
           That doesn't look like an email address 🤔
         %label.message{:for => "message"}
-          Speak your mind
+          Talk to me
         %input{:name => "message", :placeholder => "Hello Stuart…", :required => true, :onkeypress => "this.nextElementSibling.style.width = Math.floor(getTextWidth(this) + 24) + 'px';"}
         .underline
         %label.hidden
