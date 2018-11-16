@@ -5,7 +5,193 @@
     <style include="skew-style-module">
       :host {
         place-self: stretch;
+        position: relative;
       }
+
+      /*! normalize.css v6.0.0 | MIT License | github.com/necolas/normalize.css */
+html {
+    line-height: 1.15;
+    -ms-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%
+}
+
+article, aside, footer, header, nav, section {
+    display: block
+}
+
+h1 {
+    font-size: 2em;
+    margin: .67em 0
+}
+
+figcaption, figure, main {
+    display: block
+}
+
+figure {
+    margin: 1em 40px
+}
+
+hr {
+    box-sizing: content-box;
+    height: 0;
+    overflow: visible
+}
+
+pre {
+    font-family: monospace, monospace;
+    font-size: 1em
+}
+
+a {
+    background-color: transparent;
+    -webkit-text-decoration-skip: objects
+}
+
+abbr[title] {
+    border-bottom: none;
+    text-decoration: underline;
+    text-decoration: underline dotted
+}
+
+b, strong {
+    font-weight: inherit;
+    font-weight: bolder
+}
+
+code, kbd, samp {
+    font-family: monospace, monospace;
+    font-size: 1em
+}
+
+dfn {
+    font-style: italic
+}
+
+mark {
+    background-color: #ff0;
+    color: #000
+}
+
+small {
+    font-size: 80%
+}
+
+sub, sup {
+    font-size: 75%;
+    line-height: 0;
+    position: relative;
+    vertical-align: baseline
+}
+
+sub {
+    bottom: -.25em
+}
+
+sup {
+    top: -.5em
+}
+
+audio, video {
+    display: inline-block
+}
+
+audio:not([controls]) {
+    display: none;
+    height: 0
+}
+
+img {
+    border-style: none
+}
+
+svg:not(:root) {
+    overflow: hidden
+}
+
+button, input, optgroup, select, textarea {
+    margin: 0
+}
+
+button, input {
+    overflow: visible
+}
+
+button, select {
+    text-transform: none
+}
+
+[type=reset], [type=submit], button, html [type=button] {
+    -webkit-appearance: button
+}
+
+[type=button]::-moz-focus-inner, [type=reset]::-moz-focus-inner,
+[type=submit]::-moz-focus-inner, button::-moz-focus-inner {
+    border-style: none;
+    padding: 0
+}
+
+[type=button]:-moz-focusring, [type=reset]:-moz-focusring, [type=submit]:-moz-focusring,
+button:-moz-focusring {
+    outline: 1px dotted ButtonText
+}
+
+legend {
+    box-sizing: border-box;
+    color: inherit;
+    display: table;
+    max-width: 100%;
+    padding: 0;
+    white-space: normal
+}
+
+progress {
+    display: inline-block;
+    vertical-align: baseline
+}
+
+textarea {
+    overflow: auto
+}
+
+[type=checkbox], [type=radio] {
+    box-sizing: border-box;
+    padding: 0
+}
+
+[type=number]::-webkit-inner-spin-button, [type=number]::-webkit-outer-spin-button {
+    height: auto
+}
+
+[type=search] {
+    -webkit-appearance: textfield;
+    outline-offset: -2px
+}
+
+[type=search]::-webkit-search-cancel-button, [type=search]::-webkit-search-decoration {
+    -webkit-appearance: none
+}
+
+::-webkit-file-upload-button {
+    -webkit-appearance: button;
+    font: inherit
+}
+
+details, menu {
+    display: block
+}
+
+summary {
+    display: list-item
+}
+
+canvas {
+    display: inline-block
+}
+
+[hidden], template {
+    display: none
+}
 
       img {
         border-style: none
@@ -536,8 +722,19 @@
       .ViewerWrapper {
         width: 100%;
         height: 80vh;
+        overflow: hidden;
         position: relative;
         box-sizing: border-box;
+      }
+
+      .ViewerWrapperShadow {
+        display: none;
+        position: absolute;
+        top: 0;
+        left: 0;
+        border-radius: 60px;
+        box-shadow: 0px 12px 20px rgba(0, 0, 15, 0.1);
+        transform-origin: top left;
       }
 
       .ViewerWrapper--mobile {
@@ -580,8 +777,8 @@
         top: 0;
         left: 0;
         transform-origin: top left;
-        filter: drop-shadow(0px 5px 20px rgba(0, 0, 0, 0.1));
-        -webkit-filter: drop-shadow(0px 5px 20px rgba(0, 0, 0, 0.1));
+        /* filter: drop-shadow(0px 5px 20px rgba(0, 0, 0, 0.1)); */
+        /* -webkit-filter: drop-shadow(0px 5px 20px rgba(0, 0, 0, 0.1)); */
       }
 
       .ViewerMock--custom {
@@ -1041,6 +1238,7 @@
       }
 
     </style>
+    <div id="viewerWrapperShadow" class="ViewerWrapperShadow">&nbsp;</div>
     <main class="ViewerWrapper Loading" id="viewerWrapper">
       <div class$="ViewerMock [[mockType]]" id="viewerMock" style="transform: scale(1);">
         <div id="viewer" class="Viewer" data-baseurl$="https://share-data.protopie.io/[[baseurl]]" data-revision$=[[revision]] data-shared-key$=[[key]] data-mobile-view="" data-os-name="Mac OS" style="-webkit-user-select: none; overflow: hidden; width: 375px; height: 667px;"></div>
@@ -1128,19 +1326,29 @@
       connectedCallback() {
         super.connectedCallback();
         window.addEventListener("protoready", this._protoready.bind(this));
+        window.addEventListener("resize", this._resize.bind(this));
       }
 
       disconnectedCallback() {
         super.disconnectedCallback();
         window.removeEventListener("protoready", this._scroll.bind(this));
+        window.removeEventListener("resize", this._resize.bind(this));
       }
 
       _protoready(event) {
         this.$.viewerWrapper.classList.remove("Loading");
       }
 
+      _resize(event) {
+        this.$.viewerWrapperShadow.style.width = this.$.viewerMock.clientWidth + "px";
+        this.$.viewerWrapperShadow.style.height = this.$.viewerMock.clientHeight + "px";
+        this.$.viewerWrapperShadow.style.transform = this.$.viewerMock.style.transform;
+      }
+
       ready() {
         super.ready();
+        this.$.viewerWrapperShadow.style.width = this.$.viewerMock.clientWidth + "px";
+        this.$.viewerWrapperShadow.style.height = this.$.viewerMock.clientHeight + "px";
         // force resize event so on subsequent loads, protopie updates the coordinate conversion canvas
         var event = new Event('resize');
         window.dispatchEvent(event);
