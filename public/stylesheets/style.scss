@@ -193,6 +193,16 @@ blockquote h4 {
   font-family: $quote-font;
 }
 
+.fourSeventyTwoWide {
+  grid-column-end: span 4;
+  min-height: 65vmin;
+  width: 100%;
+
+  @media screen and (min-width: $break-tablet) {
+    min-height: 472px;
+  }
+}
+
 .fourSeventyTwo {
   grid-column-end: span 4;
   min-height: 65vmin;
@@ -201,6 +211,16 @@ blockquote h4 {
   @media screen and (min-width: $break-tablet) {
     grid-column-end: span 2;
     min-height: 472px;
+  }
+}
+
+.fourSeventyTwoNo {
+  grid-column-end: span 4;
+  min-height: 65vmin;
+  width: 100%;
+
+  @media screen and (min-width: $break-tablet) {
+    grid-column-end: span 2;
   }
 }
 
