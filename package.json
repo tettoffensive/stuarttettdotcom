@@ -5,8 +5,8 @@
   "main": "index.js",
   "dependencies": {
     "gulp-run-command": "0.0.9",
-    "npm": "^6.4.1",
-    "polymer-cli": "^1.8.0"
+    "npm": "^6.14.9",
+    "polymer-cli": "^1.9.11"
   },
   "devDependencies": {
     "@babel/core": "^7.1.2",
