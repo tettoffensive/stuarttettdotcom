@@ -1,48 +1,23 @@
 {
-  "name": "stuarttettdotcom",
-  "version": "1.0.0",
-  "description": "My personal website @ www.stuarttett.com",
-  "main": "index.js",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
   "dependencies": {
-    "gulp-run-command": "0.0.9",
-    "npm": "^6.14.9",
-    "polymer-cli": "^1.9.11"
+    "next": "latest",
+    "next-themes": "^0.2.0",
+    "react": "18.1.0",
+    "react-dom": "18.1.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.1.2",
-    "@babel/preset-env": "^7.1.0",
-    "babel-preset-es2015": "^6.24.1",
-    "babel-preset-minify": "^0.5.0",
-    "del": "^3.0.0",
-    "gulp": "^3.9.1",
-    "gulp-babel": "^8.0.0",
-    "gulp-cache": "^1.0.2",
-    "gulp-cssnano": "^2.1.3",
-    "gulp-debug": "^4.0.0",
-    "gulp-htmltidy": "^0.2.4",
-    "gulp-if": "^2.0.2",
-    "gulp-imagemin": "^4.1.0",
-    "gulp-polymer-build-utils": "^1.6.0",
-    "gulp-ruby-haml": "0.0.9",
-    "gulp-sass": "^4.0.2",
-    "gulp-svgo": "^1.5.4",
-    "gulp-uglify": "^3.0.1",
-    "gulp-useref": "^3.1.5"
-  },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/tettoffensive/stuarttettdotcom.git"
-  },
-  "keywords": [
-    "portfolio"
-  ],
-  "author": "Stuart Tett",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/tettoffensive/stuarttettdotcom/issues"
-  },
-  "homepage": "https://github.com/tettoffensive/stuarttettdotcom#readme"
+    "@types/node": "17.0.35",
+    "@types/react": "18.0.9",
+    "@types/react-dom": "18.0.5",
+    "autoprefixer": "^10.4.7",
+    "postcss": "^8.4.14",
+    "tailwindcss": "^3.1.2",
+    "typescript": "4.7.2"
+  }
 }

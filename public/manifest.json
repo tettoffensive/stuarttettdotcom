@@ -1,7 +1,0 @@
-{
-  "name": "stuarttettdotcom",
-  "short_name": "stuarttettdotcom",
-  "description": "Personal Website",
-  "start_url": "/",
-  "display": "standalone"
-}
