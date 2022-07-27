@@ -1,21 +1,46 @@
-import type { NextPage } from 'next'
+import Container from '../components/container'
+import MoreStories from '../components/more-stories'
+import HeroPost from '../components/hero-post'
+import Intro from '../components/intro'
+import Layout from '../components/layout'
+import { getAllPosts } from '../lib/api'
 import Head from 'next/head'
-import Image from 'next/image'
-import About from '../components/About'
+import Post from '../interfaces/post'
 
-const Home: NextPage = () => {
+type Props = {
+  allPosts: Post[]
+}
+
+export default function Index({ allPosts }: Props) {
+  const posts = allPosts
   return (
-    <div className="min-h-screen space-y-14 lg:space-y-24">
-      <Head>
+    <>
+      <Layout>
+        <Head>
         <title>〰️ Stuart Tett 〰️</title>
         <link rel="icon" href="/favicon.ico" />
-      </Head>
-
-      <main className="flex w-full flex-1 flex-col items-center justify-center px-20 text-center">
-        <About/>
-      </main>     
-    </div>
+        </Head>
+        <Container>
+          <Intro />          
+          {posts.length > 0 && <MoreStories posts={posts} />}
+        </Container>
+      </Layout>
+    </>
   )
 }
 
-export default Home
+export const getStaticProps = async () => {
+  const allPosts = getAllPosts([
+    'title',
+    'date',
+    'slug',
+    'author',
+    'coverImage',
+    'excerpt',
+  ])
+
+  return {
+    props: { allPosts },
+    revalidate: 10,
+  }
+}

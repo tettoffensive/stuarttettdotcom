@@ -1,17 +1,7 @@
-import '../styles/globals.css'
-import type { AppProps } from 'next/app'
-import Navigation from '../components/Navigation'
-import Footer from '../components/Footer'
 import { ThemeProvider } from 'next-themes'
+import { AppProps } from 'next/app'
+import '../styles/index.css'
 
-function MyApp({ Component, pageProps }: AppProps) {
-  return (
-    <ThemeProvider>
-      <Navigation/>
-      <Component {...pageProps} />
-      <Footer/>
-    </ThemeProvider>
-  )
+export default function MyApp({ Component, pageProps }: AppProps) {
+  return <ThemeProvider><Component {...pageProps} /></ThemeProvider>
 }
-
-export default MyApp
