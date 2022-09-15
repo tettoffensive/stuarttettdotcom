@@ -9,3 +9,5 @@ author:
 ogImage:
   url: '/assets/blog/sous-chef/cover.svg'
 ---
+
+![Example image](/assets/blog/authors/stuart.jpeg)
