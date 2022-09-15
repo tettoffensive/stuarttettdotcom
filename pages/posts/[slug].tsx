@@ -11,6 +11,7 @@ import Head from 'next/head'
 import { NAME } from '../../lib/constants'
 import markdownToHtml from '../../lib/markdownToHtml'
 import type PostType from '../../interfaces/post'
+import PostFooter from '../../components/post-footer'
 
 type Props = {
   post: PostType
@@ -45,6 +46,7 @@ export default function Post({ post, morePosts, preview }: Props) {
                 author={post.author}
               />
               <PostBody content={post.content} />
+              { morePosts && <PostFooter currentPost={post} morePosts={morePosts} /> }
             </article>
           </>
         )}
@@ -71,12 +73,17 @@ export async function getStaticProps({ params }: Params) {
   ])
   const content = await markdownToHtml(post.content || '')
 
+  const morePosts = getAllPosts([
+    'title',    
+    'slug'])
+
   return {
     props: {
       post: {
         ...post,
         content,
       },
+      morePosts,
     },
     revalidate: 10,
   }

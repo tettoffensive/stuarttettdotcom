@@ -23,7 +23,10 @@ module.exports = {
           ],        
         },
         colors: {
-          'army-green': '#475E32',
+          'army-green': {
+            DEFAULT: '#475E32',
+            light: '#859973'
+          },
           'almost-black': '#141413',
           'medium-gray': '#646B67',
         },  
