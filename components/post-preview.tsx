@@ -24,7 +24,7 @@ const PostPreview = ({
 }: Props) => {
   return (
     <div>
-      <Link as={`/posts/${slug}`} href="/posts/[slug]">
+      <Link href={`/posts/${slug}`}>
         <a aria-label={title}>
         <CoverImage title={title} src={coverImage} />
         <PostTitle>{title}</PostTitle>

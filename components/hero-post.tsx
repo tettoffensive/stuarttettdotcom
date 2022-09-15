@@ -23,7 +23,7 @@ const HeroPost = ({
   return (
     <section>
       <div className="mb-8 md:mb-16">
-        <Link as={`/posts/${slug}`} href="/posts/[slug]">
+        <Link href={`/posts/${slug}`}>
         <a aria-label={title}>
           <CoverImage title={title} src={coverImage} />
           <PostTitle>{title}</PostTitle>
