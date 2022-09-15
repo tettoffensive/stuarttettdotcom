@@ -71,7 +71,7 @@ export async function getStaticProps({ params }: Params) {
     'ogImage',
     'coverImage',
   ])
-  const content = await markdownToHtml(post.content || '')
+  // const content = await markdownToHtml(post.content || '')
 
   const morePosts = getAllPosts([
     'title',    
@@ -81,7 +81,7 @@ export async function getStaticProps({ params }: Params) {
     props: {
       post: {
         ...post,
-        content,
+        content: post.content,
       },
       morePosts,
     },
