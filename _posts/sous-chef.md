@@ -12,4 +12,4 @@ ogImage:
 
 # This is a test
 
-![Example image](/assets/blog/authors/stuart.jpg)
+![Example image](/assets/blog/authors/stuart.jpg?w=1920&h=1920)

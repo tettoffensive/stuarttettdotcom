@@ -1,4 +1,3 @@
-import Avatar from './avatar'
 import DateFormatter from './date-formatter'
 import CoverImage from './cover-image'
 import Link from 'next/link'
@@ -23,10 +22,10 @@ const PostPreview = ({
   slug,
 }: Props) => {
   return (
-    <div className="group">
+    <div className="group w-full aspect-square">
       <Link href={`/posts/${slug}`}>
         <a aria-label={title}>
-        <CoverImage title={title} src={coverImage} />
+        <CoverImage title={title} src={coverImage} sizes="(max-width: 768px) 100vw, 50vw" />
         <PostTitle>{title}</PostTitle>
         </a>
       </Link>
