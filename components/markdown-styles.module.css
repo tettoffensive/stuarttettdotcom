@@ -10,9 +10,14 @@
 }
 
 .markdown h2 {
-  @apply text-3xl mt-12 mb-4 leading-snug;
+  @apply text-army-green text-3xl mt-12 mb-4 leading-snug;
 }
 
 .markdown h3 {
-  @apply text-2xl mt-8 mb-4 leading-snug;
+  @apply text-medium-gray text-2xl mt-8 mb-4 leading-snug;
+}
+
+.markdown ol {
+  @apply list-decimal;
+  @apply list-inside;
 }
