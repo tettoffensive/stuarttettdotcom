@@ -3,7 +3,7 @@ import { NAME, TITLE } from '../lib/constants'
 
 const Header = () => {
   return (
-    <div className="text-almost-black text-2xl md:text-4xl mb-20 mt-8">
+    <div className="text-almost-black dark:text-white text-2xl md:text-4xl mb-20 mt-8">
     <h2>
       <Link href="/">
         <a>{NAME}
