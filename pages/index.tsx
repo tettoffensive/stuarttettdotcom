@@ -1,5 +1,5 @@
 import Container from '../components/container'
-import MoreStories from '../components/more-stories'
+import PostGallery from '../components/post-gallery'
 import HeroPost from '../components/hero-post'
 import Intro from '../components/intro'
 import Layout from '../components/layout'
@@ -22,7 +22,7 @@ export default function Index({ allPosts }: Props) {
         </Head>
         <Container>
           <Intro />          
-          {posts.length > 0 && <MoreStories posts={posts} />}
+          {posts.length > 0 && <PostGallery posts={posts} />}
         </Container>
       </Layout>
     </>
