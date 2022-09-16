@@ -2,7 +2,7 @@
 title: 'SousChef'
 excerpt: ''
 coverImage: '/assets/blog/sous-chef/cover.jpg'
-date: '2020-03-16T05:35:07.322Z'
+date: '2021-03-16T05:35:07.322Z'
 author:
   name: Stuart Tett
   picture: '/assets/blog/authors/stuart.jpg'
