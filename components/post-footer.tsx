@@ -13,7 +13,7 @@ type Props = {
 
 const PostFooter = ({ currentPost: { slug: currentSlug }, morePosts }: Props) => {
   return (
-    <nav className="justify-center mx-auto flex flex-row space-x-8">  
+    <nav className="justify-center mx-auto flex flex-row space-x-8 flex-wrap">  
     <Link href="/">
       <a>
         <PostTitle>All</PostTitle>
