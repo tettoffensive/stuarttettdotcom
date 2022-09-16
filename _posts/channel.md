@@ -1,13 +1,13 @@
 ---
-title: 'SousChef'
+title: 'Channel'
 excerpt: ''
-coverImage: '/assets/blog/sous-chef/cover.jpg'
+coverImage: '/assets/blog/channel/cover.jpg'
 date: '2020-03-16T05:35:07.322Z'
 author:
   name: Stuart Tett
   picture: '/assets/blog/authors/stuart.jpg'
 ogImage:
-  url: '/assets/blog/sous-chef/cover.jpg'
+  url: '/assets/blog/channel/cover.jpg'
 ---
 
 # This is a test
