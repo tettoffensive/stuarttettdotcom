@@ -12,4 +12,4 @@ ogImage:
 
 # This is a test
 
-![Example image](/assets/blog/authors/stuart.jpeg)
+![Example image](/assets/blog/authors/stuart.jpg)
