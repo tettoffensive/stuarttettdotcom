@@ -25,7 +25,8 @@ module.exports = {
         colors: {
           'army-green': {
             DEFAULT: '#475E32',
-            light: '#859973'
+            light: '#859973',
+            dark: '#403F33',
           },
           'almost-black': '#141413',
           'medium-gray': '#646B67',
