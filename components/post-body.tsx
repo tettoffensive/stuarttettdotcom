@@ -12,7 +12,7 @@ type Props = {
 
 const PostBody = ({ slug, content }: Props) => {
   return (
-    <div className="max-w-2xl mx-auto">
+    <div className="mx-auto">
       <ReactMarkdown
         className={markdownStyles['markdown']}
         remarkPlugins={[remarkHtml,remarkImages]}
