@@ -8,6 +8,7 @@ author:
   picture: '/assets/blog/authors/stuart.jpg'
 ogImage:
   url: '/assets/blog/find-a-preschool/cover.jpg'
+imagesOnly: true
 ---
 ## Problem
 ### Finding a preschool is a daunting task for new parents.

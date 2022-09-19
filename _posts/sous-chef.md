@@ -8,6 +8,7 @@ author:
   picture: '/assets/blog/authors/stuart.jpg'
 ogImage:
   url: '/assets/blog/sous-chef/cover.jpg'
+imagesOnly: true
 ---
 
 ## Problem
