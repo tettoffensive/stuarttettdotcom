@@ -12,7 +12,7 @@ type Props = {
   imagesOnly?: boolean
 }
 
-const PostBody = ({ slug, content, imagesOnly = true }: Props) => {
+const PostBody = ({ slug, content, imagesOnly = false }: Props) => {
   return (
     <div className="mx-auto">
       <ReactMarkdown

@@ -8,6 +8,7 @@ author:
   picture: '/assets/blog/authors/stuart.jpg'
 ogImage:
   url: '/assets/blog/tusk-legacy/cover.jpg'
+imagesOnly: true
 ---
 ![](/assets/blog/tusk-legacy/Logo.jpg)
 ![](/assets/blog/tusk-legacy/screenshot-1.jpg)

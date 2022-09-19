@@ -12,15 +12,11 @@ type Props = {
 
 const CoverImage = ({ title, src, slug, sizes = '100vw' }: Props) => {
   const image = (
-    <div className='relative aspect-video'><Image
-      fill
-      sizes={sizes}
-      placeholder="blur"
-      blurDataURL={placeholderBlur(235, 235, 228)}
+    <img
       src={src}
       alt={`Cover Image for ${title}`}
-      className="w-full h-auto object-cover transition-transform group-hover:scale-95 duration-300 ease-out"
-    /></div>
+      className="aspect-video object-cover transition-transform group-hover:scale-95 duration-300 ease-out"
+    />
   )
   return (
     <div className="sm:mx-0">
