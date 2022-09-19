@@ -1,7 +1,5 @@
 .markdown {
   @apply text-lg leading-relaxed;
-  @apply grid grid-cols-1 md:grid-cols-2 md:gap-x-16 lg:gap-x-32 gap-y-16 md:gap-y-16 mb-32;
-  grid-template-rows: masonry;
 }
 
 .markdown p,
@@ -9,7 +7,6 @@
 .markdown ol,
 .markdown blockquote {
   @apply my-6;
-  @apply hidden;
 }
 
 .markdown p:has(img) {
@@ -18,12 +15,10 @@
 
 .markdown h2 {
   @apply text-army-green dark:text-gray-200 text-3xl mt-12 mb-4 leading-snug;
-  @apply hidden;
 }
 
 .markdown h3 {
   @apply text-medium-gray text-2xl mt-8 mb-4 leading-snug;
-  @apply hidden;
 }
 
 .markdown ol {
@@ -31,6 +26,37 @@
   @apply list-inside;
 }
 
-.markdown hr {
+.markdownImages {
+  @apply text-lg leading-relaxed columns-1 md:columns-2 lg:columns-3 md:gap-8;
+}
+
+.markdownImages p,
+.markdownImages ul,
+.markdownImages ol,
+.markdownImages blockquote {
+  @apply my-6;
+  @apply hidden;
+}
+
+.markdownImages p:has(img) {
+  @apply block;
+}
+
+.markdownImages h2 {
+  @apply text-army-green dark:text-gray-200 text-3xl mt-12 mb-4 leading-snug;
+  @apply hidden;
+}
+
+.markdownImages h3 {
+  @apply text-medium-gray text-2xl mt-8 mb-4 leading-snug;
+  @apply hidden;
+}
+
+.markdownImages ol {
+  @apply list-decimal;
+  @apply list-inside;
+}
+
+.markdownImages hr {
   @apply hidden;
 }
