@@ -15,9 +15,7 @@ ogImage:
 
 Often people don't think about it until their commute home. They look in their fridge paralyzed. They often end up ordering delivery.
 
-![Refrigerator](/assets/blog/sous-chef/souschef-fridge.png)
-
-### Which leads to ordering $40 pizzas from Caviar.
+  ### Which leads to ordering $40 pizzas from Caviar.
 
 My co-founder and I wanted to see if digital technology could improve this experience. He led the development, while I led the interface and experience design.
 

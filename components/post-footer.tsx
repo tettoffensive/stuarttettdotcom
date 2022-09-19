@@ -21,7 +21,7 @@ const PostFooter = ({ currentPost: { slug: currentSlug }, morePosts }: Props) =>
     </Link>
     {morePosts.map(({title, slug }) => (
       slug === currentSlug ? <PostTitle key={slug}><span className="text-almost-black dark:text-white cursor-not-allowed opacity-20 select-none">{title}</span></PostTitle> :
-      <Link href={`/posts/${slug}`}>
+      <Link key={slug} href={`/posts/${slug}`}>
         <a aria-label={title}>
           <PostTitle>{title}</PostTitle>
         </a>

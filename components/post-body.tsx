@@ -4,6 +4,7 @@ import markdownStyles from './markdown-styles.module.css'
 import Image from 'next/future/image'
 import { placeholderBlur } from '../utils/placeholderBlur'
 import remarkImages from 'remark-images'
+import rehypeRaw from 'rehype-raw';
 
 type Props = {
   slug: string;
@@ -16,6 +17,7 @@ const PostBody = ({ slug, content }: Props) => {
       <ReactMarkdown
         className={markdownStyles['markdown']}
         remarkPlugins={[remarkHtml,remarkImages]}
+        rehypePlugins={[rehypeRaw]}
         components={{
           img: ({ node, ...props }) => {
               const imageUrl = new URL(`https://${props.src}`)
