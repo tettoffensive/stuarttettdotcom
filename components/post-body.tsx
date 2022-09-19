@@ -9,13 +9,14 @@ import rehypeRaw from 'rehype-raw';
 type Props = {
   slug: string;
   content: string
+  imagesOnly?: boolean
 }
 
-const PostBody = ({ slug, content }: Props) => {
+const PostBody = ({ slug, content, imagesOnly = true }: Props) => {
   return (
     <div className="mx-auto">
       <ReactMarkdown
-        className={markdownStyles['markdown']}
+        className={markdownStyles[imagesOnly ? 'markdownImages' : 'markdown']}
         remarkPlugins={[remarkHtml,remarkImages]}
         rehypePlugins={[rehypeRaw]}
         components={{
