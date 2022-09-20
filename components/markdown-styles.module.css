@@ -9,10 +9,6 @@
   @apply my-6;
 }
 
-.markdown p:has(img) {
-  @apply block;
-}
-
 .markdown h2 {
   @apply text-army-green dark:text-gray-200 text-3xl mt-12 mb-4 leading-snug;
 }
@@ -38,8 +34,8 @@
   @apply hidden;
 }
 
-.markdownImages p:has(img) {
-  @apply block;
+.markdownImages p {
+  @apply flex items-center justify-center;
 }
 
 .markdownImages img {
