@@ -18,6 +18,8 @@ imagesOnly: true
 
 ![](/assets/blog/tusk-legacy/screenshot-11.jpg)
 
+![](/assets/blog/tusk-legacy/icons.png)
+
 ![](/assets/blog/tusk-legacy/screenshot-12.jpg)
 
 ![](/assets/blog/tusk-legacy/screenshot-13.jpg)
