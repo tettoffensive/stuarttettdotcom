@@ -1,8 +1,8 @@
 ---
-title: 'Buildup.com'
+title: 'BuildUp'
 excerpt: 'Logo for an online maker community'
 coverImage: '/assets/blog/buildup/cover.jpg'
-date: '2022-08-15T05:35:07.322Z'
+date: '2019-08-15T05:35:07.322Z'
 author:
   name: Stuart Tett
   picture: '/assets/blog/authors/stuart.jpg'
