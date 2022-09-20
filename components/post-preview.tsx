@@ -22,7 +22,7 @@ const PostPreview = ({
   slug,
 }: Props) => {
   return (
-    <div className="group aspect-square">
+    <div className="group ">
       <Link href={`/posts/${slug}`}>
         <a aria-label={title}>
         <CoverImage title={title} src={coverImage} sizes="(max-width: 768px) 100vw, 50vw" />

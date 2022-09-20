@@ -34,7 +34,7 @@
 .markdownImages ul,
 .markdownImages ol,
 .markdownImages blockquote {
-  @apply my-6;
+  @apply py-6;
   @apply hidden;
 }
 
@@ -43,7 +43,7 @@
 }
 
 .markdownImages img {
-  @apply py-16;
+  @apply mx-8 my-16;
 }
 
 .markdownImages h2 {
