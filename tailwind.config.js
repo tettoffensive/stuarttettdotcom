@@ -38,7 +38,10 @@ module.exports = {
           h4: '1.1rem',
           h5: '1.1rem',
           h6: '1.1rem',
-        }
+        },
+        aspectRatio: {
+          '4/3': '4 / 3',
+        },
     },
   },
   plugins: [],

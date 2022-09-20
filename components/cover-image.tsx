@@ -16,7 +16,7 @@ const CoverImage = ({ title, src, slug, sizes = '100vw' }: Props) => {
     <img
       src={src}
       alt={`Cover Image for ${title}`}
-      className="aspect-video object-cover transition-transform group-hover:scale-95 duration-300 ease-out"
+      className="aspect-4/3 object-cover transition-transform group-hover:scale-95 duration-300 ease-out"
     />
   )
   return (
