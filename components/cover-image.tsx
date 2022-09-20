@@ -12,6 +12,7 @@ type Props = {
 
 const CoverImage = ({ title, src, slug, sizes = '100vw' }: Props) => {
   const image = (
+    // eslint-disable-next-line @next/next/no-img-element
     <img
       src={src}
       alt={`Cover Image for ${title}`}
