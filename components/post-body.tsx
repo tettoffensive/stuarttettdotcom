@@ -25,9 +25,10 @@ const PostBody = ({ slug, content, imagesOnly = false }: Props) => {
               const queryParams = new URLSearchParams(imageUrl.search)
               const width = queryParams.get('w') ?? 800
               const height = queryParams.get('h') ?? 600
+              const span = queryParams.get('span') === 'all' ? 'col-span-all' : '';
 
               return (
-                <Image className={`max-w-[${width}px]`} src={props.src} alt={props.alt} width={width} height={height}
+                <Image className={`max-w-[${width}px] ${span}`} src={props.src} alt={props.alt} width={width} height={height}
                   placeholder="blur"
                   blurDataURL={placeholderBlur(235, 235, 228)}
                 />
