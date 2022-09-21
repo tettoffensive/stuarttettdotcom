@@ -32,7 +32,7 @@ export default function Post({ post, morePosts, preview }: Props) {
           <PostTitle>Loading…</PostTitle>
         ) : (
           <>
-            <article className="mb-32">
+            <article className="mb-8">
               <Head>
                 <title>
                 {`${post.title} | ${NAME}`}
@@ -44,10 +44,13 @@ export default function Post({ post, morePosts, preview }: Props) {
                 coverImage={post.coverImage}
                 date={post.date}
                 author={post.author}
+                excerpt={post.excerpt}
               />
               <PostBody content={post.content} slug={post.slug} imagesOnly={post.imagesOnly} />
-              { morePosts && <PostFooter currentPost={post} morePosts={morePosts} /> }
             </article>
+            <footer className="mb-8">
+            { morePosts && <PostFooter currentPost={post} morePosts={morePosts} /> }
+            </footer>
           </>
         )}
       </Container>
@@ -64,6 +67,7 @@ type Params = {
 export async function getStaticProps({ params }: Params) {
   const post = getPostBySlug(params.slug, [
     'title',
+    'excerpt',
     'date',
     'slug',
     'author',
@@ -75,7 +79,7 @@ export async function getStaticProps({ params }: Params) {
   // const content = await markdownToHtml(post.content || '')
 
   const morePosts = getAllPosts([
-    'title',    
+    'title',  
     'slug'])
 
   return {

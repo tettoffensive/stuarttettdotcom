@@ -1,20 +1,24 @@
 .markdown {
-  @apply text-lg leading-relaxed;
+  @apply text-lg leading-relaxed px-4 md:max-w-3xl mx-auto;
 }
 
 .markdown p,
 .markdown ul,
 .markdown ol,
 .markdown blockquote {
-  @apply my-6;
+  @apply mx-auto text-gray-500 leading-snug;
+}
+
+.markdown p + img, .markdown img + img {
+  @apply mt-10;
 }
 
 .markdown h2 {
-  @apply text-army-green dark:text-gray-200 text-3xl mt-12 mb-4 leading-snug;
+  @apply text-almost-black dark:text-gray-200 text-2xl md:text-3xl mt-12 mb-4 leading-snug;
 }
 
 .markdown h3 {
-  @apply text-medium-gray text-2xl mt-8 mb-4 leading-snug;
+  @apply text-almost-black text-xl md:text-2xl mt-8 mb-4 leading-snug;
 }
 
 .markdown ol {
