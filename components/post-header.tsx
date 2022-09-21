@@ -6,18 +6,25 @@ import type Author from '../interfaces/author'
 type Props = {
   title: string
   coverImage: string
+  excerpt: string
   date: string
   author: Author
 }
 
-const PostHeader = ({ title, coverImage, date, author }: Props) => {
+const PostHeader = ({ title, coverImage, excerpt, date, author }: Props) => {
   return (
-    <>      
-      <PostTitle><span className="text-almost-black dark:text-white">{title}</span></PostTitle>
+    <section className='mx-auto max-w-3xl'>      
       <div className="mb-8 sm:mx-0">
         <CoverImage title={title} src={coverImage} />
       </div>     
-    </>
+      <h1
+     className="whitespace-nowrap text-h3 font-sans tracking-wider my-2 pb-4 leading-tight
+      text-almost-black mx-auto">
+      {title}
+      <span className="bg-army-green-light relative h-[2px] w-[40px] block mt-4"></span>
+    </h1>
+    <h2 className="text-lg tracking-wider text-gray-400 leading-none mb-4">{excerpt}</h2>      
+    </section>
   )
 }
 
