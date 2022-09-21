@@ -1,6 +1,6 @@
 ---
 title: 'Effects animation'
-excerpt: ''
+excerpt: 'Demo reel for animated visual effects'
 coverImage: '/assets/blog/effects/cover.jpg'
 date: '2020-03-16T05:35:07.322Z'
 author:

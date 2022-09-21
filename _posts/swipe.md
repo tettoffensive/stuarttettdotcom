@@ -1,6 +1,6 @@
 ---
 title: 'Swipe'
-excerpt: ''
+excerpt: 'A social photo and video sharing app'
 coverImage: '/assets/blog/swipe/cover.jpg'
 date: '2020-03-16T05:35:07.322Z'
 author:

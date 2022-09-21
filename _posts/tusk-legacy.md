@@ -1,6 +1,6 @@
 ---
 title: 'Tusk Legacy'
-excerpt: ''
+excerpt: 'Helping grieving families settle their loved one’s affairs'
 coverImage: '/assets/blog/tusk-legacy/cover.jpg'
 date: '2022-09-15T05:35:07.322Z'
 author:

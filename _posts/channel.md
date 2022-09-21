@@ -1,6 +1,6 @@
 ---
 title: 'Channel'
-excerpt: ''
+excerpt: 'A social app for editing & sharing videos'
 coverImage: '/assets/blog/channel/cover.jpg'
 date: '2020-03-16T05:35:07.322Z'
 author:

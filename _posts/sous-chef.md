@@ -1,6 +1,6 @@
 ---
 title: 'SousChef'
-excerpt: ''
+excerpt: 'A mobile app to help working professionals get dinner on the table'
 coverImage: '/assets/blog/sous-chef/cover.jpg'
 date: '2021-03-16T05:35:07.322Z'
 author:

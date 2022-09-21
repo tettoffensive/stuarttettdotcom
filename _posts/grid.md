@@ -1,6 +1,6 @@
 ---
 title: 'Grid by Binary Thumb'
-excerpt: ''
+excerpt: 'A multimedia spreadsheet for the iPad'
 coverImage: '/assets/blog/grid/cover.jpg'
 date: '2020-03-16T05:35:07.322Z'
 author:

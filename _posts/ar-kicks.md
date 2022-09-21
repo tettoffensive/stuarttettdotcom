@@ -1,6 +1,6 @@
 ---
 title: 'AR Kicks'
-excerpt: ''
+excerpt: 'An augmented reality sneaker experience'
 coverImage: '/assets/blog/ar-kicks/cover.jpg'
 date: '2020-03-16T05:35:07.322Z'
 author:

@@ -1,6 +1,6 @@
 ---
 title: 'Find a Preschool'
-excerpt: ''
+excerpt: 'A web app to help parents find the right preschool'
 coverImage: '/assets/blog/find-a-preschool/cover.jpg'
 date: '2020-03-16T05:35:07.322Z'
 author:
