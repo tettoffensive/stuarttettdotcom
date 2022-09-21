@@ -11,7 +11,8 @@ type Props = {
   morePosts: PostType[]
 }
 
-const NavItem = ({ children }: { children?: ReactNode}) => (<p className="text-xl tracking-wider text-gray-400 leading-none mb-4">{children}</p>)
+const NavItem = ({ children }: { children?: ReactNode}) => (<p className="text-xl tracking-wider text-gray-400 dark:text-white dark:opacity-60 leading-none mb-4 hover:text-army-green-light
+transition-colors duration-300">{children}</p>)
 
 const PostFooter = ({ currentPost: { slug: currentSlug }, morePosts }: Props) => {
   return (

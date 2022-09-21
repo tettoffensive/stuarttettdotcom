@@ -6,7 +6,7 @@ const Intro = () => {
       <h1 className="text-almost-black dark:text-white text-5xl md:text-7xl font-sans">
         { NAME }
       </h1>
-      <h1 className="text-army-green dark:text-gray-200 text-5xl md:text-7xl font-sans">
+      <h1 className="text-army-green dark:text-white dark:opacity-60 text-5xl md:text-7xl font-sans">
         { TITLE }
       </h1>
     </section>

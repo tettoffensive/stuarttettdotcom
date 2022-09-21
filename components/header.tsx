@@ -7,7 +7,7 @@ const Header = () => {
     <h2>
       <Link href="/">
         <a>{NAME}
-        <h2 className="text-army-green dark:text-gray-200">{TITLE}</h2>
+        <h2 className="text-army-green dark:text-white dark:opacity-60">{TITLE}</h2>
         </a>
       </Link>      
     </h2>

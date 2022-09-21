@@ -27,7 +27,7 @@ const PostPreview = ({
         <a aria-label={title}>
         <CoverImage title={title} src={coverImage} sizes="(max-width: 768px) 100vw, 50vw" />
         <PostTitle>{title}</PostTitle>
-        <p className="text-lg tracking-wider text-gray-400 leading-none mb-4">{excerpt}</p>
+        <p className="text-lg tracking-wider text-gray-400 dark:text-white dark:opacity-60 leading-none mb-4">{excerpt}</p>
         </a>
       </Link>
     </div>

@@ -19,11 +19,11 @@ const PostHeader = ({ title, coverImage, excerpt, date, author }: Props) => {
       </div>     
       <h1
      className="whitespace-nowrap text-h3 font-sans tracking-wider my-2 pb-4 leading-tight
-      text-almost-black mx-auto">
+      text-almost-black dark:text-white mx-auto">
       {title}
       <span className="bg-army-green-light relative h-[2px] w-[40px] block mt-4"></span>
     </h1>
-    <h2 className="text-lg tracking-wider text-gray-400 leading-none mb-4">{excerpt}</h2>      
+    <h2 className="text-lg tracking-wider text-gray-400 dark:text-white dark:opacity-60 leading-none mb-4">{excerpt}</h2>      
     </section>
   )
 }
