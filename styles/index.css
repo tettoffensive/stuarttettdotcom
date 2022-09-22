@@ -23,3 +23,8 @@
     font-weight: bold;
     font-style: normal;
 }
+
+:root {
+  font-size: calc(.33vw + 1em);
+  font-family: 'Basier';
+}

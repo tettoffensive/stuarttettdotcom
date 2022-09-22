@@ -1,5 +1,5 @@
 .markdown {
-  @apply text-lg leading-relaxed px-4 md:max-w-3xl mx-auto;
+  @apply leading-relaxed px-4 md:max-w-3xl mx-auto;
 }
 
 .markdown p,
@@ -31,7 +31,7 @@
 }
 
 .markdownImages {
-  @apply text-lg leading-relaxed columns-1 md:columns-2 md:gap-8;
+  @apply columns-1 md:columns-2 md:gap-8;
 }
 
 .markdownImages p,
