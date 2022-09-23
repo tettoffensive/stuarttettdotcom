@@ -14,11 +14,11 @@ imagesOnly: true
 
 ![SousChef Icons](/assets/blog/sous-chef/souschef-icons.png)
 
-![Recipe order](/assets/blog/sous-chef/souschef-recipe-order.gif?w=300&h=532)
+![Recipe order](/assets/blog/sous-chef/souschef-recipe-order.gif?w=800&h=510)
 
 ![Sorting](/assets/blog/sous-chef/souschef-sorting-full.png)
 
-![Carousel](/assets/blog/sous-chef/souschef-carousel.gif?w=300)
+![Carousel](/assets/blog/sous-chef/souschef-carousel.gif?w=300&h=535)
 
 ![Recipe view iterations](/assets/blog/sous-chef/souschef-recipe-iterations.png?span=all)
 
@@ -36,9 +36,9 @@ imagesOnly: true
 
 ![Pantry delete](/assets/blog/sous-chef/souschef-pantry-delete.gif?w=300&h=532)
 
-![Quick add](/assets/blog/sous-chef/souschef-quick-add.gif?w=300&h=532)
+![Quick add](/assets/blog/sous-chef/souschef-quick-add.gif?w=300&h=533)
 
-![Search](/assets/blog/sous-chef/souschef-search.gif?w=300&h=532)
+![Search](/assets/blog/sous-chef/souschef-search.gif?w=300&h=533)
 
 ![Recipe loading](/assets/blog/sous-chef/souschef-recipe-loading.png)
 
