@@ -1,5 +1,5 @@
 .markdown {
-  @apply text-lg leading-relaxed px-4 md:max-w-3xl mx-auto;
+  @apply leading-relaxed mx-auto;
 }
 
 .markdown p,
@@ -7,6 +7,18 @@
 .markdown ol,
 .markdown blockquote {
   @apply mx-auto text-gray-500 dark:text-white dark:opacity-60 leading-snug;
+}
+
+.markdown h1,
+.markdown h2,
+.markdown h3,
+.markdown p {
+  @apply ml-auto;
+}
+
+.markdown section {
+  font-size: 1rem;
+  max-width: 60ch;
 }
 
 .markdown p + img, .markdown img + img {
@@ -18,11 +30,11 @@
 }
 
 .markdown h2 {
-  @apply text-almost-black dark:text-white text-2xl md:text-3xl mt-12 mb-4 leading-snug;
+  @apply text-almost-black dark:text-white text-3xl mt-12 mb-4 leading-snug;
 }
 
 .markdown h3 {
-  @apply text-almost-black dark:text-white text-xl md:text-2xl mt-8 mb-4 leading-snug;
+  @apply text-almost-black dark:text-white text-2xl mt-8 mb-4 leading-snug;
 }
 
 .markdown ol {
@@ -31,7 +43,7 @@
 }
 
 .markdownImages {
-  @apply text-lg leading-relaxed columns-1 md:columns-2 md:gap-8;
+  @apply columns-1 md:columns-2 md:gap-8;
 }
 
 .markdownImages p,
@@ -47,7 +59,7 @@
 }
 
 .markdownImages img {
-  @apply mx-8 my-16;
+  @apply mr-8 my-16;
 }
 
 .markdownImages h2 {

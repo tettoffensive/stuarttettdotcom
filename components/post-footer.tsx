@@ -1,18 +1,14 @@
-import DateFormatter from './date-formatter'
-import CoverImage from './cover-image'
-import type Author from '../interfaces/author'
-import PostType from '../interfaces/post'
-import coverImage from './cover-image'
 import Link from 'next/link'
 import { ReactNode } from 'react'
+import PostType from '../interfaces/post'
 
 type Props = {
   currentPost: PostType
   morePosts: PostType[]
 }
 
-const NavItem = ({ children }: { children?: ReactNode}) => (<p className="text-xl tracking-wider text-gray-400 dark:text-white dark:opacity-60 leading-none mb-4 hover:text-army-green-light
-transition-colors duration-300">{children}</p>)
+const NavItem = ({ children }: { children?: ReactNode}) => (<div className="text-xl tracking-wider text-gray-400 dark:text-white dark:opacity-60 leading-none mb-4 hover:text-army-green-light
+transition-colors duration-300">{children}</div>)
 
 const PostFooter = ({ currentPost: { slug: currentSlug }, morePosts }: Props) => {
   return (
