@@ -20,7 +20,7 @@ const CoverImage = ({ title, src, slug, sizes = '100vw' }: Props) => {
       blurDataURL={placeholderBlur(140,138,120)}
       sizes={sizes}
       alt={`Cover Image for ${title}`}
-      className="w-full h-full aspect-4/3 object-cover transition-transform group-hover:scale-95 duration-300 ease-out mx-auto max-h-[70vh]"
+      className="aspect-4/3 transition-transform group-hover:scale-95 duration-300 ease-out mx-auto"
     />
   )
   return (

@@ -1,10 +1,11 @@
-import ReactMarkdown from 'react-markdown'
-import remarkHtml from 'remark-html'
-import markdownStyles from './markdown-styles.module.css'
 import Image from 'next/future/image'
-import { placeholderBlur } from '../utils/placeholderBlur'
+import ReactMarkdown from 'react-markdown'
+import rehypeRaw from 'rehype-raw'
+import remarkHtml from 'remark-html'
 import remarkImages from 'remark-images'
-import rehypeRaw from 'rehype-raw';
+import remarkSectionize from 'remark-sectionize'
+import { placeholderBlur } from '../utils/placeholderBlur'
+import markdownStyles from './markdown-styles.module.css'
 
 type Props = {
   slug: string;
@@ -14,10 +15,10 @@ type Props = {
 
 const PostBody = ({ slug, content, imagesOnly = false }: Props) => {
   return (
-    <div className="mx-auto">
+    <div className="mx-auto max-w-3xl">
       <ReactMarkdown
         className={markdownStyles[imagesOnly ? 'markdownImages' : 'markdown']}
-        remarkPlugins={[remarkHtml,remarkImages]}
+        remarkPlugins={[remarkHtml,remarkImages,remarkSectionize]}
         rehypePlugins={[rehypeRaw]}
         components={{
           p: paragraph => {

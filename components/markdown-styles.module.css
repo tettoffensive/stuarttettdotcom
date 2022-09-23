@@ -1,5 +1,5 @@
 .markdown {
-  @apply leading-relaxed px-4 mx-auto;
+  @apply leading-relaxed mx-auto;
 }
 
 .markdown p,
@@ -14,7 +14,11 @@
 .markdown h3,
 .markdown p {
   @apply ml-auto;
-  max-inline-size: 60ch;
+}
+
+.markdown section {
+  font-size: 1rem;
+  max-width: 60ch;
 }
 
 .markdown p + img, .markdown img + img {
@@ -55,7 +59,7 @@
 }
 
 .markdownImages img {
-  @apply mx-8 my-16;
+  @apply mr-8 my-16;
 }
 
 .markdownImages h2 {
