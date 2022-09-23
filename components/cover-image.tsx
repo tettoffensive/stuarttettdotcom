@@ -12,11 +12,15 @@ type Props = {
 
 const CoverImage = ({ title, src, slug, sizes = '100vw' }: Props) => {
   const image = (
-    // eslint-disable-next-line @next/next/no-img-element
-    <img
+    <Image
+      width="1200"
+      height="900"
       src={src}
+      placeholder="blur"
+      blurDataURL={placeholderBlur(140,138,120)}
+      sizes={sizes}
       alt={`Cover Image for ${title}`}
-      className="aspect-4/3 object-cover transition-transform group-hover:scale-95 duration-300 ease-out mx-auto max-h-[70vh]"
+      className="w-full h-full aspect-4/3 object-cover transition-transform group-hover:scale-95 duration-300 ease-out mx-auto max-h-[70vh]"
     />
   )
   return (

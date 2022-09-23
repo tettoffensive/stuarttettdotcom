@@ -1,10 +1,6 @@
-import DateFormatter from './date-formatter'
-import CoverImage from './cover-image'
-import type Author from '../interfaces/author'
-import PostType from '../interfaces/post'
-import coverImage from './cover-image'
 import Link from 'next/link'
 import { ReactNode } from 'react'
+import PostType from '../interfaces/post'
 
 type Props = {
   currentPost: PostType
