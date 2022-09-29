@@ -2,6 +2,9 @@ module.exports = {
   content: ['./components/**/*.tsx', './pages/**/*.tsx'],
   theme: {
       extend: {
+        gap: {
+          'auto': 'calc(2rem + 1vw)',
+        },
         fontFamily: {
           basier: ['Basier'],
           sans: [
@@ -41,6 +44,9 @@ module.exports = {
         },
         aspectRatio: {
           '4/3': '4 / 3',
+        },
+        gridTemplateColumns: {
+          'auto-fit': 'repeat(auto-fit, minmax(min(320px, 100%), 1fr))'
         },
     },
   },

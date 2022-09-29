@@ -21,7 +21,7 @@ const PostPreview = ({
   slug,
 }: Props) => {
   return (
-    <li className="group ">
+    <li className="group flex flex-col">
       <Link href={`/posts/${slug}`}>
         <a aria-label={title}>
         <CoverImage title={title} src={coverImage} sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" />

@@ -8,7 +8,7 @@ type Props = {
 const PostGallery = ({ posts }: Props) => {
   return (
     <section>
-      <ol role="list" className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 md:gap-8 lg:gap-16 mb-32">
+      <ol role="list" className="grid grid-cols-auto-fit gap-[4vw] mb-32">
         {posts.map((post) => (
           <PostPreview
             key={post.slug}
