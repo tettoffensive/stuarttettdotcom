@@ -17,10 +17,10 @@ function HeroPost({
     <section>
       <div className="mb-8 md:mb-16">
         <Link href={`/posts/${slug}`}>
-        <a aria-label={title}>
-          <CoverImage src={coverImage} title={title} />
-          <PostTitle>{title}</PostTitle>
-        </a>
+          <a aria-label={title}>
+            <CoverImage src={coverImage} title={title} />
+            <PostTitle>{title}</PostTitle>
+          </a>
         </Link>
       </div>
     </section>

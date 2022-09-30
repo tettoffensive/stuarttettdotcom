@@ -1,6 +1,5 @@
 import Image from 'next/future/image';
-import Link from 'next/link';
-import { placeholderBlur } from '../utils/placeholder-blur';
+import placeholderBlur from '../utils/placeholder-blur';
 
 type Props = {
   title: string
@@ -9,28 +8,21 @@ type Props = {
   sizes?: string
 }
 
-function CoverImage({ title, src, slug, sizes = '100vw' }: Props) {
-  const image = (
-    <Image
-      alt={`Cover Image for ${title}`}
-      blurDataURL={placeholderBlur(140,138,120)}
-      className="aspect-4/3 transition-transform group-hover:scale-95 duration-300 ease-out mx-auto"
-      height="900"
-      placeholder="blur"
-      sizes={sizes}
-      src={src}
-      width="1200"
-    />
-  );
+function CoverImage({
+  title, src, slug, sizes = '100vw',
+}: Props) {
   return (
-    <div className="sm:mx-0">
-      {slug ? (
-        <Link href={`/posts/${slug}`}>
-          <a aria-label={title}>{image}</a>
-        </Link>
-      ) : (
-        image
-      )}
+    <div id={slug}>
+      <Image
+        alt={`Cover Image for ${title}`}
+        blurDataURL={placeholderBlur(140, 138, 120)}
+        className="aspect-4/3 transition-transform group-hover:scale-95 duration-300 ease-out mx-auto"
+        height="900"
+        placeholder="blur"
+        sizes={sizes}
+        src={src}
+        width="1200"
+      />
     </div>
   );
 }

@@ -14,15 +14,15 @@ export default function Index({ allPosts }: Props) {
   const posts = allPosts;
   return (
     <Layout>
-        <Head>
+      <Head>
         <title>〰️ Stuart Tett 〰️</title>
         <link href="/favicon.ico" rel="icon" />
-        </Head>
-        <Container>
-          <Intro />          
-          {posts.length > 0 && <PostGallery posts={posts} />}
-        </Container>
-      </Layout>
+      </Head>
+      <Container>
+        <Intro />
+        {posts.length > 0 && <PostGallery posts={posts} />}
+      </Container>
+    </Layout>
   );
 }
 

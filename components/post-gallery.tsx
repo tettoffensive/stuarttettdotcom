@@ -11,9 +11,7 @@ function PostGallery({ posts }: Props) {
       <ol className="grid grid-cols-auto-fit gap-[4vw] mb-32">
         {posts.map((post) => (
           <PostPreview
-            author={post.author}
             coverImage={post.coverImage}
-            date={post.date}
             excerpt={post.excerpt}
             key={post.slug}
             slug={post.slug}

@@ -33,7 +33,7 @@ export default function Post({ post, morePosts }: Props) {
             <article className="mb-8">
               <Head>
                 <title>
-                {`${post.title} | ${NAME}`}
+                  {`${post.title} | ${NAME}`}
                 </title>
                 <meta content={post.ogImage.url} property="og:image" />
               </Head>
@@ -45,7 +45,7 @@ export default function Post({ post, morePosts }: Props) {
               <PostBody content={post.content} imagesOnly={post.imagesOnly} />
             </article>
             <footer className="mb-8">
-            { morePosts ? <PostFooter currentPost={post} morePosts={morePosts} /> : null }
+              { morePosts ? <PostFooter currentPost={post} morePosts={morePosts} /> : null }
             </footer>
           </>
         )}
@@ -75,7 +75,7 @@ export async function getStaticProps({ params }: Params) {
   // const content = await markdownToHtml(post.content || '')
 
   const morePosts = getAllPosts([
-    'title',  
+    'title',
     'slug']);
 
   return {
@@ -94,13 +94,11 @@ export async function getStaticPaths() {
   const posts = getAllPosts(['slug']);
 
   return {
-    paths: posts.map((post) => {
-      return {
-        params: {
-          slug: post.slug,
-        },
-      };
-    }),
+    paths: posts.map((post) => ({
+      params: {
+        slug: post.slug,
+      },
+    })),
     fallback: false,
   };
 }

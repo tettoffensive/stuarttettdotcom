@@ -18,18 +18,21 @@ function Alert({ preview }: Props) {
         <div className="py-2 text-center text-sm">
           {preview ? (
             <>
-              This page is a preview.{' '}
+              This page is a preview.
+              {' '}
               <a
                 className="underline hover:text-teal-300 duration-200 transition-colors"
                 href="/api/exit-preview"
               >
                 Click here
-              </a>{' '}
+              </a>
+              {' '}
               to exit preview mode.
             </>
           ) : (
             <>
-              The source code for this blog is{' '}
+              The source code for this blog is
+              {' '}
               <a
                 className="underline hover:text-blue-600 duration-200 transition-colors"
                 href={`https://github.com/vercel/next.js/tree/canary/examples/${EXAMPLE_PATH}`}
