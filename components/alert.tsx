@@ -1,12 +1,12 @@
-import Container from './container'
-import cn from 'classnames'
-import { EXAMPLE_PATH } from '../lib/constants'
+import cn from 'classnames';
+import { EXAMPLE_PATH } from '../lib/constants';
+import Container from './container';
 
 type Props = {
   preview?: boolean
 }
 
-const Alert = ({ preview }: Props) => {
+function Alert({ preview }: Props) {
   return (
     <div
       className={cn('border-b', {
@@ -20,8 +20,8 @@ const Alert = ({ preview }: Props) => {
             <>
               This page is a preview.{' '}
               <a
-                href="/api/exit-preview"
                 className="underline hover:text-teal-300 duration-200 transition-colors"
+                href="/api/exit-preview"
               >
                 Click here
               </a>{' '}
@@ -31,8 +31,8 @@ const Alert = ({ preview }: Props) => {
             <>
               The source code for this blog is{' '}
               <a
-                href={`https://github.com/vercel/next.js/tree/canary/examples/${EXAMPLE_PATH}`}
                 className="underline hover:text-blue-600 duration-200 transition-colors"
+                href={`https://github.com/vercel/next.js/tree/canary/examples/${EXAMPLE_PATH}`}
               >
                 available on GitHub
               </a>
@@ -42,7 +42,7 @@ const Alert = ({ preview }: Props) => {
         </div>
       </Container>
     </div>
-  )
+  );
 }
 
-export default Alert
+export default Alert;

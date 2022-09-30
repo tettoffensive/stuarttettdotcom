@@ -1,30 +1,34 @@
-module.exports = {
+/** @typedef { import('tailwindcss/defaultTheme') } DefaultTheme */
+/** @typedef { DefaultConfig & { theme: { extend: DefaultTheme } } } TailwindConfig */
+
+/** @type {import("@types/tailwindcss/tailwind-config").TailwindConfig } */
+const tailwindConfig = {
   content: ['./components/**/*.tsx', './pages/**/*.tsx'],
   theme: {
-      extend: {
-        gap: {
-          'auto': 'calc(2rem + 1vw)',
-        },
-        fontFamily: {
-          basier: ['Basier'],
-          sans: [
-            'Basier',
-            'ui-sans-serif',
-            'system-ui',
-            '-apple-system',
-            'BlinkMacSystemFont',
-            '"Segoe UI"',
-            'Roboto',
-            '"Helvetica Neue"',
-            'Arial',
-            '"Noto Sans"',
-            'sans-serif',
-            '"Apple Color Emoji"',
-            '"Segoe UI Emoji"',
-            '"Segoe UI Symbol"',
-            '"Noto Color Emoji"',
-          ],        
-        },
+    extend: {
+      gap: {
+        auto: 'calc(2rem + 1vw)',
+      },
+      fontFamily: {
+        basier: ['Basier'],
+        sans: [
+          'Basier',
+          'ui-sans-serif',
+          'system-ui',
+          '-apple-system',
+          'BlinkMacSystemFont',
+          '"Segoe UI"',
+          'Roboto',
+          '"Helvetica Neue"',
+          'Arial',
+          '"Noto Sans"',
+          'sans-serif',
+          '"Apple Color Emoji"',
+          '"Segoe UI Emoji"',
+          '"Segoe UI Symbol"',
+          '"Noto Color Emoji"',
+        ],        
+      },
         colors: {
           'army-green': {
             DEFAULT: '#475E32',
@@ -51,4 +55,6 @@ module.exports = {
     },
   },
   plugins: [],
-}
+};
+
+module.exports = tailwindConfig;

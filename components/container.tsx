@@ -1,9 +1,11 @@
+import { ReactNode } from 'react';
+
 type Props = {
-  children?: React.ReactNode
+  children?: ReactNode
 }
 
-const Container = ({ children }: Props) => {
-  return <div className="mx-auto px-[8vw]">{children}</div>
+function Container({ children }: Props) {
+  return <div className="mx-auto px-[8vw]">{children}</div>;
 }
 
-export default Container
+export default Container;

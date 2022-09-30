@@ -1,37 +1,30 @@
-import CoverImage from './cover-image'
-import Link from 'next/link'
-import type Author from '../interfaces/author'
-import PostTitle from './post-title'
+import Link from 'next/link';
+import CoverImage from './cover-image';
+import PostTitle from './post-title';
 
 type Props = {
   title: string
   coverImage: string
-  date: string
-  excerpt: string
-  author: Author
   slug: string
 }
 
-const HeroPost = ({
+function HeroPost({
   title,
   coverImage,
-  date,
-  excerpt,
-  author,
   slug,
-}: Props) => {
+}: Props) {
   return (
     <section>
       <div className="mb-8 md:mb-16">
         <Link href={`/posts/${slug}`}>
         <a aria-label={title}>
-          <CoverImage title={title} src={coverImage} />
+          <CoverImage src={coverImage} title={title} />
           <PostTitle>{title}</PostTitle>
         </a>
         </Link>
       </div>
     </section>
-  )
+  );
 }
 
-export default HeroPost
+export default HeroPost;

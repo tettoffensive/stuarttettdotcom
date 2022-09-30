@@ -1,28 +1,28 @@
-import PostPreview from './post-preview'
-import type Post from '../interfaces/post'
+import type Post from '../interfaces/post';
+import PostPreview from './post-preview';
 
 type Props = {
   posts: Post[]
 }
 
-const PostGallery = ({ posts }: Props) => {
+function PostGallery({ posts }: Props) {
   return (
     <section>
-      <ol role="list" className="grid grid-cols-auto-fit gap-[4vw] mb-32">
+      <ol className="grid grid-cols-auto-fit gap-[4vw] mb-32">
         {posts.map((post) => (
           <PostPreview
-            key={post.slug}
-            title={post.title}
+            author={post.author}
             coverImage={post.coverImage}
             date={post.date}
-            author={post.author}
-            slug={post.slug}
             excerpt={post.excerpt}
+            key={post.slug}
+            slug={post.slug}
+            title={post.title}
           />
         ))}
       </ol>
     </section>
-  )
+  );
 }
 
-export default PostGallery
+export default PostGallery;
