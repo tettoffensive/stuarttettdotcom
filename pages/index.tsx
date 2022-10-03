@@ -1,32 +1,29 @@
-import Container from '../components/container'
-import PostGallery from '../components/post-gallery'
-import HeroPost from '../components/hero-post'
-import Intro from '../components/intro'
-import Layout from '../components/layout'
-import { getAllPosts } from '../lib/api'
-import Head from 'next/head'
-import Post from '../interfaces/post'
+import Head from 'next/head';
+import Container from '../components/container';
+import Intro from '../components/intro';
+import Layout from '../components/layout';
+import PostGallery from '../components/post-gallery';
+import Post from '../interfaces/post';
+import { getAllPosts } from '../lib/api';
 
 type Props = {
   allPosts: Post[]
 }
 
 export default function Index({ allPosts }: Props) {
-  const posts = allPosts
+  const posts = allPosts;
   return (
-    <>
-      <Layout>
-        <Head>
+    <Layout>
+      <Head>
         <title>〰️ Stuart Tett 〰️</title>
-        <link rel="icon" href="/favicon.ico" />
-        </Head>
-        <Container>
-          <Intro />          
-          {posts.length > 0 && <PostGallery posts={posts} />}
-        </Container>
-      </Layout>
-    </>
-  )
+        <link href="/favicon.ico" rel="icon" />
+      </Head>
+      <Container>
+        <Intro />
+        {posts.length > 0 && <PostGallery posts={posts} />}
+      </Container>
+    </Layout>
+  );
 }
 
 export const getStaticProps = async () => {
@@ -37,10 +34,10 @@ export const getStaticProps = async () => {
     'author',
     'coverImage',
     'excerpt',
-  ])
+  ]);
 
   return {
     props: { allPosts },
     revalidate: 10,
-  }
-}
+  };
+};

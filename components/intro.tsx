@@ -1,6 +1,6 @@
-import { NAME, TITLE } from '../lib/constants'
+import { NAME, TITLE } from '../lib/constants';
 
-const Intro = () => {
+function Intro() {
   return (
     <section className="flex-col flex items-left md:justify-between mt-16 mb-16 md:mb-12">
       <h1 className="text-almost-black dark:text-white text-5xl font-sans">
@@ -10,7 +10,7 @@ const Intro = () => {
         { TITLE }
       </h1>
     </section>
-  )
+  );
 }
 
-export default Intro
+export default Intro;

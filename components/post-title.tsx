@@ -1,18 +1,19 @@
-import { ReactNode } from 'react'
+import { ReactNode } from 'react';
 
 type Props = {
   children?: ReactNode
 }
 
-const PostTitle = ({ children }: Props) => {
+function PostTitle({ children }: Props) {
   return (
     <div
-     className="text-h3 font-sans tracking-wider mt-4 mb-1 leading-tight
+      className="text-h3 font-sans tracking-wider mt-4 mb-1 leading-tight
       text-almost-black group-hover:text-army-green-light dark:text-white hover:text-army-green-light
-      transition-colors duration-300">
+      transition-colors duration-300"
+    >
       {children}
     </div>
-  )
+  );
 }
 
-export default PostTitle
+export default PostTitle;

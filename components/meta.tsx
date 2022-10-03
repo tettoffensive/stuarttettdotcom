@@ -1,34 +1,34 @@
-import Head from 'next/head'
-import { NAME, HOME_OG_IMAGE_URL } from '../lib/constants'
+import Head from 'next/head';
+import { NAME, HOME_OG_IMAGE_URL } from '../lib/constants';
 
-const Meta = () => {
+function Meta() {
   return (
     <Head>
-      <link rel="apple-touch-icon" sizes="57x57" href="/favicon/apple-icon-57x57.png" />
-      <link rel="apple-touch-icon" sizes="60x60" href="/favicon/apple-icon-60x60.png" />
-      <link rel="apple-touch-icon" sizes="72x72" href="/favicon/apple-icon-72x72.png" />
-      <link rel="apple-touch-icon" sizes="76x76" href="/favicon/apple-icon-76x76.png" />
-      <link rel="apple-touch-icon" sizes="114x114" href="/favicon/apple-icon-114x114.png" />
-      <link rel="apple-touch-icon" sizes="120x120" href="/favicon/apple-icon-120x120.png" />
-      <link rel="apple-touch-icon" sizes="144x144" href="/favicon/apple-icon-144x144.png" />
-      <link rel="apple-touch-icon" sizes="152x152" href="/favicon/apple-icon-152x152.png" />
-      <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-icon-180x180.png" />
-      <link rel="icon" type="image/png" sizes="192x192"  href="/favicon/android-icon-192x192.png" />
-      <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png" />
-      <link rel="icon" type="image/png" sizes="96x96" href="/favicon/favicon-96x96.png" />
-      <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png" />
-      <link rel="manifest" href="/favicon/manifest.json" />
-      <meta name="msapplication-TileColor" content="#475E32" />
-      <meta name="theme-color" content="#475E32" />
-      <meta name="msapplication-TileImage" content="/ms-icon-144x144.png" />
-      <link rel="alternate" type="application/rss+xml" href="/favicon/feed.xml" />
+      <link href="/favicon/apple-icon-57x57.png" rel="apple-touch-icon" sizes="57x57" />
+      <link href="/favicon/apple-icon-60x60.png" rel="apple-touch-icon" sizes="60x60" />
+      <link href="/favicon/apple-icon-72x72.png" rel="apple-touch-icon" sizes="72x72" />
+      <link href="/favicon/apple-icon-76x76.png" rel="apple-touch-icon" sizes="76x76" />
+      <link href="/favicon/apple-icon-114x114.png" rel="apple-touch-icon" sizes="114x114" />
+      <link href="/favicon/apple-icon-120x120.png" rel="apple-touch-icon" sizes="120x120" />
+      <link href="/favicon/apple-icon-144x144.png" rel="apple-touch-icon" sizes="144x144" />
+      <link href="/favicon/apple-icon-152x152.png" rel="apple-touch-icon" sizes="152x152" />
+      <link href="/favicon/apple-icon-180x180.png" rel="apple-touch-icon" sizes="180x180" />
+      <link href="/favicon/android-icon-192x192.png" rel="icon" sizes="192x192" type="image/png" />
+      <link href="/favicon/favicon-32x32.png" rel="icon" sizes="32x32" type="image/png" />
+      <link href="/favicon/favicon-96x96.png" rel="icon" sizes="96x96" type="image/png" />
+      <link href="/favicon/favicon-16x16.png" rel="icon" sizes="16x16" type="image/png" />
+      <link href="/favicon/manifest.json" rel="manifest" />
+      <meta content="#475E32" name="msapplication-TileColor" />
+      <meta content="#475E32" name="theme-color" />
+      <meta content="/ms-icon-144x144.png" name="msapplication-TileImage" />
+      <link href="/favicon/feed.xml" rel="alternate" type="application/rss+xml" />
       <meta
-        name="description"
         content={`A portfolio website for ${NAME}.`}
+        name="description"
       />
-      <meta property="og:image" content={HOME_OG_IMAGE_URL} />
+      <meta content={HOME_OG_IMAGE_URL} property="og:image" />
     </Head>
-  )
+  );
 }
 
-export default Meta
+export default Meta;

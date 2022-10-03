@@ -1,4 +1,4 @@
-import type Author from './author'
+import type Author from './author';
 
 type PostType = {
   slug: string
@@ -14,4 +14,4 @@ type PostType = {
   imagesOnly?: boolean
 }
 
-export default PostType
+export default PostType;
