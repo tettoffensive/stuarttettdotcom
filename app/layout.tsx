@@ -1,4 +1,5 @@
 import localFont from 'next/font/local';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 import { ReactNode } from 'react';
 import Footer from '../components/footer';
 import { HOME_OG_IMAGE_URL, NAME } from '../lib/constants';
@@ -65,6 +66,7 @@ export default function RootLayout({ children }: Props) {
           <main>{children}</main>
         </div>
         <Footer />
+        <SpeedInsights />
       </body>
     </html>
   );
