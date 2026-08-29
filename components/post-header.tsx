@@ -10,7 +10,9 @@ function PostHeader({ title, coverImage, excerpt }: Props) {
   return (
     <section className="mx-auto max-w-3xl">
       <div className="mb-8 sm:mx-0">
-        <CoverImage src={coverImage} title={title} />
+        {/* max-w-3xl = 768px CSS; cap the responsive hint so we don't get a
+            1920w image at DPR=1 (the LCP candidate on the post page). */}
+        <CoverImage priority sizes="(max-width: 768px) 100vw, 768px" src={coverImage} title={title} />
       </div>
       <h1
         className="text-h3 font-sans tracking-wider my-2 pb-4 leading-tight

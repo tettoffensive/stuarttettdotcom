@@ -11,6 +11,7 @@
          url('/fonts/basier-square/basiersquare-regular-webfont.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
+    font-display: swap;
 }
 
 @font-face {
@@ -22,6 +23,7 @@
          url('/fonts/basier-square/basiersquare-semibold-webfont.ttf') format('truetype');
     font-weight: bold;
     font-style: normal;
+    font-display: swap;
 }
 
 :root {
