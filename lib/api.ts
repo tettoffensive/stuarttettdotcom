@@ -40,8 +40,20 @@ export function getPostBySlug(slug: string, fields: string[] = []) {
 export function getAllPosts(fields: string[] = []) {
   const slugs = getPostSlugs();
   const posts = slugs
-    .map((slug) => getPostBySlug(slug, fields))
-    // sort posts by date in descending order
-    .sort((post1, post2) => (post1.date > post2.date ? -1 : 1));
+    .map((slug) => getPostBySlug(slug, ['draft', 'order', ...fields]))
+    // hide posts marked as drafts from the list
+    .filter((post) => post.draft !== true)
+    // sort explicitly by `order` frontmatter (ascending); posts without an
+    // `order` value fall back to descending date
+    .sort((post1, post2) => {
+      const o1 = typeof post1.order === 'number' ? post1.order : null;
+      const o2 = typeof post2.order === 'number' ? post2.order : null;
+      if (o1 !== null && o2 !== null) {
+        return o1 - o2;
+      }
+      if (o1 !== null) return -1;
+      if (o2 !== null) return 1;
+      return post1.date > post2.date ? -1 : 1;
+    });
   return posts;
 }

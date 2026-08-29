@@ -9,6 +9,7 @@ author:
 ogImage:
   url: '/assets/blog/tusk-legacy/cover.jpg'
 imagesOnly: true
+order: 1
 ---
 ![](/assets/blog/tusk-legacy/Logo.jpg)
 

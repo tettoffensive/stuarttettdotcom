@@ -3,7 +3,7 @@ import { NAME, TITLE } from '../lib/constants';
 
 function Header() {
   return (
-    <div className="text-almost-black dark:text-white text-2xl mb-10 mt-8">
+    <div className="mx-auto max-w-3xl text-almost-black dark:text-white text-2xl mb-10 mt-8">
       <h2>
         <Link href="/">
           <a>

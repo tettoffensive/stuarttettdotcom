@@ -8,6 +8,7 @@ author:
   picture: '/assets/blog/authors/stuart.jpg'
 ogImage:
   url: '/assets/blog/grid/cover.jpg'
+order: 2
 ---
 ### Grid allowed users to collaborate on spreadsheets full of video, images, and text in real-time.
 

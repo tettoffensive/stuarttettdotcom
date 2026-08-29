@@ -9,4 +9,5 @@ author:
 ogImage:
   url: '/assets/blog/doppler/cover.jpg'
 imagesOnly: true
+order: 6
 ---

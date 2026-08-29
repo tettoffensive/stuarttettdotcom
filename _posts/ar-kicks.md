@@ -9,6 +9,7 @@ author:
 ogImage:
   url: '/assets/blog/ar-kicks/cover.jpg'
 imagesOnly: true
+draft: true
 ---
 
 ![ar-kicks-splash.jpg](/assets/blog/ar-kicks/ar-kicks-splash.jpg)

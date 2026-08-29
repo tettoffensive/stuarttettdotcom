@@ -8,6 +8,7 @@ author:
   picture: '/assets/blog/authors/stuart.jpg'
 ogImage:
   url: '/assets/blog/swipe/cover.jpg'
+order: 5
 ---
 
 ### Swipe provided a frictionless way to share their photos and videos publicly.

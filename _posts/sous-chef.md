@@ -9,6 +9,7 @@ author:
 ogImage:
   url: '/assets/blog/sous-chef/cover.jpg'
 imagesOnly: true
+draft: true
 ---
 ![SousChef Logo](/assets/blog/sous-chef/souschef-logo.png)
 

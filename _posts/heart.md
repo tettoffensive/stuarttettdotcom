@@ -9,4 +9,5 @@ author:
 ogImage:
   url: '/assets/blog/heart/cover.png'
 imagesOnly: true
+draft: true
 ---

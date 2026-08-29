@@ -9,4 +9,5 @@ author:
 ogImage:
   url: '/assets/blog/starbursts/cover.jpg'
 imagesOnly: true
+order: 7
 ---

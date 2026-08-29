@@ -8,6 +8,7 @@ author:
   picture: '/assets/blog/authors/stuart.jpg'
 ogImage:
   url: '/assets/blog/effects/cover.jpg'
+order: 3
 ---
 ### From 2007–2013 I used my skills to create animated effects.
 

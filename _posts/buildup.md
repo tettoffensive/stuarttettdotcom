@@ -9,4 +9,5 @@ author:
 ogImage:
   url: '/assets/blog/buildup/cover.jpg'
 imagesOnly: true
+draft: true
 ---

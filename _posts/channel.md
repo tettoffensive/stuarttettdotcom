@@ -8,6 +8,7 @@ author:
   picture: '/assets/blog/authors/stuart.jpg'
 ogImage:
   url: '/assets/blog/channel/cover.jpg'
+order: 4
 ---
 
 ### Channel began as an app for people to share video stories from their phones.
