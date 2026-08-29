@@ -11,6 +11,12 @@ export function getPostSlugs() {
 export function getPostBySlug(slug: string, fields: string[] = []) {
   const realSlug = slug.replace(/\.md$/, '');
   const fullPath = join(postsDirectory, `${realSlug}.md`);
+  // Return null on missing file so callers can route to notFound() rather
+  // than letting a raw ENOENT bubble up. Pages Router's getStaticProps
+  // caught this differently; in App Router we normalize at the read site.
+  if (!fs.existsSync(fullPath)) {
+    return null;
+  }
   const fileContents = fs.readFileSync(fullPath, 'utf8');
   const { data, content } = matter(fileContents);
 

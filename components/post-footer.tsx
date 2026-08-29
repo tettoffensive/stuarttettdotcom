@@ -22,17 +22,13 @@ function PostFooter({ currentPost: { slug: currentSlug }, morePosts }: Props) {
     <nav className="place-content-center mx-auto flex flex-col md:flex-row md:space-x-8 md:flex-wrap">
       <span className="bg-army-green-light relative h-[2px] w-[40px] block my-4 md:invisible" />
       <Link href="/">
-        <a>
-          <NavItem>All work</NavItem>
-        </a>
+        <NavItem>All work</NavItem>
       </Link>
       {morePosts.map(({ title, slug }) => (
         slug === currentSlug ? <NavItem key={slug}><span className="text-almost-black dark:text-white cursor-not-allowed opacity-20 select-none">{title}</span></NavItem>
           : (
-            <Link href={`/posts/${slug}`} key={slug}>
-              <a aria-label={title}>
-                <NavItem>{title}</NavItem>
-              </a>
+            <Link href={`/posts/${slug}`} key={slug} aria-label={title}>
+              <NavItem>{title}</NavItem>
             </Link>
           )
       ))}

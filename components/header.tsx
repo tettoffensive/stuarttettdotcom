@@ -6,10 +6,8 @@ function Header() {
     <div className="mx-auto max-w-3xl text-almost-black dark:text-white text-2xl mb-10 mt-8">
       <h2>
         <Link href="/">
-          <a>
-            {NAME}
-            <h2 className="text-army-green dark:text-white dark:opacity-60">{TITLE}</h2>
-          </a>
+          {NAME}
+          <h2 className="text-army-green dark:text-white dark:opacity-60">{TITLE}</h2>
         </Link>
       </h2>
     </div>

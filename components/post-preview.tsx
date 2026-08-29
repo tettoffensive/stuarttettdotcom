@@ -19,14 +19,13 @@ function PostPreview({
 }: Props) {
   return (
     <li className="group flex flex-col">
-      {/* prefetch={false} keeps Next from preloading the ~80 KB react-markdown
-          chunk for every gallery card on the index page. */}
-      <Link href={`/posts/${slug}`} prefetch={false}>
-        <a aria-label={title}>
-          <CoverImage priority={priority} sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" src={coverImage} title={title} />
-          <PostTitle>{title}</PostTitle>
-          <p className="text-lg leading-snug tracking-wider text-gray-400 dark:text-white dark:opacity-60 mb-4">{excerpt}</p>
-        </a>
+      {/* App Router's next/link uses viewport-aware prefetch by default,
+          which solves the chunk-prefetch problem the safe-now `prefetch={false}`
+          workaround was hiding. Drop the override. */}
+      <Link href={`/posts/${slug}`} aria-label={title}>
+        <CoverImage priority={priority} sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" src={coverImage} title={title} />
+        <PostTitle>{title}</PostTitle>
+        <p className="text-lg leading-snug tracking-wider text-gray-400 dark:text-white dark:opacity-60 mb-4">{excerpt}</p>
       </Link>
     </li>
   );
