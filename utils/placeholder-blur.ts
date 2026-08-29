@@ -1,4 +1,3 @@
-/* eslint-disable no-bitwise */
 // Pixel GIF code adapted from https://stackoverflow.com/a/33919020/266535
 const keyStr = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=';
 
@@ -12,5 +11,3 @@ const placeholderBlur = (r: number, g: number, b: number) => `data:image/gif;bas
 }/yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==`;
 
 export default placeholderBlur;
-
-/* eslint-enable no-bitwise */

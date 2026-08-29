@@ -1,4 +1,4 @@
-import Image from 'next/future/image';
+import Image from 'next/image';
 import ReactMarkdown from 'react-markdown';
 import rehypeRaw from 'rehype-raw';
 import remarkHtml from 'remark-html';
@@ -18,7 +18,6 @@ function PostBody({ content, imagesOnly = false }: Props) {
       <ReactMarkdown
         className={markdownStyles[imagesOnly ? 'markdownImages' : 'markdown']}
         components={{
-          // eslint-disable-next-line react/no-unstable-nested-components
           p: (paragraph) => {
             const { node } = paragraph;
 
@@ -29,8 +28,8 @@ function PostBody({ content, imagesOnly = false }: Props) {
 
               const imageUrl = new URL(`https://${src}`);
               const queryParams = new URLSearchParams(imageUrl.search);
-              const width = queryParams.get('w') ?? 800;
-              const height = queryParams.get('h') ?? 600;
+              const width = Number(queryParams.get('w')) || 800;
+              const height = Number(queryParams.get('h')) || 600;
               const span = queryParams.get('span') === 'all' ? 'col-span-all' : '';
 
               return (
