@@ -14,8 +14,11 @@ export function getPostBySlug(slug: string, fields: string[] = []) {
   const fileContents = fs.readFileSync(fullPath, 'utf8');
   const { data, content } = matter(fileContents);
 
+  // gray-matter returns `data` as `{ [key: string]: any }`; the values
+  // are whatever was parsed out of the YAML frontmatter (strings, booleans,
+  // numbers, dates, …) so the index signature mirrors that.
   type Items = {
-    [key: string]: string
+    [key: string]: any
   }
 
   const items: Items = {};
