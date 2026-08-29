@@ -4,9 +4,10 @@
     "dev": "next",
     "build": "next build",
     "start": "next start",
-    "typecheck": "tsc",
     "lint": "next lint",
-    "lint:fix": "next lint --fix"
+    "lint:fix": "next lint --fix",
+    "typecheck": "tsc --noEmit",
+    "validate": "yarn lint && yarn typecheck"
   },
   "dependencies": {
     "@vercel/style-guide": "^4.0.2",
