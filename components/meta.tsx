@@ -20,6 +20,7 @@ function Meta() {
       <link href="/favicon/manifest.json" rel="manifest" />
       <meta content="#475E32" name="msapplication-TileColor" />
       <meta content="#475E32" name="theme-color" />
+      <meta content="nopin" name="pinterest" />
       <meta content="/ms-icon-144x144.png" name="msapplication-TileImage" />
       <link href="/favicon/feed.xml" rel="alternate" type="application/rss+xml" />
       <meta
