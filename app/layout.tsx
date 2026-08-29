@@ -1,3 +1,4 @@
+import localFont from 'next/font/local';
 import { ReactNode } from 'react';
 import Footer from '../components/footer';
 import { HOME_OG_IMAGE_URL, NAME } from '../lib/constants';
@@ -7,9 +8,34 @@ type Props = {
   children: ReactNode
 }
 
+// next/font/local self-hashes the URLs (cache-friendly long-lived URLs),
+// self-preloads the regular weight (closes the FOIT/LCP window), and with
+// adjustFontFallback emits metric-matched ascent/descent/size-adjust
+// overrides that close the swap-CLS gap. Replaces the manual @font-face
+// blocks in styles/index.css and the <link rel="preload"> in the
+// previous app/layout.tsx.
+const basier = localFont({
+  src: [
+    {
+      path: '../public/fonts/basier-square/basiersquare-regular-webfont.woff2',
+      weight: '400',
+      style: 'normal',
+    },
+    {
+      path: '../public/fonts/basier-square/basiersquare-semibold-webfont.woff2',
+      weight: '700',
+      style: 'normal',
+    },
+  ],
+  variable: '--font-basier',
+  display: 'swap',
+  // 'Arial' is the closest open-source fallback; for an exact metric match
+  // pass a real measured value here. Field CLS data should confirm the
+  // metric-matched fallback closes the swap-CLS window.
+  adjustFontFallback: 'Arial',
+});
+
 export const metadata = {
-  // The description / og:image / RSS alternates below replace what used to
-  // live in `components/meta.tsx`, which is deleted as part of this commit.
   description: `A portfolio website for ${NAME}.`,
   icons: {
     icon: '/favicon.ico',
@@ -27,18 +53,8 @@ export const viewport = {
 
 export default function RootLayout({ children }: Props) {
   return (
-    <html lang="en">
+    <html lang="en" className={basier.variable}>
       <head>
-        {/* Font preload carried over from `pages/_document.tsx`. The next
-            commit swaps this for `next/font/local` (which self-preloads and
-            adds a metric-matched fallback that closes the swap-CLS gap). */}
-        <link
-          as="font"
-          crossOrigin="anonymous"
-          href="/fonts/basier-square/basiersquare-regular-webfont.woff2"
-          rel="preload"
-          type="font/woff2"
-        />
         {/* Non-standard meta tags Next's metadata API doesn't cover. */}
         <meta content="nopin" name="pinterest" />
         <meta content="/ms-icon-144x144.png" name="msapplication-TileImage" />
