@@ -27,3 +27,9 @@ if (field === 'draft') {
 Callers can then compare with `===` / `!==` without re-doing the normalization, and the `Items` index signature remains `any` because the upstream source is genuinely `any` for fields we haven't explicitly typed.
 
 Apply the same shape to any other untyped boundary (JSON config, third-party SDK responses) before the value leaves the file that reads it.
+
+## App Router type conventions (Next 13+)
+
+- **Page `params` is a `Promise<{...}>`** in dynamic-segment routes (`[slug]/page.tsx`). Both `generateMetadata` and the page component must `await params`. `generateStaticParams` is the exception — it returns `{ params: Params }[]` synchronously (the build-time path shape, not the runtime shape). Don't access `params.slug` synchronously in code that runs per-request.
+- **Default `fetch()` caching in RSC** is `'force-cache'`. For any `fetch(url)` you add in RSC code, pass `cache: 'no-store'` explicitly unless you really want the cache. There are zero `fetch()` calls in this codebase today; the convention is forward-looking, set by the Stage 4 review.
+- **Don't add `"use client"` to `PostBody`** (`components/post-body.tsx`). It uses `react-markdown` as a Server Component, which is the entire point of the App Router cutover — the markdown chain stays out of the client bundle. The render-time `p`-rewrite that strips `<p>` wrappers around `<img>` only touches hast node positions; no event handler or hook is involved, so it works in a Server Component.
