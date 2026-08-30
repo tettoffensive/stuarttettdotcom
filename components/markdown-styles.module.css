@@ -79,12 +79,12 @@
 }
 
 .markdown h3 {
-  /* h3 sits at 1rem (text-base) and bumps to the next loaded weight step
-     above body text. We don't have a 500 medium weight in the local
-     Basier Square set; 700 semibold is the closest loaded weight and
-     reads as a controlled bump over 400 body. mt-10 / mb-5 keep the
-     rhythm from the previous spacing pass intact. */
-  @apply text-almost-black dark:text-white text-base mt-10 mb-5 leading-snug font-semibold;
+  /* h3 sits at 1rem (text-base) and bumps one weight step above body.
+     Inter is now the project font, loaded at weights 400 + 500 only.
+     \`font-medium\` (500) reads as a controlled bump over body 400
+     without dominating the column. mt-10 / mb-5 keep the rhythm from
+     the spacing pass intact. */
+  @apply text-almost-black dark:text-white text-base mt-10 mb-5 leading-snug font-medium;
 }
 
 .markdown ol {

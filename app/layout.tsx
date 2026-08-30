@@ -1,4 +1,4 @@
-import localFont from 'next/font/local';
+import { Inter } from 'next/font/google';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import { ReactNode } from 'react';
 import Footer from '../components/footer';
@@ -9,31 +9,26 @@ type Props = {
   children: ReactNode
 }
 
-// next/font/local self-hashes the URLs (cache-friendly long-lived URLs),
-// self-preloads the regular weight (closes the FOIT/LCP window), and with
-// adjustFontFallback emits metric-matched ascent/descent/size-adjust
-// overrides that close the swap-CLS gap. Replaces the manual @font-face
-// blocks in styles/index.css and the <link rel="preload"> in the
-// previous app/layout.tsx.
-const basier = localFont({
-  src: [
-    {
-      path: '../public/fonts/basier-square/basiersquare-regular-webfont.woff2',
-      weight: '400',
-      style: 'normal',
-    },
-    {
-      path: '../public/fonts/basier-square/basiersquare-semibold-webfont.woff2',
-      weight: '700',
-      style: 'normal',
-    },
-  ],
-  variable: '--font-basier',
+// Swap from Basier Square (local) to Inter (Google Fonts, served at build
+// time and self-hosted by Next). Two reasons:
+//   1. The project font dir has no Medium (500) weight; 700 semibold was
+//      the next step above body 400, and it visually dominates h3 at
+//      body-size. Inter ships 500 cleanly.
+//   2. Drop the manual woff2 hosting (public/fonts/basier-square/) —
+//      next/font/google downloads at build and serves from the same
+//      self-hosted, long-cache-hashed pipeline we relied on before.
+//
+// Weights [400, 500] are the requested set: body 400 (default), heading
+// 500 (medium). No 700 is loaded; any `font-semibold` class will fall back
+// to the closest available load (500) — there is currently one consumer
+// (markdown h3) which this commit also flips to `font-medium`.
+const inter = Inter({
+  subsets: ['latin'],
+  weight: ['400', '500'],
+  variable: '--font-inter',
   display: 'swap',
-  // 'Arial' is the closest open-source fallback; for an exact metric match
-  // pass a real measured value here. Field CLS data should confirm the
-  // metric-matched fallback closes the swap-CLS window.
-  adjustFontFallback: 'Arial',
+  // next/font/google emits a metric-matched adjustment automatically;
+  // adjustFontFallback is only configurable with next/font/local.
 });
 
 export const metadata = {
@@ -54,7 +49,7 @@ export const viewport = {
 
 export default function RootLayout({ children }: Props) {
   return (
-    <html lang="en" className={basier.variable}>
+    <html lang="en" className={inter.variable}>
       <head>
         {/* Non-standard meta tags Next's metadata API doesn't cover. */}
         <meta content="nopin" name="pinterest" />

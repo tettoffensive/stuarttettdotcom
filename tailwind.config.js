@@ -10,9 +10,9 @@ const tailwindConfig = {
         auto: 'calc(2rem + 1vw)',
       },
       fontFamily: {
-        basier: ['var(--font-basier)'],
+        inter: ['var(--font-inter)'],
         sans: [
-          'var(--font-basier)',
+          'var(--font-inter)',
           'ui-sans-serif',
           'system-ui',
           '-apple-system',

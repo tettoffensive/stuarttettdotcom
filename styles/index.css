@@ -3,8 +3,9 @@
 @tailwind utilities;
 
 /* The @font-face declarations + <link rel="preload"> moved to
-   `next/font/local` (app/layout.tsx). Css variables
-   (--font-basier) hydrate the font-sans/font-basier utilities. */
+   `next/font/google` (app/layout.tsx), which fetches Inter at build
+   time and self-hosts it. CSS variable `--font-inter` hydrates the
+   `font-sans` Tailwind utility via the stack in tailwind.config.js. */
 
 :root {
   font-size: calc(.33vw * .5vw + 1em);
