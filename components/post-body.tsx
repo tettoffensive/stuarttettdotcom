@@ -46,6 +46,15 @@ function PostBody({ content, imagesOnly = false }: Props) {
             }
             return <p>{paragraph.children}</p>;
           },
+          // `rehype-raw` lets Vimeo embed markup through unchanged, including
+          // its `<script src="https://player.vimeo.com/api/player.js">`
+          // tag. React errors on rendering <script> into the tree because
+          // client-side scripts in JSX never execute, so the tag would be
+          // dead weight anyway. The iframe itself plays videos without the
+          // Vimeo.Player API, which this site doesn't use. Dropping the
+          // component also removes the duplicate script on the second
+          // embed — both Vimeo snippets in `effects.md` load the same URL.
+          script: () => null,
         }}
         rehypePlugins={[rehypeRaw]}
         remarkPlugins={[remarkHtml, remarkImages, remarkSectionize]}
