@@ -26,7 +26,7 @@ function PostPreview({
       <Link href={`/posts/${slug}`} aria-label={title}>
         <CoverImage priority={priority} sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" src={coverImage} title={title} />
         <PostTitle>{title}</PostTitle>
-        <p className="text-lg leading-snug tracking-wider text-gray-400 dark:text-white dark:opacity-60 mb-4">{excerpt}</p>
+        <p className="text-lg leading-snug tracking-wider text-gray-400 dark:text-white dark:opacity-60 mb-6">{excerpt}</p>
       </Link>
       {/* Pre-cache the post-page hero variant. The visible CoverImage above
           loads the gallery-card variant (sizes=33vw at >=1200px); the post

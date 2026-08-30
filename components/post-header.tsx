@@ -9,19 +9,19 @@ type Props = {
 function PostHeader({ title, coverImage, excerpt }: Props) {
   return (
     <section className="mx-auto max-w-3xl">
-      <div className="mb-8 sm:mx-0">
-        {/* max-w-3xl = 768px CSS; cap the responsive hint so we don't get a
-            1920w image at DPR=1 (the LCP candidate on the post page). */}
+      {/* LCP candidate. max-w-3xl = 768px CSS; cap the responsive hint so
+          we don't get a 1920w image at DPR=1. */}
+      <div className="mb-10 sm:mx-0">
         <CoverImage priority sizes="(max-width: 768px) 100vw, 768px" src={coverImage} title={title} />
       </div>
       <h1
-        className="text-h3 font-sans tracking-wider my-2 pb-4 leading-tight
+        className="text-h3 font-sans tracking-wider pt-2 pb-6 leading-tight
       text-almost-black dark:text-white mx-auto"
       >
         {title}
         <span className="bg-army-green-light relative h-[2px] w-[40px] block mt-4" />
       </h1>
-      <h2 className="text-lg tracking-wider text-gray-400 dark:text-white dark:opacity-60 leading-none mb-4">{excerpt}</h2>
+      <h2 className="text-lg tracking-wider text-gray-400 dark:text-white dark:opacity-60 leading-none mb-10">{excerpt}</h2>
     </section>
   );
 }

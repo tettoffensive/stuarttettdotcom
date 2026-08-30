@@ -21,7 +21,32 @@
   max-width: 60ch;
 }
 
-.markdown p + img, .markdown img + img {
+/* Vertical rhythm. The original CSS had no rule for `p + p`, so two
+   consecutive paragraphs rendered with zero gap between them and read
+   like one wall of text. `mt-5` (20px) is a comfortable step that
+   matches what most reading surfaces ship. */
+.markdown p + p {
+  @apply mt-5;
+}
+
+.markdown p + img,
+.markdown img + img {
+  @apply mt-10;
+}
+
+/* Inverse of `p + img`: when the next element after an image is a
+   paragraph (no intervening heading), the paragraph used to butt flush
+   against the bottom of the image. Same 20px step as paragraph rhythm. */
+.markdown img + p {
+  @apply mt-5;
+}
+
+/* Image / iframe followed by an h3 needs more breathing than a paragraph
+   needs — the eye wants the next section to land firmly. `mt-10` (40px)
+   matches the existing h3 top margin so the heading doesn't visually
+   "sag" onto the image. */
+.markdown img + h3,
+.markdown iframe + h3 {
   @apply mt-10;
 }
 
@@ -31,9 +56,18 @@
    through, and `:has(...)` is the cheapest way to spot Vimeo's iframe without
    editing the markdown source. Mirrors the `p + img` / `img + img` shape:
    add top margin to the first vimeo div after a paragraph, and to a second
-   vimeo that follows the first. */
+   vimeo that follows the first. Add the same inverse rules as inline
+   images so a vimeo div transitioning to a paragraph or h3 breathes. */
 .markdown p + div:has(iframe[src*="vimeo"]),
 .markdown div:has(iframe[src*="vimeo"]) + div:has(iframe[src*="vimeo"]) {
+  @apply mt-10;
+}
+
+.markdown div:has(iframe[src*="vimeo"]) + p {
+  @apply mt-5;
+}
+
+.markdown div:has(iframe[src*="vimeo"]) + h3 {
   @apply mt-10;
 }
 
@@ -42,11 +76,14 @@
 }
 
 .markdown h2 {
-  @apply text-almost-black dark:text-white text-3xl mt-12 mb-4 leading-snug;
+  @apply text-almost-black dark:text-white text-3xl mt-12 mb-5 leading-snug;
 }
 
 .markdown h3 {
-  @apply text-almost-black dark:text-white text-2xl mt-8 mb-4 leading-snug;
+  /* Was mt-8 mb-4 (32px above, 16px below). 32px above a relaxed-leading
+     16px body reads as close — bump to mt-10 mb-5 (40px above, 20px below)
+     for clearer heading-to-body separation. */
+  @apply text-almost-black dark:text-white text-2xl mt-10 mb-5 leading-snug;
 }
 
 .markdown ol {
