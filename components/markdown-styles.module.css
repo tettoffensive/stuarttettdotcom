@@ -25,6 +25,18 @@
   @apply mt-10;
 }
 
+/* Vimeo embeds ship as Vimeo's stock `<div><iframe/></div>` markup, so the
+   paragraph-adjacent rule above doesn't catch them and the player sits flush
+   against the preceding paragraph. `rehype-raw` lets the embed HTML pass
+   through, and `:has(...)` is the cheapest way to spot Vimeo's iframe without
+   editing the markdown source. Mirrors the `p + img` / `img + img` shape:
+   add top margin to the first vimeo div after a paragraph, and to a second
+   vimeo that follows the first. */
+.markdown p + div:has(iframe[src*="vimeo"]),
+.markdown div:has(iframe[src*="vimeo"]) + div:has(iframe[src*="vimeo"]) {
+  @apply mt-10;
+}
+
 .markdown blockquote {
   @apply my-10;
 }
